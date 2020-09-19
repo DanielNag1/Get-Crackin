@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Move : MonoBehaviour
 {
-    private CharacterController CC;
+    private CharacterController characterController;
     private Vector2 movementDirection = new Vector2();
     private Transform cameraTransform;
 
@@ -12,7 +12,7 @@ public class Move : MonoBehaviour
 
     void Start()
     {
-        CC = GetComponent<CharacterController>();
+        characterController = GetComponent<CharacterController>();
         cameraTransform = Camera.main.transform;
     }
 
@@ -47,6 +47,6 @@ public class Move : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(desiredDirection), 0.3f);
         }
 
-        CC.Move(desiredDirection * 3 * Time.deltaTime);  //The object moves.
+        characterController.Move(desiredDirection * 3 * Time.deltaTime);  //The object moves.
     }
 }
