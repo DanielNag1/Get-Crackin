@@ -4,54 +4,74 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    int buttonInput;
-    public enum ButtonInput
-    {
-        ButtonA, // 0
-        ButtonB, // 1
-        ButtonX, // 2
-        ButtonY, // 3
-        LeftBumberButton, // 4
-        RightBumberButton, // 5
-        StartButton, // 6
-        BackButton // 7
-    }
-
     private void Update()
     {
-        if (Input.GetButtonDown("ButtonA"))
+        if (ButtonAPressed())
         {
             Debug.Log("pressed button A");
         }
-        if (Input.GetButtonDown("ButtonB"))
+       
+        if (ButtonBPressed())
         {
             Debug.Log("Pressed Button B");
         }
-        if (Input.GetButtonDown("ButtonX"))
+        if (buttonXPressed())
         {
             Debug.Log("Pressed Button X");
         }
-        if (Input.GetButtonDown("ButtonY"))
+        if (ButtonYPressed())
         {
             Debug.Log("Pressed Button Y");
         }
-        if (Input.GetButtonDown("LeftBumperButton"))
+        if (LeftBumperPressed())
         {
             Debug.Log("Pressed LeftBumberButton");
         }
-        if (Input.GetButtonDown("RightBumperButton"))
+        if (RightBumperPressed())
         {
             Debug.Log("Pressed RightBumberButton");
         }
-        if (Input.GetButtonDown("StartButton"))
+        if (StartButtonPressed())
         {
             Debug.Log("Pressed startButton");
         }
-        if (Input.GetButtonDown("BackButton"))
+        if (BackButtonPressed())
         {
+
             Debug.Log("Pressed BackButton");
         }
     }
 
-
+    public bool ButtonAPressed()
+    {
+        return Input.GetKeyDown(KeyCode.Joystick1Button0);
+    }
+   private bool ButtonBPressed()
+    {
+        return Input.GetKeyDown(KeyCode.Joystick1Button1);
+    }
+    private bool buttonXPressed()
+    {
+        return Input.GetKeyDown(KeyCode.Joystick1Button2);
+    }
+    private bool ButtonYPressed()
+    {
+       return Input.GetKeyDown(KeyCode.Joystick1Button3);
+    }
+    private bool LeftBumperPressed()
+    {
+        return Input.GetKeyDown(KeyCode.Joystick1Button4);
+    }
+    private bool RightBumperPressed()
+    {
+        return Input.GetKeyDown(KeyCode.Joystick1Button5);
+    }
+    private bool StartButtonPressed()
+    {
+        return Input.GetKeyDown(KeyCode.Joystick1Button6);
+    }
+    private bool BackButtonPressed()
+    {
+        return Input.GetKeyDown(KeyCode.Joystick1Button7);
+    }
 }
