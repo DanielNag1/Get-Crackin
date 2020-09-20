@@ -19,17 +19,38 @@ public class InputManager : MonoBehaviour
 
     private void Update()
     {
-        //if (Input.GetButton("ButtonA"))
-        //{
-
-        //}
-      
-        //switch (buttonInput)
-        //{
-        //    case (ButtonInput.ButtonA = Input.GetButton("ButtonA")
-
-        //        break;
-        //}
+        if (Input.GetButtonDown("ButtonA"))
+        {
+            Debug.Log("pressed button A");
+        }
+        if (Input.GetButtonDown("ButtonB"))
+        {
+            Debug.Log("Pressed Button B");
+        }
+        if (Input.GetButtonDown("ButtonX"))
+        {
+            Debug.Log("Pressed Button X");
+        }
+        if (Input.GetButtonDown("ButtonY"))
+        {
+            Debug.Log("Pressed Button Y");
+        }
+        if (Input.GetButtonDown("LeftBumperButton"))
+        {
+            Debug.Log("Pressed LeftBumberButton");
+        }
+        if (Input.GetButtonDown("RightBumperButton"))
+        {
+            Debug.Log("Pressed RightBumberButton");
+        }
+        if (Input.GetButtonDown("StartButton"))
+        {
+            Debug.Log("Pressed startButton");
+        }
+        if (Input.GetButtonDown("BackButton"))
+        {
+            Debug.Log("Pressed BackButton");
+        }
     }
 
 
