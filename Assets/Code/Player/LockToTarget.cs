@@ -7,6 +7,7 @@ public class LockToTarget : MonoBehaviour
     [SerializeField] public Cinemachine.CinemachineTargetGroup targetGroup;
     [SerializeField] private ChangeCamera changeCamera;
     [SerializeField] private Transform targetIcon;
+    [SerializeField] private InputManager inputManager;
 
     List<Transform> enemiesInRange;
     Transform closestEnemy;
@@ -58,7 +59,7 @@ public class LockToTarget : MonoBehaviour
     /// </summary>
     void ManualTargeting()
     {
-        if (Input.GetKeyUp(KeyCode.F))
+        if (inputManager.RightBumperPressed())
         {
             if (isLockedToTarget) // Exit manual Lock
             {
