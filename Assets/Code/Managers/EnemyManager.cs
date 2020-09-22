@@ -2,6 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public class Spawner : MonoBehaviour
+{
+    private void FixedUpdate()
+    {
+        EnemyManager.Instance.SpawnEnemyFromPool("Enemy1", transform.position, Quaternion.identity);
+    }
+};
+
+
 public class EnemyManager : MonoBehaviour
 {
     /// <summary>
@@ -72,6 +81,8 @@ public class EnemyManager : MonoBehaviour
         enemyToSpawn.SetActive(true);  // enable to object.
         enemyToSpawn.transform.position = position;
         enemyToSpawn.transform.rotation = rotation;
+
+        ISpawn spawnobj = enemyToSpawn.GetComponent<ISpawn>();
 
         enemyPoolDictionary[tag].Enqueue(enemyToSpawn);  
 
