@@ -82,7 +82,12 @@ public class EnemyManager : MonoBehaviour
         enemyToSpawn.transform.position = position;
         enemyToSpawn.transform.rotation = rotation;
 
-        ISpawn spawnobj = enemyToSpawn.GetComponent<ISpawn>();
+        //ISpawn spawnobj = enemyToSpawn.GetComponent<ISpawn>();
+
+        //if(spawnobj != null)
+        //{
+        //    spawnobj.OnSpawn();
+        //}
 
         enemyPoolDictionary[tag].Enqueue(enemyToSpawn);  
 
