@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
+    [SerializeField] private LockToTarget LockToTarget;
+
     private void Update()
     {
         if (ButtonAPressed())
@@ -28,12 +30,13 @@ public class InputManager : MonoBehaviour
         }
         if (RightBumperPressed())
         {
+            LockToTarget.ManualTargeting();
             Debug.Log("Pressed RightBumberButton");
         }
         if (StartButtonPressed())
         {
             Debug.Log("Pressed startButton");
-        }
+        }   
         if (BackButtonPressed())
         {
             Debug.Log("Pressed BackButton");

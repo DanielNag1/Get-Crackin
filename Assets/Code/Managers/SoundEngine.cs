@@ -19,7 +19,6 @@ public class SoundEngine : ScriptableObject
             {
                 instance = CreateInstance<SoundEngine>();
             }
-
             return instance;
         }
     }
@@ -160,7 +159,7 @@ public class SoundEngine : ScriptableObject
             //if we are moving we play a sound, and set the timer to 0
             if (verticalAxis != 0 || h != horizontalAxis) 
             {
-                AudioSourceHandler.Instance.RequestSFX(transform.root.GetComponent<AudioSource>(),SoundPaths[Random.Range(0,SoundPaths.Count)],1,Time.fixedTime);
+                SoundEngine.Instance.RequestSFX(transform.root.GetComponent<AudioSource>(),SoundPaths[Random.Range(0,SoundPaths.Count)],1,Time.fixedTime);
                 walkingSFXtimer = 0;
             }
         }
