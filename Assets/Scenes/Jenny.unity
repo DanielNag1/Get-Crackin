@@ -670,7 +670,6 @@ MonoBehaviour:
   targetGroup: {fileID: 1949945023}
   changeCamera: {fileID: 601335369}
   targetIcon: {fileID: 1368101291}
-  inputManager: {fileID: 725413660}
 --- !u!114 &669675936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -771,6 +770,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70444ec948a342d4bb16cd244e5c04e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LockToTarget: {fileID: 669675935}
+  SoundPath: 
 --- !u!1 &725413659
 GameObject:
   m_ObjectHideFlags: 0
@@ -800,6 +801,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70444ec948a342d4bb16cd244e5c04e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LockToTarget: {fileID: 0}
+  SoundPath: 
 --- !u!4 &725413661
 Transform:
   m_ObjectHideFlags: 0
@@ -931,7 +934,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 832117987}
-  m_LocalRotation: {x: -0.1716685, y: 0.18878257, z: 0.030206762, w: 0.96642566}
+  m_LocalRotation: {x: -0.17166848, y: 0.18878262, z: 0.030206751, w: 0.96642566}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1322,7 +1325,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1036666307}
-  m_LocalRotation: {x: -0.15057635, y: 0.1810827, z: -0.010459387, w: 0.971816}
+  m_LocalRotation: {x: -0.15057634, y: 0.18108273, z: -0.010459391, w: 0.97181606}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

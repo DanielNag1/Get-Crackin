@@ -7,7 +7,7 @@ public class LockToTarget : MonoBehaviour
     [SerializeField] public Cinemachine.CinemachineTargetGroup targetGroup;
     [SerializeField] private ChangeCamera changeCamera;
     [SerializeField] private Transform targetIcon;
-    [SerializeField] private InputManager inputManager;
+
 
     List<Transform> enemiesInRange;
     Transform closestEnemy;
@@ -57,10 +57,9 @@ public class LockToTarget : MonoBehaviour
     /// <summary>
     /// Lock the camera on the selected target with F.
     /// </summary>
-    void ManualTargeting()
+   public void ManualTargeting()
     {
-        if (inputManager.RightBumperPressed())
-        {
+       
             if (isLockedToTarget) // Exit manual Lock
             {
                 changeCamera.EnterFreeCamera();
@@ -80,7 +79,7 @@ public class LockToTarget : MonoBehaviour
                     isLockedToTarget = true;
                 }
             }
-        }
+     
     }
 
     /// <summary>
@@ -100,7 +99,7 @@ public class LockToTarget : MonoBehaviour
                 targetIcon.position = new Vector3(closestEnemy.position.x, closestEnemy.position.y + 1.5f, closestEnemy.position.z);
             }
 
-            ManualTargeting();
+           
         }
         else
         {
