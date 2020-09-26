@@ -682,6 +682,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 074d6c29dca09d34291ac1829b664637, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MovementSpeed: 5
 --- !u!136 &669675937
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1325,7 +1326,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1036666307}
-  m_LocalRotation: {x: -0.15057634, y: 0.18108273, z: -0.010459391, w: 0.97181606}
+  m_LocalRotation: {x: -0.15057635, y: 0.1810827, z: -0.010459387, w: 0.971816}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
