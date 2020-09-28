@@ -34,12 +34,16 @@ public class MoveTowardsPlayer : IState
         _navMeshAgent.enabled = true;
         _navMeshAgent.SetDestination(_enemy.Player.transform.position);
         _animator.SetFloat(speed, 1);
+
+        Debug.Log("Move Towards Player ENTER");
     }
 
     public void OnExit()
     {
         _navMeshAgent.enabled = false;
         _animator.SetFloat(speed, 0);
+
+        Debug.Log("Move Towards Player EXIT");
     }
 
     public void TimeTick()
@@ -50,6 +54,8 @@ public class MoveTowardsPlayer : IState
 
             _lastPosition = _enemy.transform.position;
         }
+
+        Debug.Log("Move Towards Player TIMETICK");
     }
 
     #endregion

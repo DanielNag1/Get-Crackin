@@ -8,19 +8,19 @@ public class FiniteStateMachine
     private IState _currentState;
 
     private Dictionary<Type, List<Transition>> _transitions = new Dictionary<Type, List<Transition>>(); //Type = classType(key). List<Transition = Value. => For every type, there is a list of possible transitions.
-    private List<Transition> _currentTransitions = new List<Transition>();
+    private List<Transition> _currentTransitions = new List<Transition>();  //switching out which transition is current based on our state.
     private List<Transition> _aTransition = new List<Transition>();
-    private static List<Transition> EmptyTransition = new List<Transition>();
+    private static List<Transition> EmptyTransition = new List<Transition>(0);
 
     public void TimeTick()
     {
-        var transiton = GetTransition();
+        var transiton = GetTransition(); //looks for a transition, if it gets a transition back...
         if (transiton != null)
         {
-            SetState(transiton.NewState);
+            SetState(transiton.NewState); //..set the state to the next state.
         }
         //If we dont find any transition, we have returned a null and then we just let it Tick. We only want to set a state which is not a null state.
-        _currentState?.TimeTick(); //THIS IS WHERE THE MAGIC HAPPENS!
+        _currentState?.TimeTick(); //THIS IS WHERE THE MAGIC HAPPENS! Tell the current state to Tick.
     }
 
     public void SetState(IState state)
@@ -31,8 +31,8 @@ public class FiniteStateMachine
             return;
         }
 
-        _currentState?.OnExit();  //Did we already have a previous State? If we did OnExit is called.
-        _currentState = state;  //Set current State to the state that was passed in.
+        _currentState?.OnExit();  //Did we already have a previous State? If we did OnExit is called for that state.
+        _currentState = state;  //Set current State to the state that was passed in. (so when we tick, we will be ticking against that current state).
 
         _transitions.TryGetValue(_currentState.GetType(), out _currentTransitions); //Asks the dictionary(_transitions) to return the list<transition> for this Type(the key) and put it into _currentTransitions.
         if (_currentTransitions == null)
@@ -51,10 +51,10 @@ public class FiniteStateMachine
     /// </summary>
     public void AddTransition(IState previousState, IState newState, Func<bool> predicate)
     {
-        //Get back the list of transitions for the new state
+        //Try to get back the list of transitions from the previous state, if we dont...
         if (_transitions.TryGetValue(previousState.GetType(), out var transitions) == false)
         {
-            //if we dont have a list<transitions< for that state(previous state), we create a new list.
+            //...if we dont have a list<transitions< for that state(previous state), we create a new list.
             transitions = new List<Transition>();
             _transitions[previousState.GetType()] = transitions; //and add it into our dictionary.
         }
@@ -82,14 +82,16 @@ public class FiniteStateMachine
 
     private Transition GetTransition()
     {
+        //loop through anyTrnsitions (The transitions comming from any state because they dont have a from state).
         foreach (var transition in _aTransition)
         {
-            if(transition.Condition())
+            if(transition.Condition())  //does the condition return true?
             {
                 return transition;
             }
         }
 
+        //if we didnt have a anyTransition or didnt have any need for it right now then we go through our current transitions.
         foreach (var transition in _currentTransitions)
         {
             if(transition.Condition())

@@ -6,13 +6,13 @@ public class Idle : IState
 {
     #region Variables
 
-
+    private EnemyOne _enemy;
 
     #endregion
 
-    public Idle()
+    public Idle(EnemyOne enemy)
     {
-
+        this._enemy = enemy;
     }
 
     #region Interface functions
@@ -20,6 +20,7 @@ public class Idle : IState
     public void OnEnter()
     {
         Debug.Log("EnterIdle");
+        //Play Idle animation;
     }
 
     public void OnExit()

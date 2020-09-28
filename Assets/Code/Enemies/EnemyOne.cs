@@ -9,17 +9,16 @@ public class EnemyOne : MonoBehaviour
     private FiniteStateMachine _finiteStateMachine;
     public Player Player { get; }
 
-
     private void Awake()
     {
+        _finiteStateMachine = new FiniteStateMachine();
+
         var navMeshAgent = GetComponent<NavMeshAgent>();
         var animator = GetComponent<Animator>();
         var playerDetector = gameObject.AddComponent<PlayerDetector>();
 
-        _finiteStateMachine = new FiniteStateMachine();
-
-        //This is where we initalize the different states that the enemies can have
-        var idle = new Idle();
+        //This is where we initalize the different states that the enemy can have:
+        var idle = new Idle(this);
         var moveTowardsPlayer = new MoveTowardsPlayer(this, navMeshAgent, animator);
         var runAway = new RunAway(this, navMeshAgent, playerDetector, animator);
 

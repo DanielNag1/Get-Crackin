@@ -37,6 +37,8 @@ public class RunAway : IState
         _animator.SetBool(RunAwayHash, true);
         _speed = _navMeshAgent.speed;
         _navMeshAgent.speed = Flee_speed;
+
+        Debug.Log("RunAway ENTER");
     }
 
     public void OnExit()
@@ -44,6 +46,8 @@ public class RunAway : IState
         _navMeshAgent.speed = _speed;
         _navMeshAgent.enabled = false;
         _animator.SetBool(RunAwayHash, false);
+
+        Debug.Log("RunAway EXIT");
     }
 
     /// <summary>
@@ -55,6 +59,7 @@ public class RunAway : IState
         {
             var away = GetNewPoint();
             _navMeshAgent.SetDestination(away); //Set as destination.
+            Debug.Log("RunAway TIMETICK");
         }
     }
 
