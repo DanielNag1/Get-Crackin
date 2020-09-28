@@ -12,7 +12,8 @@ public class ActionMove : MonoBehaviour
     private InputManager inputManager;
 
     private Vector3 inputDirection, targetDirection;
-    public float jumpSpeed, dodgeSpeed;
+    public float jumpSpeed, dodgeSpeed, posY, gravity, attackSpeed;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -22,16 +23,20 @@ public class ActionMove : MonoBehaviour
         animator = GetComponent<Animator>();
         cc = GetComponent<CharacterController>();
         inputManager = GetComponent<InputManager>();
+        attackSpeed = dodgeSpeed / 2;
     }
 
     // Update is called once per frame
     void Update()
     {
         inputDirection = move.GetInputDirection();
+        posY = animator.GetFloat("posY");
 
         Dodge();
         Jump();
         Attack();
+        Fall();
+        Land();
     }
 
     void Dodge()
@@ -43,9 +48,11 @@ public class ActionMove : MonoBehaviour
     }
     void Jump()
     {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Jump") ||
+            animator.GetCurrentAnimatorStateInfo(0).IsName("Double Jump")
+            )
         {
-            cc.Move(new Vector3(inputDirection.x, animator.GetFloat("posY"), inputDirection.y) * jumpSpeed * Time.deltaTime);
+            cc.Move(new Vector3(inputDirection.x, posY, inputDirection.y) * jumpSpeed * Time.deltaTime);
         }
     }
 
@@ -55,7 +62,32 @@ public class ActionMove : MonoBehaviour
             animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack2") ||
             animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack3"))
         {
-            cc.Move(target.GetEnemyDirection() * dodgeSpeed/2 * Time.deltaTime);
+            cc.Move(target.GetEnemyDirection() * attackSpeed * Time.deltaTime);
+
+        }
+    }
+
+    void Fall()
+    {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Fall"))
+        {
+            if (transform.position.y <= 1)
+            {
+                animator.SetTrigger("onGround");
+            }
+
+            else
+            {
+                cc.Move(new Vector3(inputDirection.x, gravity, inputDirection.y) * Time.deltaTime);
+            }
+        }
+    }
+
+    void Land()
+    {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Land"))
+        {
+            transform.SetPositionAndRotation(new Vector3(transform.position.x, 1, transform.position.z), transform.rotation);
         }
     }
 }
