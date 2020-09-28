@@ -39,7 +39,7 @@ public class LockToTarget : MonoBehaviour
         Vector3 currentPosition = transform.position;
 
         //Looks through the list of the nearby enemies and finds the nearest.
-        foreach (Transform potentialTarget in enemies) 
+        foreach (Transform potentialTarget in enemies)
         {
             Vector3 directionToTarget = potentialTarget.position - currentPosition;
             float distanceToTarget = directionToTarget.sqrMagnitude;
@@ -124,7 +124,12 @@ public class LockToTarget : MonoBehaviour
     /// <returns></returns>
     public Vector3 GetEnemyDirection()
     {
-        return closestEnemy.position - transform.position;
+        if (closestEnemy != null)
+        {
+            return closestEnemy.position - transform.position;
+        }
+        else
+            return Vector3.zero;
     }
 
     void OnTriggerEnter(Collider other)

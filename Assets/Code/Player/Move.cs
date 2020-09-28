@@ -7,20 +7,20 @@ public class Move : MonoBehaviour
     private CharacterController characterController;
     private Vector2 movementDirection = new Vector2();
     private Transform cameraTransform;
-   
+
     private Vector3 desiredDirection;
 
     void Start()
     {
         characterController = GetComponent<CharacterController>();
         cameraTransform = Camera.main.transform;
-    
+
     }
 
     void Update()
     {
         RelativeToCameraMovement();
-      
+
     }
 
     /// <summary>
@@ -50,5 +50,17 @@ public class Move : MonoBehaviour
         }
 
         characterController.Move(desiredDirection * 3 * Time.deltaTime);  //The object moves.
+    }
+
+    public Vector3 GetInputDirection()
+    {
+        if (desiredDirection != null)
+        {
+            return desiredDirection;
+        }
+        else
+        {
+            return Vector3.zero;
+        }
     }
 }
