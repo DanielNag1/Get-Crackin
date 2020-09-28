@@ -19,17 +19,17 @@ public class Idle : IState
 
     public void OnEnter()
     {
-        throw new System.NotImplementedException();
+        Debug.Log("EnterIdle");
     }
 
     public void OnExit()
     {
-        throw new System.NotImplementedException();
+        Debug.Log("Exit Idle");
     }
 
     public void TimeTick()
     {
-        throw new System.NotImplementedException();
+        Debug.Log("TimeTick Idle");
     }
 
     #endregion

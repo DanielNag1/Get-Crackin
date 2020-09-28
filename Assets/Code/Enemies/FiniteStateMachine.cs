@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FiniteStateMachine : MonoBehaviour
+public class FiniteStateMachine
 {
     private IState _currentState;
 

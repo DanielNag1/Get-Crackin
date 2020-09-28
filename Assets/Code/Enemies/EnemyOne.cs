@@ -7,6 +7,8 @@ using UnityEngine.AI;
 public class EnemyOne : MonoBehaviour
 {
     private FiniteStateMachine _finiteStateMachine;
+    public Player Player { get; }
+
 
     private void Awake()
     {
@@ -29,7 +31,7 @@ public class EnemyOne : MonoBehaviour
         _finiteStateMachine.AddAnyTransition(runAway, () => playerDetector.PlayerInRange);
         AddTransition(runAway, idle, () => playerDetector.PlayerInRange == false);
 
-        Func<bool> HasATarget() => () => Target != null;  //target is the player which is not implemented yet.
+        Func<bool> HasATarget() => () => Player != null;  //target is the player which is not implemented yet.
 
 
         _finiteStateMachine.SetState(idle);  //setting the default state (the initial state).

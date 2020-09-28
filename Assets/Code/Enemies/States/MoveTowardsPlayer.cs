@@ -14,7 +14,7 @@ public class MoveTowardsPlayer : IState
 
     private Vector3 _lastPosition = Vector3.zero;
 
-    public int timeStuck;
+    public float timeStuck;
 
     #endregion
 
@@ -32,7 +32,7 @@ public class MoveTowardsPlayer : IState
     {
         timeStuck = 0; //safety check to see if the enemy has not moved.
         _navMeshAgent.enabled = true;
-        _navMeshAgent.SetDestination(_enemy.Target.transform.position);
+        _navMeshAgent.SetDestination(_enemy.Player.transform.position);
         _animator.SetFloat(speed, 1);
     }
 
@@ -46,7 +46,7 @@ public class MoveTowardsPlayer : IState
     {
         if(Vector3.Distance(_enemy.transform.position, _lastPosition) <= 0)
         {
-            TimeStuck += Time.deltaTime;
+            timeStuck += Time.deltaTime;
 
             _lastPosition = _enemy.transform.position;
         }

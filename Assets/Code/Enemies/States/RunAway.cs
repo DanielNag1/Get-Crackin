@@ -53,12 +53,12 @@ public class RunAway : IState
     {
         if(_navMeshAgent.remainingDistance < 1f)
         {
-            var away = GetRandomPoint();
+            var away = GetNewPoint();
             _navMeshAgent.SetDestination(away); //Set as destination.
         }
     }
 
-    private Vector3 GetRandomPoint()
+    private Vector3 GetNewPoint()
     {
         var directionFromPlayer = _enemy.transform.position - _playerDetector.GetPosition();
         directionFromPlayer.Normalize();
@@ -68,6 +68,8 @@ public class RunAway : IState
         {
             return hit.position;
         }
+
+        return _enemy.transform.position;
     }
 
     #endregion
