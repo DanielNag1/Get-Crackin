@@ -7,12 +7,14 @@ public class Idle : IState
     #region Variables
 
     private EnemyOne _enemy;
+    private Animator _animator;
 
     #endregion
 
-    public Idle(EnemyOne enemy)
+    public Idle(EnemyOne enemy, Animator animator)
     {
         this._enemy = enemy;
+        this._animator = animator;
     }
 
     #region Interface functions
