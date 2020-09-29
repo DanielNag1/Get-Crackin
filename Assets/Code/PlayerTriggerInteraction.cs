@@ -7,7 +7,6 @@ public class PlayerTriggerInteraction : MonoBehaviour
     private TriggerComponent callableUnit;
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        Debug.Log("Start");
         if (hit.collider.gameObject.tag != "Trigger")
             return;
 

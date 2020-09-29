@@ -8,6 +8,7 @@ public class LockToTarget : MonoBehaviour
     [SerializeField] private ChangeCamera changeCamera;
     [SerializeField] private Transform targetIcon;
     [SerializeField] private List<string> SoundPaths;
+    [SerializeField] private List<float> VolumeScales;
 
     List<Transform> enemiesInRange;
     Transform closestEnemy;
@@ -70,7 +71,7 @@ public class LockToTarget : MonoBehaviour
             targetGroup.RemoveMember(closestEnemy); //Remove the nearest enemy from the camera target group.
             isLockedToTarget = false;
             enemiesInRange.Clear();
-            SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), SoundPaths[0], 0, Time.fixedTime);
+            SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), SoundPaths[0], 0, Time.fixedTime,VolumeScales[0]);
             return;
         }
 
@@ -82,7 +83,7 @@ public class LockToTarget : MonoBehaviour
                 iconRenderer.material.color = new Color(0, 150, 200);
                 targetGroup.AddMember(closestEnemy, 1, 0); //The lockOn camera focuses on both the player and the target.
                 isLockedToTarget = true;
-                SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), SoundPaths[1], 0, Time.fixedTime);
+                SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), SoundPaths[1], 0, Time.fixedTime, VolumeScales[1]);
             }
         }
 

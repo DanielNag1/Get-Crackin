@@ -5,7 +5,7 @@ using UnityEngine;
 public class SFXLoop : MonoBehaviour
 {
     [SerializeField] private string SoundPath; //sound paths
-
+    [SerializeField] private float volumeScale; //volume scale
     // Update is called once per frame
     void Update()
     {
@@ -16,7 +16,7 @@ public class SFXLoop : MonoBehaviour
 
         if (!transform.GetComponent<AudioSource>().isPlaying)
         {
-            SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), SoundPath, 0, Time.fixedTime);
+            SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), SoundPath, 0, Time.fixedTime,volumeScale);
         }
     }
 }
