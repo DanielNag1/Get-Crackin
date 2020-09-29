@@ -20,7 +20,6 @@ public class InputBuffer : ScriptableObject
     #region Variables
     public List<KeyCode> PressedButtons = new List<KeyCode>(10); //Get input
     private Stack<KeyCode> bufferStack = new Stack<KeyCode>();
-
     private bool bufferMode = true;
     private float bufferTimer = 0;
 

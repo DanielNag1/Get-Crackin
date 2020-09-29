@@ -9,7 +9,6 @@ public class ActionMove : MonoBehaviour
     private LockToTarget target;
     private Animator animator;
     private CharacterController cc;
-    private InputManager inputManager;
 
     private Vector3 inputDirection, targetDirection;
     public float jumpSpeed, dodgeSpeed, posY, gravity, attackSpeed;
@@ -22,7 +21,6 @@ public class ActionMove : MonoBehaviour
         target = GetComponent<LockToTarget>();
         animator = GetComponent<Animator>();
         cc = GetComponent<CharacterController>();
-        inputManager = GetComponent<InputManager>();
         attackSpeed = dodgeSpeed / 2;
     }
 

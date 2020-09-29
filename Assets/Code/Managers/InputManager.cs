@@ -7,7 +7,6 @@ public class InputManager : ScriptableObject
     #region Variables
     private float leftTrigger;
     private float rightTrigger;
-    [SerializeField] private string SoundPath;
     private List<KeyCode> PressedButtons = new List<KeyCode>(10);
     #endregion
 

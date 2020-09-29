@@ -16,6 +16,6 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         InputManager.Instance.Update();
-          SoundEngine.Instance.Update();
+        SoundEngine.Instance.Update();
     }
 }
