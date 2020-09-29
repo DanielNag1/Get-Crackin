@@ -7,7 +7,8 @@ public class LockToTarget : MonoBehaviour
     [SerializeField] public Cinemachine.CinemachineTargetGroup targetGroup;
     [SerializeField] private ChangeCamera changeCamera;
     [SerializeField] private Transform targetIcon;
-    [SerializeField] private InputManager inputManager;
+    [SerializeField] private List<string> SoundPaths;
+    [SerializeField] private List<float> VolumeScales;
 
     List<Transform> enemiesInRange;
     Transform closestEnemy;
@@ -39,7 +40,7 @@ public class LockToTarget : MonoBehaviour
         Vector3 currentPosition = transform.position;
 
         //Looks through the list of the nearby enemies and finds the nearest.
-        foreach (Transform potentialTarget in enemies) 
+        foreach (Transform potentialTarget in enemies)
         {
             Vector3 directionToTarget = potentialTarget.position - currentPosition;
             float distanceToTarget = directionToTarget.sqrMagnitude;
@@ -57,30 +58,35 @@ public class LockToTarget : MonoBehaviour
     /// <summary>
     /// Lock the camera on the selected target with F.
     /// </summary>
-    void ManualTargeting()
+    public void ManualTargeting()
     {
-        if (inputManager.RightBumperPressed())
+        if (closestEnemy == null)
         {
-            if (isLockedToTarget) // Exit manual Lock
-            {
-                changeCamera.EnterFreeCamera();
-                targetGroup.RemoveMember(closestEnemy); //Remove the nearest enemy from the camera target group.
-                isLockedToTarget = false;
-                enemiesInRange.Clear();
-                return;
-            }
+            AutomaticTargeting();
+        }
 
-            if (!isLockedToTarget) //Enter manual Lock
+        if (isLockedToTarget) // Exit manual Lock
+        {
+            changeCamera.EnterFreeCamera();
+            targetGroup.RemoveMember(closestEnemy); //Remove the nearest enemy from the camera target group.
+            isLockedToTarget = false;
+            enemiesInRange.Clear();
+            SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), SoundPaths[0], 0, Time.fixedTime,VolumeScales[0]);
+            return;
+        }
+
+        if (!isLockedToTarget) //Enter manual Lock
+        {
+            if (targetGroup.FindMember(closestEnemy) != 1) //Checks if the closest enemy is not already locked on to.
             {
-                if (targetGroup.FindMember(closestEnemy) != 1) //Checks if the closest enemy is not already locked on to.
-                {
-                    changeCamera.EnterLockCamera();
-                    iconRenderer.material.color = new Color(0, 150, 200);
-                    targetGroup.AddMember(closestEnemy, 1, 0); //The lockOn camera focuses on both the player and the target.
-                    isLockedToTarget = true;
-                }
+                changeCamera.EnterLockCamera();
+                iconRenderer.material.color = new Color(0, 150, 200);
+                targetGroup.AddMember(closestEnemy, 1, 0); //The lockOn camera focuses on both the player and the target.
+                isLockedToTarget = true;
+                SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), SoundPaths[1], 0, Time.fixedTime, VolumeScales[1]);
             }
         }
+
     }
 
     /// <summary>
@@ -99,8 +105,6 @@ public class LockToTarget : MonoBehaviour
                 iconRenderer.material.color = new Color(160, 100, 0);
                 targetIcon.position = new Vector3(closestEnemy.position.x, closestEnemy.position.y + 1.5f, closestEnemy.position.z);
             }
-
-            ManualTargeting();
         }
         else
         {
