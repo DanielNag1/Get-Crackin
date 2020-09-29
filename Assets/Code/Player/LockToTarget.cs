@@ -60,13 +60,10 @@ public class LockToTarget : MonoBehaviour
     /// </summary>
     public void ManualTargeting()
     {
-        if (closestEnemy == null)
-        {
-            AutomaticTargeting();
-        }
 
         if (isLockedToTarget) // Exit manual Lock
         {
+            Debug.Log("Unlocking at time:" + Time.frameCount);
             changeCamera.EnterFreeCamera();
             targetGroup.RemoveMember(closestEnemy); //Remove the nearest enemy from the camera target group.
             isLockedToTarget = false;
@@ -79,6 +76,7 @@ public class LockToTarget : MonoBehaviour
         {
             if (targetGroup.FindMember(closestEnemy) != 1) //Checks if the closest enemy is not already locked on to.
             {
+                Debug.Log("Locking at time:" + Time.frameCount);
                 changeCamera.EnterLockCamera();
                 iconRenderer.material.color = new Color(0, 150, 200);
                 targetGroup.AddMember(closestEnemy, 1, 0); //The lockOn camera focuses on both the player and the target.
@@ -163,6 +161,3 @@ public class LockToTarget : MonoBehaviour
     }
 
 }
-
-
-
