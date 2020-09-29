@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface ISpawn
+public interface IState
 {
-    void OnSpawn();
+    void TimeTick();
+
+    void OnEnter();
+
+    void OnExit();
 }
