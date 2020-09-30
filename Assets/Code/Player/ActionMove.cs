@@ -12,7 +12,7 @@ public class ActionMove : MonoBehaviour
 
     private Vector3 inputDirection, targetDirection;
     public float jumpSpeed, dodgeSpeed, posY, gravity, attackSpeed;
-    
+
 
     // Start is called before the first frame update
     void Start()
@@ -58,10 +58,15 @@ public class ActionMove : MonoBehaviour
     {
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack1") ||
             animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack2") ||
-            animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack3"))
+            animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack3") ||
+            animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack4") ||
+            animator.GetCurrentAnimatorStateInfo(0).IsName("In Air_Chain1_Attack1") ||
+            animator.GetCurrentAnimatorStateInfo(0).IsName("In Air_Chain1_Attack2") ||
+            animator.GetCurrentAnimatorStateInfo(0).IsName("In Air_Chain1_Attack3") ||
+            animator.GetCurrentAnimatorStateInfo(0).IsName("In Air_Chain1_Attack4"))
         {
             cc.Move(target.GetEnemyDirection() * attackSpeed * Time.deltaTime);
-
+            transform.LookAt(target.GetEnemyTransform());
         }
     }
 
@@ -69,7 +74,7 @@ public class ActionMove : MonoBehaviour
     {
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Fall"))
         {
-            if (transform.position.y <= 1)
+            if (cc.isGrounded)
             {
                 animator.SetTrigger("onGround");
             }
