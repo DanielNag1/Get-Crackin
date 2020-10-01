@@ -41,7 +41,8 @@ public class ActionMove : MonoBehaviour
 
     void Dodge()
     {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Dodge"))
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Dodge") ||
+            (animator.GetCurrentAnimatorStateInfo(0).IsName("Air Dodge")))
         {
             cc.Move(inputDirection * dodgeSpeed * Time.deltaTime);
         }
@@ -75,7 +76,10 @@ public class ActionMove : MonoBehaviour
             animator.GetCurrentAnimatorStateInfo(0).IsName("In Air_Chain1_Attack4") ||
             animator.GetCurrentAnimatorStateInfo(0).IsName("Rage Mode_Attack1") ||
             animator.GetCurrentAnimatorStateInfo(0).IsName("Rage Mode_Attack2") ||
-            animator.GetCurrentAnimatorStateInfo(0).IsName("Rage Mode_Attack3"))
+            animator.GetCurrentAnimatorStateInfo(0).IsName("Rage Mode_Attack3") ||
+            animator.GetCurrentAnimatorStateInfo(0).IsName("In Air_Rage Mode_Attack1") ||
+            animator.GetCurrentAnimatorStateInfo(0).IsName("In Air_Rage Mode_Attack2") ||
+            animator.GetCurrentAnimatorStateInfo(0).IsName("In Air_Rage Mode_Attack3"))
         {
             cc.Move(target.GetEnemyDirection() * attackSpeed * Time.deltaTime);
             transform.LookAt(target.GetEnemyTransform());
