@@ -35,6 +35,8 @@ public class ActionMove : MonoBehaviour
         Attack();
         Fall();
         Land();
+        GetHit();
+        AttackJump();
     }
 
     void Dodge()
@@ -51,6 +53,13 @@ public class ActionMove : MonoBehaviour
             )
         {
             cc.Move(new Vector3(inputDirection.x, posY, inputDirection.y) * jumpSpeed * Time.deltaTime);
+        }
+    }
+    void AttackJump()
+    {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack Jump"))
+        {
+            cc.Move(new Vector3(0, posY, 0) * jumpSpeed * Time.deltaTime);
         }
     }
 
@@ -94,6 +103,14 @@ public class ActionMove : MonoBehaviour
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Land"))
         {
             transform.SetPositionAndRotation(new Vector3(transform.position.x, 1, transform.position.z), transform.rotation);
+        }
+    }
+
+    void GetHit()
+    {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Get Hit"))
+        {
+            cc.Move(Vector3.back * Time.deltaTime); //Vector is placeholder, should be calculated from the enemy that has landed a hit.
         }
     }
 }
