@@ -15,5 +15,4 @@ public class LevelManager : MonoBehaviour
     {
         navMeshSurface.BuildNavMesh();
     }
-
 }
