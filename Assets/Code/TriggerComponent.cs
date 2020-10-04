@@ -15,12 +15,8 @@ public class TriggerComponent : MonoBehaviour
     [SerializeField] private string parameterItem3;
     [SerializeField] private bool parameterItem4;
 
-   public bool isTriggered;
-
-
     public void ActivateTrigger() //Activates the trigger when CharacterController collides with trigger hitbox.
     {
-        isTriggered = true;
         triggerDebug.Fuu(parameterItem1, parameterItem2, parameterItem3, parameterItem4); //Method in script to be called.
         Debug.Log("TriggerComponent:SoundPath = " + SoundPath);
         GameObject temp = Instantiate(SoundObjectPrefab, this.transform.position, Quaternion.identity); //Creates the temporary SoundObject

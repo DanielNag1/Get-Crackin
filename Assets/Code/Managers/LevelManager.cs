@@ -7,7 +7,8 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
     #region Variables
-    private TriggerComponent triggerComp;
+    //private TriggerComponent triggerComp;
+    // private PlayerTriggerInteraction playerTrigger;
     public NavMeshSurface navMeshSurface;
     public Animator animator;
     public float transitionDelayTime = 1.0f;
@@ -17,33 +18,26 @@ public class LevelManager : MonoBehaviour
     private void Awake()
     {
         animator = GameObject.Find("Transition").GetComponent<Animator>();
-        triggerComp = GameObject.FindGameObjectWithTag("Trigger").GetComponent<TriggerComponent>();
     }
 
     void Start()
     {
         navMeshSurface.BuildNavMesh();
     }
-    private void Update()
-    {
-        if (triggerComp.isTriggered == true) // Checks if the player has activated the triggercomponent.
-        {
-            LoadNextLevel();
-        }
-    }
 
     /// <summary>
     /// Loading in the next level.
     /// </summary>
-    void LoadNextLevel()
+    public void LoadNextLevel()
     {
         StartCoroutine(DelayLoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
     }
-   /// <summary>
-   /// Enumertator that makes the transition look smooth.
-   /// </summary>
-   /// <param name="index"></param>
-   /// <returns></returns>
+
+    /// <summary>
+    /// Enumertator that makes the transition look smooth.
+    /// </summary>
+    /// <param name="index"></param> 
+    /// <returns></returns>
     IEnumerator DelayLoadLevel(int index)
     {
         animator.SetTrigger("TriggerTransition");
