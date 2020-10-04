@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerTriggerInteraction : MonoBehaviour
 {
     private TriggerComponent callableUnit;
+
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
         if (hit.collider.gameObject.tag != "Trigger")
