@@ -15,21 +15,19 @@ public class EnemyOne : MonoBehaviour
     {
         var navMeshAgent = GetComponent<NavMeshAgent>();
         var animator = GetComponent<Animator>();
-        var playerDetector = gameObject.AddComponent<PlayerDetector>();
+        //var playerDetector = gameObject.AddComponent<PlayerDetector>();
 
         //This is where we initalize the different states that the enemy can have:
         var idle = new Idle(this, animator);
         var moveTowardsPlayer = new MoveTowardsPlayer(this, navMeshAgent, animator);
-        var runAway = new RunAway(this, navMeshAgent, playerDetector, animator);
+        //var runAway = new RunAway(this, navMeshAgent, playerDetector, animator);
 
         _finiteStateMachine = new FiniteStateMachine();
 
-        
-
         AddTransition(moveTowardsPlayer, idle, HasATarget());
-        AddTransition(runAway, idle, () => playerDetector.PlayerInRange == false);
+        //AddTransition(runAway, idle, () => playerDetector.PlayerInRange == false);
 
-        _finiteStateMachine.AddAnyTransition(runAway, () => playerDetector.PlayerInRange);
+        //_finiteStateMachine.AddAnyTransition(runAway, () => playerDetector.PlayerInRange);
         _finiteStateMachine.SetState(idle);  //setting the default state (the initial state).
 
         //creating a function inside of the method that we can re-use.
