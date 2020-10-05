@@ -24,18 +24,19 @@ public class EnemyOne : MonoBehaviour
 
         _finiteStateMachine = new FiniteStateMachine();
 
-        //creating a function inside of the method that we can re-use.
-        void AddTransition(IState newState, IState previousState, Func<bool> condition) => _finiteStateMachine.AddTransition(newState, previousState, condition);
+        
 
         AddTransition(moveTowardsPlayer, idle, HasATarget());
         AddTransition(runAway, idle, () => playerDetector.PlayerInRange == false);
 
         _finiteStateMachine.AddAnyTransition(runAway, () => playerDetector.PlayerInRange);
-
-
-        Func<bool> HasATarget() => () => (Vector3.Distance(this.transform.position, PlayerPrefab.transform.position) < 10);
-
         _finiteStateMachine.SetState(idle);  //setting the default state (the initial state).
+
+        //creating a function inside of the method that we can re-use.
+        void AddTransition(IState newState, IState previousState, Func<bool> condition) => _finiteStateMachine.AddTransition(newState, previousState, condition);
+
+        Func<bool> HasATarget() => () => (Vector3.Distance(this.transform.position, PlayerPrefab.transform.position) <= 10);
+
     }
 
     private void Update()
