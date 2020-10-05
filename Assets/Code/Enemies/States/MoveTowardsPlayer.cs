@@ -12,6 +12,7 @@ public class MoveTowardsPlayer : IState
     private readonly Animator _animator;
     private float speed = 5;
     private int minimunDistancce = 10;
+    private GameObject _player;
 
     #endregion
 
@@ -21,6 +22,7 @@ public class MoveTowardsPlayer : IState
         this._enemy = enemy;
         this._navMeshAgent = navMeshAgent;
         this._animator = animator;
+        _player = GameObject.FindGameObjectWithTag("Player");
     }
 
     #region Interface Functions
@@ -28,6 +30,7 @@ public class MoveTowardsPlayer : IState
     public void OnEnter()
     {
         _navMeshAgent.enabled = true;
+        _navMeshAgent.transform.LookAt(_player.transform.position);
 
         Debug.Log("Move Towards Player ENTER");
     }
@@ -41,9 +44,8 @@ public class MoveTowardsPlayer : IState
 
     public void TimeTick()
     {
+        _navMeshAgent.SetDestination(_player.transform.transform.position);
         _navMeshAgent.transform.position += _navMeshAgent.transform.forward * speed * Time.deltaTime;
-        _navMeshAgent.SetDestination(_enemy.PlayerPrefab.transform.position);
-        _navMeshAgent.transform.LookAt(_enemy.PlayerPrefab.transform.position);
 
         Debug.Log("Move Towards Player TIMETICK");
     }

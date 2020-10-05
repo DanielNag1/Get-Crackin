@@ -8,14 +8,15 @@ public class EnemyOne : MonoBehaviour
 {
     private FiniteStateMachine _finiteStateMachine;
 
-    [SerializeField]
-    public GameObject PlayerPrefab;
+    private GameObject _player;
 
     private void Awake()
     {
+        _player = GameObject.FindGameObjectWithTag("Player");
         var navMeshAgent = GetComponent<NavMeshAgent>();
         var animator = GetComponent<Animator>();
         //var playerDetector = gameObject.AddComponent<PlayerDetector>();
+        
 
         //This is where we initalize the different states that the enemy can have:
         var idle = new Idle(this, animator);
@@ -33,7 +34,7 @@ public class EnemyOne : MonoBehaviour
         //creating a function inside of the method that we can re-use.
         void AddTransition(IState newState, IState previousState, Func<bool> condition) => _finiteStateMachine.AddTransition(newState, previousState, condition);
 
-        Func<bool> HasATarget() => () => (Vector3.Distance(this.transform.position, PlayerPrefab.transform.position) <= 10);
+        Func<bool> HasATarget() => () => (Vector3.Distance(this.transform.position, _player.transform.position) <= 10);
 
     }
 
