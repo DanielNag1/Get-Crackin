@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 2696658631594671627}
   - component: {fileID: 2696658631594671626}
   - component: {fileID: 2696658631594671625}
-  - component: {fileID: 2696658631594671624}
   - component: {fileID: 2696658631594671671}
   - component: {fileID: 2696658631594671670}
+  - component: {fileID: -5033384761173261907}
   m_Layer: 0
   m_Name: Prel_Enemy
   m_TagString: Enemy
@@ -97,18 +97,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &2696658631594671624
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2696658631594671669}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b78fe1074fe1a2242bcd4fd88a680177, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!195 &2696658631594671671
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -147,3 +135,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-5033384761173261907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2696658631594671669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b78fe1074fe1a2242bcd4fd88a680177, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerPrefab: {fileID: 6793778528719022535, guid: 28230520bdbe3574cbe4af10423ddbb4,
+    type: 3}

@@ -7,7 +7,9 @@ using UnityEngine.AI;
 public class EnemyOne : MonoBehaviour
 {
     private FiniteStateMachine _finiteStateMachine;
-    public Player Player { get; }
+
+    [SerializeField]
+    public GameObject PlayerPrefab;
 
     private void Awake()
     {
@@ -31,7 +33,7 @@ public class EnemyOne : MonoBehaviour
         _finiteStateMachine.AddAnyTransition(runAway, () => playerDetector.PlayerInRange);
 
 
-        Func<bool> HasATarget() => () => Player != null;  //target is the player which is not implemented yet.
+        Func<bool> HasATarget() => () => (Vector3.Distance(this.transform.position, PlayerPrefab.transform.position) < 10);
 
         _finiteStateMachine.SetState(idle);  //setting the default state (the initial state).
     }
