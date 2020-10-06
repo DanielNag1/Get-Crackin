@@ -9,6 +9,8 @@ public class LevelManager : MonoBehaviour
     #region Variables
     public Animator animator;
     public float transitionDelayTime = 1.0f;
+
+
     #endregion
     #region Methods
 
@@ -16,7 +18,10 @@ public class LevelManager : MonoBehaviour
     {
         animator = GameObject.Find("Transition").GetComponent<Animator>();
     }
-
+    private void Update()
+    {
+        LoadLevelFromCutscene();
+    }
 
     /// <summary>
     /// Loading in the next level.
@@ -36,6 +41,30 @@ public class LevelManager : MonoBehaviour
         animator.SetTrigger("TriggerTransition");
         yield return new WaitForSeconds(transitionDelayTime);
         SceneManager.LoadScene(index);
+    }
+
+    private void LoadLevelFromCutscene()
+    {
+        Scene cutScene1 = SceneManager.GetSceneByName("Cutscene_1");
+        Scene cutScene2 = SceneManager.GetSceneByName("Cutscene_2");
+        // Check if the name of the current Active Scene is your first Scene.
+        if (SceneManager.GetActiveScene() == cutScene1)
+        {
+            CheckInput();
+        }
+        if (SceneManager.GetActiveScene() == cutScene2)
+        {
+            CheckInput();
+        }
+
+    }
+
+    private void CheckInput()
+    {
+        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Joystick1Button0))
+        {
+            StartCoroutine(DelayLoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
+        }
     }
     #endregion
 }
