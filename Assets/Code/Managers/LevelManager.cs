@@ -7,9 +7,6 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
     #region Variables
-    //private TriggerComponent triggerComp;
-    // private PlayerTriggerInteraction playerTrigger;
-    public NavMeshSurface navMeshSurface;
     public Animator animator;
     public float transitionDelayTime = 1.0f;
     #endregion
@@ -20,10 +17,6 @@ public class LevelManager : MonoBehaviour
         animator = GameObject.Find("Transition").GetComponent<Animator>();
     }
 
-    void Start()
-    {
-        navMeshSurface.BuildNavMesh();
-    }
 
     /// <summary>
     /// Loading in the next level.
