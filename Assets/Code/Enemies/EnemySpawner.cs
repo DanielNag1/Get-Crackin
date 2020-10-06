@@ -18,7 +18,6 @@ public class EnemySpawner : MonoBehaviour
         for (int i = 0; i < spawnPoints.Count; i++)
         {
             EnemyManager.SpawnEnemyFromPool("Enemy", spawnPoints[i].transform.position, Quaternion.identity);
-
         }
     }
 }

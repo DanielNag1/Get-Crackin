@@ -12,6 +12,7 @@ public class RunAway : IState
     private NavMeshAgent _navMeshAgent;
     private PlayerDetector _playerDetector;
     private Animator _animator;
+    private GameObject _player;
 
     private float _speed;
     private float Flee_speed = 5f;
@@ -21,12 +22,12 @@ public class RunAway : IState
 
     #endregion
 
-    public RunAway(EnemyOne enemy, NavMeshAgent navMeshAgent, PlayerDetector playerDetecctor, Animator animator)
+    public RunAway(EnemyOne enemy, NavMeshAgent navMeshAgent, Animator animator)
     {
         this._enemy = enemy;
         this._navMeshAgent = navMeshAgent;
-        this._playerDetector = playerDetecctor;
         this._animator = animator;
+        _player = GameObject.FindGameObjectWithTag("Player");
     }
 
     #region Interface functions
@@ -65,7 +66,7 @@ public class RunAway : IState
 
     private Vector3 GetNewPoint()
     {
-        var directionFromPlayer = _enemy.transform.position - _playerDetector.GetPosition();
+        var directionFromPlayer = _enemy.transform.position - _player.transform.position;
         directionFromPlayer.Normalize();
 
         var lastPoint = _enemy.transform.position + (directionFromPlayer * runAwayDistance);

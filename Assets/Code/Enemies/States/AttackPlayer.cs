@@ -11,6 +11,8 @@ public class AttackPlayer : IState
     private NavMeshAgent _navMeshAgent;
     private Animator _animator;
 
+    public BoxCollider boxC;
+
     #endregion
 
 
@@ -36,8 +38,10 @@ public class AttackPlayer : IState
 
     public void TimeTick()
     {
-        //Check if hitboxes intersect and do damage.
+        
     }
+
+    
 
     #endregion
 }

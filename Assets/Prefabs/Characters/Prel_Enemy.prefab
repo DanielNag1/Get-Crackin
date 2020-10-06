@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2696658631594671626}
   - component: {fileID: 2696658631594671625}
   - component: {fileID: 2696658631594671671}
-  - component: {fileID: 2696658631594671670}
   - component: {fileID: -5033384761173261907}
   m_Layer: 0
   m_Name: Prel_Enemy
@@ -119,22 +118,6 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!54 &2696658631594671670
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2696658631594671669}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!114 &-5033384761173261907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,5 +130,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b78fe1074fe1a2242bcd4fd88a680177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerPrefab: {fileID: 6793778528719022535, guid: 28230520bdbe3574cbe4af10423ddbb4,
-    type: 3}
+  _player: {fileID: 0}

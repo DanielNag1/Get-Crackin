@@ -69,7 +69,7 @@ public class EnemyManager : MonoBehaviour
         }
 
         GameObject enemyToSpawn = enemyPoolDictionary[tag].Dequeue(); //Dequeue to pull out the first element in the queue.
-        enemyToSpawn.SetActive(true);  // enable to object.
+        enemyToSpawn.SetActive(false);  // enable to object.
         enemyToSpawn.transform.position = position;
         enemyToSpawn.transform.rotation = rotation;
 
