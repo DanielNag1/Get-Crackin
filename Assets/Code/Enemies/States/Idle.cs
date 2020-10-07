@@ -21,18 +21,18 @@ public class Idle : IState
 
     public void OnEnter()
     {
-        Debug.Log("EnterIdle");
+        //Debug.Log("EnterIdle");
         //Play Idle animation;
     }
 
     public void OnExit()
     {
-        Debug.Log("Exit Idle");
+        //Debug.Log("Exit Idle");
     }
 
     public void TimeTick()
     {
-        Debug.Log("TimeTick Idle");
+        //Debug.Log("TimeTick Idle");
     }
 
     #endregion

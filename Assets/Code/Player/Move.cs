@@ -23,15 +23,6 @@ public class Move : MonoBehaviour
 
     }
 
-    private void FixedUpdate()
-    {
-        Vector3 position = transform.position;
-        Vector3 direction = Vector3.down;
-
-        Physics.Raycast(position, direction);
-        Debug.DrawRay(position, direction, Color.red);
-    }
-
     /// <summary>
     /// The character is moving in a direction which is calculated from the cameras perspective.
     /// </summary>

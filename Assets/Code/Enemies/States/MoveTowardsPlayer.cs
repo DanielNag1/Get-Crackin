@@ -38,14 +38,14 @@ public class MoveTowardsPlayer : IState
         _navMeshAgent.enabled = true;
         //Play chase animation
 
-        Debug.Log("Move Towards Player ENTER");
+        //Debug.Log("Move Towards Player ENTER");
     }
 
     public void OnExit()
     {
         _navMeshAgent.enabled = false;
         //Stop chase animation.
-        Debug.Log("Move Towards Player EXIT");
+        //Debug.Log("Move Towards Player EXIT");
     }
 
     public void TimeTick()
@@ -54,7 +54,7 @@ public class MoveTowardsPlayer : IState
         _navMeshAgent.SetDestination(_player.transform.position);
         //_navMeshAgent.transform.position += _enemy.transform.forward * speed * Time.deltaTime;
 
-        Debug.Log("Move Towards Player TIMETICK");
+        //Debug.Log("Move Towards Player TIMETICK");
     }
 
     #endregion

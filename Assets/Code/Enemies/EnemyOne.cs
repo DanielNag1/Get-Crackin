@@ -63,6 +63,6 @@ public class EnemyOne : MonoBehaviour
     private void Update()
     {
         _finiteStateMachine.TimeTick();
-        Debug.Log(IsWithinDistance());
+        //Debug.Log(IsWithinDistance());
     }
 }

@@ -18,7 +18,7 @@ public class ActionMove : MonoBehaviour
     void Start()
     {
         move = GetComponent<Move>();
-        target = GetComponent<LockToTarget>();
+        target = GetComponentInChildren<LockToTarget>();
         animator = GetComponent<Animator>();
         cc = GetComponent<CharacterController>();
         attackSpeed = dodgeSpeed / 2;
