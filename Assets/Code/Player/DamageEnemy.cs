@@ -9,8 +9,8 @@ public class DamageEnemy : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            rage.ModifyRage(25);
-            collision.gameObject.GetComponent<enemyhealth>().MakeDamage(15);
+            //rage.ModifyRage(25);
+            //collision.gameObject.GetComponent<enemyhealth>().MakeDamage(15);
         }
     }
 }

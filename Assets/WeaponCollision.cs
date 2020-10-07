@@ -2,9 +2,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class WeaponCollision : MonoBehaviour
 {
+    [SerializeField] RageMode rage;
+    [SerializeField] private List<string> SoundPaths;
+    [SerializeField] private List<float> VolumeScales;
+    private Health health;
+    [SerializeField] private Animator animator;
+    Random random;
+
     public string targetTag;
     public int layerMaskValue;
     public List<Transform> weaponPoints;
@@ -15,7 +23,7 @@ public class WeaponCollision : MonoBehaviour
     private int layerMask;
     private List<GameObject> targetsHit = new List<GameObject>();
     private List<Tuple<float, GameObject>> recentTargetsHit = new List<Tuple<float, GameObject>>();
-    
+
     private void Start()
     {
         for (int i = 0; i < weaponPoints.Count; i++)
@@ -78,6 +86,19 @@ public class WeaponCollision : MonoBehaviour
 
             Debug.Log(targetsHit[i].name);
             //deal Damage Here
+            if (targetTag != "Player")
+            {
+                rage.ModifyRage(25);
+                targetsHit[i].GetComponent<enemyhealth>().MakeDamage(15);
+                SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), SoundPaths[Random.Range(0, SoundPaths.Count - 1)], 0, Time.fixedTime, VolumeScales[0]);
+            }
+            else
+            {
+                animator.SetTrigger("GetHit");
+                health = targetsHit[i].GetComponentInChildren<Health>();
+                health.ModifyHealth(-5);
+                SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), SoundPaths[Random.Range(0, SoundPaths.Count-1)], 0, Time.fixedTime, VolumeScales[0]);
+            }
         }
         targetsHit.Clear();
     }

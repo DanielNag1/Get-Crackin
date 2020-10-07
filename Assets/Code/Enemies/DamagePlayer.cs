@@ -11,9 +11,9 @@ public class DamagePlayer : MonoBehaviour
     {
         if (collision.gameObject.name== "HealthHitBox")
         {
-            animator.SetTrigger("GetHit");
-            health = collision.gameObject.GetComponentInChildren<Health>();
-            health.ModifyHealth(-5);
+            //animator.SetTrigger("GetHit");
+            //health = collision.gameObject.GetComponentInChildren<Health>();
+            //health.ModifyHealth(-5);
         }
     }
 
