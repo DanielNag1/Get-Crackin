@@ -44,7 +44,7 @@ public class InputBuffer : ScriptableObject
     #region Methods
     public void StartBuffer()
     {
-        Debug.Log("BufferStart");
+        //Debug.Log("BufferStart");
         CheckInput();
     }
     /// <summary>
@@ -52,14 +52,14 @@ public class InputBuffer : ScriptableObject
     /// </summary>
     private void CheckInput()
     {
-        Debug.Log("BufferMode="+bufferMode);
+        //Debug.Log("BufferMode="+bufferMode);
         //if bufferMode is off execute input
         if (bufferMode == false)
         {
-            Debug.Log("pressedButtons.Count=" + PressedButtons.Count);
+            //Debug.Log("pressedButtons.Count=" + PressedButtons.Count);
             for (int i = 0; i < PressedButtons.Count; i++)
             {
-                Debug.Log("PressedButtons[i] = "+ PressedButtons[i]);
+                //Debug.Log("PressedButtons[i] = "+ PressedButtons[i]);
                 ExecuteInput(PressedButtons[i]);
             }
             return;
@@ -70,7 +70,7 @@ public class InputBuffer : ScriptableObject
             //execute input that is imidiate actions
             if (PressedButtons[i] == KeyCode.Joystick1Button6 || PressedButtons[i] == KeyCode.Joystick1Button7 || PressedButtons[i] == KeyCode.Joystick1Button5)
             {
-                Debug.Log("ImidiateActionButton =" +PressedButtons[i]);
+                //Debug.Log("ImidiateActionButton =" +PressedButtons[i]);
                 ExecuteInput(PressedButtons[i]);
                 continue;
             }
@@ -80,7 +80,7 @@ public class InputBuffer : ScriptableObject
     }
     private void BufferInput(KeyCode pressedButton)
     {
-        Debug.Log("BufferInput pushed ="+ pressedButton);
+        //Debug.Log("BufferInput pushed ="+ pressedButton);
         bufferStack.Push(pressedButton); // populate the buffer in correct order, nice.
     }
     private void ExecuteBuffer()
@@ -89,7 +89,7 @@ public class InputBuffer : ScriptableObject
         {
             return;
         }
-        Debug.Log("BufferExecute Start");
+        //Debug.Log("BufferExecute Start");
         while (bufferTimer <= 0) // Wait for timer
         {
             bufferTimer -= Time.deltaTime;
@@ -100,11 +100,11 @@ public class InputBuffer : ScriptableObject
     }
     private void ExecuteInput(KeyCode inputKeyCode)
     {
-        Debug.Log("ExecuteInput Start, KeyCode ="+inputKeyCode);
+        //Debug.Log("ExecuteInput Start, KeyCode ="+inputKeyCode);
         switch (inputKeyCode)
         {
             case KeyCode.Joystick1Button0:
-                Debug.Log("ExecuteInput A");
+                //Debug.Log("ExecuteInput A");
                 //MethodCall
                 break;
             case KeyCode.Joystick1Button1:
@@ -120,7 +120,7 @@ public class InputBuffer : ScriptableObject
                 //MethodCall
                 break;
             case KeyCode.Joystick1Button5:
-                Debug.Log("ExecuteInput LockToTarget");
+                //Debug.Log("ExecuteInput LockToTarget");
                 LockToTarget.ManualTargeting();
                 break;
             case KeyCode.Joystick1Button6:
@@ -136,15 +136,15 @@ public class InputBuffer : ScriptableObject
                 //MethodCall
                 break;
             case KeyCode.Joystick1Button10:
-                Debug.Log("ExecuteInput pressed trigger left");
+                //Debug.Log("ExecuteInput pressed trigger left");
                 //MethodCall
                 break;
             case KeyCode.Joystick1Button11:
-                Debug.Log("ExecuteInput pressed trigger right");
+                //Debug.Log("ExecuteInput pressed trigger right");
                 //MethodCall
                 break;
         }
-        Debug.Log("BufferDone");
+        //Debug.Log("BufferDone");
     }
     #endregion
 }

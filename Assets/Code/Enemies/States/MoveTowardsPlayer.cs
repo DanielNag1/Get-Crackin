@@ -32,7 +32,7 @@ public class MoveTowardsPlayer : IState
     {
         timeStuck = 0; //safety check to see if the enemy has not moved.
         _navMeshAgent.enabled = true;
-        _navMeshAgent.SetDestination(_enemy.Player.transform.position);
+        _navMeshAgent.SetDestination(_enemy.gameObject.transform.position);
         _animator.SetFloat(speed, 1);
 
         Debug.Log("Move Towards Player ENTER");

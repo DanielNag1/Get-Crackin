@@ -5,21 +5,21 @@ using UnityEngine;
 
 public class PlayerDetector : MonoBehaviour
 {
-    public bool PlayerInRange => player != null;
+    public bool PlayerInRange => GameObject.FindGameObjectWithTag("Player") != null;
 
-    private Player player;
+    private GameObject player;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<Player>())
+        if (other.GetComponent<GameObject>())
         {
-            player = other.GetComponent<Player>();
+            player = other.GetComponent<GameObject>();
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.GetComponent<Player>())
+        if (other.GetComponent<GameObject>())
         {
             StartCoroutine(ClearDetectedPlayerAfterADelay());
         }

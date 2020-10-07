@@ -39,7 +39,7 @@ public class Menu : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(null);
 
             EventSystem.current.SetSelectedGameObject(pauseResumeButton);
-
+                
         }
         else
         {
