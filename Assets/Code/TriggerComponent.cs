@@ -15,7 +15,6 @@ public class TriggerComponent : MonoBehaviour
     [SerializeField] private string parameterItem3;
     [SerializeField] private bool parameterItem4;
 
-
     public void ActivateTrigger() //Activates the trigger when CharacterController collides with trigger hitbox.
     {
         triggerDebug.Fuu(parameterItem1, parameterItem2, parameterItem3, parameterItem4); //Method in script to be called.
