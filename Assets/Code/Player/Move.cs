@@ -9,18 +9,18 @@ public class Move : MonoBehaviour
     private Transform cameraTransform;
     [SerializeField] float MovementSpeed;
     private Vector3 desiredDirection;
-
+    private Animator animator;
     void Start()
     {
         characterController = GetComponent<CharacterController>();
         cameraTransform = Camera.main.transform;
-
+        animator = GetComponent<Animator>();
     }
 
     void Update()
     {
         RelativeToCameraMovement();
-
+        animator.SetFloat("movementMagnitude",movementDirection.magnitude);
     }
 
     /// <summary>

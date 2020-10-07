@@ -11,8 +11,10 @@ public class ActionMove : MonoBehaviour
     private CharacterController cc;
 
     private Vector3 inputDirection, targetDirection;
-    public float jumpSpeed, dodgeSpeed, posY, gravity, attackSpeed;
-
+    public float jumpSpeed, dodgeSpeed, posY, gravity, attackSpeed, groundDistance;
+    private LayerMask groundMask;
+    private Transform groundCheck;
+    private bool isGrounded;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +24,9 @@ public class ActionMove : MonoBehaviour
         animator = GetComponent<Animator>();
         cc = GetComponent<CharacterController>();
         attackSpeed = dodgeSpeed / 2;
+
+        groundMask = LayerMask.GetMask("ground");
+        groundCheck = transform.GetChild(3);
     }
 
     // Update is called once per frame
@@ -90,8 +95,10 @@ public class ActionMove : MonoBehaviour
     {
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Fall"))
         {
-            if (cc.isGrounded)
+            isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+            if (isGrounded)
             {
+                
                 animator.SetTrigger("onGround");
             }
 
@@ -106,7 +113,7 @@ public class ActionMove : MonoBehaviour
     {
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Land"))
         {
-            transform.SetPositionAndRotation(new Vector3(transform.position.x, 1, transform.position.z), transform.rotation);
+            transform.SetPositionAndRotation(new Vector3(transform.position.x, .5f, transform.position.z), transform.rotation);
         }
     }
 
@@ -117,4 +124,6 @@ public class ActionMove : MonoBehaviour
             cc.Move(Vector3.back * Time.deltaTime); //Vector is placeholder, should be calculated from the enemy that has landed a hit.
         }
     }
+   
+
 }

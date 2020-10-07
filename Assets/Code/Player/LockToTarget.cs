@@ -11,10 +11,11 @@ public class LockToTarget : MonoBehaviour
     [SerializeField] private List<float> VolumeScales;
 
     List<Transform> enemiesInRange;
-    Transform closestEnemy;
+    public Transform closestEnemy;
     bool isLockedToTarget;
 
     private Renderer iconRenderer;
+    private GameObject lockedEnemy;
 
     private void Start()
     {
@@ -76,6 +77,10 @@ public class LockToTarget : MonoBehaviour
         {
             if (targetGroup.FindMember(closestEnemy) != 1) //Checks if the closest enemy is not already locked on to.
             {
+                if (closestEnemy != null)
+                {
+                    lockedEnemy = closestEnemy.gameObject;
+                }
                 Debug.Log("Locking at time:" + Time.frameCount);
                 changeCamera.EnterLockCamera();
                 iconRenderer.material.color = new Color(0, 150, 200);
@@ -93,7 +98,7 @@ public class LockToTarget : MonoBehaviour
     /// </summary>
     void AutomaticTargeting()
     {
-        if (FindClosestEnemy(enemiesInRange) != null) //If there is an enemy nearby
+        if (FindClosestEnemy(enemiesInRange) != null && !isLockedToTarget) //If there is an enemy nearby
         {
             iconRenderer.enabled = true;
 
@@ -104,11 +109,20 @@ public class LockToTarget : MonoBehaviour
                 targetIcon.position = new Vector3(closestEnemy.position.x, closestEnemy.position.y + 1.5f, closestEnemy.position.z);
             }
         }
+        else if (isLockedToTarget) //If the player has locked on to an enemy, the position of the target icon is being updated.
+        {
+            if (closestEnemy != null)
+            {
+                targetIcon.position = new Vector3(lockedEnemy.transform.position.x, lockedEnemy.transform.position.y + 1.5f, lockedEnemy.transform.position.z);
+            }
+        }
         else
         {
             closestEnemy = null; //Sets selected target to null.
+            lockedEnemy = null;
             iconRenderer.enabled = false;
         }
+
     }
 
     ///<summary>

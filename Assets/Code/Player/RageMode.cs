@@ -13,14 +13,13 @@ public class RageMode : MonoBehaviour
     [SerializeField]
     private float TimerSec;
     private float elapsedTime;
-
     private Image rags;
 
-    private int currentRage;
+    public float currentRage;
 
 
     public event Action<float> onRagePctChanged = delegate { };
-
+    [SerializeField] private Animator animator;
 
 
     // Start is called before the first frame update
@@ -28,7 +27,6 @@ public class RageMode : MonoBehaviour
     {
         currentRage = startRage;
         rags = GetComponentInParent<RageBar>().RageBarss;
-
     }
 
 
@@ -38,7 +36,7 @@ public class RageMode : MonoBehaviour
 
     }
 
-    public void ModifyRage(int amount)
+    public void ModifyRage(float amount)
     {
 
         currentRage += amount;
@@ -51,54 +49,51 @@ public class RageMode : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
 
         if (currentRage == maxRage)
         {
-
-            elapsedTime += Time.deltaTime;
-            EnableRageMode();
-
-
-            if (elapsedTime >= TimerSec)
-            {
-                elapsedTime = 0;
-                ResetRageMode();
-
-            }
+            animator.SetBool("Rage Mode", true);
         }
 
-        else if (Input.GetKeyDown(KeyCode.S))
+        else if (currentRage <= 0)
         {
-            Debug.Log("Rage increase");
-            ModifyRage(25);
+            animator.SetBool("Rage Mode", false);
         }
-        else if (Input.GetKeyDown(KeyCode.K))
+    
+        else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Rage Mode_Attack1"))
         {
-            currentRage = startRage;
-
-            rags.fillAmount = 0;
-
-
-            Debug.Log("RAGE MODE RESET");
+            ModifyRage(-2);
         }
+        else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Rage Mode_Attack2"))
+        {
+            ModifyRage(-2);
+        }
+        else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Rage Mode_Attack3"))
+        {
+            ModifyRage(-2);
+        }
+        //elapsedTime += Time.deltaTime;
 
 
 
+            //if (elapsedTime >= TimerSec)
+            //{
+            //    elapsedTime = 0;
+            //    ResetRageMode();
+
+            //}
     }
 
-    private void EnableRageMode()
-    {
-        Debug.Log("RAGE MODE ENABLE");
-    }
+    
 
     private void ResetRageMode()
-    {
-        currentRage = startRage;
-        rags.fillAmount = 0;
+{
+    currentRage = startRage;
+    rags.fillAmount = 0;
 
 
-        Debug.Log("RAGE MODE RESET");
+    //Debug.Log("RAGE MODE RESET");
 
-    }
+}
 }

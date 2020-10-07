@@ -8,11 +8,12 @@ public class Health : MonoBehaviour
 {
 
     [SerializeField]
-    private int maxHealth = 100;
+    private int maxHealth = 30;
 
-    private int currentHealth;
+    public int currentHealth;
 
-    public event Action<float> onHealthPctChanged = delegate{ };
+    public event Action<float> onHealthPctChanged = delegate { };
+    [SerializeField] Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -33,17 +34,24 @@ public class Health : MonoBehaviour
         currentHealth += amount;
         float currentHealthPct = (float)currentHealth / (float)maxHealth;
         onHealthPctChanged(currentHealthPct);
-    
+
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W))
+        if (currentHealth <= 0)
         {
-            Debug.Log("minus health");
-            ModifyHealth(-10);
+            if(animator.GetBool("isDead")==false)
+            {
+                animator.SetBool("isDead", true);
+            }
         }
+        //if (Input.GetKeyDown(KeyCode.W))
+        //{
+        //    Debug.Log("minus health");
+        //    ModifyHealth(-10);
+        //}
     }
 }

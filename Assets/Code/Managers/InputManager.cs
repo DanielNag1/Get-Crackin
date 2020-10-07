@@ -34,17 +34,17 @@ public class InputManager : ScriptableObject
         PressedButtons.Clear();
         if (ButtonAPressed())
         {
-            PressedButtons.Add(KeyCode.Joystick1Button0);
+            PressedButtons.Add(KeyCode.Joystick1Button0); //Attack
             Debug.Log("pressed button A");
         }
         if (ButtonBPressed())
         {
-            PressedButtons.Add(KeyCode.Joystick1Button1);
+            PressedButtons.Add(KeyCode.Joystick1Button1); //Dodge
             Debug.Log("Pressed Button B");
         }
         if (buttonXPressed())
         {
-            PressedButtons.Add(KeyCode.Joystick1Button2);
+            PressedButtons.Add(KeyCode.Joystick1Button2); //Jump
             Debug.Log("Pressed Button X");
         }
         if (ButtonYPressed())
