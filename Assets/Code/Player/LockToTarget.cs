@@ -68,7 +68,7 @@ public class LockToTarget : MonoBehaviour
             targetGroup.RemoveMember(closestEnemy); //Remove the nearest enemy from the camera target group.
             isLockedToTarget = false;
             enemiesInRange.Clear();
-            SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), SoundPaths[0], 0, Time.fixedTime,VolumeScales[0]);
+            SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), SoundPaths[0], 0, Time.fixedTime, VolumeScales[0]);
             return;
         }
 
@@ -132,6 +132,15 @@ public class LockToTarget : MonoBehaviour
         }
         else
             return Vector3.zero;
+    }
+    public Transform GetEnemyTransform()
+    {
+        if (closestEnemy != null)
+        {
+            return closestEnemy.transform;
+        }
+        else
+            return null;
     }
 
     void OnTriggerEnter(Collider other)

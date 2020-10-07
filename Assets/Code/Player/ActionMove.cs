@@ -12,7 +12,7 @@ public class ActionMove : MonoBehaviour
 
     private Vector3 inputDirection, targetDirection;
     public float jumpSpeed, dodgeSpeed, posY, gravity, attackSpeed;
-    
+
 
     // Start is called before the first frame update
     void Start()
@@ -35,11 +35,14 @@ public class ActionMove : MonoBehaviour
         Attack();
         Fall();
         Land();
+        GetHit();
+        AttackJump();
     }
 
     void Dodge()
     {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Dodge"))
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Dodge") ||
+            (animator.GetCurrentAnimatorStateInfo(0).IsName("Air Dodge")))
         {
             cc.Move(inputDirection * dodgeSpeed * Time.deltaTime);
         }
@@ -53,15 +56,33 @@ public class ActionMove : MonoBehaviour
             cc.Move(new Vector3(inputDirection.x, posY, inputDirection.y) * jumpSpeed * Time.deltaTime);
         }
     }
+    void AttackJump()
+    {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack Jump"))
+        {
+            cc.Move(new Vector3(0, posY, 0) * jumpSpeed * Time.deltaTime);
+        }
+    }
 
     void Attack()
     {
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack1") ||
             animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack2") ||
-            animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack3"))
+            animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack3") ||
+            animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack4") ||
+            animator.GetCurrentAnimatorStateInfo(0).IsName("In Air_Chain1_Attack1") ||
+            animator.GetCurrentAnimatorStateInfo(0).IsName("In Air_Chain1_Attack2") ||
+            animator.GetCurrentAnimatorStateInfo(0).IsName("In Air_Chain1_Attack3") ||
+            animator.GetCurrentAnimatorStateInfo(0).IsName("In Air_Chain1_Attack4") ||
+            animator.GetCurrentAnimatorStateInfo(0).IsName("Rage Mode_Attack1") ||
+            animator.GetCurrentAnimatorStateInfo(0).IsName("Rage Mode_Attack2") ||
+            animator.GetCurrentAnimatorStateInfo(0).IsName("Rage Mode_Attack3") ||
+            animator.GetCurrentAnimatorStateInfo(0).IsName("In Air_Rage Mode_Attack1") ||
+            animator.GetCurrentAnimatorStateInfo(0).IsName("In Air_Rage Mode_Attack2") ||
+            animator.GetCurrentAnimatorStateInfo(0).IsName("In Air_Rage Mode_Attack3"))
         {
             cc.Move(target.GetEnemyDirection() * attackSpeed * Time.deltaTime);
-
+            transform.LookAt(target.GetEnemyTransform());
         }
     }
 
@@ -69,7 +90,7 @@ public class ActionMove : MonoBehaviour
     {
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Fall"))
         {
-            if (transform.position.y <= 1)
+            if (cc.isGrounded)
             {
                 animator.SetTrigger("onGround");
             }
@@ -86,6 +107,14 @@ public class ActionMove : MonoBehaviour
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Land"))
         {
             transform.SetPositionAndRotation(new Vector3(transform.position.x, 1, transform.position.z), transform.rotation);
+        }
+    }
+
+    void GetHit()
+    {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Get Hit"))
+        {
+            cc.Move(Vector3.back * Time.deltaTime); //Vector is placeholder, should be calculated from the enemy that has landed a hit.
         }
     }
 }
