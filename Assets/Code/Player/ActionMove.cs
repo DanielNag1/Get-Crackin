@@ -26,7 +26,7 @@ public class ActionMove : MonoBehaviour
         attackSpeed = dodgeSpeed / 2;
 
         groundMask = LayerMask.GetMask("ground");
-        groundCheck = transform.GetChild(3);
+        groundCheck = transform.GetChild(4);
     }
 
     // Update is called once per frame
