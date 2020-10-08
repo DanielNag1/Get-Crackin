@@ -28,74 +28,72 @@ public class InputManager : ScriptableObject
     /// Checks if a button has been pressed, if it's true it will execute the code for that button.
     /// </summary>
     ///
-#if DEBUG
     public void Update()
     {
         PressedButtons.Clear();
         if (ButtonAPressed())
         {
             PressedButtons.Add(KeyCode.Joystick1Button0); //Attack
-            Debug.Log("pressed button A");
+            //Debug.Log("pressed button A");
         }
         if (ButtonBPressed())
         {
             PressedButtons.Add(KeyCode.Joystick1Button1); //Dodge
-            Debug.Log("Pressed Button B");
+           // Debug.Log("Pressed Button B");
         }
         if (buttonXPressed())
         {
             PressedButtons.Add(KeyCode.Joystick1Button2); //Jump
-            Debug.Log("Pressed Button X");
+            //Debug.Log("Pressed Button X");
         }
         if (ButtonYPressed())
         {
             PressedButtons.Add(KeyCode.Joystick1Button3);
-            Debug.Log("Pressed Button Y");
+           // Debug.Log("Pressed Button Y");
         }
         if (LeftBumperPressed())
         {
             PressedButtons.Add(KeyCode.Joystick1Button4);
-            Debug.Log("Pressed LeftBumberButton");
+           // Debug.Log("Pressed LeftBumberButton");
         }
         if (RightBumperPressed())
         {
             PressedButtons.Add(KeyCode.Joystick1Button5);
-            Debug.Log("Pressed RightBumberButton");
+            //Debug.Log("Pressed RightBumberButton");
         }
         if (StartButtonPressed())
         {
             PressedButtons.Add(KeyCode.Joystick1Button6);
-            Debug.Log("Pressed startButton");
+           // Debug.Log("Pressed startButton");
         }
         if (BackButtonPressed())
         {
             PressedButtons.Add(KeyCode.Joystick1Button7);
-            Debug.Log("Pressed BackButton");
+            //Debug.Log("Pressed BackButton");
         }
         if(LeftStickClicked())
         {
             PressedButtons.Add(KeyCode.Joystick1Button8);
-            Debug.Log(" Pressed LeftJoystick Down");
+           // Debug.Log(" Pressed LeftJoystick Down");
         }
         if (RightStickClicked())
         {
             PressedButtons.Add(KeyCode.Joystick1Button9);
-            Debug.Log(" Pressed RightJoystick Down");
+            //Debug.Log(" Pressed RightJoystick Down");
         }
         if (LeftTrigger() > 0)
         {
             PressedButtons.Add(KeyCode.Joystick1Button10);//This might not work, we added new buttons in projectSettings, If something breakes we know why! :D ^^
-            Debug.Log("Pressed Left Trigger");
+           // Debug.Log("Pressed Left Trigger");
         }
         if (RightTrigger() > 0)
         {
             PressedButtons.Add(KeyCode.Joystick1Button11);//This might not work, we added new buttons in projectSettings, If something breakes we know why! :D ^^
-            Debug.Log("Pressed Right Trigger");
+            //Debug.Log("Pressed Right Trigger");
         }
         InputBuffer.Instance.PressedButtons = PressedButtons;
         InputBuffer.Instance.StartBuffer();
     }
-#endif
 
     #region Methods
     /// <summary>
