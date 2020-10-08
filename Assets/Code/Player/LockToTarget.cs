@@ -46,13 +46,19 @@ public class LockToTarget : MonoBehaviour
             if (enemies[i] == null)
             {
                 enemies.RemoveAt(i);
-                ExitLock();
+                if (isLockedToTarget)
+                {
+                    ExitLock();
+                }
                 continue;
             }
             if (enemies[i].gameObject.active == false)
             {
                 enemies.RemoveAt(i);
-                ExitLock();
+                if (isLockedToTarget)
+                {
+                    ExitLock();
+                }
                 continue;
             }
             Transform potentialTarget = enemies[i];
@@ -124,10 +130,6 @@ public class LockToTarget : MonoBehaviour
             if (!isLockedToTarget) //The player has not manually locked on to one enemy.
             {
                 closestEnemy = FindClosestEnemy(enemiesInRange); //Get the nearest enemy
-                if (closestEnemy == null)
-                {
-                    enemiesInRange.Remove(closestEnemy);
-                }
                 iconRenderer.material.color = new Color(160, 100, 0);
                 targetIcon.position = new Vector3(closestEnemy.position.x, closestEnemy.position.y + 1.5f, closestEnemy.position.z);
             }
