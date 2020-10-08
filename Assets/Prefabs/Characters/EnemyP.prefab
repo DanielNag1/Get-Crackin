@@ -354,6 +354,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 0
   startHealth: 50
+  SoundPaths:
+  - troll_monster_hurt_pain_01
+  - troll_monster_hurt_pain_02
+  - troll_monster_hurt_pain_03
+  - troll_monster_hurt_pain_04
+  VolumeScales:
+  - 0.6
+  SoundObjectPrefab: {fileID: 6447233000424186925, guid: a214008ad84fe8d4fb1ad97d04c3ed40,
+    type: 3}
 --- !u!82 &6741729657773714254
 AudioSource:
   m_ObjectHideFlags: 0

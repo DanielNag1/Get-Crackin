@@ -41,8 +41,21 @@ public class LockToTarget : MonoBehaviour
         Vector3 currentPosition = transform.position;
 
         //Looks through the list of the nearby enemies and finds the nearest.
-        foreach (Transform potentialTarget in enemies)
+        for (int i = enemies.Count - 1; i >= 0; i--)
         {
+            if (enemies[i] == null)
+            {
+                enemies.RemoveAt(i);
+                ExitLock();
+                continue;
+            }
+            if (enemies[i].gameObject.active == false)
+            {
+                enemies.RemoveAt(i);
+                ExitLock();
+                continue;
+            }
+            Transform potentialTarget = enemies[i];
             Vector3 directionToTarget = potentialTarget.position - currentPosition;
             float distanceToTarget = directionToTarget.sqrMagnitude;
 
@@ -56,6 +69,17 @@ public class LockToTarget : MonoBehaviour
         return bestTarget;
     }
 
+    private void ExitLock()
+    {
+        Debug.Log("Unlocking at time:" + Time.frameCount);
+        changeCamera.EnterFreeCamera();
+        targetGroup.RemoveMember(closestEnemy); //Remove the nearest enemy from the camera target group.
+        isLockedToTarget = false;
+        enemiesInRange.Clear();
+        SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), SoundPaths[0], 0, Time.fixedTime, VolumeScales[0]);
+    }
+
+
     /// <summary>
     /// Lock the camera on the selected target with F.
     /// </summary>
@@ -64,12 +88,7 @@ public class LockToTarget : MonoBehaviour
 
         if (isLockedToTarget) // Exit manual Lock
         {
-            Debug.Log("Unlocking at time:" + Time.frameCount);
-            changeCamera.EnterFreeCamera();
-            targetGroup.RemoveMember(closestEnemy); //Remove the nearest enemy from the camera target group.
-            isLockedToTarget = false;
-            enemiesInRange.Clear();
-            SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), SoundPaths[0], 0, Time.fixedTime, VolumeScales[0]);
+            ExitLock();
             return;
         }
 
@@ -105,6 +124,10 @@ public class LockToTarget : MonoBehaviour
             if (!isLockedToTarget) //The player has not manually locked on to one enemy.
             {
                 closestEnemy = FindClosestEnemy(enemiesInRange); //Get the nearest enemy
+                if (closestEnemy == null)
+                {
+                    enemiesInRange.Remove(closestEnemy);
+                }
                 iconRenderer.material.color = new Color(160, 100, 0);
                 targetIcon.position = new Vector3(closestEnemy.position.x, closestEnemy.position.y + 1.5f, closestEnemy.position.z);
             }
