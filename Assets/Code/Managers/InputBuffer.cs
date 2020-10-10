@@ -158,6 +158,7 @@ public class InputBuffer : ScriptableObject
                     animator.GetCurrentAnimatorStateInfo(0).IsName("Walk") ||
                     animator.GetCurrentAnimatorStateInfo(0).IsName("Run"))
         {
+            animator.SetBool("AttackJump", false); //Resetting attackjump
             animator.SetTrigger("Attack");
             animator.SetInteger("GroundChain", 1);
         }
@@ -178,12 +179,17 @@ public class InputBuffer : ScriptableObject
     {
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") ||  //If the player is in Idle/Walk/Run
                     animator.GetCurrentAnimatorStateInfo(0).IsName("Walk") ||
-                    animator.GetCurrentAnimatorStateInfo(0).IsName("Run") &&
-                    animator.GetBool("Rage Mode") == true)
+                    animator.GetCurrentAnimatorStateInfo(0).IsName("Run"))
         {
-            animator.SetInteger("Rage GroundChain", 1);
-            animator.SetTrigger("Rage Attack");
+            if (animator.GetBool("Rage Mode") == true) //If the player is in rage mode -> Do the rage chain
+            {
+
+                animator.SetInteger("Rage GroundChain", 1);
+                animator.SetTrigger("Rage Attack");
+
+            }
         }
+
         else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Rage Mode_Attack1")) //If the player continues the chain from 1 to 2
         {
             animator.SetInteger("Rage GroundChain", 2);
@@ -192,6 +198,7 @@ public class InputBuffer : ScriptableObject
         {
             animator.SetInteger("Rage GroundChain", 3);
         }
+
     }
     void GroundDodge()
     {
@@ -207,6 +214,7 @@ public class InputBuffer : ScriptableObject
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("In Air"))
         {
             animator.SetInteger("AirChain", 1);
+            animator.SetTrigger("Air Attack");
             animator.SetBool("Air Dodge", false);
         }
         else if (animator.GetCurrentAnimatorStateInfo(0).IsName("In Air_Chain1_Attack1"))
@@ -250,15 +258,21 @@ public class InputBuffer : ScriptableObject
     }
     void GroundJump()
     {
-        animator.SetTrigger("Jump");
-        animator.SetBool("AttackJump", false);
-        animator.SetBool("Air Dodge", false);
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") ||
+            animator.GetCurrentAnimatorStateInfo(0).IsName("Walk") ||
+            animator.GetCurrentAnimatorStateInfo(0).IsName("Run"))
+        {
+            animator.SetTrigger("Jump");
+            animator.SetBool("Air Dodge", false);
+        }
+
     }
     void AttackJump()
     {
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack1") ||
             animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack2") ||
             animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack3") ||
+            animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack4") ||
             animator.GetCurrentAnimatorStateInfo(0).IsName("Rage Mode_Attack1") ||
             animator.GetCurrentAnimatorStateInfo(0).IsName("Rage Mode_Attack2") ||
             animator.GetCurrentAnimatorStateInfo(0).IsName("Rage Mode_Attack3"))

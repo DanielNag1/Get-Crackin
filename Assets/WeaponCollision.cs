@@ -88,7 +88,14 @@ public class WeaponCollision : MonoBehaviour
             //deal Damage Here
             if (targetTag != "Player")
             {
-                rage.ModifyRage(25);
+                if (animator.GetBool("Rage Mode") == false)
+                {
+                    rage.ModifyRage(25); //Increase rage meter
+                }
+                else
+                {
+                    rage.ModifyRage(-5); //Decrease rage meter
+                }
                 targetsHit[i].GetComponent<enemyhealth>().MakeDamage(15);
                 SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), SoundPaths[Random.Range(0, SoundPaths.Count - 1)], 0, Time.fixedTime, VolumeScales[0]);
             }
@@ -97,7 +104,7 @@ public class WeaponCollision : MonoBehaviour
                 animator.SetTrigger("GetHit");
                 health = targetsHit[i].GetComponentInChildren<Health>();
                 health.ModifyHealth(-5);
-                SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), SoundPaths[Random.Range(0, SoundPaths.Count-1)], 0, Time.fixedTime, VolumeScales[0]);
+                SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), SoundPaths[Random.Range(0, SoundPaths.Count - 1)], 0, Time.fixedTime, VolumeScales[0]);
             }
         }
         targetsHit.Clear();

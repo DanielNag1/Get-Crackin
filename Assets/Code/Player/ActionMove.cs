@@ -94,11 +94,12 @@ public class ActionMove : MonoBehaviour
     void Fall()
     {
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Fall"))
+            
         {
             isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
             if (isGrounded)
             {
-                
+                animator.SetBool("Air Dodge", false); //Resetting air dodge
                 animator.SetTrigger("onGround");
             }
 
