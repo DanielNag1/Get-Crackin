@@ -36,7 +36,6 @@ public class EnemyManager : MonoBehaviour
     void Start()
     {
         enemyPoolDictionary = new Dictionary<string, Queue<GameObject>>();  //Empty Dictionary.
-
         foreach (Pool pool in poolList)
         {
             Queue<GameObject> enemyPool = new Queue<GameObject>();  //A Queue of objects.
@@ -44,7 +43,7 @@ public class EnemyManager : MonoBehaviour
             //Create each one of these objects.
             for (int i = 0; i < pool.totalSizeOfPool; i++)
             {
-                GameObject enemy = Instantiate(pool.enemyPrefab); 
+                GameObject enemy = Instantiate(pool.enemyPrefab);
                 enemy.SetActive(false);  //We cant see it just yet!
                 enemyPool.Enqueue(enemy);  //Add it to the end of the Queue and feed it the enemyobject.
             }
@@ -61,21 +60,21 @@ public class EnemyManager : MonoBehaviour
     /// <returns></returns>
     public GameObject SpawnEnemyFromPool(string tag, Vector3 position, Quaternion rotation)
     {
+    
         //Safety first!!
-        if(!enemyPoolDictionary.ContainsKey(tag))
+        if (!enemyPoolDictionary.ContainsKey(tag))
         {
             Debug.Log(tag + " pool does not exist");
             return null;
         }
 
-        GameObject enemyToSpawn = enemyPoolDictionary[tag].Dequeue(); //Dequeue to pull out the first element in the queue.
-        enemyToSpawn.SetActive(false);  // enable to object.
-        enemyToSpawn.transform.position = position;
-        enemyToSpawn.transform.rotation = rotation;
+        GameObject enemy = enemyPoolDictionary[tag].Dequeue(); //Dequeue to pull out the first element in the queue.
+        enemy.SetActive(true);  // enable to object.
+        enemy.transform.position = position;
+        enemy.transform.rotation = rotation;
+        enemyPoolDictionary[tag].Enqueue(enemy);
 
-        enemyPoolDictionary[tag].Enqueue(enemyToSpawn);  
-
-        return enemyToSpawn;
+        return enemy;
     }
 
 }
