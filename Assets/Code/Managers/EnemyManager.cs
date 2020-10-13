@@ -33,7 +33,8 @@ public class EnemyManager : MonoBehaviour
     /// </summary>
     public Dictionary<string, Queue<GameObject>> enemyPoolDictionary;
 
-    void Start()
+  
+    public void SpawnEnemyFromTrigger()
     {
         enemyPoolDictionary = new Dictionary<string, Queue<GameObject>>();  //Empty Dictionary.
         foreach (Pool pool in poolList)
@@ -47,11 +48,9 @@ public class EnemyManager : MonoBehaviour
                 enemy.SetActive(false);  //We cant see it just yet!
                 enemyPool.Enqueue(enemy);  //Add it to the end of the Queue and feed it the enemyobject.
             }
-
             enemyPoolDictionary.Add(pool.tag, enemyPool);  //Adding pool to Dictionary.
         }
     }
-
     /// <summary>
     /// Take inactive gameobjects and spawn them in to our active level.
     /// <paramref name="tag"/> = tag of the object we want to spawn.
