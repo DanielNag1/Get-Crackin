@@ -23,7 +23,6 @@ public class ActionMove : MonoBehaviour
         target = GetComponentInChildren<LockToTarget>();
         animator = GetComponent<Animator>();
         cc = GetComponent<CharacterController>();
-        attackSpeed = dodgeSpeed / 2;
 
         groundMask = LayerMask.GetMask("ground");
         groundCheck = transform.GetChild(4);
@@ -86,7 +85,7 @@ public class ActionMove : MonoBehaviour
             animator.GetCurrentAnimatorStateInfo(0).IsName("In Air_Rage Mode_Attack2") ||
             animator.GetCurrentAnimatorStateInfo(0).IsName("In Air_Rage Mode_Attack3"))
         {
-            cc.Move(target.GetEnemyDirection() * attackSpeed * Time.deltaTime);
+            cc.Move(target.GetEnemyDirection().normalized * attackSpeed * Time.deltaTime);
             transform.LookAt(target.GetEnemyTransform());
         }
     }
@@ -105,7 +104,8 @@ public class ActionMove : MonoBehaviour
 
             else
             {
-                cc.Move(new Vector3(inputDirection.x, gravity, inputDirection.y) * Time.deltaTime);
+                GetComponent<Move>().enabled = false;
+                cc.Move(new Vector3(inputDirection.x, gravity, inputDirection.y) * Time.deltaTime);               
             }
         }
     }
@@ -114,7 +114,8 @@ public class ActionMove : MonoBehaviour
     {
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Land"))
         {
-            transform.SetPositionAndRotation(new Vector3(transform.position.x, .5f, transform.position.z), transform.rotation);
+            GetComponent<Move>().enabled = true;
+            transform.SetPositionAndRotation(new Vector3(transform.position.x, 0.46f, transform.position.z), transform.rotation);
         }
     }
 
@@ -125,6 +126,8 @@ public class ActionMove : MonoBehaviour
             cc.Move(Vector3.back * Time.deltaTime); //Vector is placeholder, should be calculated from the enemy that has landed a hit.
         }
     }
+
+
    
 
 }

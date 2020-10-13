@@ -49,8 +49,7 @@ public class RageMode : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        Debug.Log(currentRage);
+        
         if (currentRage == maxRage)
         {
             animator.SetBool("Rage Mode", true);
