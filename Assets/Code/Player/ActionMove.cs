@@ -114,8 +114,8 @@ public class ActionMove : MonoBehaviour
     {
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Land"))
         {
-            GetComponent<Move>().enabled = true;
             transform.SetPositionAndRotation(new Vector3(transform.position.x, 0.46f, transform.position.z), transform.rotation);
+            GetComponent<Move>().enabled = true;
         }
     }
 
