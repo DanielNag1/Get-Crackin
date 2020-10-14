@@ -10,7 +10,6 @@ public class AttackPlayer : IState
     private EnemyOne _enemy;
     private NavMeshAgent _navMeshAgent;
     private Animator _animator;
-
     public BoxCollider boxC;
 
     #endregion
@@ -28,6 +27,7 @@ public class AttackPlayer : IState
     public void OnEnter()
     {
         _navMeshAgent.enabled = true;
+
         //play attack animation
     }
 
@@ -38,7 +38,7 @@ public class AttackPlayer : IState
 
     public void TimeTick()
     {
-        
+
     }
 
     

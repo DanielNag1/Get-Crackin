@@ -206,6 +206,7 @@ GameObject:
   - component: {fileID: 2416777182407210950}
   - component: {fileID: 6741729657773714254}
   - component: {fileID: 7784704148503022429}
+  - component: {fileID: -3610739010150937476}
   m_Layer: 9
   m_Name: EnemyP
   m_TagString: Enemy
@@ -361,8 +362,6 @@ MonoBehaviour:
   - troll_monster_hurt_pain_04
   VolumeScales:
   - 0.6
-  SoundObjectPrefab: {fileID: 6447233000424186925, guid: a214008ad84fe8d4fb1ad97d04c3ed40,
-    type: 3}
 --- !u!82 &6741729657773714254
 AudioSource:
   m_ObjectHideFlags: 0
@@ -491,6 +490,20 @@ MonoBehaviour:
   - {fileID: 131433755670998351}
   InvulnerabilityTime: 0.5
   collisionActive: 1
+--- !u!114 &-3610739010150937476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5898030445511312558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 416911f9687757f4cbe6472a84baf19a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: 523028e574857874ba4c3b540282abaf, type: 2}
+  enemy: {fileID: 5898030445511312558}
 --- !u!1 &6704261016002546880
 GameObject:
   m_ObjectHideFlags: 0

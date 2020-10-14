@@ -15,37 +15,48 @@ public class EnemyOne : MonoBehaviour
         _player = GameObject.FindGameObjectWithTag("Player");
         var navMeshAgent = GetComponent<NavMeshAgent>();
         var animator = GetComponent<Animator>();
-        //var playerDetector = gameObject.AddComponent<PlayerDetector>();
-        
 
         //This is where we initalize the different states that the enemy can have:
         var idle = new Idle(this, animator);
         var moveTowardsPlayer = new MoveTowardsPlayer(this, navMeshAgent, animator);
         var runAway = new RunAway(this, navMeshAgent, animator);
+        var attack = new AttackPlayer(this, navMeshAgent, animator);
 
         _finiteStateMachine = new FiniteStateMachine();
 
         //AddTransition(moveTowardsPlayer, idle, HasATarget());
         //AddTransition(runAway, idle, HasATarget());
 
-        
-        //AddTransition(runAway, idle, () => playerDetector.PlayerInRange == false);
-
-        //_finiteStateMachine.AddAnyTransition(runAway, () => playerDetector.PlayerInRange);
         _finiteStateMachine.SetState(idle);  //setting the default state (the initial state).
 
         _finiteStateMachine.AddAnyTransition(moveTowardsPlayer, HasATarget());
 
+        _finiteStateMachine.AddAnyTransition(attack, AttackTarget());
+
         //creating a function inside of the method that we can re-use.
         void AddTransition(IState newState, IState previousState, Func<bool> condition) => _finiteStateMachine.AddTransition(newState, previousState, condition);
 
-        Func<bool> HasATarget() => () => IsWithinDistance() == true;
+        Func<bool> HasATarget() => () => IsWithinChaseDistance();
+
+        Func<bool> AttackTarget() => () => IsWithinAttackDistance();
 
     }
 
-    private bool IsWithinDistance()
+    private bool IsWithinChaseDistance()
     {
-        if(Vector3.Distance(this.transform.position, _player.transform.position) <= 20)
+        if (Vector3.Distance(this.transform.position, _player.transform.position) <= 20 && Vector3.Distance(this.transform.position, _player.transform.position) > 1)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    private bool IsWithinAttackDistance()
+    {
+        if(Vector3.Distance(this.transform.position, _player.transform.position) <= 1)
         {
             return true;
         }
@@ -57,7 +68,7 @@ public class EnemyOne : MonoBehaviour
 
     private void FixedUpdate()
     {
-        IsWithinDistance();
+        IsWithinChaseDistance();
     }
 
     private void Update()

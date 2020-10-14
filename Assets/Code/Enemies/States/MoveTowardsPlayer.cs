@@ -11,8 +11,6 @@ public class MoveTowardsPlayer : IState
     private readonly EnemyOne _enemy;
     private NavMeshAgent _navMeshAgent;
     private readonly Animator _animator;
-    private float speed = 5;
-    //private int minimunDistancce = 10;
     private GameObject _player;
 
     #endregion
@@ -52,7 +50,6 @@ public class MoveTowardsPlayer : IState
     {
         _navMeshAgent.transform.LookAt(_player.transform.position);
         _navMeshAgent.SetDestination(_player.transform.position);
-        //_navMeshAgent.transform.position += _enemy.transform.forward * speed * Time.deltaTime;
 
         //Debug.Log("Move Towards Player TIMETICK");
     }
