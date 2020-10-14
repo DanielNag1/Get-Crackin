@@ -7,7 +7,6 @@ using UnityEngine.AI;
 public class EnemyOne : MonoBehaviour
 {
     private FiniteStateMachine _finiteStateMachine;
-
     public GameObject _player;
 
     private void Awake()
@@ -24,23 +23,21 @@ public class EnemyOne : MonoBehaviour
 
         _finiteStateMachine = new FiniteStateMachine();
 
-        //AddTransition(moveTowardsPlayer, idle, HasATarget());
-        //AddTransition(runAway, idle, HasATarget());
-
+        //The states with conditions
         _finiteStateMachine.SetState(idle);  //setting the default state (the initial state).
 
         _finiteStateMachine.AddAnyTransition(moveTowardsPlayer, HasATarget());
 
         _finiteStateMachine.AddAnyTransition(attack, AttackTarget());
 
-        //creating a function inside of the method that we can re-use.
-        void AddTransition(IState newState, IState previousState, Func<bool> condition) => _finiteStateMachine.AddTransition(newState, previousState, condition);
 
         Func<bool> HasATarget() => () => IsWithinChaseDistance();
 
         Func<bool> AttackTarget() => () => IsWithinAttackDistance();
 
     }
+
+    #region Conditions
 
     private bool IsWithinChaseDistance()
     {
@@ -66,6 +63,8 @@ public class EnemyOne : MonoBehaviour
         }
     }
 
+    #endregion
+
     private void FixedUpdate()
     {
         IsWithinChaseDistance();
@@ -74,6 +73,5 @@ public class EnemyOne : MonoBehaviour
     private void Update()
     {
         _finiteStateMachine.TimeTick();
-        //Debug.Log(IsWithinDistance());
     }
 }

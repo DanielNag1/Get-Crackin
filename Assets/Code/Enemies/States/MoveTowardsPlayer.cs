@@ -15,7 +15,6 @@ public class MoveTowardsPlayer : IState
 
     #endregion
 
-
     public MoveTowardsPlayer(EnemyOne enemy, NavMeshAgent navMeshAgent, Animator animator)
     {
         this._enemy = enemy;

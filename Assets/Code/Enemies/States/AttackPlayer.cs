@@ -27,7 +27,6 @@ public class AttackPlayer : IState
     public void OnEnter()
     {
         _navMeshAgent.enabled = true;
-
         //play attack animation
     }
 
@@ -40,8 +39,6 @@ public class AttackPlayer : IState
     {
 
     }
-
-    
 
     #endregion
 }
