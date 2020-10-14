@@ -50,7 +50,7 @@ public class MoveTowardsPlayer : IState
 
     public void TimeTick()
     {
-        //_navMeshAgent.transform.LookAt(_player.transform.position);
+        _navMeshAgent.transform.LookAt(_player.transform.position);
         _navMeshAgent.SetDestination(_player.transform.position);
         //_navMeshAgent.transform.position += _enemy.transform.forward * speed * Time.deltaTime;
 
