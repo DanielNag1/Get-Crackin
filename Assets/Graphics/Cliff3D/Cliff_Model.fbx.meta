@@ -3,7 +3,12 @@ guid: a3fb34e2cbf88664d9824f326645ce9e
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CliffMAT.001
+    second: {fileID: 2100000, guid: 45d5d734e94b35a45b789e6cd5c7b418, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
