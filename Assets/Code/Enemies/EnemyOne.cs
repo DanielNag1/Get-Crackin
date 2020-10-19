@@ -43,9 +43,6 @@ public class EnemyOne : MonoBehaviour
         Func<bool> HasATarget() => () => isWithinChaseRange;
 
         Func<bool> AttackTarget() => () => isWithinAttachRange;
-
-        Detect();
-
     }
 
     private bool Detect()
@@ -76,6 +73,17 @@ public class EnemyOne : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        RangeBools();
+    }
+
+    private void Update()
+    {
+        _finiteStateMachine.TimeTick();
+    }
+
+    #region Gizmos
 
     private void OnDrawGizmos()
     {
@@ -91,41 +99,5 @@ public class EnemyOne : MonoBehaviour
         Debug.DrawLine(transform.position, frontRayPoint, Color.blue);
     }
 
-    #region Conditions
-
-    //private bool IsWithinChaseDistance()
-    //{
-    //    if (Vector3.Distance(this.transform.position, _player.transform.position) <= 20 && Vector3.Distance(this.transform.position, _player.transform.position) > 1)
-    //    {
-    //        return true;
-    //    }
-    //    else
-    //    {
-    //        return false;
-    //    }
-    //}
-
-    //private bool IsWithinAttackDistance()
-    //{
-    //    if (Vector3.Distance(this.transform.position, _player.transform.position) <= 1)
-    //    {
-    //        return true;
-    //    }
-    //    else
-    //    {
-    //        return false;
-    //    }
-    //}
-
     #endregion
-
-    private void FixedUpdate()
-    {
-        RangeBools();
-    }
-
-    private void Update()
-    {
-        _finiteStateMachine.TimeTick();
-    }
 }
