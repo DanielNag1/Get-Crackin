@@ -85,6 +85,8 @@ public class ActionMove : MonoBehaviour
             animator.GetCurrentAnimatorStateInfo(0).IsName("In Air_Rage Mode_Attack2") ||
             animator.GetCurrentAnimatorStateInfo(0).IsName("In Air_Rage Mode_Attack3"))
         {
+            FreeCameraShake.Instance.ShakeCamera(2f, 0.1f);
+            LockCameraShake.Instance.ShakeCamera(2f, 0.1f);
             cc.Move(target.GetEnemyDirection().normalized * attackSpeed * Time.deltaTime);
             transform.LookAt(target.GetEnemyTransform());
         }
@@ -93,7 +95,7 @@ public class ActionMove : MonoBehaviour
     void Fall()
     {
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Fall"))
-            
+
         {
             isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
             if (isGrounded)
@@ -105,7 +107,7 @@ public class ActionMove : MonoBehaviour
             else
             {
                 GetComponent<Move>().enabled = false;
-                cc.Move(new Vector3(inputDirection.x, gravity, inputDirection.y) * Time.deltaTime);               
+                cc.Move(new Vector3(inputDirection.x, gravity, inputDirection.y) * Time.deltaTime);
             }
         }
     }
@@ -128,6 +130,6 @@ public class ActionMove : MonoBehaviour
     }
 
 
-   
+
 
 }
