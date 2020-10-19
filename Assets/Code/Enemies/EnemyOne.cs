@@ -12,7 +12,10 @@ public class EnemyOne : MonoBehaviour
     public int fieldOfView = 500;
     public int viewDistance = 10;
 
+    RaycastHit hit;
     private Vector3 rayDirection;
+
+    private bool isWithinAttachRange, isWithinChaseRange = false;
 
     private void Awake()
     {
@@ -35,10 +38,11 @@ public class EnemyOne : MonoBehaviour
 
         _finiteStateMachine.AddAnyTransition(attack, AttackTarget());
 
+        Detect();
 
-        Func<bool> HasATarget() => () => Detect();
+        Func<bool> HasATarget() => () => isWithinChaseRange;
 
-        Func<bool> AttackTarget() => () => IsWithinAttackDistance();
+        Func<bool> AttackTarget() => () => isWithinAttachRange;
 
         Detect();
 
@@ -46,26 +50,36 @@ public class EnemyOne : MonoBehaviour
 
     private bool Detect()
     {
-        RaycastHit hit;
         rayDirection = _player.transform.position - this.transform.position;
         if ((Vector3.Angle(rayDirection, this.transform.forward)) < fieldOfView)
         {
-            if(Physics.Raycast(this.transform.position, rayDirection, out hit, viewDistance))
-            {
-                Debug.Log("Detech Hit");
-                return true;
-            }
+            return true;
         }
         else
         {
             return false;
         }
-        return true;
     }
+
+    private void RangeBools()
+    {
+        if (Physics.Raycast(this.transform.position, rayDirection, out hit, 5f))
+        {
+            isWithinAttachRange = true;
+            Debug.Log("ATTACK RANGE");
+        }
+
+        if (Physics.Raycast(this.transform.position, rayDirection, out hit, viewDistance))
+        {
+            isWithinChaseRange = true;
+            Debug.Log("CHASE RANGE");
+        }
+    }
+
 
     private void OnDrawGizmos()
     {
-        if(_player.transform == null)
+        if (_player.transform == null)
         {
             return;
         }
@@ -79,35 +93,35 @@ public class EnemyOne : MonoBehaviour
 
     #region Conditions
 
-    private bool IsWithinChaseDistance()
-    {
-        if (Vector3.Distance(this.transform.position, _player.transform.position) <= 20 && Vector3.Distance(this.transform.position, _player.transform.position) > 1)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
+    //private bool IsWithinChaseDistance()
+    //{
+    //    if (Vector3.Distance(this.transform.position, _player.transform.position) <= 20 && Vector3.Distance(this.transform.position, _player.transform.position) > 1)
+    //    {
+    //        return true;
+    //    }
+    //    else
+    //    {
+    //        return false;
+    //    }
+    //}
 
-    private bool IsWithinAttackDistance()
-    {
-        if (Vector3.Distance(this.transform.position, _player.transform.position) <= 1)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
+    //private bool IsWithinAttackDistance()
+    //{
+    //    if (Vector3.Distance(this.transform.position, _player.transform.position) <= 1)
+    //    {
+    //        return true;
+    //    }
+    //    else
+    //    {
+    //        return false;
+    //    }
+    //}
 
     #endregion
 
     private void FixedUpdate()
     {
-        IsWithinChaseDistance();
+        RangeBools();
     }
 
     private void Update()
