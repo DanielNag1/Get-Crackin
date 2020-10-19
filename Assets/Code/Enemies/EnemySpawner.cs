@@ -8,16 +8,19 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     List<GameObject> spawnPoints = new List<GameObject>();
 
+   
     private void Start()
     {
         EnemyManager = EnemyManager.Instance;
-    }
 
-    void FixedUpdate()
+    }
+    private void FixedUpdate()
     {
         for (int i = 0; i < spawnPoints.Count; i++)
         {
             EnemyManager.SpawnEnemyFromPool("Enemy", spawnPoints[i].transform.position, Quaternion.identity);
         }
     }
+  
 }
+

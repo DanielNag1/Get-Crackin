@@ -26,14 +26,12 @@ public class EnemyManager : MonoBehaviour
     #endregion
 
     public List<Pool> poolList;
-
     /// <summary>
     /// Key (string) is the tag we assosioate each pool with.
     /// Second is the actual pool stored as a Queue of Gameobjects.
     /// </summary>
     public Dictionary<string, Queue<GameObject>> enemyPoolDictionary;
 
-  
     public void SpawnEnemyFromTrigger()
     {
         enemyPoolDictionary = new Dictionary<string, Queue<GameObject>>();  //Empty Dictionary.
@@ -59,8 +57,8 @@ public class EnemyManager : MonoBehaviour
     /// <returns></returns>
     public GameObject SpawnEnemyFromPool(string tag, Vector3 position, Quaternion rotation)
     {
-    
-        //Safety first!!
+
+        ////Safety first!!
         if (!enemyPoolDictionary.ContainsKey(tag))
         {
             Debug.Log(tag + " pool does not exist");
@@ -72,7 +70,6 @@ public class EnemyManager : MonoBehaviour
         enemy.transform.position = position;
         enemy.transform.rotation = rotation;
         enemyPoolDictionary[tag].Enqueue(enemy);
-
         return enemy;
     }
 
