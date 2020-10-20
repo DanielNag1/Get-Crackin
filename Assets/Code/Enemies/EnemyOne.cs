@@ -17,6 +17,11 @@ public class EnemyOne : MonoBehaviour
 
     private bool isWithinAttachRange, isWithinChaseRange = false;
 
+    public bool isGrounded;
+    public float groundedHeight = 0.5f;
+    public LayerMask groundLayer;
+    public float highOffset = 0.25f;
+
     private void Awake()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
@@ -43,6 +48,20 @@ public class EnemyOne : MonoBehaviour
         Func<bool> HasATarget() => () => isWithinChaseRange;
 
         Func<bool> AttackTarget() => () => isWithinAttachRange;
+    }
+
+    public void GroundCheck()
+    {
+        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + highOffset, transform.position.z), Vector3.down, groundedHeight + highOffset, groundLayer))
+        {
+            isGrounded = true;
+            Debug.Log("Grounded TRUE");
+        }
+        else
+        {
+            isGrounded = false;
+            Debug.Log("Grounded FALSE");
+        }
     }
 
     private bool Detect()
@@ -76,6 +95,7 @@ public class EnemyOne : MonoBehaviour
     private void FixedUpdate()
     {
         RangeBools();
+        GroundCheck();
     }
 
     private void Update()
@@ -97,6 +117,9 @@ public class EnemyOne : MonoBehaviour
         Vector3 frontRayPoint = transform.position + (transform.forward * viewDistance);
 
         Debug.DrawLine(transform.position, frontRayPoint, Color.blue);
+
+        Vector3 downRay = transform.position + (Vector3.down * groundedHeight);
+        Debug.DrawLine(transform.position, downRay, Color.yellow);
     }
 
     #endregion
