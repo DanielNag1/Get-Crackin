@@ -12,6 +12,13 @@ public class AttackPlayer : IState
     private Animator _animator;
     public BoxCollider boxC;
 
+    public int attackDamageMinimun;
+    public int attackDamageMaximun;
+    public float attackCoolDownTimeMain = 3;
+    public float attackCoolDownTime = 3;
+    WeaponCollision weaponCollision;
+
+
     #endregion
 
 
@@ -20,6 +27,7 @@ public class AttackPlayer : IState
         this._enemy = enemy;
         this._navMeshAgent = navMeshAgent;
         this._animator = animator;
+        weaponCollision = GameObject.FindGameObjectWithTag("Player").GetComponent<WeaponCollision>();
     }
 
     #region Interface Methods
@@ -27,7 +35,6 @@ public class AttackPlayer : IState
     public void OnEnter()
     {
         _navMeshAgent.enabled = true;
-        //play attack animation
     }
 
     public void OnExit()
@@ -37,7 +44,22 @@ public class AttackPlayer : IState
 
     public void TimeTick()
     {
+        if (attackCoolDownTime > 0)
+        {
+            attackCoolDownTime -= Time.deltaTime;
+        }
+        else
+        {
+            attackCoolDownTime = attackCoolDownTimeMain;
+            Attack();
+        }
+    }
 
+    private void Attack()
+    {
+        weaponCollision.DeliverDamageToTargetsHit();
+        //Play Attack Animation;
+        //Debug.Log("ATTACK");
     }
 
     #endregion

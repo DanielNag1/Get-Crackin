@@ -22,6 +22,10 @@ public class EnemyOne : MonoBehaviour
     public LayerMask groundLayer;
     public float highOffset = 0.25f;
 
+    Idle idle;
+    MoveTowardsPlayer moveTowardsPlayer;
+    AttackPlayer attack;
+
     private void Awake()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
@@ -29,38 +33,44 @@ public class EnemyOne : MonoBehaviour
         var animator = GetComponent<Animator>();
 
         //This is where we initalize the different states that the enemy can have:
-        var idle = new Idle(this, animator);
-        var moveTowardsPlayer = new MoveTowardsPlayer(this, navMeshAgent, animator);
-        var runAway = new RunAway(this, navMeshAgent, animator);
-        var attack = new AttackPlayer(this, navMeshAgent, animator);
+        //var idle = new Idle(this, animator);
+        //var moveTowardsPlayer = new MoveTowardsPlayer(this, navMeshAgent, animator);
+        //var runAway = new RunAway(this, navMeshAgent, animator);
+        //var attack = new AttackPlayer(this, navMeshAgent, animator);
+
+        idle = new Idle(this, animator);
+        moveTowardsPlayer = new MoveTowardsPlayer(this, navMeshAgent, animator);
+        attack = new AttackPlayer(this, navMeshAgent, animator);
 
         _finiteStateMachine = new FiniteStateMachine();
 
-        //The states with conditions
-        _finiteStateMachine.SetState(idle);  //setting the default state (the initial state).
+        Detect();
 
+        //The states with conditions
         _finiteStateMachine.AddAnyTransition(moveTowardsPlayer, HasATarget());
 
         _finiteStateMachine.AddAnyTransition(attack, AttackTarget());
 
-        Detect();
+       
 
-        Func<bool> HasATarget() => () => isWithinChaseRange;
+        _finiteStateMachine.SetState(idle);  //setting the default state (the initial state).
 
-        Func<bool> AttackTarget() => () => isWithinAttachRange;
+        Func<bool> AttackTarget() => () => isWithinAttachRange == true;
+        Func<bool> HasATarget() => () => isWithinChaseRange == true && isWithinAttachRange == false;
     }
+
 
     public void GroundCheck()
     {
         if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + highOffset, transform.position.z), Vector3.down, groundedHeight + highOffset, groundLayer))
         {
             isGrounded = true;
-            Debug.Log("Grounded TRUE");
+            //Debug.Log("Grounded TRUE");
         }
         else
         {
             isGrounded = false;
-            Debug.Log("Grounded FALSE");
+            //Debug.Log("Grounded FALSE");
         }
     }
 
@@ -84,11 +94,19 @@ public class EnemyOne : MonoBehaviour
             isWithinAttachRange = true;
             Debug.Log("ATTACK RANGE");
         }
+        else
+        {
+            isWithinAttachRange = false;
+        }
 
         if (Physics.Raycast(this.transform.position, rayDirection, out hit, viewDistance))
         {
             isWithinChaseRange = true;
             Debug.Log("CHASE RANGE");
+        }
+        else
+        {
+            isWithinChaseRange = false;
         }
     }
 
@@ -117,9 +135,6 @@ public class EnemyOne : MonoBehaviour
         Vector3 frontRayPoint = transform.position + (transform.forward * viewDistance);
 
         Debug.DrawLine(transform.position, frontRayPoint, Color.blue);
-
-        Vector3 downRay = transform.position + (Vector3.down * groundedHeight);
-        Debug.DrawLine(transform.position, downRay, Color.yellow);
     }
 
     #endregion

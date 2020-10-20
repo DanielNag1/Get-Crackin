@@ -80,7 +80,7 @@ public class WeaponCollision : MonoBehaviour
             Debug.DrawRay(previousWeaponPointPositions[i], transform.TransformDirection((currentWeaponPointPositions[i] - previousWeaponPointPositions[i]).normalized) * Vector3.Distance(previousWeaponPointPositions[i], currentWeaponPointPositions[i]), Color.white);
         }
     }
-    void DeliverDamageToTargetsHit()
+    public void DeliverDamageToTargetsHit()
     {
         for (int i = 0; i < targetsHit.Count; i++)
         {
@@ -98,7 +98,7 @@ public class WeaponCollision : MonoBehaviour
                 animator.SetTrigger("GetHit");
                 health = targetsHit[i].GetComponentInChildren<Health>();
                 health.ModifyHealth(-5);
-                SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), SoundPaths[Random.Range(0, SoundPaths.Count-1)], 0, Time.fixedTime, VolumeScales[0]);
+                SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), SoundPaths[Random.Range(0, SoundPaths.Count - 1)], 0, Time.fixedTime, VolumeScales[0]);
             }
         }
         targetsHit.Clear();
