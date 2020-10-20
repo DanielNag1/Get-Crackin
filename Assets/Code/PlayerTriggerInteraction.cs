@@ -16,7 +16,6 @@ public class PlayerTriggerInteraction : MonoBehaviour
     }
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
-
         if (hit.collider.gameObject.tag == "Trigger")
         {
             Debug.Log("Collided with Trigger");
@@ -32,7 +31,6 @@ public class PlayerTriggerInteraction : MonoBehaviour
         {
             SpawnEnemies(hit);
         }
-
     }
     #region Method
     private void LoadNextLevel(ControllerColliderHit hit)

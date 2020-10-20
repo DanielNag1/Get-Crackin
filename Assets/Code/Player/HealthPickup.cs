@@ -10,5 +10,4 @@ public class HealthPickup : MonoBehaviour
 
         Destroy(this.gameObject); // Destroys the mushroom object
     }
-  
 }

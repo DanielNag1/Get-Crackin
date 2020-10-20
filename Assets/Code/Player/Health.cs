@@ -19,9 +19,7 @@ public class Health : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
-
     }
-
 
     private void OnEnable()
     {
@@ -65,5 +63,4 @@ public class Health : MonoBehaviour
             Debug.Log("Gained 10 Health");
         }
     }
-
 }
