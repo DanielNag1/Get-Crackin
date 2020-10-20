@@ -49,8 +49,7 @@ public class RageMode : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
+        
         if (currentRage == maxRage)
         {
             animator.SetBool("Rage Mode", true);
@@ -60,40 +59,29 @@ public class RageMode : MonoBehaviour
         {
             animator.SetBool("Rage Mode", false);
         }
-    
-        else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Rage Mode_Attack1"))
-        {
-            ModifyRage(-2);
-        }
-        else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Rage Mode_Attack2"))
-        {
-            ModifyRage(-2);
-        }
-        else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Rage Mode_Attack3"))
-        {
-            ModifyRage(-2);
-        }
+        
+
         //elapsedTime += Time.deltaTime;
 
 
 
-            //if (elapsedTime >= TimerSec)
-            //{
-            //    elapsedTime = 0;
-            //    ResetRageMode();
+        //if (elapsedTime >= TimerSec)
+        //{
+        //    elapsedTime = 0;
+        //    ResetRageMode();
 
-            //}
+        //}
     }
 
-    
+
 
     private void ResetRageMode()
-{
-    currentRage = startRage;
-    rags.fillAmount = 0;
+    {
+        currentRage = startRage;
+        rags.fillAmount = 0;
 
 
-    //Debug.Log("RAGE MODE RESET");
+        //Debug.Log("RAGE MODE RESET");
 
-}
+    }
 }
