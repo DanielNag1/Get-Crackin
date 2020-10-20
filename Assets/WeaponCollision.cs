@@ -23,9 +23,11 @@ public class WeaponCollision : MonoBehaviour
     private int layerMask;
     private List<GameObject> targetsHit = new List<GameObject>();
     private List<Tuple<float, GameObject>> recentTargetsHit = new List<Tuple<float, GameObject>>();
+   
 
     private void Start()
     {
+        animator = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
         for (int i = 0; i < weaponPoints.Count; i++)
         {
             currentWeaponPointPositions.Add(weaponPoints[i].position);
