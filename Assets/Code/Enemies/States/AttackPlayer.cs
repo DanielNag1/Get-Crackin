@@ -16,8 +16,8 @@ public class AttackPlayer : IState
     public int attackDamageMaximun;
     public float attackCoolDownTimeMain = 3;
     public float attackCoolDownTime = 3;
-    WeaponCollision weaponCollision;
 
+    WeaponCollision weaponCollision;
 
     #endregion
 
@@ -58,6 +58,10 @@ public class AttackPlayer : IState
     private void Attack()
     {
         weaponCollision.DeliverDamageToTargetsHit();
+        if (weaponCollision.collisionActive == true)
+        {
+            Debug.Log("Attack TRUE!!");
+        }
         //Play Attack Animation;
         //Debug.Log("ATTACK");
     }

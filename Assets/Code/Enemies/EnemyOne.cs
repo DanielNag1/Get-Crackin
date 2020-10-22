@@ -50,28 +50,12 @@ public class EnemyOne : MonoBehaviour
         _finiteStateMachine.AddAnyTransition(moveTowardsPlayer, HasATarget());
 
         _finiteStateMachine.AddAnyTransition(attack, AttackTarget());
-
        
 
         _finiteStateMachine.SetState(idle);  //setting the default state (the initial state).
 
         Func<bool> AttackTarget() => () => isWithinAttachRange == true;
         Func<bool> HasATarget() => () => isWithinChaseRange == true && isWithinAttachRange == false;
-    }
-
-
-    public void GroundCheck()
-    {
-        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + highOffset, transform.position.z), Vector3.down, groundedHeight + highOffset, groundLayer))
-        {
-            isGrounded = true;
-            //Debug.Log("Grounded TRUE");
-        }
-        else
-        {
-            isGrounded = false;
-            //Debug.Log("Grounded FALSE");
-        }
     }
 
     private bool Detect()
@@ -92,7 +76,6 @@ public class EnemyOne : MonoBehaviour
         if (Physics.Raycast(this.transform.position, rayDirection, out hit, 5f))
         {
             isWithinAttachRange = true;
-            Debug.Log("ATTACK RANGE");
         }
         else
         {
@@ -102,18 +85,12 @@ public class EnemyOne : MonoBehaviour
         if (Physics.Raycast(this.transform.position, rayDirection, out hit, viewDistance))
         {
             isWithinChaseRange = true;
-            Debug.Log("CHASE RANGE");
-        }
-        else
-        {
-            isWithinChaseRange = false;
         }
     }
 
     private void FixedUpdate()
     {
         RangeBools();
-        GroundCheck();
     }
 
     private void Update()
