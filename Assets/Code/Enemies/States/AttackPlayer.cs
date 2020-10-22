@@ -14,10 +14,11 @@ public class AttackPlayer : IState
 
     public int attackDamageMinimun;
     public int attackDamageMaximun;
-    public float attackCoolDownTimeMain = 3;
-    public float attackCoolDownTime = 3;
+    public float attackCoolDownTimeMain = 1;
+    public float attackCoolDownTime = 1;
 
-    WeaponCollision weaponCollision;
+    private WeaponCollision weaponCollision;
+    private GameObject _player;
 
     #endregion
 
@@ -28,6 +29,7 @@ public class AttackPlayer : IState
         this._navMeshAgent = navMeshAgent;
         this._animator = animator;
         weaponCollision = GameObject.FindGameObjectWithTag("Player").GetComponent<WeaponCollision>();
+        _player = GameObject.FindGameObjectWithTag("Player");
     }
 
     #region Interface Methods
@@ -57,13 +59,29 @@ public class AttackPlayer : IState
 
     private void Attack()
     {
-        weaponCollision.DeliverDamageToTargetsHit();
+        
         if (weaponCollision.collisionActive == true)
         {
+            addImpact(_enemy.transform.position, 10);
             Debug.Log("Attack TRUE!!");
         }
         //Play Attack Animation;
         //Debug.Log("ATTACK");
+    }
+
+    private void addImpact(Vector3 direction, float force)
+    {
+        var mass = 3;
+        var impact = Vector3.zero;
+
+        direction.Normalize();
+
+        if(direction.y < 0)
+        {
+            direction.y = -direction.y;
+        }
+
+        impact += direction.normalized * force / mass;
     }
 
     #endregion
