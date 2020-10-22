@@ -23,6 +23,7 @@ public class WeaponCollision : MonoBehaviour
     private int layerMask;
     private List<GameObject> targetsHit = new List<GameObject>();
     private List<Tuple<float, GameObject>> recentTargetsHit = new List<Tuple<float, GameObject>>();
+   
 
     private void Start()
     {

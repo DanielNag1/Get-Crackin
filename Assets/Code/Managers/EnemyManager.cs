@@ -15,6 +15,7 @@ public class EnemyManager : MonoBehaviour
         public int totalSizeOfPool;  //At which point are we going to start reuse objects instead of spawning a new one.
     }
 
+
     #region Singleton
     public static EnemyManager Instance;
 
@@ -27,15 +28,17 @@ public class EnemyManager : MonoBehaviour
 
     public List<Pool> poolList;
 
+    public bool isReady = false;
+
     /// <summary>
     /// Key (string) is the tag we assosioate each pool with.
     /// Second is the actual pool stored as a Queue of Gameobjects.
     /// </summary>
     public Dictionary<string, Queue<GameObject>> enemyPoolDictionary;
 
-  
     public void SpawnEnemyFromTrigger()
     {
+        isReady = true;
         enemyPoolDictionary = new Dictionary<string, Queue<GameObject>>();  //Empty Dictionary.
         foreach (Pool pool in poolList)
         {
@@ -59,20 +62,19 @@ public class EnemyManager : MonoBehaviour
     /// <returns></returns>
     public GameObject SpawnEnemyFromPool(string tag, Vector3 position, Quaternion rotation)
     {
-    
-        //Safety first!!
+
+        ////Safety first!!
         if (!enemyPoolDictionary.ContainsKey(tag))
         {
             Debug.Log(tag + " pool does not exist");
+            isReady = false;
             return null;
         }
-
         GameObject enemy = enemyPoolDictionary[tag].Dequeue(); //Dequeue to pull out the first element in the queue.
         enemy.SetActive(true);  // enable to object.
         enemy.transform.position = position;
         enemy.transform.rotation = rotation;
         enemyPoolDictionary[tag].Enqueue(enemy);
-
         return enemy;
     }
 

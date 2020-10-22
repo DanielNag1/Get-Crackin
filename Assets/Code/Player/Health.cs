@@ -21,7 +21,6 @@ public class Health : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-
     private void OnEnable()
     {
         currentHealth = maxHealth;
@@ -30,11 +29,9 @@ public class Health : MonoBehaviour
 
     public void ModifyHealth(int amount)
     {
-
         currentHealth += amount;
         float currentHealthPct = (float)currentHealth / (float)maxHealth;
         onHealthPctChanged(currentHealthPct);
-
     }
 
 
@@ -43,7 +40,7 @@ public class Health : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
-            if(animator.GetBool("isDead")==false)
+            if (animator.GetBool("isDead") == false)
             {
                 animator.SetBool("isDead", true);
             }
@@ -53,5 +50,17 @@ public class Health : MonoBehaviour
         //    Debug.Log("minus health");
         //    ModifyHealth(-10);
         //}
+    }
+
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.collider.gameObject.tag == "Health"/* && currentHealth != maxHealth*/) // uncomment this 
+        {
+            HealthPickup HP;
+            HP = hit.collider.gameObject.GetComponent<HealthPickup>();
+            HP.PickupHealth();
+            ModifyHealth(10);
+            Debug.Log("Gained 10 Health");
+        }
     }
 }

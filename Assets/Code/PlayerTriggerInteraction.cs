@@ -7,16 +7,15 @@ public class PlayerTriggerInteraction : MonoBehaviour
     private TriggerComponent callableUnit;
     private LevelManager levelManager;
     private EnemyManager enemyManager;
+    private EnemySpawner enemySpawner;
 
     private void Awake()
     {
         levelManager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
         enemyManager = GameObject.FindGameObjectWithTag("EnemyManager").GetComponent<EnemyManager>();
-        
     }
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
-
         if (hit.collider.gameObject.tag == "Trigger")
         {
             Debug.Log("Collided with Trigger");
@@ -32,7 +31,6 @@ public class PlayerTriggerInteraction : MonoBehaviour
         {
             SpawnEnemies(hit);
         }
-
     }
     #region Method
     private void LoadNextLevel(ControllerColliderHit hit)
@@ -44,6 +42,7 @@ public class PlayerTriggerInteraction : MonoBehaviour
     private void SpawnEnemies(ControllerColliderHit hit)
     {
         callableUnit = hit.collider.gameObject.GetComponent<TriggerComponent>();
+        enemySpawner = GetComponent<EnemySpawner>();
         callableUnit.ActivateTrigger();
         enemyManager.SpawnEnemyFromTrigger();
     }
