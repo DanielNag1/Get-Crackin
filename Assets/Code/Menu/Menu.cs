@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class Menu : MonoBehaviour
 
     public GameObject customKeybindingButton, masterVolumeButton, soundEffectsButton, musicVolumeButton, backButton;
 
-
+    private bool MainActive;
 
     // Start is called before the first frame update
     void Update()
@@ -25,8 +26,27 @@ public class Menu : MonoBehaviour
         }
     }
 
+
+    public void PlayGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+    }
+
+    public void ExitGame()
+    {
+        Debug.Log("Quit");
+        Application.Quit();
+
+    }
+
     public void PauseUnpause()
     {
+        //if (!MainActive)
+        //{
+
+
+
         if (!pauseMenu.activeInHierarchy)
         {
             mainMenu.SetActive(false);
@@ -49,7 +69,7 @@ public class Menu : MonoBehaviour
             Time.timeScale = 1f;
 
         }
-
+        //}
     }
 
     public void OpenOptions()
@@ -77,6 +97,8 @@ public class Menu : MonoBehaviour
     public void MainMenuButton()
     {
 
+        // Pause can be activeted in main menu
+        // MainActive = true;
         pauseMenu.SetActive(false);
         optionsMenu.SetActive(false);
         mainMenu.SetActive(true);
@@ -86,8 +108,8 @@ public class Menu : MonoBehaviour
     public void ResumeButton()
     {
         PauseUnpause();
-    
-    
+
+
     }
     public void BackButton()
     {

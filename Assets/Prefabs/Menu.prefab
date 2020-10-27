@@ -361,7 +361,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3548632428926065298}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3548632429119446004}
+        m_MethodName: PlayGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3548632428951564462
 GameObject:
   m_ObjectHideFlags: 0
@@ -760,15 +771,15 @@ MonoBehaviour:
   pauseMenu: {fileID: 3548632430268434004}
   optionsMenu: {fileID: 3548632430949005435}
   mainMenu: {fileID: 3548632430493433823}
-  pauseResumeButton: {fileID: 0}
-  optionButton: {fileID: 0}
-  mainMenuButton: {fileID: 0}
-  quitToDesktopButton: {fileID: 0}
-  customKeybindingButton: {fileID: 0}
-  masterVolumeButton: {fileID: 0}
-  soundEffectsButton: {fileID: 0}
-  musicVolumeButton: {fileID: 0}
-  backButton: {fileID: 0}
+  pauseResumeButton: {fileID: 3548632430476102677}
+  optionButton: {fileID: 3548632430140428474}
+  mainMenuButton: {fileID: 3548632429012304878}
+  quitToDesktopButton: {fileID: 3548632429453060645}
+  customKeybindingButton: {fileID: 3548632430411565894}
+  masterVolumeButton: {fileID: 3548632429714470103}
+  soundEffectsButton: {fileID: 3548632430223360623}
+  musicVolumeButton: {fileID: 3548632429902369799}
+  backButton: {fileID: 3548632430706707598}
 --- !u!1 &3548632429141115964
 GameObject:
   m_ObjectHideFlags: 0
@@ -3041,7 +3052,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3548632430241505143}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3548632429119446004}
+        m_MethodName: ExitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3548632430268434004
 GameObject:
   m_ObjectHideFlags: 0
