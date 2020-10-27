@@ -17,6 +17,15 @@ public class EnemyOne : MonoBehaviour
 
     private bool isWithinAttachRange, isWithinChaseRange = false;
 
+    public bool isGrounded;
+    public float groundedHeight = 0.5f;
+    public LayerMask groundLayer;
+    public float highOffset = 0.25f;
+
+    Idle idle;
+    MoveTowardsPlayer moveTowardsPlayer;
+    AttackPlayer attack;
+
     private void Awake()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
@@ -24,25 +33,29 @@ public class EnemyOne : MonoBehaviour
         var animator = GetComponent<Animator>();
 
         //This is where we initalize the different states that the enemy can have:
-        var idle = new Idle(this, animator);
-        var moveTowardsPlayer = new MoveTowardsPlayer(this, navMeshAgent, animator);
-        var runAway = new RunAway(this, navMeshAgent, animator);
-        var attack = new AttackPlayer(this, navMeshAgent, animator);
+        //var idle = new Idle(this, animator);
+        //var moveTowardsPlayer = new MoveTowardsPlayer(this, navMeshAgent, animator);
+        //var runAway = new RunAway(this, navMeshAgent, animator);
+        //var attack = new AttackPlayer(this, navMeshAgent, animator);
+
+        idle = new Idle(this, animator);
+        moveTowardsPlayer = new MoveTowardsPlayer(this, navMeshAgent, animator);
+        attack = new AttackPlayer(this, navMeshAgent, animator);
 
         _finiteStateMachine = new FiniteStateMachine();
 
-        //The states with conditions
-        _finiteStateMachine.SetState(idle);  //setting the default state (the initial state).
+        Detect();
 
+        //The states with conditions
         _finiteStateMachine.AddAnyTransition(moveTowardsPlayer, HasATarget());
 
         _finiteStateMachine.AddAnyTransition(attack, AttackTarget());
+       
 
-        Detect();
+        _finiteStateMachine.SetState(idle);  //setting the default state (the initial state).
 
-        Func<bool> HasATarget() => () => isWithinChaseRange;
-
-        Func<bool> AttackTarget() => () => isWithinAttachRange;
+        Func<bool> AttackTarget() => () => isWithinAttachRange == true;
+        Func<bool> HasATarget() => () => isWithinChaseRange == true && isWithinAttachRange == false;
     }
 
     private bool Detect()
@@ -63,13 +76,15 @@ public class EnemyOne : MonoBehaviour
         if (Physics.Raycast(this.transform.position, rayDirection, out hit, 5f))
         {
             isWithinAttachRange = true;
-            Debug.Log("ATTACK RANGE");
+        }
+        else
+        {
+            isWithinAttachRange = false;
         }
 
         if (Physics.Raycast(this.transform.position, rayDirection, out hit, viewDistance))
         {
             isWithinChaseRange = true;
-            Debug.Log("CHASE RANGE");
         }
     }
 

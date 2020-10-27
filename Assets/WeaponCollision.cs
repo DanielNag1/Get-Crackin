@@ -81,7 +81,7 @@ public class WeaponCollision : MonoBehaviour
             Debug.DrawRay(previousWeaponPointPositions[i], transform.TransformDirection((currentWeaponPointPositions[i] - previousWeaponPointPositions[i]).normalized) * Vector3.Distance(previousWeaponPointPositions[i], currentWeaponPointPositions[i]), Color.white);
         }
     }
-    void DeliverDamageToTargetsHit()
+    public void DeliverDamageToTargetsHit()
     {
         for (int i = 0; i < targetsHit.Count; i++)
         {
