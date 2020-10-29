@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HealthPickup : MonoBehaviour
 {
+
     public void PickupHealth()
     {
         // TO DO: Sound effect implementation 
@@ -11,4 +12,5 @@ public class HealthPickup : MonoBehaviour
 
         Destroy(this.gameObject); // Destroys the mushroom object
     }
+
 }

@@ -333,6 +333,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MovementSpeed: 10
   layerMaskValue: 0
+  hitDistance: 0.1
 --- !u!143 &6793778528719022532
 CharacterController:
   m_ObjectHideFlags: 0
@@ -350,7 +351,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.48, z: 0}
+  m_Center: {x: 0, y: 0.3, z: 0}
 --- !u!95 &6793778528719022584
 Animator:
   serializedVersion: 3
@@ -570,6 +571,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 30
   currentHealth: 0
+  inRangeForHealth: 0
   animator: {fileID: 6793778528719022584}
 --- !u!1 &7038056455805487911
 GameObject:

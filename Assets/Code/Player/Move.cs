@@ -13,6 +13,8 @@ public class Move : MonoBehaviour
     public int layerMaskValue;
     private int layerMask;
     private bool jumping;
+    public float hitDistance;
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -54,7 +56,6 @@ public class Move : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(desiredDirection), 0.3f);
         }
 
-        characterController.Move(desiredDirection * MovementSpeed * movementDirection.magnitude * Time.deltaTime);  //The object moves.
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
         {
             jumping = true;
@@ -72,12 +73,13 @@ public class Move : MonoBehaviour
             if (Physics.Raycast(transform.position, Vector3.down, out hit, Mathf.Infinity, layerMask))
             {
                 if (hit.collider.tag == "Ground")
-                    if (hit.distance > 0.5f)
+                    if (hit.distance > hitDistance)
                     {
                         characterController.Move(-Vector3.up * Mathf.Min(hit.distance,0.1f));
                     }
             }
         }
+        characterController.Move(desiredDirection * MovementSpeed * movementDirection.magnitude * Time.deltaTime);  //The object moves.
     }
 
     public Vector3 GetInputDirection()
