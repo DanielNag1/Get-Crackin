@@ -22,9 +22,10 @@ public class Move : MonoBehaviour
         layerMask = ~layerMask;
     }
 
+    [SerializeField] float DodgeSpeed;
     void Update()
     {
-        RelativeToCameraMovement();
+        NormalMovement();
         animator.SetFloat("movementMagnitude", movementDirection.magnitude);
     }
 
@@ -53,7 +54,11 @@ public class Move : MonoBehaviour
         {
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(desiredDirection), 0.3f);
         }
+    }
 
+    void NormalMovement()
+    {
+        RelativeToCameraMovement();
         characterController.Move(desiredDirection * MovementSpeed * movementDirection.magnitude * Time.deltaTime);  //The object moves.
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
         {
@@ -74,12 +79,18 @@ public class Move : MonoBehaviour
                 if (hit.collider.tag == "Ground")
                     if (hit.distance > 0.5f)
                     {
-                        characterController.Move(-Vector3.up * Mathf.Min(hit.distance,0.1f));
+                        characterController.Move(-Vector3.up * Mathf.Min(hit.distance, 0.1f));
                     }
             }
         }
     }
 
+    public void DodgeMovement()
+    {
+        RelativeToCameraMovement();
+        characterController.Move(desiredDirection * DodgeSpeed * movementDirection.magnitude * Time.deltaTime);  //The object moves.
+    }
+    
     public Vector3 GetInputDirection()
     {
         if (desiredDirection != null)

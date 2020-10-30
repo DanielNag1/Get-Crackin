@@ -16,14 +16,13 @@ public class FreeCameraShake : MonoBehaviour
         cinemachineBrain = Camera.main.GetComponent<CinemachineBrain>();
         freeLookCamera = GetComponent<CinemachineFreeLook>();
 
-
         Instance = this;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(shakeTimer);
+     
         if (shakeTimer > 0)
         {
             shakeTimer -= Time.deltaTime;
@@ -33,7 +32,6 @@ public class FreeCameraShake : MonoBehaviour
         {
             if (cinemachineBrain.IsLive(freeLookCamera))
             {
-                Debug.Log("Freelook shake! ends");
                 freeLookCamera.GetRig(0).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
                 freeLookCamera.GetRig(1).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
                 freeLookCamera.GetRig(2).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;

@@ -23,7 +23,6 @@ public class LockCameraShake : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(shakeTimer);
         if (shakeTimer > 0)
         {
             shakeTimer -= Time.deltaTime;
@@ -33,7 +32,7 @@ public class LockCameraShake : MonoBehaviour
         {
             if (cinemachineBrain.IsLive(lockCamera))
             {
-                Debug.Log("lockCamera shake ends!"); CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin = lockCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+               CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin = lockCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
                 cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 0;
             }
         }

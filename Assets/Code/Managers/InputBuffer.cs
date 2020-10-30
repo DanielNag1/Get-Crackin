@@ -22,6 +22,7 @@ public class InputBuffer : ScriptableObject
     private Stack<KeyCode> bufferStack = new Stack<KeyCode>();
     private bool bufferMode = true;
     private float bufferTimer = 0;
+    public GameObject player;
 
     public LockToTarget LockToTarget;
     public Animator animator;
@@ -208,6 +209,9 @@ public class InputBuffer : ScriptableObject
         {
             animator.SetTrigger("Dodge");
         }
+        //Move the charater
+        Move move = player.GetComponent<Move>();
+        move.DodgeMovement();
     }
     void AirCombos()
     {
