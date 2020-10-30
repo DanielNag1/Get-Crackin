@@ -50,7 +50,7 @@ public class MoveTowardsPlayer : IState
         _navMeshAgent.transform.LookAt(_player.transform.position);
         _navMeshAgent.SetDestination(_player.transform.position);
 
-        Debug.Log("Move Towards Player TIMETICK");
+        //Debug.Log("Move Towards Player TIMETICK");
     }
 
     #endregion

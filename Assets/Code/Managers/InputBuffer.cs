@@ -205,8 +205,13 @@ public class InputBuffer : ScriptableObject
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") ||
                             animator.GetCurrentAnimatorStateInfo(0).IsName("Walk") ||
                             animator.GetCurrentAnimatorStateInfo(0).IsName("Run"))
+
         {
-            animator.SetTrigger("Dodge");
+            if (animator.GetFloat("movementMagnitude") > 0)
+            {
+                animator.SetTrigger("Dodge");
+            }
+
         }
     }
     void AirCombos()

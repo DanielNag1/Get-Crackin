@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AnimationEvents : MonoBehaviour
 {
-
+    [Header("Slashes")]
     [SerializeField] GameObject slash1;
     [SerializeField] GameObject slash2;
     [SerializeField] GameObject slash3;

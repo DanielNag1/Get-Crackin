@@ -177,6 +177,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: Dodge
     m_EventTreshold: 0
+  - m_ConditionMode: 3
+    m_ConditionEvent: movementMagnitude
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -2232897261648964436}
   m_Solo: 0
@@ -349,7 +352,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0
+  m_TransitionDuration: 0.17
   m_TransitionOffset: 0
   m_ExitTime: 1
   m_HasExitTime: 1
@@ -1017,7 +1020,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Dodge
-  m_Speed: 3
+  m_Speed: 1.1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 592492209872991066}
@@ -1032,7 +1035,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -623603649343465320, guid: 9b0832854a1011c4a8a69b644e6ccf0d,
+  m_Motion: {fileID: -623603649343465320, guid: 383c227e28859e04a9f3cf8010fed42e,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
@@ -1548,7 +1551,7 @@ AnimatorStateMachine:
     m_Position: {x: -270, y: -240, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2105716145245971357}
-    m_Position: {x: -600, y: 360, z: 0}
+    m_Position: {x: -1020, y: 520, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8893017551935814449}
     m_Position: {x: -550, y: -150, z: 0}
@@ -1566,7 +1569,7 @@ AnimatorStateMachine:
     m_Position: {x: -2000, y: -30, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1614862825064739280}
-    m_Position: {x: -760, y: -20, z: 0}
+    m_Position: {x: -850, y: -20, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -1704,7 +1707,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0
+  m_TransitionDuration: 0.14
   m_TransitionOffset: 0
   m_ExitTime: 1
   m_HasExitTime: 1
@@ -1865,7 +1868,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -623603649343465320, guid: 5e48ac58ee44b4047af8f30b249ed344,
+  m_Motion: {fileID: -623603649343465320, guid: 625894926cf323c44a847ca22a5b3489,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
@@ -2630,7 +2633,7 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0
+  m_TransitionDuration: 0.31
   m_TransitionOffset: 0
   m_ExitTime: 1
   m_HasExitTime: 1

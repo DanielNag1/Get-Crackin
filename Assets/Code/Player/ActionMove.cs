@@ -85,8 +85,8 @@ public class ActionMove : MonoBehaviour
             animator.GetCurrentAnimatorStateInfo(0).IsName("In Air_Rage Mode_Attack2") ||
             animator.GetCurrentAnimatorStateInfo(0).IsName("In Air_Rage Mode_Attack3"))
         {
-            FreeCameraShake.Instance.ShakeCamera(2f, 0.1f);
-            LockCameraShake.Instance.ShakeCamera(2f, 0.1f);
+            FreeCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            LockCameraShake.Instance.ShakeCamera(1f, 0.1f);
             cc.Move(target.GetEnemyDirection().normalized * attackSpeed * Time.deltaTime);
             transform.LookAt(target.GetEnemyTransform());
         }

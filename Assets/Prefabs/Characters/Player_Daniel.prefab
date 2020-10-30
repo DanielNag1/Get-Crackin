@@ -384,7 +384,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpSpeed: 3
-  dodgeSpeed: 5
+  dodgeSpeed: 7
   posY: 0
   gravity: -9.81
   attackSpeed: 8
@@ -557,6 +557,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   VFX1: {fileID: 0}
+  VFX2: {fileID: 0}
 --- !u!114 &7549676529129411895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -571,8 +572,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 30
   currentHealth: 0
-  inRangeForHealth: 0
   animator: {fileID: 6793778528719022584}
+  healthPickedUp: 0
 --- !u!1 &7038056455805487911
 GameObject:
   m_ObjectHideFlags: 0
@@ -1294,6 +1295,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -113564988318934197, guid: 6dfd3fef41cbe0444b86f132ca0e06cf,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 56e1f560de268fe4c8e720b1d93f850c, type: 2}
     - target: {fileID: -112182730096436232, guid: 6dfd3fef41cbe0444b86f132ca0e06cf,
         type: 3}
       propertyPath: m_Layer
@@ -1364,6 +1370,21 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2978280580551946675, guid: 6dfd3fef41cbe0444b86f132ca0e06cf,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 56e1f560de268fe4c8e720b1d93f850c, type: 2}
+    - target: {fileID: 2978280580551946675, guid: 6dfd3fef41cbe0444b86f132ca0e06cf,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 56e1f560de268fe4c8e720b1d93f850c, type: 2}
+    - target: {fileID: 2978280580551946675, guid: 6dfd3fef41cbe0444b86f132ca0e06cf,
+        type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 56e1f560de268fe4c8e720b1d93f850c, type: 2}
     - target: {fileID: 3450276610890820110, guid: 6dfd3fef41cbe0444b86f132ca0e06cf,
         type: 3}
       propertyPath: m_Layer
@@ -1887,6 +1908,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 39.99225
+      objectReference: {fileID: 0}
+    - target: {fileID: 4971272274241018080, guid: ad99e81ed2f0cf24ab81d45d5d50efd3,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4971272274241018080, guid: ad99e81ed2f0cf24ab81d45d5d50efd3,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 4971272274241018087, guid: ad99e81ed2f0cf24ab81d45d5d50efd3,
         type: 3}
