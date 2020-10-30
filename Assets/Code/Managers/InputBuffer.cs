@@ -211,7 +211,7 @@ public class InputBuffer : ScriptableObject
         }
         //Move the charater
         Move move = player.GetComponent<Move>();
-        move.DodgeMovement();
+        move.DodgeMovementStart(player.GetComponent<Transform>());
     }
     void AirCombos()
     {

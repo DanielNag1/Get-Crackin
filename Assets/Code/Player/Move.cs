@@ -8,11 +8,15 @@ public class Move : MonoBehaviour
     private Vector2 movementDirection = new Vector2();
     private Transform cameraTransform;
     [SerializeField] float MovementSpeed;
+    [SerializeField] float DodgeTimeSeconds;
+    [SerializeField] float DodgeDistance;
     private Vector3 desiredDirection;
     private Animator animator;
     public int layerMaskValue;
     private int layerMask;
     private bool jumping;
+
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -22,7 +26,6 @@ public class Move : MonoBehaviour
         layerMask = ~layerMask;
     }
 
-    [SerializeField] float DodgeSpeed;
     void Update()
     {
         NormalMovement();
@@ -85,12 +88,26 @@ public class Move : MonoBehaviour
         }
     }
 
-    public void DodgeMovement()
+    public void DodgeMovementStart(Transform trans)
     {
-        RelativeToCameraMovement();
-        characterController.Move(desiredDirection * DodgeSpeed * movementDirection.magnitude * Time.deltaTime);  //The object moves.
+        StartCoroutine(DodgeMovement(trans));
     }
-    
+    public IEnumerator DodgeMovement(Transform trans)
+    {
+        float timer = DodgeTimeSeconds;
+        var lockedDesiredDirection = desiredDirection;
+        var lockedMovementDirection = movementDirection.magnitude;
+        while (timer > 0)
+        {
+            RelativeToCameraMovement();
+            //trans.position += lockedDesiredDirection * (DodgeDistance / DodgeTimeSeconds) * Time.deltaTime;
+            characterController.Move(lockedDesiredDirection * (DodgeDistance / DodgeTimeSeconds) * Time.deltaTime);  //The object moves.
+            timer -= Time.deltaTime;
+            yield return null;
+        }
+
+    }
+
     public Vector3 GetInputDirection()
     {
         if (desiredDirection != null)
