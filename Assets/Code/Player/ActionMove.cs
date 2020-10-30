@@ -48,6 +48,8 @@ public class ActionMove : MonoBehaviour
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Dodge") ||
             (animator.GetCurrentAnimatorStateInfo(0).IsName("Air Dodge")))
         {
+            FreeCameraShake.Instance.ShakeCamera(1.3f, 0.1f);
+            LockCameraShake.Instance.ShakeCamera(1.3f, 0.1f);
             cc.Move(inputDirection * dodgeSpeed * Time.deltaTime);
         }
     }
