@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public class EnemyOne : MonoBehaviour
 {
     private FiniteStateMachine _finiteStateMachine;
-    public GameObject _player;
+    private GameObject _player;
 
     public int fieldOfView = 500;
     public int viewDistance = 10;
@@ -25,7 +25,7 @@ public class EnemyOne : MonoBehaviour
     Idle idle;
     MoveTowardsPlayer moveTowardsPlayer;
     AttackPlayer attack;
-
+   
     private void Awake()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
@@ -57,7 +57,7 @@ public class EnemyOne : MonoBehaviour
         Func<bool> AttackTarget() => () => isWithinAttachRange == true;
         Func<bool> HasATarget() => () => isWithinChaseRange == true && isWithinAttachRange == false;
     }
-
+   
     private bool Detect()
     {
         rayDirection = _player.transform.position - this.transform.position;
@@ -98,21 +98,4 @@ public class EnemyOne : MonoBehaviour
         _finiteStateMachine.TimeTick();
     }
 
-    #region Gizmos
-
-    private void OnDrawGizmos()
-    {
-        if (_player.transform == null)
-        {
-            return;
-        }
-
-        Debug.DrawLine(transform.position, _player.transform.position, Color.red);
-
-        Vector3 frontRayPoint = transform.position + (transform.forward * viewDistance);
-
-        Debug.DrawLine(transform.position, frontRayPoint, Color.blue);
-    }
-
-    #endregion
 }

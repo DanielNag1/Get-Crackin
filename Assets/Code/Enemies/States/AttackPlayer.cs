@@ -11,6 +11,7 @@ public class AttackPlayer : IState
     private NavMeshAgent _navMeshAgent;
     private Animator _animator;
     public BoxCollider boxC;
+    private Rigidbody rb;
 
     public int attackDamageMinimun;
     public int attackDamageMaximun;
@@ -30,6 +31,7 @@ public class AttackPlayer : IState
         this._animator = animator;
         weaponCollision = GameObject.FindGameObjectWithTag("Player").GetComponent<WeaponCollision>();
         _player = GameObject.FindGameObjectWithTag("Player");
+        rb = _enemy.GetComponent<Rigidbody>();
     }
 
     #region Interface Methods
@@ -37,6 +39,7 @@ public class AttackPlayer : IState
     public void OnEnter()
     {
         _navMeshAgent.enabled = true;
+       
     }
 
     public void OnExit()
@@ -46,6 +49,7 @@ public class AttackPlayer : IState
 
     public void TimeTick()
     {
+        rb.isKinematic = false;
         if (attackCoolDownTime > 0)
         {
             attackCoolDownTime -= Time.deltaTime;

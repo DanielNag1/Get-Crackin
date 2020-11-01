@@ -8,6 +8,7 @@ public class Idle : IState
 
     private EnemyOne _enemy;
     private Animator _animator;
+    private Rigidbody rb;
 
     #endregion
 
@@ -15,12 +16,14 @@ public class Idle : IState
     {
         this._enemy = enemy;
         this._animator = animator;
+        rb = _enemy.GetComponent<Rigidbody>();
     }
 
     #region Interface functions
 
     public void OnEnter()
     {
+      
         //Debug.Log("EnterIdle");
         //Play Idle animation;
     }
@@ -32,6 +35,7 @@ public class Idle : IState
 
     public void TimeTick()
     {
+        rb.isKinematic = true;
         //Debug.Log("TimeTick Idle");
     }
 

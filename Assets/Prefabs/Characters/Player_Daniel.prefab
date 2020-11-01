@@ -332,6 +332,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementSpeed: 10
+  DodgeTimeSeconds: 0
+  DodgeDistance: 0
   layerMaskValue: 0
 --- !u!143 &6793778528719022532
 CharacterController:
@@ -542,7 +544,7 @@ MonoBehaviour:
   - {fileID: 1849272252203534487}
   - {fileID: 7660421928429704941}
   InvulnerabilityTime: 0.5
-  collisionActive: 1
+  collisionActive: 0
 --- !u!114 &3931738415636858030
 MonoBehaviour:
   m_ObjectHideFlags: 0

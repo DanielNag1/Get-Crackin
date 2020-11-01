@@ -332,6 +332,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 0}
+  fieldOfView: 500
+  viewDistance: 10
+  isGrounded: 0
+  groundedHeight: 0.5
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  highOffset: 0.25
+  navMeshAgent: {fileID: 0}
 --- !u!195 &6574963950494839007
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -518,7 +527,7 @@ MonoBehaviour:
   - {fileID: 1269246307695957497}
   - {fileID: 807841831568644400}
   InvulnerabilityTime: 0.5
-  collisionActive: 1
+  collisionActive: 0
 --- !u!1 &7763709058477711026
 GameObject:
   m_ObjectHideFlags: 0

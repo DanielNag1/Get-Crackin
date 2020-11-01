@@ -41,6 +41,7 @@ public class WeaponCollision : MonoBehaviour
 
     private void Update()
     {
+      
         PurgeOldRecentTargetsHit();
         if (collisionActive)
         {
@@ -76,6 +77,7 @@ public class WeaponCollision : MonoBehaviour
                         {
                             targetsHit.Add(hit.transform.gameObject);
                             recentTargetsHit.Add(new Tuple<float, GameObject>(0, hit.transform.gameObject));
+                      
                         }
                     }
                 }
@@ -100,8 +102,8 @@ public class WeaponCollision : MonoBehaviour
                 else
                 {
                     rage.ModifyRage(-5); //Decrease rage meter
-                }
-                targetsHit[i].GetComponent<enemyhealth>().TakeDamage(15);      
+                }               
+                targetsHit[i].GetComponent<enemyhealth>().TakeDamage(15, weaponPoints[0].transform); // if this breaks check weaponpoints noll
                 SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), SoundPaths[Random.Range(0, SoundPaths.Count - 1)], 0, Time.fixedTime, VolumeScales[0]);
             }
             else

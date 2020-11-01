@@ -23,7 +23,7 @@ public class InputBuffer : ScriptableObject
     private bool bufferMode = true;
     private float bufferTimer = 0;
     public GameObject player;
-
+    private Rigidbody enemyRB;
     public LockToTarget LockToTarget;
     public Animator animator;
     #endregion
@@ -48,6 +48,7 @@ public class InputBuffer : ScriptableObject
     {
         //Debug.Log("BufferStart");
         CheckInput();
+
     }
     /// <summary>
     /// Analyse input
@@ -109,6 +110,7 @@ public class InputBuffer : ScriptableObject
                 GroundCombos();
                 RageGroundCombos();
                 AirCombos();
+               
                 break;
             case KeyCode.Joystick1Button1: //B Dodge
                 GroundDodge();
@@ -162,18 +164,24 @@ public class InputBuffer : ScriptableObject
             animator.SetBool("AttackJump", false); //Resetting attackjump
             animator.SetTrigger("Attack");
             animator.SetInteger("GroundChain", 1);
+            player.GetComponentInChildren<WeaponCollision>().collisionActive = true;
+
         }
         else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack1")) //If the player continues the chain from 1 to 2
         {
             animator.SetInteger("GroundChain", 2);
+            player.GetComponentInChildren<WeaponCollision>().collisionActive = true;
+            
         }
         else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack2")) //If the player continues the chain from 2 to 3
         {
             animator.SetInteger("GroundChain", 3);
+            player.GetComponentInChildren<WeaponCollision>().collisionActive = true;
         }
         else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack3")) //If the player continues the chain from 3 to 4
         {
             animator.SetInteger("GroundChain", 4);
+            player.GetComponentInChildren<WeaponCollision>().collisionActive = true;
         }
     }
     void RageGroundCombos()

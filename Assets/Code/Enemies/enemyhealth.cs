@@ -15,16 +15,16 @@ public class enemyhealth : MonoBehaviour
 
     private int deathSound;
     private Rigidbody rb;
-    private Transform target;
-    private List<GameObject> prefabList;
     private GameObject enemy;
+    private List<GameObject> prefabList;
+
     private Vector3 smash;
     private CharacterController characterController;
 
 
     void Start()
     {
-        target = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Transform>();
+        enemy = GameObject.FindGameObjectWithTag("Enemy");
         rb = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Rigidbody>();
         characterController = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>();
         prefabList = new List<GameObject>();
@@ -36,7 +36,7 @@ public class enemyhealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(smash.magnitude >= 0.1)
+        if (smash.magnitude >= 0.1)
         {
             characterController.Move(smash * Time.deltaTime);
         }
@@ -46,26 +46,38 @@ public class enemyhealth : MonoBehaviour
             //StartCoroutine(DeathCoroutine());
             gameObject.active = false;
         }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            TakeDamage(2);
-        }
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    TakeDamage(2);
+        //}
 
     }
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(int amount, Transform damageDealer)
     {
+        Vector3 knockbackDirection = (enemy.transform.position - damageDealer.position).normalized;
+        if (rb != null)
+        {
+            rb.velocity += knockbackDirection * amount;
+            //rb.AddExplosionForce(10, transform.position,5,5);
+            currentHealth -= amount;
+
+        }
+
+
+        // UseSmash(target.transform.position, 10);
+
+
         //foreach (var enemy in GameObject.FindGameObjectsWithTag("Enemy"))
         //{
         //    prefabList.Add(enemy);
         //}
         //for (int i = 0; i < prefabList.Count; i++)
         //{
-            currentHealth -= amount;
-            UseSmash(target.position, 2);
-           // rb.AddForce(transform.position * 2, ForceMode.Impulse);
-     //  }
-      
+
+        // rb.AddForce(transform.position * 2, ForceMode.Impulse);
+        //  }
+
     }
     private void UseSmash(Vector3 direction, float force)
     {

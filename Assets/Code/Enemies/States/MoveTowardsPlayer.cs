@@ -12,6 +12,7 @@ public class MoveTowardsPlayer : IState
     private NavMeshAgent _navMeshAgent;
     private readonly Animator _animator;
     private GameObject _player;
+    private Rigidbody rb;
 
     #endregion
 
@@ -21,6 +22,7 @@ public class MoveTowardsPlayer : IState
         this._navMeshAgent = navMeshAgent;
         this._animator = animator;
         _player = GameObject.FindGameObjectWithTag("Player");
+        rb = _enemy.GetComponent<Rigidbody>();
     }
 
     private void EnableNavMeshAgent()
@@ -33,6 +35,7 @@ public class MoveTowardsPlayer : IState
     public void OnEnter()
     {
         _navMeshAgent.enabled = true;
+
         //Play chase animation
 
         //Debug.Log("Move Towards Player ENTER");
@@ -47,9 +50,10 @@ public class MoveTowardsPlayer : IState
 
     public void TimeTick()
     {
+        rb.isKinematic = false;
         _navMeshAgent.transform.LookAt(_player.transform.position);
         _navMeshAgent.SetDestination(_player.transform.position);
-
+      
         Debug.Log("Move Towards Player TIMETICK");
     }
 
