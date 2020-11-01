@@ -21,7 +21,7 @@ public class EnemyOne : MonoBehaviour
     public float groundedHeight = 0.5f;
     public LayerMask groundLayer;
     public float highOffset = 0.25f;
-
+    public NavMeshAgent navMeshAgent;
     Idle idle;
     MoveTowardsPlayer moveTowardsPlayer;
     AttackPlayer attack;
@@ -29,9 +29,9 @@ public class EnemyOne : MonoBehaviour
     private void Awake()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
-        var navMeshAgent = GetComponent<NavMeshAgent>();
+        navMeshAgent = GetComponent<NavMeshAgent>();
         var animator = GetComponent<Animator>();
-
+        navMeshAgent.enabled = false;
         //This is where we initalize the different states that the enemy can have:
         //var idle = new Idle(this, animator);
         //var moveTowardsPlayer = new MoveTowardsPlayer(this, navMeshAgent, animator);

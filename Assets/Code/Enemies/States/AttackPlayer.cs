@@ -62,7 +62,7 @@ public class AttackPlayer : IState
         
         if (weaponCollision.collisionActive == true)
         {
-            addImpact(_enemy.transform.position, 10);
+            addImpact(_player.transform.position, 10);
             Debug.Log("Attack TRUE!!");
         }
         //Play Attack Animation;

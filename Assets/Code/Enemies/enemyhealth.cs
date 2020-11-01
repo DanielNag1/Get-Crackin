@@ -12,15 +12,22 @@ public class enemyhealth : MonoBehaviour
 
     [SerializeField] private List<string> SoundPaths;
     [SerializeField] private List<float> VolumeScales;
+
     private int deathSound;
     private Rigidbody rb;
     private Transform target;
+    private List<GameObject> prefabList;
+    private GameObject enemy;
+    private Vector3 smash;
+    private CharacterController characterController;
 
 
     void Start()
     {
-        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        target = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Transform>();
         rb = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Rigidbody>();
+        characterController = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>();
+        prefabList = new List<GameObject>();
         currentHealth = startHealth;
         //deathSound = Random.Range(0, SoundPaths.Count - 1);
         deathSound = 0;
@@ -29,6 +36,11 @@ public class enemyhealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(smash.magnitude >= 0.1)
+        {
+            characterController.Move(smash * Time.deltaTime);
+        }
+        smash = Vector3.Lerp(smash, Vector3.zero, 2 * Time.deltaTime);
         if (currentHealth <= 0)
         {
             //StartCoroutine(DeathCoroutine());
@@ -43,9 +55,22 @@ public class enemyhealth : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
-        currentHealth -= amount;
-
-        rb.AddForce(transform.position * 2, ForceMode.Impulse);
+        //foreach (var enemy in GameObject.FindGameObjectsWithTag("Enemy"))
+        //{
+        //    prefabList.Add(enemy);
+        //}
+        //for (int i = 0; i < prefabList.Count; i++)
+        //{
+            currentHealth -= amount;
+            UseSmash(target.position, 2);
+           // rb.AddForce(transform.position * 2, ForceMode.Impulse);
+     //  }
+      
+    }
+    private void UseSmash(Vector3 direction, float force)
+    {
+        direction.Normalize();
+        smash += direction.normalized * force;
     }
     //IEnumerator DeathCoroutine()
     //{
