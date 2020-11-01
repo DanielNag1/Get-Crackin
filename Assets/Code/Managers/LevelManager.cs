@@ -16,7 +16,7 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
-        animator = GameObject.Find("Transition").GetComponent<Animator>();
+       // animator = GameObject.Find("Transition").GetComponent<Animator>();
     }
     private void Update()
     {

@@ -9,11 +9,18 @@ public class enemyhealth : MonoBehaviour
     public int currentHealth;
     public int startHealth;
 
+
     [SerializeField] private List<string> SoundPaths;
     [SerializeField] private List<float> VolumeScales;
     private int deathSound;
+    private Rigidbody rb;
+    private Transform target;
+
+
     void Start()
     {
+        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        rb = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Rigidbody>();
         currentHealth = startHealth;
         //deathSound = Random.Range(0, SoundPaths.Count - 1);
         deathSound = 0;
@@ -27,11 +34,18 @@ public class enemyhealth : MonoBehaviour
             //StartCoroutine(DeathCoroutine());
             gameObject.active = false;
         }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            TakeDamage(2);
+        }
+
     }
 
-    public void MakeDamage(int amount)
+    public void TakeDamage(int amount)
     {
         currentHealth -= amount;
+
+        rb.AddForce(transform.position * 2, ForceMode.Impulse);
     }
     //IEnumerator DeathCoroutine()
     //{
