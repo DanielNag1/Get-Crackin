@@ -15,7 +15,7 @@ public class RageMode : MonoBehaviour
     private float elapsedTime;
     private Image rags;
 
-    public float currentRage;
+    public float currentRage;//Set this value when loading!
 
 
     public event Action<float> onRagePctChanged = delegate { };
@@ -50,7 +50,7 @@ public class RageMode : MonoBehaviour
     void Update()
     {
         
-        if (currentRage == maxRage)
+        if (currentRage >= maxRage)
         {
             animator.SetBool("Rage Mode", true);
         }

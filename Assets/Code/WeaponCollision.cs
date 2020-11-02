@@ -52,6 +52,9 @@ public class WeaponCollision : MonoBehaviour
        
     }
 
+    /// <summary>
+    /// Moves the collision lines to be between current frame and last frame
+    /// </summary>
     void UpdateCollision()
     {
         for (int i = 0; i < weaponPoints.Count; i++)
@@ -60,7 +63,9 @@ public class WeaponCollision : MonoBehaviour
             currentWeaponPointPositions[i] = weaponPoints[i].position;
         }
     }
-
+    /// <summary>
+    /// Raycasts along the collision line.
+    /// </summary>
     void WeaponCollisionCheck()
     {
         for (int i = 0; i < weaponPoints.Count; i++)
@@ -97,7 +102,7 @@ public class WeaponCollision : MonoBehaviour
             {
                 if (animator.GetBool("Rage Mode") == false)
                 {
-                    rage.ModifyRage(25); //Increase rage meter
+                    rage.ModifyRage(10); //Increase rage meter
                 }
                 else
                 {

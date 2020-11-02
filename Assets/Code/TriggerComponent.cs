@@ -10,7 +10,7 @@ public class TriggerComponent : MonoBehaviour
     [SerializeField] private GameObject SoundObjectPrefab; //Creates a temporary SoundObject on the location of the trigger that destroys itself when done.
 
     //Parameters that you want to send to the methods the trigger calls.
-    [SerializeField] private string parameterItem1; 
+    [SerializeField] private string parameterItem1;
     [SerializeField] private int parameterItem2;
     [SerializeField] private string parameterItem3;
     [SerializeField] private bool parameterItem4;

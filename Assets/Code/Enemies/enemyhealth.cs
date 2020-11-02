@@ -15,7 +15,7 @@ public class enemyhealth : MonoBehaviour
 
     private int deathSound;
     private Rigidbody rb;
-    private GameObject enemy;
+    public GameObject rootGameObject;
     private List<GameObject> prefabList;
 
     private Vector3 smash;
@@ -24,8 +24,11 @@ public class enemyhealth : MonoBehaviour
 
     void Start()
     {
-        enemy = GameObject.FindGameObjectWithTag("Enemy");
-        rb = GameObject.FindGameObjectWithTag("Enemy").GetComponent<Rigidbody>();
+        //Transform rootTransform = rootGameObject.transform.root;
+        //Debug.Log(rootTransform);
+        //rootGameObject = rootTransform.GetComponent<GameObject>();//set to root gameObject
+        Debug.Log(rootGameObject);
+        rb = rootGameObject.GetComponent<Rigidbody>();
         characterController = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>();
         prefabList = new List<GameObject>();
         currentHealth = startHealth;
@@ -33,14 +36,18 @@ public class enemyhealth : MonoBehaviour
         deathSound = 0;
     }
 
-    // Update is called once per frame
+    //Update is called once per frame
     void Update()
     {
+
+        //OBS, Not used??
         if (smash.magnitude >= 0.1)
         {
             characterController.Move(smash * Time.deltaTime);
         }
         smash = Vector3.Lerp(smash, Vector3.zero, 2 * Time.deltaTime);
+
+
         if (currentHealth <= 0)
         {
             //StartCoroutine(DeathCoroutine());
@@ -55,17 +62,17 @@ public class enemyhealth : MonoBehaviour
 
     public void TakeDamage(int amount, Transform damageDealer)
     {
-        Vector3 knockbackDirection = (enemy.transform.position - damageDealer.position).normalized;
+        Vector3 knockbackDirection = (rootGameObject.transform.position - damageDealer.position).normalized;
         if (rb != null)
         {
-            rb.velocity += knockbackDirection * amount;
+            rb.AddForce(knockbackDirection * amount, ForceMode.Impulse);
             //rb.AddExplosionForce(10, transform.position,5,5);
             currentHealth -= amount;
 
         }
 
 
-        // UseSmash(target.transform.position, 10);
+        //UseSmash(target.transform.position, 10);
 
 
         //foreach (var enemy in GameObject.FindGameObjectsWithTag("Enemy"))
@@ -79,11 +86,13 @@ public class enemyhealth : MonoBehaviour
         //  }
 
     }
+
     private void UseSmash(Vector3 direction, float force)
     {
         direction.Normalize();
         smash += direction.normalized * force;
     }
+
     //IEnumerator DeathCoroutine()
     //{
     //    SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), SoundPaths[deathSound], 0, Time.fixedTime, VolumeScales[0]);
