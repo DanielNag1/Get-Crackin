@@ -13,6 +13,7 @@ public class WeaponCollision : MonoBehaviour
     [SerializeField] private Animator animator;
     Random random;
 
+    public int weaponDamage = 1;
     public string targetTag;
     public int layerMaskValue;
     public List<Transform> weaponPoints;
@@ -107,8 +108,14 @@ public class WeaponCollision : MonoBehaviour
                 else
                 {
                     rage.ModifyRage(-5); //Decrease rage meter
-                }               
-                targetsHit[i].GetComponent<enemyhealth>().TakeDamage(15, weaponPoints[0].transform); // if this breaks check weaponpoints noll
+                }
+
+                //OBS!! weaponPoint location is hard coded, add info on what weaponPoint made the hit to the list: targetsHit
+                //If we want knockback to depend on weapon hit location.
+                //targetsHit[i].GetComponent<enemyhealth>().TakeDamage(weaponDamage, weaponPoints[0].transform); // if this breaks check weaponpoints noll
+                //If we want knockback to depend on player position.
+                targetsHit[i].GetComponent<enemyhealth>().TakeDamage(weaponDamage, weaponPoints[0].transform.root);
+
                 SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), SoundPaths[Random.Range(0, SoundPaths.Count - 1)], 0, Time.fixedTime, VolumeScales[0]);
             }
             else

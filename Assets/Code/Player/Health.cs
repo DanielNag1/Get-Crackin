@@ -45,21 +45,21 @@ public class Health : MonoBehaviour
                 animator.SetBool("isDead", true);
             }
         }
-        //if (Input.GetKeyDown(KeyCode.W))
-        //{
-        //    Debug.Log("minus health");
-        //    ModifyHealth(-10);
-        //}
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            Debug.Log("minus health");
+            ModifyHealth(-10);
+        }
     }
 
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (hit.collider.gameObject.tag == "Health"/* && currentHealth != maxHealth*/) // uncomment this 
+        if (hit.collider.gameObject.tag == "Health" && currentHealth != maxHealth)
         {
             HealthPickup HP;
             HP = hit.collider.gameObject.GetComponent<HealthPickup>();
             HP.PickupHealth();
-            ModifyHealth(10);
+            ModifyHealth(HP.healingValue);
             Debug.Log("Gained 10 Health");
         }
     }

@@ -53,7 +53,6 @@ public class MoveTowardsPlayer : IState
         rb.isKinematic = false;
         _navMeshAgent.transform.LookAt(_player.transform.position);
         _navMeshAgent.SetDestination(_player.transform.position);
-      
         Debug.Log("Move Towards Player TIMETICK");
     }
 

@@ -276,6 +276,9 @@ public class InputBuffer : ScriptableObject
         {
             animator.SetTrigger("Jump");
             animator.SetBool("Air Dodge", false);
+            animator.SetBool("InAir", true);
+            Move move = player.GetComponent<Move>();
+            move.JumpMovementStart(player.GetComponent<Transform>());
         }
 
     }
@@ -290,6 +293,7 @@ public class InputBuffer : ScriptableObject
             animator.GetCurrentAnimatorStateInfo(0).IsName("Rage Mode_Attack3"))
         {
             animator.SetBool("AttackJump", true);
+            animator.SetBool("InAir", true);
         }
     }
     #endregion

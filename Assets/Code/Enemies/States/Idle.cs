@@ -1,42 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 public class Idle : IState
 {
     #region Variables
-
     private EnemyOne _enemy;
     private Animator _animator;
-    private Rigidbody rb;
-
+    private NavMeshAgent _navMeshAgent;
     #endregion
 
-    public Idle(EnemyOne enemy, Animator animator)
+    public Idle(/*EnemyOne enemy,*/ Animator animator, NavMeshAgent navMeshAgent)
     {
-        this._enemy = enemy;
+        //this._enemy = enemy;
         this._animator = animator;
-        rb = _enemy.GetComponent<Rigidbody>();
+        _navMeshAgent = navMeshAgent;
     }
 
     #region Interface functions
 
     public void OnEnter()
     {
-      
-        //Debug.Log("EnterIdle");
-        //Play Idle animation;
+        _navMeshAgent.enabled = false;
     }
 
     public void OnExit()
     {
-        //Debug.Log("Exit Idle");
+        _navMeshAgent.enabled = true;
     }
 
     public void TimeTick()
     {
-        rb.isKinematic = true;
-        //Debug.Log("TimeTick Idle");
     }
 
     #endregion

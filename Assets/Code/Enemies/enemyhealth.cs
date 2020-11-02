@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
 public class enemyhealth : MonoBehaviour
@@ -53,11 +54,6 @@ public class enemyhealth : MonoBehaviour
             //StartCoroutine(DeathCoroutine());
             gameObject.active = false;
         }
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    TakeDamage(2);
-        //}
-
     }
 
     public void TakeDamage(int amount, Transform damageDealer)
@@ -65,10 +61,8 @@ public class enemyhealth : MonoBehaviour
         Vector3 knockbackDirection = (rootGameObject.transform.position - damageDealer.position).normalized;
         if (rb != null)
         {
-            rb.AddForce(knockbackDirection * amount, ForceMode.Impulse);
-            //rb.AddExplosionForce(10, transform.position,5,5);
+            rb.AddForce(knockbackDirection * 60000000/*direction * 60.000.000 gave nice result(Save this)*/, ForceMode.Impulse);
             currentHealth -= amount;
-
         }
 
 
@@ -87,11 +81,11 @@ public class enemyhealth : MonoBehaviour
 
     }
 
-    private void UseSmash(Vector3 direction, float force)
-    {
-        direction.Normalize();
-        smash += direction.normalized * force;
-    }
+    //private void UseSmash(Vector3 direction, float force)
+    //{
+    //    direction.Normalize();
+    //    smash += direction.normalized * force;
+    //}
 
     //IEnumerator DeathCoroutine()
     //{

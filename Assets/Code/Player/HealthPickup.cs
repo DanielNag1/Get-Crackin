@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HealthPickup : MonoBehaviour
 {
+    public int healingValue = 10;
     public void PickupHealth()
     {
         // TO DO: Sound effect implementation 

@@ -15,7 +15,8 @@ public class Move : MonoBehaviour
     public int layerMaskValue;
     private int layerMask;
     private bool jumping;
-
+    [SerializeField] float fallSpeed = 0;
+    [SerializeField] float highOffset = 1.58f;
 
     void Start()
     {
@@ -63,29 +64,54 @@ public class Move : MonoBehaviour
     {
         RelativeToCameraMovement();
         characterController.Move(desiredDirection * MovementSpeed * movementDirection.magnitude * Time.deltaTime);  //The object moves.
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Jump") && !animator.GetBool("InAir"))
         {
-            jumping = true;
+            animator.SetBool("InAir", true);
         }
-
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Land"))
+        else if (!animator.GetBool("InAir") || animator.GetCurrentAnimatorStateInfo(0).IsName("Fall") && !jumping)
         {
-            jumping = false;
-            return;
-        }
-        if (!jumping)
-        {
-
             RaycastHit hit;
             if (Physics.Raycast(transform.position, Vector3.down, out hit, Mathf.Infinity, layerMask))
             {
-                if (hit.collider.tag == "Ground")
-                    if (hit.distance > 0.5f)
-                    {
-                        characterController.Move(-Vector3.up * Mathf.Min(hit.distance, 0.1f));
-                    }
+
+                if (hit.distance > highOffset + 0.5f && animator.GetBool("InAir"))
+                {
+                    characterController.Move(-Vector3.up * Mathf.Min(hit.distance, fallSpeed));
+                    fallSpeed += Time.deltaTime * .982f;
+                }
+                else if (animator.GetBool("InAir"))
+                {
+                    animator.SetTrigger("onGround");
+                    animator.SetBool("InAir", false);
+                    fallSpeed = 0;
+                }
+                else if (hit.distance > highOffset)
+                {
+                    characterController.Move(-Vector3.up * Mathf.Min(hit.distance, 0.2f));
+                }
+                else
+                {
+                    characterController.Move(Vector3.up * (float)(highOffset - hit.distance));
+                }
             }
         }
+    }
+
+    public void JumpMovementStart(Transform trans)
+    {
+        StartCoroutine(JumpMovement(trans));
+    }
+    public IEnumerator JumpMovement(Transform trans)
+    {
+        float timer = DodgeTimeSeconds;
+        jumping = true;
+        while (timer > 0)
+        {
+            characterController.Move(Vector3.up * ((DodgeDistance / 2) / DodgeTimeSeconds) * Time.deltaTime);  //The object moves.
+            timer -= Time.deltaTime;
+            yield return null;
+        }
+        jumping = false;
     }
 
     public void DodgeMovementStart(Transform trans)
@@ -100,7 +126,6 @@ public class Move : MonoBehaviour
         while (timer > 0)
         {
             RelativeToCameraMovement();
-            //trans.position += lockedDesiredDirection * (DodgeDistance / DodgeTimeSeconds) * Time.deltaTime;
             characterController.Move(lockedDesiredDirection * (DodgeDistance / DodgeTimeSeconds) * Time.deltaTime);  //The object moves.
             timer -= Time.deltaTime;
             yield return null;
