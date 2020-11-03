@@ -9,11 +9,10 @@ public class Health : MonoBehaviour
 
     [SerializeField]
     private int maxHealth = 30;
-
     public int currentHealth;
-
     public event Action<float> onHealthPctChanged = delegate { };
     [SerializeField] Animator animator;
+    public bool healthPickedUp;
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +37,8 @@ public class Health : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        DrawHealthPickUpVFX();
+
         if (currentHealth <= 0)
         {
             if (animator.GetBool("isDead") == false)
@@ -58,9 +59,31 @@ public class Health : MonoBehaviour
         {
             HealthPickup HP;
             HP = hit.collider.gameObject.GetComponent<HealthPickup>();
+            healthPickedUp = true;
             HP.PickupHealth();
             ModifyHealth(HP.healingValue);
             Debug.Log("Gained 10 Health");
         }
     }
+    /// <summary>
+    /// Triggers the healing particles on the player.
+    /// </summary>
+    void DrawHealthPickUpVFX()
+    {
+        if (healthPickedUp)
+        {
+            VFXEvents.Instance.VFX2Play();
+            healthPickedUp = false;
+            StartCoroutine(Healing());
+        }
+    }
+
+    IEnumerator Healing()
+    {
+        yield return new WaitForSeconds(1.3f);
+        VFXEvents.Instance.VFX2Stop();
+    }
+
+
+
 }

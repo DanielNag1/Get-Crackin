@@ -65,7 +65,7 @@ public class Move : MonoBehaviour
     void NormalMovement()
     {
         RelativeToCameraMovement();
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Jump") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Land") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Dodge") 
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Jump") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Land") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Dodge")
             && !animator.GetCurrentAnimatorStateInfo(0).IsName("Air Dodge") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Die"))//What animation states does NOT allow the character to move.
         {
             characterController.Move(desiredDirection * MovementSpeed * movementDirection.magnitude * Time.deltaTime);  //The object moves.
@@ -102,6 +102,7 @@ public class Move : MonoBehaviour
                 }
             }
         }
+        characterController.Move(desiredDirection * MovementSpeed * movementDirection.magnitude * Time.deltaTime);  //The object moves.
     }
 
     public void JumpMovementStart(Transform trans)

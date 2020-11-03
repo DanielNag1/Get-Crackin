@@ -58,11 +58,27 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.12698412
+        functionName: VFX1Play
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 3d728732bbe847a49b462ca7e22eb1fb,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.98412704
+        functionName: VFX1Stop
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 3d728732bbe847a49b462ca7e22eb1fb,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+      additiveReferencePoseFrame: 1
     isReadable: 0
   meshes:
     lODScreenPercentages: []

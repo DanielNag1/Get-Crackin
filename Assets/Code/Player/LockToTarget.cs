@@ -41,7 +41,7 @@ public class LockToTarget : MonoBehaviour
         Vector3 currentPosition = transform.position;
 
         //Looks through the list of the nearby enemies and finds the nearest.
-        for (int i = enemies.Count - 1; i >= 0; i--)
+        for (int i = enemies.Count-1; i >= 0; i--)
         {
             if (enemies[i] == null)
             {
@@ -131,7 +131,10 @@ public class LockToTarget : MonoBehaviour
             {
                 closestEnemy = FindClosestEnemy(enemiesInRange); //Get the nearest enemy
                 iconRenderer.material.color = new Color(160, 100, 0);
-                targetIcon.position = new Vector3(closestEnemy.position.x, closestEnemy.position.y + 1.5f, closestEnemy.position.z);
+                if(closestEnemy!=null)
+                {
+                    targetIcon.position = new Vector3(closestEnemy.position.x, closestEnemy.position.y + 1.5f, closestEnemy.position.z);
+                }
             }
         }
         else if (isLockedToTarget) //If the player has locked on to an enemy, the position of the target icon is being updated.
