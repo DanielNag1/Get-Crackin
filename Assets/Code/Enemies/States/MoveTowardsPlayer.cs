@@ -50,8 +50,11 @@ public class MoveTowardsPlayer : IState
 
     public void TimeTick()
     {
+        Vector3 targetPos = new Vector3(_player.transform.position.x, _navMeshAgent.transform.position.y, _player.transform.position.z);
+
         rb.isKinematic = false;
-        _navMeshAgent.transform.LookAt(_player.transform.position);
+        //_navMeshAgent.transform.LookAt(_player.transform.position);
+        _navMeshAgent.transform.LookAt(targetPos);
         _navMeshAgent.SetDestination(_player.transform.position);
         Debug.Log("Move Towards Player TIMETICK");
     }

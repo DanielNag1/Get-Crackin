@@ -102,6 +102,7 @@ public class Move : MonoBehaviour
                 }
             }
         }
+        characterController.Move(desiredDirection * MovementSpeed * movementDirection.magnitude * Time.deltaTime);  //The object moves.
     }
 
     public void JumpMovementStart(Transform trans)
@@ -110,14 +111,11 @@ public class Move : MonoBehaviour
     }
     public IEnumerator JumpMovement(Transform trans)
     {
-        float timer = 0.283f;
+        float timer = DodgeTimeSeconds;
         jumping = true;
         while (timer > 0)
         {
-            if(timer<0.183f)
-            {
-                characterController.Move(Vector3.up * ((DodgeDistance / 2) / 0.283f) * Time.deltaTime);  //The object moves.
-            }
+            characterController.Move(Vector3.up * ((DodgeDistance / 2) / DodgeTimeSeconds) * Time.deltaTime);  //The object moves.
             timer -= Time.deltaTime;
             yield return null;
         }
@@ -134,16 +132,8 @@ public class Move : MonoBehaviour
         while (timer > 0)
         {
             var target = GetComponentInChildren<LockToTarget>();
-            Transform targetTransform = target.GetEnemyTransform();
-
-            if(targetTransform!=null)
-            {
-                Vector3 targetPos = new Vector3(targetTransform.position.x, transform.position.y, targetTransform.position.z);
-                transform.LookAt(targetPos);
-            }
-
             characterController.Move(target.GetEnemyDirection().normalized * (attackTowardsDistance / attackTowardSeconds) * Time.deltaTime);  //The object moves.
-            //transform.LookAt(target.GetEnemyTransform());
+            transform.LookAt(target.GetEnemyTransform());
             timer -= Time.deltaTime;
             yield return null;
         }

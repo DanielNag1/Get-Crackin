@@ -208,7 +208,7 @@ public class InputBuffer : ScriptableObject
                 animator.SetTrigger("Rage Attack");
                 FreeCameraShake.Instance.ShakeCamera(1f, 0.1f);
                 LockCameraShake.Instance.ShakeCamera(1f, 0.1f);
-                player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
+                //player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
             }
         }
 
@@ -217,14 +217,14 @@ public class InputBuffer : ScriptableObject
             animator.SetInteger("Rage GroundChain", 2);
             FreeCameraShake.Instance.ShakeCamera(1f, 0.1f);
             LockCameraShake.Instance.ShakeCamera(1f, 0.1f);
-            player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
+            //player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
         }
         else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Rage Mode_Attack2")) //If the player continues the chain from 2 to 3
         {
             animator.SetInteger("Rage GroundChain", 3);
             FreeCameraShake.Instance.ShakeCamera(1f, 0.1f);
             LockCameraShake.Instance.ShakeCamera(1f, 0.1f);
-            player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
+            //player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
         }
 
     }
@@ -254,7 +254,7 @@ public class InputBuffer : ScriptableObject
             animator.SetBool("Air Dodge", false);
             FreeCameraShake.Instance.ShakeCamera(1f, 0.1f);
             LockCameraShake.Instance.ShakeCamera(1f, 0.1f);
-            player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
+            //player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
         }
         else if (animator.GetCurrentAnimatorStateInfo(0).IsName("In Air_Chain1_Attack1"))
         {
@@ -262,7 +262,7 @@ public class InputBuffer : ScriptableObject
             animator.SetBool("Air Dodge", false);
             FreeCameraShake.Instance.ShakeCamera(1f, 0.1f);
             LockCameraShake.Instance.ShakeCamera(1f, 0.1f);
-            player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
+            //player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
         }
         else if (animator.GetCurrentAnimatorStateInfo(0).IsName("In Air_Chain1_Attack2"))
         {
@@ -270,7 +270,7 @@ public class InputBuffer : ScriptableObject
             animator.SetBool("Air Dodge", false);
             FreeCameraShake.Instance.ShakeCamera(1f, 0.1f);
             LockCameraShake.Instance.ShakeCamera(1f, 0.1f);
-            player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
+            //player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
         }
         else if (animator.GetCurrentAnimatorStateInfo(0).IsName("In Air_Chain1_Attack3"))
         {
@@ -278,7 +278,7 @@ public class InputBuffer : ScriptableObject
             animator.SetBool("Air Dodge", false);
             FreeCameraShake.Instance.ShakeCamera(1f, 0.1f);
             LockCameraShake.Instance.ShakeCamera(1f, 0.1f);
-            player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
+            //player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
         }
     }
     void AirDodge()

@@ -297,11 +297,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 074d6c29dca09d34291ac1829b664637, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   MovementSpeed: 10
-  DodgeTimeSeconds: 0.25
-  DodgeDistance: 4
+  DodgeTimeSeconds: 0.439
+  DodgeDistance: 8
   attackTowardsDistance: 2
   attackTowardSeconds: 0.34
   layerMaskValue: 0
@@ -340,7 +340,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
-  m_WarningMessage:
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -354,8 +354,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4ac3fd7937e4fe549895780df5fe928f, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!82 &5602473436880409283
 AudioSource:
   m_ObjectHideFlags: 0
@@ -462,8 +462,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bd730548f3b38c24d94441ba6770f0e7, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   slash1: {fileID: 1391434060059608235, guid: 16a910c192e3f3145a1208b056880b3a, type: 3}
   slash2: {fileID: 1391434060059608235, guid: 593c139fd447fb64780903ce9393ab90, type: 3}
   slash3: {fileID: 1391434060059608235, guid: ab97999ba379bde448baac941ebfc256, type: 3}
@@ -478,8 +478,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 69d5659865216724dbb79c86dc3afbd8, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   rage: {fileID: 7997354238359120587}
   SoundPaths:
   - Body_Slashed1
@@ -510,8 +510,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d728732bbe847a49b462ca7e22eb1fb, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   VFX1: {fileID: 0}
   VFX2: {fileID: 0}
   VFX3: {fileID: 0}
@@ -525,8 +525,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b19e93d370ba8244a61aa2119f8001a, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   maxHealth: 30
   currentHealth: 0
   animator: {fileID: 6793778528719022584}
@@ -649,8 +649,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5bbe423b9aa66c140a5c2133acf54b8a, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   targetGroup: {fileID: 0}
   changeCamera: {fileID: 0}
   targetIcon: {fileID: 0}
@@ -895,8 +895,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 337af3eb04feee641aa51469626d0417, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   SoundPaths:
   - BackgroundMusicFolder/music_calm_tree_of_life
   - BackgroundMusicFolder/music_epic_orchestral_bg_underscore
@@ -1255,7 +1255,7 @@ PrefabInstance:
     - target: {fileID: -113564988318934197, guid: 6dfd3fef41cbe0444b86f132ca0e06cf,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
-      value:
+      value: 
       objectReference: {fileID: 2100000, guid: 56e1f560de268fe4c8e720b1d93f850c, type: 2}
     - target: {fileID: -112182730096436232, guid: 6dfd3fef41cbe0444b86f132ca0e06cf,
         type: 3}
@@ -1330,17 +1330,17 @@ PrefabInstance:
     - target: {fileID: 2978280580551946675, guid: 6dfd3fef41cbe0444b86f132ca0e06cf,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
-      value:
+      value: 
       objectReference: {fileID: 2100000, guid: 56e1f560de268fe4c8e720b1d93f850c, type: 2}
     - target: {fileID: 2978280580551946675, guid: 6dfd3fef41cbe0444b86f132ca0e06cf,
         type: 3}
       propertyPath: m_Materials.Array.data[1]
-      value:
+      value: 
       objectReference: {fileID: 2100000, guid: 56e1f560de268fe4c8e720b1d93f850c, type: 2}
     - target: {fileID: 2978280580551946675, guid: 6dfd3fef41cbe0444b86f132ca0e06cf,
         type: 3}
       propertyPath: m_Materials.Array.data[2]
-      value:
+      value: 
       objectReference: {fileID: 2100000, guid: 56e1f560de268fe4c8e720b1d93f850c, type: 2}
     - target: {fileID: 3450276610890820110, guid: 6dfd3fef41cbe0444b86f132ca0e06cf,
         type: 3}
@@ -1657,7 +1657,7 @@ PrefabInstance:
     - target: {fileID: 4783982333688647266, guid: 950a3889f37a8464d812bc5592dd72d2,
         type: 3}
       propertyPath: animator
-      value:
+      value: 
       objectReference: {fileID: 6793778528719022584}
     - target: {fileID: 4783982333688647266, guid: 950a3889f37a8464d812bc5592dd72d2,
         type: 3}
@@ -1681,8 +1681,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e97450162fc9ef543bd8e2cf23d0d0ac, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &7997354238359120628 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4783982333688647261, guid: 950a3889f37a8464d812bc5592dd72d2,
