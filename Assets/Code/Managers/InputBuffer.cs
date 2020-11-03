@@ -165,23 +165,34 @@ public class InputBuffer : ScriptableObject
             animator.SetTrigger("Attack");
             animator.SetInteger("GroundChain", 1);
             player.GetComponentInChildren<WeaponCollision>().collisionActive = true;
-
+            FreeCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            LockCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
         }
         else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack1")) //If the player continues the chain from 1 to 2
         {
             animator.SetInteger("GroundChain", 2);
             player.GetComponentInChildren<WeaponCollision>().collisionActive = true;
-            
+            FreeCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            LockCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
+
         }
         else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack2")) //If the player continues the chain from 2 to 3
         {
             animator.SetInteger("GroundChain", 3);
             player.GetComponentInChildren<WeaponCollision>().collisionActive = true;
+            FreeCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            LockCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
         }
         else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack3")) //If the player continues the chain from 3 to 4
         {
             animator.SetInteger("GroundChain", 4);
             player.GetComponentInChildren<WeaponCollision>().collisionActive = true;
+            FreeCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            LockCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
         }
     }
     void RageGroundCombos()
@@ -195,17 +206,25 @@ public class InputBuffer : ScriptableObject
 
                 animator.SetInteger("Rage GroundChain", 1);
                 animator.SetTrigger("Rage Attack");
-
+                FreeCameraShake.Instance.ShakeCamera(1f, 0.1f);
+                LockCameraShake.Instance.ShakeCamera(1f, 0.1f);
+                player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
             }
         }
 
         else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Rage Mode_Attack1")) //If the player continues the chain from 1 to 2
         {
             animator.SetInteger("Rage GroundChain", 2);
+            FreeCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            LockCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
         }
         else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Rage Mode_Attack2")) //If the player continues the chain from 2 to 3
         {
             animator.SetInteger("Rage GroundChain", 3);
+            FreeCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            LockCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
         }
 
     }
@@ -216,10 +235,11 @@ public class InputBuffer : ScriptableObject
                             animator.GetCurrentAnimatorStateInfo(0).IsName("Run"))
         {
             animator.SetTrigger("Dodge");
+            //Move the charater
+            Move move = player.GetComponent<Move>();
+            move.DodgeMovementStart(player.GetComponent<Transform>());
         }
-        //Move the charater
-        Move move = player.GetComponent<Move>();
-        move.DodgeMovementStart(player.GetComponent<Transform>());
+
     }
     void AirCombos()
     {
@@ -228,21 +248,33 @@ public class InputBuffer : ScriptableObject
             animator.SetInteger("AirChain", 1);
             animator.SetTrigger("Air Attack");
             animator.SetBool("Air Dodge", false);
+            FreeCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            LockCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
         }
         else if (animator.GetCurrentAnimatorStateInfo(0).IsName("In Air_Chain1_Attack1"))
         {
             animator.SetInteger("AirChain", 2);
             animator.SetBool("Air Dodge", false);
+            FreeCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            LockCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
         }
         else if (animator.GetCurrentAnimatorStateInfo(0).IsName("In Air_Chain1_Attack2"))
         {
             animator.SetInteger("AirChain", 3);
             animator.SetBool("Air Dodge", false);
+            FreeCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            LockCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
         }
         else if (animator.GetCurrentAnimatorStateInfo(0).IsName("In Air_Chain1_Attack3"))
         {
             animator.SetInteger("AirChain", 4);
             animator.SetBool("Air Dodge", false);
+            FreeCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            LockCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
         }
     }
     void AirDodge()
@@ -277,8 +309,7 @@ public class InputBuffer : ScriptableObject
             animator.SetTrigger("Jump");
             animator.SetBool("Air Dodge", false);
             animator.SetBool("InAir", true);
-            Move move = player.GetComponent<Move>();
-            move.JumpMovementStart(player.GetComponent<Transform>());
+            player.GetComponent<Move>().JumpMovementStart(player.GetComponent<Transform>());
         }
 
     }

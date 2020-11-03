@@ -10,6 +10,8 @@ public class Move : MonoBehaviour
     [SerializeField] float MovementSpeed;
     [SerializeField] float DodgeTimeSeconds;
     [SerializeField] float DodgeDistance;
+    [SerializeField] float attackTowardsDistance;
+    [SerializeField] float attackTowardSeconds;
     private Vector3 desiredDirection;
     private Animator animator;
     public int layerMaskValue;
@@ -63,7 +65,12 @@ public class Move : MonoBehaviour
     void NormalMovement()
     {
         RelativeToCameraMovement();
-        characterController.Move(desiredDirection * MovementSpeed * movementDirection.magnitude * Time.deltaTime);  //The object moves.
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Jump") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Land") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Dodge") 
+            && !animator.GetCurrentAnimatorStateInfo(0).IsName("Air Dodge") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Die"))//What animation states does NOT allow the character to move.
+        {
+            characterController.Move(desiredDirection * MovementSpeed * movementDirection.magnitude * Time.deltaTime);  //The object moves.
+        }
+
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Jump") && !animator.GetBool("InAir"))
         {
             animator.SetBool("InAir", true);
@@ -112,6 +119,23 @@ public class Move : MonoBehaviour
             yield return null;
         }
         jumping = false;
+    }
+
+    public void AttackTowardsMovementStart(Transform trans)
+    {
+        StartCoroutine(AttackTowardsMovement(trans));
+    }
+    public IEnumerator AttackTowardsMovement(Transform trans)
+    {
+        float timer = attackTowardSeconds;
+        while (timer > 0)
+        {
+            var target = GetComponentInChildren<LockToTarget>();
+            characterController.Move(target.GetEnemyDirection().normalized * (attackTowardsDistance / attackTowardSeconds) * Time.deltaTime);  //The object moves.
+            transform.LookAt(target.GetEnemyTransform());
+            timer -= Time.deltaTime;
+            yield return null;
+        }
     }
 
     public void DodgeMovementStart(Transform trans)
