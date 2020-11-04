@@ -8,7 +8,7 @@ public class RageMode : MonoBehaviour
 {
 
     [SerializeField]
-    private int maxRage = 100;
+    public int maxRage = 100;
     private int startRage = 0;
     [SerializeField]
     private float TimerSec;
@@ -17,14 +17,15 @@ public class RageMode : MonoBehaviour
 
     public float currentRage;//Set this value when loading!
 
-
     public event Action<float> onRagePctChanged = delegate { };
-    [SerializeField] private Animator animator;
 
+    [SerializeField] Animator animator;
 
+    public static RageMode Instance { get; private set; }
     // Start is called before the first frame update
     void Start()
     {
+        Instance = this;
         currentRage = startRage;
         rags = GetComponentInParent<RageBar>().RageBarss;
     }
@@ -49,20 +50,19 @@ public class RageMode : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if (currentRage >= maxRage)
-        {
-            animator.SetBool("Rage Mode", true);
-        }
-
-        else if (currentRage <= 0)
-        {
-            animator.SetBool("Rage Mode", false);
-        }
-        
-
         //elapsedTime += Time.deltaTime;
 
+        if (currentRage <= 0)
+        {
+            animator.ResetTrigger("Attack");
+            animator.SetBool("Rage Mode", false);
+            VFXEvents.Instance.VFX4Stop();
+            VFXEvents.Instance.VFX5Stop();
+        }
+        if (currentRage > 0)
+        {
+            VFXEvents.Instance.VFX4Play();
+        }
 
 
         //if (elapsedTime >= TimerSec)
@@ -84,4 +84,6 @@ public class RageMode : MonoBehaviour
         //Debug.Log("RAGE MODE RESET");
 
     }
+
+
 }

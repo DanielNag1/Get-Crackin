@@ -9,6 +9,10 @@ public class VFXEvents : MonoBehaviour
     [SerializeField] VisualEffect VFX1;
     [SerializeField] VisualEffect VFX2;
     [SerializeField] VisualEffect VFX3;
+    [SerializeField] VisualEffect VFX4;
+    [SerializeField] VisualEffect VFX5;
+
+
 
 
     public static VFXEvents Instance { get; private set; }
@@ -16,10 +20,14 @@ public class VFXEvents : MonoBehaviour
     private void Start()
     {
         Instance = this;
+        VFX4.gameObject.SetActive(false);
+        VFX5.gameObject.SetActive(false);
     }
     private void Update()
     {
         VFX2.transform.position = new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z);
+        VFX4.transform.position = new Vector3(transform.position.x, transform.position.y - 0.2f, transform.position.z);
+        VFX5.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
     }
 
     void VFX1Play()
@@ -27,7 +35,7 @@ public class VFXEvents : MonoBehaviour
         Vector3 forward = (transform.rotation * Vector3.forward).normalized;
 
         VFX1.transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
-        VFX1.transform.position += forward *1;
+        VFX1.transform.position += forward * 1;
         VFX1.Play();
 
     }
@@ -48,9 +56,9 @@ public class VFXEvents : MonoBehaviour
     void VFX3Play()
     {
         Vector3 forward = (transform.rotation * Vector3.forward).normalized;
-        
+
         VFX3.transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
-        VFX3.transform.position += forward *2;
+        VFX3.transform.position += forward * 2;
         VFX3.transform.rotation = transform.rotation;
         VFX3.Play();
 
@@ -60,6 +68,24 @@ public class VFXEvents : MonoBehaviour
         VFX3.Stop();
     }
 
+    public void VFX4Play()
+    {
+        VFX4.gameObject.SetActive(true);
+    }
+    public void VFX4Stop()
+    {
+        VFX4.gameObject.SetActive(false);
+    }
+
+    public void VFX5Play()
+    {
+        VFX5.gameObject.SetActive(true);
+    }
+
+    public void VFX5Stop()
+    {
+        VFX5.gameObject.SetActive(false);
+    }
 
 
 }

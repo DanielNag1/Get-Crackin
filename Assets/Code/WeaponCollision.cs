@@ -6,7 +6,6 @@ using Random = UnityEngine.Random;
 
 public class WeaponCollision : MonoBehaviour
 {
-    [SerializeField] RageMode rage;
     [SerializeField] private List<string> SoundPaths;
     [SerializeField] private List<float> VolumeScales;
     private Health health;
@@ -103,11 +102,11 @@ public class WeaponCollision : MonoBehaviour
             {
                 if (animator.GetBool("Rage Mode") == false)
                 {
-                    rage.ModifyRage(10); //Increase rage meter
+                    RageMode.Instance.ModifyRage(30); //Increase rage meter
                 }
                 else
                 {
-                    rage.ModifyRage(-5); //Decrease rage meter
+                    RageMode.Instance.ModifyRage(-10); //Decrease rage meter
                 }
 
                 //OBS!! weaponPoint location is hard coded, add info on what weaponPoint made the hit to the list: targetsHit

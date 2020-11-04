@@ -318,7 +318,7 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2.3
+  m_Height: 2.5
   m_Radius: 0.38
   m_SlopeLimit: 45
   m_StepOffset: 0.3
@@ -480,7 +480,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69d5659865216724dbb79c86dc3afbd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rage: {fileID: 7997354238359120587}
   SoundPaths:
   - Body_Slashed1
   - Body_Slashed2
@@ -515,6 +514,8 @@ MonoBehaviour:
   VFX1: {fileID: 0}
   VFX2: {fileID: 0}
   VFX3: {fileID: 0}
+  VFX4: {fileID: 0}
+  VFX5: {fileID: 0}
 --- !u!114 &7549676529129411895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1662,7 +1663,7 @@ PrefabInstance:
     - target: {fileID: 4783982333688647266, guid: 950a3889f37a8464d812bc5592dd72d2,
         type: 3}
       propertyPath: maxRage
-      value: 1000
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4783982333688647270, guid: 950a3889f37a8464d812bc5592dd72d2,
         type: 3}
@@ -1671,18 +1672,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 950a3889f37a8464d812bc5592dd72d2, type: 3}
---- !u!114 &7997354238359120587 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4783982333688647266, guid: 950a3889f37a8464d812bc5592dd72d2,
-    type: 3}
-  m_PrefabInstance: {fileID: 3213408335757681833}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e97450162fc9ef543bd8e2cf23d0d0ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &7997354238359120628 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4783982333688647261, guid: 950a3889f37a8464d812bc5592dd72d2,
@@ -1889,7 +1878,7 @@ PrefabInstance:
     - target: {fileID: 4971272274241018087, guid: ad99e81ed2f0cf24ab81d45d5d50efd3,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4971272273699788369, guid: ad99e81ed2f0cf24ab81d45d5d50efd3, type: 3}

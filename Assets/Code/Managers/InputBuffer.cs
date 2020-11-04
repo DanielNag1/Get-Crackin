@@ -121,10 +121,9 @@ public class InputBuffer : ScriptableObject
                 GroundJump();
                 break;
             case KeyCode.Joystick1Button3: //Y
-
                 break;
             case KeyCode.Joystick1Button4: //LB
-
+                ActivateRageMode();
                 break;
             case KeyCode.Joystick1Button5: //RB
                 if (LockToTarget.closestEnemy != null)
@@ -236,12 +235,13 @@ public class InputBuffer : ScriptableObject
 
         {
 
-        if (animator.GetFloat("movementMagnitude") > 0)
-         {  animator.SetTrigger("Dodge");
-            //Move the charater
-            Move move = player.GetComponent<Move>();
-            move.DodgeMovementStart(player.GetComponent<Transform>());
-          }
+            if (animator.GetFloat("movementMagnitude") > 0)
+            {
+                animator.SetTrigger("Dodge");
+                //Move the charater
+                Move move = player.GetComponent<Move>();
+                move.DodgeMovementStart(player.GetComponent<Transform>());
+            }
         }
 
     }
@@ -331,5 +331,27 @@ public class InputBuffer : ScriptableObject
             animator.SetBool("InAir", true);
         }
     }
+
+    void ActivateRageMode()
+    {
+        animator.ResetTrigger("Attack");
+        if (RageMode.Instance.currentRage > 0)
+        {
+            if (!animator.GetBool("Rage Mode"))
+            {
+                animator.SetBool("Rage Mode", true);
+                VFXEvents.Instance.VFX4Stop();
+                VFXEvents.Instance.VFX5Play();
+            }
+            else if (animator.GetBool("Rage Mode"))
+            {
+                animator.SetBool("Rage Mode", false);
+                VFXEvents.Instance.VFX5Stop();
+            }
+
+        }
+
+    }
+
     #endregion
 }
