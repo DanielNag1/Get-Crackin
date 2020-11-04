@@ -19,13 +19,13 @@ public class SoundLooper : MonoBehaviour
 
         if (!transform.GetComponent<AudioSource>().isPlaying)
         {
-            Debug.Log("Request track:" + currentSong + "trackCount =" + SoundPaths.Count);
+            //Debug.Log("Request track:" + currentSong + "trackCount =" + SoundPaths.Count);
             SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), SoundPaths[currentSong], 0, Time.fixedTime,volumeScale);
             ++currentSong;
-            Debug.Log("Next track:" + currentSong);
+            //Debug.Log("Next track:" + currentSong);
             if (currentSong >= SoundPaths.Count)
             {
-                Debug.Log("Reset track at track number:" + currentSong);
+                //Debug.Log("Reset track at track number:" + currentSong);
                 currentSong = 0;
             }
             

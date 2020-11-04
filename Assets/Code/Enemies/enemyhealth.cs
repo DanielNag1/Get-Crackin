@@ -25,34 +25,22 @@ public class enemyhealth : MonoBehaviour
 
     void Start()
     {
-        //Transform rootTransform = rootGameObject.transform.root;
-        //Debug.Log(rootTransform);
-        //rootGameObject = rootTransform.GetComponent<GameObject>();//set to root gameObject
-        Debug.Log(rootGameObject);
         rb = rootGameObject.GetComponent<Rigidbody>();
         characterController = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>();
         prefabList = new List<GameObject>();
         currentHealth = startHealth;
-        //deathSound = Random.Range(0, SoundPaths.Count - 1);
+        deathSound = Random.Range(0, SoundPaths.Count - 1);
         deathSound = 0;
     }
 
     //Update is called once per frame
     void Update()
     {
-
-        //OBS, Not used??
-        if (smash.magnitude >= 0.1)
-        {
-            characterController.Move(smash * Time.deltaTime);
-        }
-        smash = Vector3.Lerp(smash, Vector3.zero, 2 * Time.deltaTime);
-
-
         if (currentHealth <= 0)
         {
-            //StartCoroutine(DeathCoroutine());
-            gameObject.active = false;
+            EnemyManager enemyManager = EnemyManager.Instance;
+            enemyManager.enemyPool.Find(x => x.enemy.transform.root.GetInstanceID() == rootGameObject.transform.root.GetInstanceID()).elementAvailable = true;//If this crashes someone else fucked up! All enemies should exist in the EnemyManagers enemyPool!
+            StartCoroutine(DeathCoroutine());
         }
     }
 
@@ -64,38 +52,25 @@ public class enemyhealth : MonoBehaviour
             rb.AddForce(knockbackDirection * 60000000/*direction * 60.000.000 gave nice result(Save this)*/, ForceMode.Impulse);
             currentHealth -= amount;
         }
-
-
-        //UseSmash(target.transform.position, 10);
-
-
-        //foreach (var enemy in GameObject.FindGameObjectsWithTag("Enemy"))
-        //{
-        //    prefabList.Add(enemy);
-        //}
-        //for (int i = 0; i < prefabList.Count; i++)
-        //{
-
-        // rb.AddForce(transform.position * 2, ForceMode.Impulse);
-        //  }
-
     }
 
-    //private void UseSmash(Vector3 direction, float force)
-    //{
-    //    direction.Normalize();
-    //    smash += direction.normalized * force;
-    //}
+    public void Reset()
+    {
+        currentHealth = startHealth;
+    }
 
-    //IEnumerator DeathCoroutine()
-    //{
-    //    SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), SoundPaths[deathSound], 0, Time.fixedTime, VolumeScales[0]);
+    IEnumerator DeathCoroutine()
+    {
+        Debug.Log(this.name + "Dead");
+        rootGameObject.SetActive(false);
 
-    //    //yield on a new YieldInstruction that waits the duration of the AudioClip.
-    //    yield return new WaitForSeconds(Resources.Load<AudioClip>(SoundPaths[deathSound]).length);
+        SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), SoundPaths[deathSound], 0, Time.fixedTime, VolumeScales[0]);
 
-    //    Destroy(this.gameObject);
-    //}
+        //yield on a new YieldInstruction that waits the duration of the AudioClip.
+        yield return new WaitForSeconds(Resources.Load<AudioClip>(SoundPaths[deathSound]).length);
+
+        //Destroy(this.gameObject);
+    }
 }
 
 
