@@ -14,15 +14,30 @@ public class SaveFileManager : MonoBehaviour
     #endregion
 
 
-    // Start is called before the first frame update
-    void Start()
+    public void SaveGame()
     {
+        /*
+         Current scene
+        ---------------
+        Player
+        ---------------
+        Position, Take this value from the checkpoint
+        Rotation, Take this value from the checkpoint
+        Current health
         
+        ---------------
+        UI
+        ---------------
+        add text and animation for user to know we just saved
+         */
     }
-
-    // Update is called once per frame
-    void Update()
+    public void LoadGame()
     {
-        
+        /*
+        ---------------
+        UI
+        ---------------
+        Load from black
+         */
     }
 }
