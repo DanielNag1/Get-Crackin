@@ -7,6 +7,7 @@ public class TriggerComponent : MonoBehaviour
 {
     private LevelManager levelManager;
     private EnemyManager enemyManager;
+    private SaveFileManager saveFileManager;
 
     [SerializeField] private TriggerDebug triggerDebug; //The script that you want to run, Can be multiple
     [SerializeField] private string SoundPath; //The sound to be played when the trigger is activated
@@ -27,11 +28,11 @@ public class TriggerComponent : MonoBehaviour
     {
         levelManager = LevelManager.Instance;
         enemyManager = EnemyManager.Instance;
+        saveFileManager = SaveFileManager.Instance;
     }
 
     public void ActivateTrigger() //Activates the trigger when CharacterController collides with trigger hitbox.
     {
-
         for (int i = 0; ClassesToBeCalled.Count > i; ++i)
         {
             if (ClassesToBeCalled[i] == "LevelManager")
@@ -45,14 +46,6 @@ public class TriggerComponent : MonoBehaviour
                 continue;
             }
         }
-
-
-
-
-
-
-
-
 
         triggerDebug.Fuu(parameterItem1, parameterItem2, parameterItem3, parameterItem4); //Method in script to be called.
         GameObject temp = Instantiate(SoundObjectPrefab, this.transform.position, Quaternion.identity); //Creates the temporary SoundObject

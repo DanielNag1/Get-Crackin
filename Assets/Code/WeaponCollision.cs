@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 public class WeaponCollision : MonoBehaviour
 {
     [SerializeField] RageMode rage;
-    [SerializeField] private List<string> SoundPaths;
+    [SerializeField] private List<string> HitSoundPaths;
     [SerializeField] private List<float> VolumeScales;
     private Health health;
     [SerializeField] private Animator animator;
@@ -83,7 +83,6 @@ public class WeaponCollision : MonoBehaviour
                         {
                             targetsHit.Add(hit.transform.gameObject);
                             recentTargetsHit.Add(new Tuple<float, GameObject>(0, hit.transform.gameObject));
-                      
                         }
                     }
                 }
@@ -96,7 +95,6 @@ public class WeaponCollision : MonoBehaviour
     {
         for (int i = 0; i < targetsHit.Count; i++)
         {
-
             Debug.Log(targetsHit[i].name);
             //deal Damage Here
             if (targetTag != "Player")
@@ -107,26 +105,23 @@ public class WeaponCollision : MonoBehaviour
                 }
                 else
                 {
-                    rage.ModifyRage(-5); //Decrease rage meter
+                    rage.ModifyRage(-5); //Decrease rage meter OBS!!! We need to add a drain to rage as well!
                 }
 
                 //OBS!! weaponPoint location is hard coded, add info on what weaponPoint made the hit to the list: targetsHit
                 //If we want knockback to depend on weapon hit location.
-                //targetsHit[i].GetComponent<enemyhealth>().TakeDamage(weaponDamage, weaponPoints[0].transform); // if this breaks check weaponpoints noll
+                //targetsHit[i].GetComponent<enemyhealth>().TakeDamage(weaponDamage, weaponPoints[0].transform); // if this breaks check weaponpoints null
                 //If we want knockback to depend on player position.
                 targetsHit[i].GetComponent<enemyhealth>().TakeDamage(weaponDamage, weaponPoints[0].transform.root);
-
-                SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), SoundPaths[Random.Range(0, SoundPaths.Count - 1)], 0, Time.fixedTime, VolumeScales[0]);
             }
             else
             {
                 animator.SetTrigger("GetHit");
                 health = targetsHit[i].GetComponentInChildren<Health>();
-                health.ModifyHealth(-5);
-                SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), SoundPaths[Random.Range(0, SoundPaths.Count - 1)], 0, Time.fixedTime, VolumeScales[0]);
+                health.ModifyHealth(weaponDamage);
             }
+            SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), HitSoundPaths[Random.Range(0, HitSoundPaths.Count - 1)], 0, Time.fixedTime, VolumeScales[0]);
         }
-        
         targetsHit.Clear();
     }
 

@@ -53,6 +53,7 @@ public class EnemyManager : MonoBehaviour
             GameObject prefabName = Instantiate(enemyCompareList[i]);
             string temp = prefabName.name;
             enemyPrefabList.Add(temp, enemyCompareList[i]); //unsure how changing temp to prefabName.name is acctually going to be handled.
+            Destroy(prefabName);
         }
         enemyCompareList = null;
     }
@@ -64,10 +65,6 @@ public class EnemyManager : MonoBehaviour
     public void SpawnEnemyFromTrigger(int setToUse)
     {
         //we have a list of enemies we want to spawn.
-        //Search the enemyPool for an available enemy for every enemy in the seleted spawnSet.
-        //if not found, create the enemy && add to pool && set unavailable in pool && spawn
-        //else, update stats && set unavailable in pool && spawn
-
         //spawnSet[setToUse].spawnPrefab
 
         //Search the enemyPool for an available enemy for every enemy in the seleted spawnSet.
@@ -95,7 +92,7 @@ public class EnemyManager : MonoBehaviour
                 {
                     enemy.enemy.transform.GetChild(J).gameObject.SetActive(true);
                 }
-                enemy.enemy.GetComponentInChildren<enemyhealth>().Reset();
+                //enemy.enemy.GetComponentInChildren<enemyhealth>().Reset();
                 enemy.elementAvailable = false;
             }
             enemy.enemy.transform.position = spawnSet[setToUse].spawnPoints[i].transform.position;

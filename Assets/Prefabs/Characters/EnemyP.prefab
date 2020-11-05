@@ -242,7 +242,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6574963950494839003
 Transform:
   m_ObjectHideFlags: 0
@@ -335,7 +335,11 @@ MonoBehaviour:
   viewDistance: 10
   isGrounded: 0
   groundedHeight: 0.5
+  attackRange: 1
   groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  playerLayerMask:
     serializedVersion: 2
     m_Bits: 0
   highOffset: 0.25
@@ -392,13 +396,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 0
   startHealth: 50
-  SoundPaths:
-  - troll_monster_hurt_pain_01
-  - troll_monster_hurt_pain_02
-  - troll_monster_hurt_pain_03
-  - troll_monster_hurt_pain_04
-  VolumeScales:
-  - 0.6
+  hurtSoundPaths: []
+  deathSoundPaths: []
+  volumeScales: []
+  SoundObjectPrefab: {fileID: 0}
   rootGameObject: {fileID: 0}
 --- !u!82 &6299298893688151857
 AudioSource:
@@ -509,12 +510,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rage: {fileID: 0}
-  SoundPaths:
-  - goblin_fairy_hurt_pain_14
-  - goblin_fairy_hurt_pain_15
-  - goblin_fairy_hurt_pain_16
-  - goblin_fairy_hurt_pain_17
-  - goblin_fairy_hurt_pain_18
+  HitSoundPaths: []
   VolumeScales:
   - 0.6
   animator: {fileID: 0}
