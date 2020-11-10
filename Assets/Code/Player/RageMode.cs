@@ -59,7 +59,7 @@ public class RageMode : MonoBehaviour
             VFXEvents.Instance.VFX4Stop();
             VFXEvents.Instance.VFX5Stop();
         }
-        if (currentRage > 0)
+        if (currentRage > 0 && animator.GetBool("Rage Mode") != true)
         {
             VFXEvents.Instance.VFX4Play();
         }

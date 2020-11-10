@@ -102,7 +102,7 @@ public class WeaponCollision : MonoBehaviour
             {
                 if (animator.GetBool("Rage Mode") == false)
                 {
-                    RageMode.Instance.ModifyRage(30); //Increase rage meter
+                    RageMode.Instance.ModifyRage(10); //Increase rage meter
                 }
                 else
                 {
