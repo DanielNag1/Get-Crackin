@@ -39,11 +39,12 @@ public class AttackPlayer : IState
     public void OnEnter()
     {
         _navMeshAgent.enabled = true;
-       
+        _animator.SetBool("Fox_Attack", true);
     }
 
     public void OnExit()
     {
+        _animator.SetBool("Fox_Attack", false);
         //Stop attack Animation.
     }
 
@@ -58,6 +59,7 @@ public class AttackPlayer : IState
         {
             attackCoolDownTime = attackCoolDownTimeMain;
             Attack();
+            _animator.SetBool("Fox_Attack", true);
         }
     }
 
@@ -69,6 +71,7 @@ public class AttackPlayer : IState
             addImpact(_player.transform.position, 10);
             Debug.Log("Attack TRUE!!");
         }
+
         //Play Attack Animation;
         //Debug.Log("ATTACK");
     }

@@ -35,7 +35,8 @@ public class MoveTowardsPlayer : IState
     public void OnEnter()
     {
         _navMeshAgent.enabled = true;
-
+        _animator.SetBool("Fox_Run", true);
+        Debug.Log("GÅR VI IN HÄÄR??");
         //Play chase animation
 
         //Debug.Log("Move Towards Player ENTER");
@@ -44,6 +45,8 @@ public class MoveTowardsPlayer : IState
     public void OnExit()
     {
         _navMeshAgent.enabled = false;
+        _animator.SetBool("Fox_Run", false);
+        Debug.Log("HAR VI GÅTT UTTT??");
         //Stop chase animation.
         //Debug.Log("Move Towards Player EXIT");
     }
@@ -51,7 +54,7 @@ public class MoveTowardsPlayer : IState
     public void TimeTick()
     {
         rb.isKinematic = false;
-        _navMeshAgent.transform.LookAt(_player.transform.position);
+        //_navMeshAgent.transform.LookAt(_player.transform.position);
         _navMeshAgent.SetDestination(_player.transform.position);
         Debug.Log("Move Towards Player TIMETICK");
     }
