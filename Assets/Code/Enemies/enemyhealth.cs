@@ -41,7 +41,7 @@ public class enemyhealth : MonoBehaviour
             if (currentHealth > 0)
             {
                 Vector3 knockbackDirection = (rootGameObject.transform.position - damageDealer.position).normalized;
-                rb.AddForce(knockbackDirection * 60000000/*direction * 60.000.000 gave nice result(Save this)*/, ForceMode.Impulse);
+                rb.AddForce(knockbackDirection * 6000000/*direction * 6.000.000 gave nice result(Save this)*/, ForceMode.Impulse);
                 SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), hurtSoundPaths[Random.Range(0, hurtSoundPaths.Count - 1)], 0, Time.fixedTime, volumeScales[0]);
             }
             else

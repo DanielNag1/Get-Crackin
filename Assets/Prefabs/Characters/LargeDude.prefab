@@ -297,6 +297,7 @@ GameObject:
   - component: {fileID: 2257629015830217684}
   - component: {fileID: 2257629015830217685}
   - component: {fileID: 2257629015830217686}
+  - component: {fileID: 2140246758119537362}
   m_Layer: 9
   m_Name: EnemyP
   m_TagString: Enemy
@@ -581,11 +582,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69d5659865216724dbb79c86dc3afbd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rage: {fileID: 0}
-  HitSoundPaths:
-  - SFX/ImpactSounds/Body_Slashed1
-  - SFX/ImpactSounds/Body_Slashed2
-  - SFX/ImpactSounds/Body_Slashed3
+  SoundPaths: []
   VolumeScales:
   - 0.6
   animator: {fileID: 0}
@@ -600,3 +597,22 @@ MonoBehaviour:
   - {fileID: 2257629014768675188}
   InvulnerabilityTime: 0.5
   collisionActive: 0
+--- !u!95 &2140246758119537362
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2257629015830217680}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: e8cb16a895b5849498d233c697459d16, type: 3}
+  m_Controller: {fileID: 9100000, guid: 2476013db8a1e6d499b5dc5b7494c821, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

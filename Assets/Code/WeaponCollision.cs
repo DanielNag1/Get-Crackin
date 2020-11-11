@@ -9,7 +9,6 @@ public class WeaponCollision : MonoBehaviour
     [SerializeField] private List<string> SoundPaths;
     [SerializeField] private List<float> VolumeScales;
     private Health health;
-    [SerializeField] private Animator animator;
     Random random;
 
     public int weaponDamage = 1;
@@ -28,8 +27,6 @@ public class WeaponCollision : MonoBehaviour
 
     private void Start()
     {
-        animator = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
-       
         for (int i = 0; i < weaponPoints.Count; i++)
         {
             currentWeaponPointPositions.Add(weaponPoints[i].position);
@@ -100,7 +97,7 @@ public class WeaponCollision : MonoBehaviour
             //deal Damage Here
             if (targetTag != "Player")
             {
-                if (animator.GetBool("Rage Mode") == false)
+                if (targetsHit[i].GetComponent<Animator>().GetBool("Rage Mode") == false)
                 {
                     RageMode.Instance.ModifyRage(10); //Increase rage meter
                 }
@@ -119,7 +116,7 @@ public class WeaponCollision : MonoBehaviour
             }
             else
             {
-                animator.SetTrigger("GetHit");
+                targetsHit[i].GetComponent<Animator>().SetTrigger("GetHit");
                 health = targetsHit[i].GetComponentInChildren<Health>();
                 health.ModifyHealth(-5);
                 SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), SoundPaths[Random.Range(0, SoundPaths.Count - 1)], 0, Time.fixedTime, VolumeScales[0]);

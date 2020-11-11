@@ -28,37 +28,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6793778528719022590}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1485805727234710305
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5476388137276723478}
-  m_Layer: 0
-  m_Name: GroundCheck
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5476388137276723478
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1485805727234710305}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.896, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 6793778528719022590}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2264495682613255606
 GameObject:
@@ -120,7 +90,7 @@ Transform:
   m_Children:
   - {fileID: 3760979190343455003}
   m_Father: {fileID: 6793778528719022590}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &260487901886093695
 CapsuleCollider:
@@ -235,7 +205,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6793778528719022590}
-  - component: {fileID: 6793778528719022587}
   - component: {fileID: 6793778528719022586}
   - component: {fileID: 6793778528719022532}
   - component: {fileID: 6793778528719022584}
@@ -267,26 +236,11 @@ Transform:
   - {fileID: 213664369275565087}
   - {fileID: 543450653712525956}
   - {fileID: 7997354238359120628}
-  - {fileID: 5476388137276723478}
   - {fileID: 325779968672550594}
   - {fileID: 497110276}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &6793778528719022587
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6793778528719022535}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
-  m_Radius: 4.39
-  m_Height: 11.92054
-  m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 6.5}
 --- !u!114 &6793778528719022586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -497,7 +451,7 @@ MonoBehaviour:
   - {fileID: 7196623024628452506}
   - {fileID: 1849272252203534487}
   - {fileID: 7660421928429704941}
-  InvulnerabilityTime: 0.15
+  InvulnerabilityTime: 0.2
   collisionActive: 0
 --- !u!114 &3931738415636858030
 MonoBehaviour:
@@ -604,8 +558,7 @@ GameObject:
   - component: {fileID: 2354856517242978277}
   - component: {fileID: 3975439169780208015}
   - component: {fileID: 846736193}
-  - component: {fileID: 1397656894911988471}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: ColliderFolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -663,102 +616,6 @@ MonoBehaviour:
   - 0.1
   closestEnemy: {fileID: 0}
 --- !u!82 &846736193
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8574336844977390024}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!82 &1397656894911988471
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1332,17 +1189,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 56e1f560de268fe4c8e720b1d93f850c, type: 2}
+      objectReference: {fileID: 2100000, guid: a880bd737a16b6440a9aad2bb13d6d3b, type: 2}
     - target: {fileID: 2978280580551946675, guid: 6dfd3fef41cbe0444b86f132ca0e06cf,
         type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: 56e1f560de268fe4c8e720b1d93f850c, type: 2}
+      objectReference: {fileID: 2100000, guid: a880bd737a16b6440a9aad2bb13d6d3b, type: 2}
     - target: {fileID: 2978280580551946675, guid: 6dfd3fef41cbe0444b86f132ca0e06cf,
         type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 
-      objectReference: {fileID: 2100000, guid: 56e1f560de268fe4c8e720b1d93f850c, type: 2}
+      objectReference: {fileID: 2100000, guid: a880bd737a16b6440a9aad2bb13d6d3b, type: 2}
     - target: {fileID: 3450276610890820110, guid: 6dfd3fef41cbe0444b86f132ca0e06cf,
         type: 3}
       propertyPath: m_Layer

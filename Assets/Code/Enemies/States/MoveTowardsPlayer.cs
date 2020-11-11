@@ -34,6 +34,7 @@ public class MoveTowardsPlayer : IState
 
     public void OnEnter()
     {
+        rb.isKinematic = false;
         _navMeshAgent.enabled = true;
         _animator.SetBool("Fox_Run", true);
         //Play chase animation
@@ -53,7 +54,7 @@ public class MoveTowardsPlayer : IState
     {
         Vector3 targetPos = new Vector3(_player.transform.position.x, _navMeshAgent.transform.position.y, _player.transform.position.z);
 
-        rb.isKinematic = false;
+
         //_navMeshAgent.transform.LookAt(_player.transform.position);
         _navMeshAgent.transform.LookAt(targetPos);// OBS!!! Check if this is correct!
         _navMeshAgent.SetDestination(_player.transform.position);

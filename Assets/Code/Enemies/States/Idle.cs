@@ -8,6 +8,8 @@ public class Idle : IState
     private EnemyOne _enemy;
     private Animator _animator;
     private NavMeshAgent _navMeshAgent;
+    private Quaternion _localRotation;
+    public float boringTimer;
     #endregion
 
     public Idle(/*EnemyOne enemy,*/ Animator animator, NavMeshAgent navMeshAgent)
@@ -23,6 +25,8 @@ public class Idle : IState
     {
       _animator.SetBool("Fox_Idle", true);
         _navMeshAgent.enabled = false;
+        _localRotation = _navMeshAgent.transform.localRotation;
+        boringTimer = Random.Range(2, 40) / 10;
     }
 
     public void OnExit()
@@ -33,6 +37,8 @@ public class Idle : IState
 
     public void TimeTick()
     {
+        _navMeshAgent.transform.localRotation = _localRotation;
+        boringTimer -= Time.deltaTime;
     }
 
     #endregion
