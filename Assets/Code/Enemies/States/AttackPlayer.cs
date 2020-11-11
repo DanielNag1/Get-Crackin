@@ -70,6 +70,7 @@ public class AttackPlayer : IState
         {
             addImpact(_player.transform.position, 10);
             Debug.Log("Attack TRUE!!");
+
         }
 
         //Play Attack Animation;

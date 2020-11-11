@@ -36,7 +36,6 @@ public class MoveTowardsPlayer : IState
     {
         _navMeshAgent.enabled = true;
         _animator.SetBool("Fox_Run", true);
-        Debug.Log("GÅR VI IN HÄÄR??");
         //Play chase animation
 
         //Debug.Log("Move Towards Player ENTER");
@@ -46,7 +45,6 @@ public class MoveTowardsPlayer : IState
     {
         _navMeshAgent.enabled = false;
         _animator.SetBool("Fox_Run", false);
-        Debug.Log("HAR VI GÅTT UTTT??");
         //Stop chase animation.
         //Debug.Log("Move Towards Player EXIT");
     }

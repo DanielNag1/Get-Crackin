@@ -22,14 +22,12 @@ public class Idle : IState
     public void OnEnter()
     {
       _animator.SetBool("Fox_Idle", true);
-      //  Debug.Log("nu är vi i idle");
         _navMeshAgent.enabled = false;
     }
 
     public void OnExit()
     {
        _animator.SetBool("Fox_Idle", false);
-      //  Debug.Log("nu är vi INTE idle");
         _navMeshAgent.enabled = true;
     }
 
