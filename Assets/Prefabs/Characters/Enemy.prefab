@@ -457,13 +457,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 0
   startHealth: 50
-  SoundPaths:
-  - troll_monster_hurt_pain_01
-  - troll_monster_hurt_pain_02
-  - troll_monster_hurt_pain_03
-  - troll_monster_hurt_pain_04
-  VolumeScales:
+  hurtSoundPaths:
+  - SFX/HurtSounds/goblin_fairy_hurt_pain_14
+  - SFX/HurtSounds/goblin_fairy_hurt_pain_15
+  - SFX/HurtSounds/goblin_fairy_hurt_pain_16
+  - SFX/HurtSounds/goblin_fairy_hurt_pain_17
+  - SFX/HurtSounds/goblin_fairy_hurt_pain_18
+  deathSoundPaths:
+  - SFX/HurtSounds/troll_monster_hurt_pain_01
+  - SFX/HurtSounds/troll_monster_hurt_pain_02
+  - SFX/HurtSounds/troll_monster_hurt_pain_03
+  - SFX/HurtSounds/troll_monster_hurt_pain_04
+  volumeScales:
   - 0.6
+  SoundObjectPrefab: {fileID: 6447233000424186925, guid: a214008ad84fe8d4fb1ad97d04c3ed40,
+    type: 3}
   rootGameObject: {fileID: 2257629015830217680}
 --- !u!82 &2257629015830217685
 AudioSource:
@@ -476,7 +484,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -574,12 +582,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rage: {fileID: 0}
-  SoundPaths:
-  - goblin_fairy_hurt_pain_14
-  - goblin_fairy_hurt_pain_15
-  - goblin_fairy_hurt_pain_16
-  - goblin_fairy_hurt_pain_17
-  - goblin_fairy_hurt_pain_18
+  HitSoundPaths:
+  - SFX/ImpactSounds/Body_Slashed1
+  - SFX/ImpactSounds/Body_Slashed2
+  - SFX/ImpactSounds/Body_Slashed3
   VolumeScales:
   - 0.6
   animator: {fileID: 0}

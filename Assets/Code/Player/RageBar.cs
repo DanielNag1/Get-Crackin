@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,15 +12,11 @@ public class RageBar : MonoBehaviour
     private void Awake()
     {
         GetComponentInParent<RageMode>().onRagePctChanged += HandleRageChanged;
-        
     }
 
     private void HandleRageChanged(float pct)
     {
-        //foregroundImage.fillAmount = pct;
-
         StartCoroutine(ChangeToPct(pct));
-
     }
 
     private IEnumerator ChangeToPct(float pct)
@@ -38,7 +33,6 @@ public class RageBar : MonoBehaviour
         RageBarss.fillAmount = pct;
     }
 
-    // Start is called before the first frame update
     private void LateUpdate()
     {
         transform.LookAt(Camera.main.transform);

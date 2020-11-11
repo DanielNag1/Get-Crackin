@@ -125,4 +125,8 @@ public class EnemyOne : MonoBehaviour
         _finiteStateMachine.TimeTick();
     }
 
+    public void Reset()
+    {
+        Detect();
+    }
 }
