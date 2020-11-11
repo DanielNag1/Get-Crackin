@@ -35,7 +35,7 @@ public class MoveTowardsPlayer : IState
     public void OnEnter()
     {
         _navMeshAgent.enabled = true;
-
+        _animator.SetBool("Fox_Run", true);
         //Play chase animation
 
         //Debug.Log("Move Towards Player ENTER");
@@ -44,6 +44,7 @@ public class MoveTowardsPlayer : IState
     public void OnExit()
     {
         _navMeshAgent.enabled = false;
+        _animator.SetBool("Fox_Run", false);
         //Stop chase animation.
         //Debug.Log("Move Towards Player EXIT");
     }
@@ -54,7 +55,7 @@ public class MoveTowardsPlayer : IState
 
         rb.isKinematic = false;
         //_navMeshAgent.transform.LookAt(_player.transform.position);
-        _navMeshAgent.transform.LookAt(targetPos);
+        _navMeshAgent.transform.LookAt(targetPos);// OBS!!! Check if this is correct!
         _navMeshAgent.SetDestination(_player.transform.position);
         //Debug.Log("Move Towards Player TIMETICK");
     }

@@ -21,11 +21,13 @@ public class Idle : IState
 
     public void OnEnter()
     {
+      _animator.SetBool("Fox_Idle", true);
         _navMeshAgent.enabled = false;
     }
 
     public void OnExit()
     {
+       _animator.SetBool("Fox_Idle", false);
         _navMeshAgent.enabled = true;
     }
 
