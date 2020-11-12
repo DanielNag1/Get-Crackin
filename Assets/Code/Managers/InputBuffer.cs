@@ -170,6 +170,7 @@ public class InputBuffer : ScriptableObject
         }
         else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack1")) //If the player continues the chain from 1 to 2
         {
+            
             animator.SetInteger("GroundChain", 2);
             player.GetComponentInChildren<WeaponCollision>().collisionActive = true;
             FreeCameraShake.Instance.ShakeCamera(1f, 0.1f);

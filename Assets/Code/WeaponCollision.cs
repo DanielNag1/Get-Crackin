@@ -22,8 +22,8 @@ public class WeaponCollision : MonoBehaviour
     private int layerMask;
     private List<GameObject> targetsHit = new List<GameObject>();
     private List<Tuple<float, GameObject>> recentTargetsHit = new List<Tuple<float, GameObject>>();
-   
-   
+
+
 
     private void Start()
     {
@@ -38,7 +38,7 @@ public class WeaponCollision : MonoBehaviour
 
     private void Update()
     {
-      
+
         PurgeOldRecentTargetsHit();
         if (collisionActive)
         {
@@ -46,7 +46,7 @@ public class WeaponCollision : MonoBehaviour
             WeaponCollisionCheck();
             DeliverDamageToTargetsHit();
         }
-       
+
     }
 
     /// <summary>
@@ -79,7 +79,7 @@ public class WeaponCollision : MonoBehaviour
                         {
                             targetsHit.Add(hit.transform.gameObject);
                             recentTargetsHit.Add(new Tuple<float, GameObject>(0, hit.transform.gameObject));
-                      
+
                         }
                     }
                 }
@@ -97,6 +97,7 @@ public class WeaponCollision : MonoBehaviour
             //deal Damage Here
             if (targetTag != "Player")
             {
+                VFXEvents.Instance.VFX1Play();
                 if (targetsHit[i].GetComponent<Animator>().GetBool("Rage Mode") == false)
                 {
                     RageMode.Instance.ModifyRage(10); //Increase rage meter
@@ -105,13 +106,11 @@ public class WeaponCollision : MonoBehaviour
                 {
                     RageMode.Instance.ModifyRage(-10); //Decrease rage meter
                 }
-
                 //OBS!! weaponPoint location is hard coded, add info on what weaponPoint made the hit to the list: targetsHit
                 //If we want knockback to depend on weapon hit location.
                 //targetsHit[i].GetComponent<enemyhealth>().TakeDamage(weaponDamage, weaponPoints[0].transform); // if this breaks check weaponpoints noll
                 //If we want knockback to depend on player position.
                 targetsHit[i].GetComponent<enemyhealth>().TakeDamage(weaponDamage, weaponPoints[0].transform.root);
-
                 SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), SoundPaths[Random.Range(0, SoundPaths.Count - 1)], 0, Time.fixedTime, VolumeScales[0]);
             }
             else
@@ -122,9 +121,10 @@ public class WeaponCollision : MonoBehaviour
                 SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), SoundPaths[Random.Range(0, SoundPaths.Count - 1)], 0, Time.fixedTime, VolumeScales[0]);
             }
         }
-        
+
         targetsHit.Clear();
     }
+    
 
     bool CompereTargetsHit(RaycastHit hit)
     {

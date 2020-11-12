@@ -30,18 +30,22 @@ public class VFXEvents : MonoBehaviour
         VFX5.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
     }
 
-    void VFX1Play()
+    public void VFX1Play()
     {
         Vector3 forward = (transform.rotation * Vector3.forward).normalized;
 
         VFX1.transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
         VFX1.transform.position += forward * 1;
-        VFX1.Play();
-
+        var VisualEffect = Instantiate(VFX1);
+        StartCoroutine(Timer(VisualEffect));
     }
-    void VFX1Stop()
+    IEnumerator Timer(VisualEffect vfx)
     {
-        VFX1.Stop();
+        vfx.Play();
+        yield return new WaitForSeconds(0.3f);
+        vfx.Stop();
+        yield return new WaitForSeconds(3f);
+        Destroy(vfx.gameObject);
     }
 
     public void VFX2Play()

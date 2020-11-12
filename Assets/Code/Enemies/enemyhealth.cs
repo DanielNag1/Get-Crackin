@@ -25,7 +25,7 @@ public class enemyhealth : MonoBehaviour
 
     void Start()
     {
-        
+
         rb = rootGameObject.GetComponent<Rigidbody>();
         characterController = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>();
         currentHealth = startHealth;
