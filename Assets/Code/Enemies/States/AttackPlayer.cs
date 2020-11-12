@@ -64,7 +64,6 @@ public class AttackPlayer : IState
             attackCoolDownTime = attackCoolDownTimeMain;
             _animator.SetBool("Fox_Attack", false);
             _animator.SetBool("Fox_Idle", true);
-
         }
     }
 

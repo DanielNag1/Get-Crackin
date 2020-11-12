@@ -12,15 +12,13 @@ public class Idle : IState
     public float boringTimer;
     #endregion
 
-    public Idle(/*EnemyOne enemy,*/ Animator animator, NavMeshAgent navMeshAgent)
+    public Idle( Animator animator, NavMeshAgent navMeshAgent)
     {
-        //this._enemy = enemy;
         this._animator = animator;
         _navMeshAgent = navMeshAgent;
     }
 
     #region Interface functions
-
     public void OnEnter()
     {
       _animator.SetBool("Fox_Idle", true);

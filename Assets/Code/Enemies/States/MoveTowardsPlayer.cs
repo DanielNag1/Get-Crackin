@@ -31,35 +31,24 @@ public class MoveTowardsPlayer : IState
     }
 
     #region Interface Functions
-
     public void OnEnter()
     {
         rb.isKinematic = false;
         _navMeshAgent.enabled = true;
         _animator.SetBool("Fox_Run", true);
-        //Play chase animation
-
-        //Debug.Log("Move Towards Player ENTER");
+        //OBS!!! Inform other agents of targets
     }
 
     public void OnExit()
     {
         _navMeshAgent.enabled = false;
         _animator.SetBool("Fox_Run", false);
-        //Stop chase animation.
-        //Debug.Log("Move Towards Player EXIT");
     }
 
     public void TimeTick()
     {
-        Vector3 targetPos = new Vector3(_player.transform.position.x, _navMeshAgent.transform.position.y, _player.transform.position.z);
-
-
-        //_navMeshAgent.transform.LookAt(_player.transform.position);
-        _navMeshAgent.transform.LookAt(targetPos);// OBS!!! Check if this is correct!
+        _navMeshAgent.transform.LookAt(new Vector3(_player.transform.position.x, _navMeshAgent.transform.position.y, _player.transform.position.z));
         _navMeshAgent.SetDestination(_player.transform.position);
-        //Debug.Log("Move Towards Player TIMETICK");
     }
-
     #endregion
 }

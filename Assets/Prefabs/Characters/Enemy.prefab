@@ -100,34 +100,69 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5932685504311250735, guid: 2fd561386cc024249b2303f4d5fe4045,
         type: 3}
-      propertyPath: SoundPaths.Array.size
-      value: 3
+      propertyPath: weaponPoints.Array.size
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5932685504311250735, guid: 2fd561386cc024249b2303f4d5fe4045,
         type: 3}
-      propertyPath: SoundPaths.Array.data[0]
-      value: SFX/ImpactSounds/Body_Slashed1
-      objectReference: {fileID: 0}
+      propertyPath: weaponPoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 6554036030384762807}
     - target: {fileID: 5932685504311250735, guid: 2fd561386cc024249b2303f4d5fe4045,
         type: 3}
-      propertyPath: SoundPaths.Array.data[1]
-      value: SFX/ImpactSounds/Body_Slashed2
-      objectReference: {fileID: 0}
+      propertyPath: weaponPoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 4629160499462582317}
     - target: {fileID: 5932685504311250735, guid: 2fd561386cc024249b2303f4d5fe4045,
         type: 3}
-      propertyPath: SoundPaths.Array.data[2]
-      value: SFX/ImpactSounds/Body_Slashed3
-      objectReference: {fileID: 0}
+      propertyPath: weaponPoints.Array.data[2]
+      value: 
+      objectReference: {fileID: 7992613537832535062}
     - target: {fileID: 5932685504311250735, guid: 2fd561386cc024249b2303f4d5fe4045,
         type: 3}
-      propertyPath: VolumeScales.Array.data[0]
-      value: 0.4
-      objectReference: {fileID: 0}
+      propertyPath: weaponPoints.Array.data[3]
+      value: 
+      objectReference: {fileID: 253716993578465508}
+    - target: {fileID: 5932685504311250735, guid: 2fd561386cc024249b2303f4d5fe4045,
+        type: 3}
+      propertyPath: weaponPoints.Array.data[4]
+      value: 
+      objectReference: {fileID: 5382094063943380787}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2fd561386cc024249b2303f4d5fe4045, type: 3}
 --- !u!4 &6658760529502713539 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 509427493077184790, guid: 2fd561386cc024249b2303f4d5fe4045,
+    type: 3}
+  m_PrefabInstance: {fileID: 6591425935332362197}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6554036030384762807 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 112009433025456226, guid: 2fd561386cc024249b2303f4d5fe4045,
+    type: 3}
+  m_PrefabInstance: {fileID: 6591425935332362197}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4629160499462582317 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1965651937058945016, guid: 2fd561386cc024249b2303f4d5fe4045,
+    type: 3}
+  m_PrefabInstance: {fileID: 6591425935332362197}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7992613537832535062 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3860153729272824771, guid: 2fd561386cc024249b2303f4d5fe4045,
+    type: 3}
+  m_PrefabInstance: {fileID: 6591425935332362197}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &253716993578465508 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6412018343161708337, guid: 2fd561386cc024249b2303f4d5fe4045,
+    type: 3}
+  m_PrefabInstance: {fileID: 6591425935332362197}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5382094063943380787 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1281407126368757990, guid: 2fd561386cc024249b2303f4d5fe4045,
     type: 3}
   m_PrefabInstance: {fileID: 6591425935332362197}
   m_PrefabAsset: {fileID: 0}

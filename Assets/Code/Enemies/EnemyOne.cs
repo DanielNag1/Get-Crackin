@@ -36,9 +36,6 @@ public class EnemyOne : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         var animator = GetComponent<Animator>();
 
-        //playerLayerMask = 1 << layerMaskValue;
-        //playerLayerMask = ~playerLayerMask;
-
         //The States
         #region States
         idle = new Idle(/*this,*/ animator, navMeshAgent);

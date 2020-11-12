@@ -10,7 +10,6 @@ public class RunAway : IState
 
     private readonly EnemyOne _enemy;
     private NavMeshAgent _navMeshAgent;
-    private PlayerDetector _playerDetector;
     private Animator _animator;
     private GameObject _player;
 

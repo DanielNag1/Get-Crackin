@@ -435,12 +435,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SoundPaths:
-  - Body_Slashed1
-  - Body_Slashed2
-  - Body_Slashed3
+  - SFX/ImpactSounds/Body_Slashed1
+  - SFX/ImpactSounds/Body_Slashed2
+  - SFX/ImpactSounds/Body_Slashed3
   VolumeScales:
   - 0.2
-  animator: {fileID: 6793778528719022584}
   weaponDamage: 10
   targetTag: Enemy
   layerMaskValue: 10
@@ -451,7 +450,7 @@ MonoBehaviour:
   - {fileID: 7196623024628452506}
   - {fileID: 1849272252203534487}
   - {fileID: 7660421928429704941}
-  InvulnerabilityTime: 0.2
+  InvulnerabilityTime: 0.3
   collisionActive: 0
 --- !u!114 &3931738415636858030
 MonoBehaviour:
@@ -761,7 +760,7 @@ MonoBehaviour:
   - BackgroundMusicFolder/music_journey_to_the_battlefield
   - BackgroundMusicFolder/music_mountainous_journey
   - BackgroundMusicFolder/music_modern_war
-  volumeScale: 0.1
+  volumeScale: 0.01
 --- !u!82 &692588069049597892
 AudioSource:
   m_ObjectHideFlags: 0
