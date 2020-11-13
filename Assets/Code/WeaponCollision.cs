@@ -115,6 +115,8 @@ public class WeaponCollision : MonoBehaviour
             }
             else
             {
+                Vector3 knockbackDirection = (targetsHit[i].transform.position - transform.position).normalized; //The direction from the enemy that hit the player
+                targetsHit[i].GetComponent<Move>().Knockback(knockbackDirection); //Set knockback on player
                 targetsHit[i].GetComponent<Animator>().SetTrigger("GetHit");
                 health = targetsHit[i].GetComponentInChildren<Health>();
                 health.ModifyHealth(-5);
@@ -124,7 +126,7 @@ public class WeaponCollision : MonoBehaviour
 
         targetsHit.Clear();
     }
-    
+
 
     bool CompereTargetsHit(RaycastHit hit)
     {

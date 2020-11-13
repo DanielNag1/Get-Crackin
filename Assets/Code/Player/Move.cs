@@ -19,6 +19,8 @@ public class Move : MonoBehaviour
     private bool jumping;
     [SerializeField] float fallSpeed = 0;
     [SerializeField] float highOffset = 1.58f;
+    [SerializeField] float knockbackAmount;
+    [SerializeField] float knockbackTimer;
 
     void Start()
     {
@@ -31,6 +33,7 @@ public class Move : MonoBehaviour
 
     void Update()
     {
+        ModifyAttackSpeed();
         NormalMovement();
         animator.SetFloat("movementMagnitude", movementDirection.magnitude);
     }
@@ -66,7 +69,11 @@ public class Move : MonoBehaviour
     {
         RelativeToCameraMovement();
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Jump") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Land") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Dodge")
-            && !animator.GetCurrentAnimatorStateInfo(0).IsName("Air Dodge") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Die"))//What animation states does NOT allow the character to move.
+            && !animator.GetCurrentAnimatorStateInfo(0).IsName("Air Dodge") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Die") &&
+            !animator.GetCurrentAnimatorStateInfo(0).IsName("Get Hit") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Recover") &&
+            !animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack1") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack2") &&
+            !animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack3") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack4"))
+        //What animation states does NOT allow the character to move.
         {
             characterController.Move(desiredDirection * MovementSpeed * movementDirection.magnitude * Time.deltaTime);  //The object moves.
         }
@@ -104,6 +111,26 @@ public class Move : MonoBehaviour
         }
     }
 
+    public void Knockback(Vector3 direction)
+    {
+        animator.ResetTrigger("Get Hit");
+        StartCoroutine(KnockbackMovement(direction));
+    }
+
+    public void ModifyAttackSpeed()
+    {
+        if (animator.GetBool("Rage Mode"))
+        {
+            attackTowardsDistance = 7;
+            //attackTowardSeconds = 0.34f;
+        }
+        else
+        {
+            attackTowardsDistance = 2;
+            //attackTowardSeconds = 0.34f;
+        }
+    }
+
     public void JumpMovementStart(Transform trans)
     {
         StartCoroutine(JumpMovement(trans));
@@ -114,7 +141,7 @@ public class Move : MonoBehaviour
         jumping = true;
         while (timer > 0)
         {
-            if(timer<0.183f)
+            if (timer < 0.183f)
             {
                 characterController.Move(Vector3.up * ((DodgeDistance / 2) / 0.283f) * Time.deltaTime);  //The object moves.
             }
@@ -136,7 +163,7 @@ public class Move : MonoBehaviour
             var target = GetComponentInChildren<LockToTarget>();
             Transform targetTransform = target.GetEnemyTransform();
 
-            if(targetTransform!=null)
+            if (targetTransform != null)
             {
                 Vector3 targetPos = new Vector3(targetTransform.position.x, transform.position.y, targetTransform.position.z);
                 transform.LookAt(targetPos);
@@ -166,6 +193,17 @@ public class Move : MonoBehaviour
             yield return null;
         }
 
+    }
+
+    public IEnumerator KnockbackMovement(Vector3 direction)
+    {
+        float timer = knockbackTimer;
+        while (timer > 0)
+        {
+            characterController.Move(direction * knockbackAmount * Time.deltaTime);
+            timer -= Time.deltaTime;
+            yield return null;
+        }
     }
 
     public Vector3 GetInputDirection()

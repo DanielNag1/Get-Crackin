@@ -11,7 +11,7 @@ public class VFXEvents : MonoBehaviour
     [SerializeField] VisualEffect VFX3;
     [SerializeField] VisualEffect VFX4;
     [SerializeField] VisualEffect VFX5;
-
+    [SerializeField] VisualEffect VFX6;
 
 
 
@@ -37,14 +37,22 @@ public class VFXEvents : MonoBehaviour
         VFX1.transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
         VFX1.transform.position += forward * 1;
         var VisualEffect = Instantiate(VFX1);
-        StartCoroutine(Timer(VisualEffect));
+        StartCoroutine(VFX1Timer(VisualEffect));
     }
-    IEnumerator Timer(VisualEffect vfx)
+    IEnumerator VFX1Timer(VisualEffect vfx)
     {
         vfx.Play();
         yield return new WaitForSeconds(0.3f);
         vfx.Stop();
         yield return new WaitForSeconds(3f);
+        Destroy(vfx.gameObject);
+    }
+    IEnumerator VFX6Timer(VisualEffect vfx)
+    {
+        vfx.Play();
+        yield return new WaitForSeconds(1f);
+        vfx.Stop();
+        yield return new WaitForSeconds(1f);
         Destroy(vfx.gameObject);
     }
 
@@ -90,6 +98,14 @@ public class VFXEvents : MonoBehaviour
     {
         VFX5.gameObject.SetActive(false);
     }
+
+    public void VFX6Play(Transform enemy)
+    {
+        VFX6.transform.position = enemy.position;
+        var VisualEffect = Instantiate(VFX6);
+        StartCoroutine(VFX6Timer(VisualEffect));
+    }
+
 
 
 }

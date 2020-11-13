@@ -21,7 +21,7 @@ public class enemyhealth : MonoBehaviour
 
     private Vector3 smash;
     private CharacterController characterController;
-
+    public float knockbackAmount;
 
     void Start()
     {
@@ -40,12 +40,22 @@ public class enemyhealth : MonoBehaviour
             currentHealth -= amount;
             if (currentHealth > 0)
             {
+
                 Vector3 knockbackDirection = (rootGameObject.transform.position - damageDealer.position).normalized;
-                rb.AddForce(knockbackDirection * 6000000/*direction * 6.000.000 gave nice result(Save this)*/, ForceMode.Impulse);
+                if (characterController.gameObject.GetComponent<Animator>().GetBool("Rage Mode"))
+                {
+                    knockbackAmount = 6000000 * 1.5f;
+                }
+                else
+                {
+                    knockbackAmount = 6000000;
+                }
+                rb.AddForce(knockbackDirection * knockbackAmount/*direction * 6.000.000 gave nice result(Save this)*/, ForceMode.Impulse);
                 SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), hurtSoundPaths[Random.Range(0, hurtSoundPaths.Count - 1)], 0, Time.fixedTime, volumeScales[0]);
             }
             else
             {
+                VFXEvents.Instance.VFX6Play(transform);
                 EnemyManager enemyManager = EnemyManager.Instance;
                 enemyManager.enemyPool.Find(x => x.enemy.transform.root.GetInstanceID() == rootGameObject.transform.root.GetInstanceID()).elementAvailable = true;//If this crashes someone else fucked up! All enemies should exist in the EnemyManagers enemyPool!
                 StartCoroutine(DeathCoroutine());

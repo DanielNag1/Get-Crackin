@@ -170,7 +170,7 @@ public class InputBuffer : ScriptableObject
         }
         else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack1")) //If the player continues the chain from 1 to 2
         {
-            
+
             animator.SetInteger("GroundChain", 2);
             player.GetComponentInChildren<WeaponCollision>().collisionActive = true;
             FreeCameraShake.Instance.ShakeCamera(1f, 0.1f);
@@ -217,15 +217,22 @@ public class InputBuffer : ScriptableObject
             animator.SetInteger("Rage GroundChain", 2);
             FreeCameraShake.Instance.ShakeCamera(1f, 0.1f);
             LockCameraShake.Instance.ShakeCamera(1f, 0.1f);
-            //player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
+            player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
         }
         else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Rage Mode_Attack2")) //If the player continues the chain from 2 to 3
         {
             animator.SetInteger("Rage GroundChain", 3);
             FreeCameraShake.Instance.ShakeCamera(1f, 0.1f);
             LockCameraShake.Instance.ShakeCamera(1f, 0.1f);
-            //player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
+            player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
         }
+        else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Rage Mode_Attack3")) //If the player is in chain 3
+        {
+            FreeCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            LockCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
+        }
+
 
     }
     void GroundDodge()

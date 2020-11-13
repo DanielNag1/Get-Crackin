@@ -40,9 +40,9 @@ VisualEffect:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6672990459827677495}
   m_Enabled: 1
-  m_Asset: {fileID: 8926484042661614526, guid: 7481c9ca905876f49a262453d8cbc333, type: 3}
-  m_InitialEventName: OnPlay
-  m_InitialEventNameOverriden: 0
+  m_Asset: {fileID: 8926484042661614526, guid: 0dbfb296a3459544c8eb10131d4bb27f, type: 3}
+  m_InitialEventName: OnStop
+  m_InitialEventNameOverriden: 1
   m_StartSeed: 0
   m_ResetSeedOnPlay: 1
   m_PropertySheet:
@@ -86,7 +86,6 @@ VFXRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   m_StaticBatchInfo:
