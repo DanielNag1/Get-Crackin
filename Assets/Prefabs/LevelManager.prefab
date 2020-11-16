@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4754208940108479535}
   m_Layer: 0
   m_Name: LevelManager
-  m_TagString: Untagged
+  m_TagString: LevelManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43,6 +43,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24c51ea1c0a24044a8b875f4aaca36d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  navMeshSurface: {fileID: 0}
   animator: {fileID: 0}
   transitionDelayTime: 1

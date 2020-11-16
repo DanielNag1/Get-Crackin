@@ -1,38 +1,44 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 public class Idle : IState
 {
     #region Variables
-
     private EnemyOne _enemy;
     private Animator _animator;
-
+    private NavMeshAgent _navMeshAgent;
+    private Quaternion _localRotation;
+    public float boringTimer;
     #endregion
 
-    public Idle(EnemyOne enemy, Animator animator)
+    public Idle(/*EnemyOne enemy,*/ Animator animator, NavMeshAgent navMeshAgent)
     {
-        this._enemy = enemy;
+        //this._enemy = enemy;
         this._animator = animator;
+        _navMeshAgent = navMeshAgent;
     }
 
     #region Interface functions
 
     public void OnEnter()
     {
-        //Debug.Log("EnterIdle");
-        //Play Idle animation;
+      _animator.SetBool("Fox_Idle", true);
+        _navMeshAgent.enabled = false;
+        _localRotation = _navMeshAgent.transform.localRotation;
+        boringTimer = Random.Range(2, 40) / 10;
     }
 
     public void OnExit()
     {
-        //Debug.Log("Exit Idle");
+       _animator.SetBool("Fox_Idle", false);
+        _navMeshAgent.enabled = true;
     }
 
     public void TimeTick()
     {
-        //Debug.Log("TimeTick Idle");
+        _navMeshAgent.transform.localRotation = _localRotation;
+        boringTimer -= Time.deltaTime;
     }
 
     #endregion

@@ -11,12 +11,10 @@ public class MoveTowardsPlayer : IState
     private readonly EnemyOne _enemy;
     private NavMeshAgent _navMeshAgent;
     private readonly Animator _animator;
-    private float speed = 5;
-    //private int minimunDistancce = 10;
     private GameObject _player;
+    private Rigidbody rb;
 
     #endregion
-
 
     public MoveTowardsPlayer(EnemyOne enemy, NavMeshAgent navMeshAgent, Animator animator)
     {
@@ -24,6 +22,7 @@ public class MoveTowardsPlayer : IState
         this._navMeshAgent = navMeshAgent;
         this._animator = animator;
         _player = GameObject.FindGameObjectWithTag("Player");
+        rb = _enemy.GetComponent<Rigidbody>();
     }
 
     private void EnableNavMeshAgent()
@@ -35,7 +34,9 @@ public class MoveTowardsPlayer : IState
 
     public void OnEnter()
     {
+        rb.isKinematic = false;
         _navMeshAgent.enabled = true;
+        _animator.SetBool("Fox_Run", true);
         //Play chase animation
 
         //Debug.Log("Move Towards Player ENTER");
@@ -44,16 +45,19 @@ public class MoveTowardsPlayer : IState
     public void OnExit()
     {
         _navMeshAgent.enabled = false;
+        _animator.SetBool("Fox_Run", false);
         //Stop chase animation.
         //Debug.Log("Move Towards Player EXIT");
     }
 
     public void TimeTick()
     {
-        //_navMeshAgent.transform.LookAt(_player.transform.position);
-        _navMeshAgent.SetDestination(_player.transform.position);
-        //_navMeshAgent.transform.position += _enemy.transform.forward * speed * Time.deltaTime;
+        Vector3 targetPos = new Vector3(_player.transform.position.x, _navMeshAgent.transform.position.y, _player.transform.position.z);
 
+
+        //_navMeshAgent.transform.LookAt(_player.transform.position);
+        _navMeshAgent.transform.LookAt(targetPos);// OBS!!! Check if this is correct!
+        _navMeshAgent.SetDestination(_player.transform.position);
         //Debug.Log("Move Towards Player TIMETICK");
     }
 

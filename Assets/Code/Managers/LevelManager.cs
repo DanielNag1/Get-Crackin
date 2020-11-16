@@ -12,12 +12,17 @@ public class LevelManager : MonoBehaviour
 
 
     #endregion
-    #region Methods
 
+    #region Singleton
+    public static LevelManager Instance;
     private void Awake()
     {
-        animator = GameObject.Find("Transition").GetComponent<Animator>();
+        Instance = this;
     }
+    #endregion
+
+    #region Methods
+
     private void Update()
     {
         LoadLevelFromCutscene();

@@ -22,7 +22,8 @@ public class InputBuffer : ScriptableObject
     private Stack<KeyCode> bufferStack = new Stack<KeyCode>();
     private bool bufferMode = true;
     private float bufferTimer = 0;
-
+    public GameObject player;
+    private Rigidbody enemyRB;
     public LockToTarget LockToTarget;
     public Animator animator;
     #endregion
@@ -47,6 +48,7 @@ public class InputBuffer : ScriptableObject
     {
         //Debug.Log("BufferStart");
         CheckInput();
+
     }
     /// <summary>
     /// Analyse input
@@ -108,6 +110,7 @@ public class InputBuffer : ScriptableObject
                 GroundCombos();
                 RageGroundCombos();
                 AirCombos();
+
                 break;
             case KeyCode.Joystick1Button1: //B Dodge
                 GroundDodge();
@@ -118,10 +121,9 @@ public class InputBuffer : ScriptableObject
                 GroundJump();
                 break;
             case KeyCode.Joystick1Button3: //Y
-
                 break;
             case KeyCode.Joystick1Button4: //LB
-
+                ActivateRageMode();
                 break;
             case KeyCode.Joystick1Button5: //RB
                 if (LockToTarget.closestEnemy != null)
@@ -158,71 +160,133 @@ public class InputBuffer : ScriptableObject
                     animator.GetCurrentAnimatorStateInfo(0).IsName("Walk") ||
                     animator.GetCurrentAnimatorStateInfo(0).IsName("Run"))
         {
+            animator.SetBool("AttackJump", false); //Resetting attackjump
             animator.SetTrigger("Attack");
             animator.SetInteger("GroundChain", 1);
+            player.GetComponentInChildren<WeaponCollision>().collisionActive = true;
+            FreeCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            LockCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
         }
         else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack1")) //If the player continues the chain from 1 to 2
         {
+
             animator.SetInteger("GroundChain", 2);
+            player.GetComponentInChildren<WeaponCollision>().collisionActive = true;
+            FreeCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            LockCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
+
         }
         else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack2")) //If the player continues the chain from 2 to 3
         {
             animator.SetInteger("GroundChain", 3);
+            player.GetComponentInChildren<WeaponCollision>().collisionActive = true;
+            FreeCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            LockCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
         }
         else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack3")) //If the player continues the chain from 3 to 4
         {
             animator.SetInteger("GroundChain", 4);
+            player.GetComponentInChildren<WeaponCollision>().collisionActive = true;
+            FreeCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            LockCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
         }
     }
     void RageGroundCombos()
     {
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") ||  //If the player is in Idle/Walk/Run
                     animator.GetCurrentAnimatorStateInfo(0).IsName("Walk") ||
-                    animator.GetCurrentAnimatorStateInfo(0).IsName("Run") &&
-                    animator.GetBool("Rage Mode") == true)
+                    animator.GetCurrentAnimatorStateInfo(0).IsName("Run"))
         {
-            animator.SetInteger("Rage GroundChain", 1);
-            animator.SetTrigger("Rage Attack");
+            if (animator.GetBool("Rage Mode") == true) //If the player is in rage mode -> Do the rage chain
+            {
+
+                animator.SetInteger("Rage GroundChain", 1);
+                animator.SetTrigger("Rage Attack");
+                FreeCameraShake.Instance.ShakeCamera(1f, 0.1f);
+                LockCameraShake.Instance.ShakeCamera(1f, 0.1f);
+                //player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
+            }
         }
+
         else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Rage Mode_Attack1")) //If the player continues the chain from 1 to 2
         {
             animator.SetInteger("Rage GroundChain", 2);
+            FreeCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            LockCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
         }
         else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Rage Mode_Attack2")) //If the player continues the chain from 2 to 3
         {
             animator.SetInteger("Rage GroundChain", 3);
+            FreeCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            LockCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
         }
+        else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Rage Mode_Attack3")) //If the player is in chain 3
+        {
+            FreeCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            LockCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
+        }
+
+
     }
     void GroundDodge()
     {
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") ||
                             animator.GetCurrentAnimatorStateInfo(0).IsName("Walk") ||
                             animator.GetCurrentAnimatorStateInfo(0).IsName("Run"))
+
         {
-            animator.SetTrigger("Dodge");
+
+            if (animator.GetFloat("movementMagnitude") > 0)
+            {
+                animator.SetTrigger("Dodge");
+                //Move the charater
+                Move move = player.GetComponent<Move>();
+                move.DodgeMovementStart(player.GetComponent<Transform>());
+            }
         }
+
     }
     void AirCombos()
     {
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("In Air"))
         {
             animator.SetInteger("AirChain", 1);
+            animator.SetTrigger("Air Attack");
             animator.SetBool("Air Dodge", false);
+            FreeCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            LockCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            //player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
         }
         else if (animator.GetCurrentAnimatorStateInfo(0).IsName("In Air_Chain1_Attack1"))
         {
             animator.SetInteger("AirChain", 2);
             animator.SetBool("Air Dodge", false);
+            FreeCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            LockCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            //player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
         }
         else if (animator.GetCurrentAnimatorStateInfo(0).IsName("In Air_Chain1_Attack2"))
         {
             animator.SetInteger("AirChain", 3);
             animator.SetBool("Air Dodge", false);
+            FreeCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            LockCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            //player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
         }
         else if (animator.GetCurrentAnimatorStateInfo(0).IsName("In Air_Chain1_Attack3"))
         {
             animator.SetInteger("AirChain", 4);
             animator.SetBool("Air Dodge", false);
+            FreeCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            LockCameraShake.Instance.ShakeCamera(1f, 0.1f);
+            //player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
         }
     }
     void AirDodge()
@@ -250,21 +314,52 @@ public class InputBuffer : ScriptableObject
     }
     void GroundJump()
     {
-        animator.SetTrigger("Jump");
-        animator.SetBool("AttackJump", false);
-        animator.SetBool("Air Dodge", false);
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") ||
+            animator.GetCurrentAnimatorStateInfo(0).IsName("Walk") ||
+            animator.GetCurrentAnimatorStateInfo(0).IsName("Run"))
+        {
+            animator.SetTrigger("Jump");
+            animator.SetBool("Air Dodge", false);
+            animator.SetBool("InAir", true);
+            player.GetComponent<Move>().JumpMovementStart(player.GetComponent<Transform>());
+        }
+
     }
     void AttackJump()
     {
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack1") ||
             animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack2") ||
             animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack3") ||
+            animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack4") ||
             animator.GetCurrentAnimatorStateInfo(0).IsName("Rage Mode_Attack1") ||
             animator.GetCurrentAnimatorStateInfo(0).IsName("Rage Mode_Attack2") ||
             animator.GetCurrentAnimatorStateInfo(0).IsName("Rage Mode_Attack3"))
         {
             animator.SetBool("AttackJump", true);
+            animator.SetBool("InAir", true);
         }
     }
+
+    void ActivateRageMode()
+    {
+        animator.ResetTrigger("Attack");
+        if (RageMode.Instance.currentRage > 0)
+        {
+            if (!animator.GetBool("Rage Mode"))
+            {
+                animator.SetBool("Rage Mode", true);
+                VFXEvents.Instance.VFX4Stop();
+                VFXEvents.Instance.VFX5Play();
+            }
+            else if (animator.GetBool("Rage Mode"))
+            {
+                animator.SetBool("Rage Mode", false);
+                VFXEvents.Instance.VFX5Stop();
+            }
+
+        }
+
+    }
+
     #endregion
 }
