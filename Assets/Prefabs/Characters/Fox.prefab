@@ -221,7 +221,6 @@ MonoBehaviour:
   SoundPaths: []
   VolumeScales:
   - 0.6
-  animator: {fileID: 0}
   weaponDamage: 1
   targetTag: Player
   layerMaskValue: 9
@@ -287,6 +286,7 @@ MonoBehaviour:
   SoundObjectPrefab: {fileID: 6447233000424186925, guid: a214008ad84fe8d4fb1ad97d04c3ed40,
     type: 3}
   rootGameObject: {fileID: 890034010353216428}
+  knockbackAmount: 0
 --- !u!1 &1753571335725303639
 GameObject:
   m_ObjectHideFlags: 0

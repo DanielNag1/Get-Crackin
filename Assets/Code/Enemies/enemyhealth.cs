@@ -34,7 +34,6 @@ public class enemyhealth : MonoBehaviour
 
     public void TakeDamage(int amount, Transform damageDealer)
     {
-
         if (rb != null)
         {
             currentHealth -= amount;
@@ -51,20 +50,20 @@ public class enemyhealth : MonoBehaviour
                 {
                     knockbackAmount = 6000000;
                 }
-                rb.AddForce(knockbackDirection * knockbackAmount/*direction * 6.000.000 gave nice result(Save this)*/, ForceMode.Impulse);
-                //rb.AddForce(knockbackDirection * 6000000/*direction * 6.000.000 gave nice result(Save this)*/, ForceMode.Impulse);
+                //rb.AddForce(knockbackDirection * knockbackAmount/*direction * 6.000.000 gave nice result(Save this)*/, ForceMode.Impulse);
+                rb.AddForce(knockbackDirection * 6000000/*direction * 6.000.000 gave nice result(Save this)*/, ForceMode.Impulse);
 
                 rb.GetComponent<EnemyOne>().knockback.destination = (knockbackDirection * knockbackDistance) + rb.GetComponent<EnemyOne>().transform.position;//experimental new knockback
                 rb.GetComponent<EnemyOne>().SetFSMState("knockback");
                 SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), hurtSoundPaths[Random.Range(0, hurtSoundPaths.Count - 1)], 0, Time.fixedTime, volumeScales[0]);
             }
-        }
-        else
-        {
-            VFXEvents.Instance.VFX6Play(transform);
-            EnemyManager enemyManager = EnemyManager.Instance;
-            enemyManager.enemyPool.Find(x => x.enemy.transform.root.GetInstanceID() == rootGameObject.transform.root.GetInstanceID()).elementAvailable = true;//If this crashes someone else fucked up! All enemies should exist in the EnemyManagers enemyPool!
-            StartCoroutine(DeathCoroutine());
+            else
+            {
+                VFXEvents.Instance.VFX6Play(transform);
+                EnemyManager enemyManager = EnemyManager.Instance;
+                enemyManager.enemyPool.Find(x => x.enemy.transform.root.GetInstanceID() == rootGameObject.transform.root.GetInstanceID()).elementAvailable = true;//If this crashes someone else fucked up! All enemies should exist in the EnemyManagers enemyPool!
+                StartCoroutine(DeathCoroutine());
+            }
         }
     }
 
