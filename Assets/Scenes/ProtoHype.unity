@@ -533,8 +533,161 @@ PrefabInstance:
       propertyPath: m_Name
       value: MenuFolder
       objectReference: {fileID: 0}
+    - target: {fileID: 8342070121407548489, guid: fd66088361e11cd44b7ac7184598fef3,
+        type: 3}
+      propertyPath: m_text
+      value: Return to main menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 8342070121689423324, guid: fd66088361e11cd44b7ac7184598fef3,
+        type: 3}
+      propertyPath: pauseResumeButton
+      value: 
+      objectReference: {fileID: 254586488}
+    - target: {fileID: 8342070121689423324, guid: fd66088361e11cd44b7ac7184598fef3,
+        type: 3}
+      propertyPath: optionButton
+      value: 
+      objectReference: {fileID: 254586500}
+    - target: {fileID: 8342070121689423324, guid: fd66088361e11cd44b7ac7184598fef3,
+        type: 3}
+      propertyPath: mainMenuButton
+      value: 
+      objectReference: {fileID: 254586499}
+    - target: {fileID: 8342070121689423324, guid: fd66088361e11cd44b7ac7184598fef3,
+        type: 3}
+      propertyPath: quitToDesktopButton
+      value: 
+      objectReference: {fileID: 254586498}
+    - target: {fileID: 8342070121689423324, guid: fd66088361e11cd44b7ac7184598fef3,
+        type: 3}
+      propertyPath: customKeybindingButton
+      value: 
+      objectReference: {fileID: 254586497}
+    - target: {fileID: 8342070121689423324, guid: fd66088361e11cd44b7ac7184598fef3,
+        type: 3}
+      propertyPath: masterVolumeButton
+      value: 
+      objectReference: {fileID: 254586496}
+    - target: {fileID: 8342070121689423324, guid: fd66088361e11cd44b7ac7184598fef3,
+        type: 3}
+      propertyPath: soundEffectsButton
+      value: 
+      objectReference: {fileID: 254586495}
+    - target: {fileID: 8342070121689423324, guid: fd66088361e11cd44b7ac7184598fef3,
+        type: 3}
+      propertyPath: musicVolumeButton
+      value: 
+      objectReference: {fileID: 254586494}
+    - target: {fileID: 8342070121689423324, guid: fd66088361e11cd44b7ac7184598fef3,
+        type: 3}
+      propertyPath: backButton
+      value: 
+      objectReference: {fileID: 254586493}
+    - target: {fileID: 8342070121689423324, guid: fd66088361e11cd44b7ac7184598fef3,
+        type: 3}
+      propertyPath: optionsMainMenuButton
+      value: 
+      objectReference: {fileID: 254586491}
+    - target: {fileID: 8342070121689423324, guid: fd66088361e11cd44b7ac7184598fef3,
+        type: 3}
+      propertyPath: newGameButton
+      value: 
+      objectReference: {fileID: 254586492}
+    - target: {fileID: 8342070121689423324, guid: fd66088361e11cd44b7ac7184598fef3,
+        type: 3}
+      propertyPath: quitGameButton
+      value: 
+      objectReference: {fileID: 254586490}
+    - target: {fileID: 8342070121689423324, guid: fd66088361e11cd44b7ac7184598fef3,
+        type: 3}
+      propertyPath: continueButton
+      value: 
+      objectReference: {fileID: 254586489}
+    - target: {fileID: 8342070122068991304, guid: fd66088361e11cd44b7ac7184598fef3,
+        type: 3}
+      propertyPath: m_text
+      value: Quit Game
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd66088361e11cd44b7ac7184598fef3, type: 3}
+--- !u!1 &254586488 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8342070120878672445, guid: fd66088361e11cd44b7ac7184598fef3,
+    type: 3}
+  m_PrefabInstance: {fileID: 254586487}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &254586489 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8342070122381703253, guid: fd66088361e11cd44b7ac7184598fef3,
+    type: 3}
+  m_PrefabInstance: {fileID: 254586487}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &254586490 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8342070120575916386, guid: fd66088361e11cd44b7ac7184598fef3,
+    type: 3}
+  m_PrefabInstance: {fileID: 254586487}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &254586491 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8342070121123672145, guid: fd66088361e11cd44b7ac7184598fef3,
+    type: 3}
+  m_PrefabInstance: {fileID: 254586487}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &254586492 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8342070121346096317, guid: fd66088361e11cd44b7ac7184598fef3,
+    type: 3}
+  m_PrefabInstance: {fileID: 254586487}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &254586493 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8342070120907950758, guid: fd66088361e11cd44b7ac7184598fef3,
+    type: 3}
+  m_PrefabInstance: {fileID: 254586487}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &254586494 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8342070122255028783, guid: fd66088361e11cd44b7ac7184598fef3,
+    type: 3}
+  m_PrefabInstance: {fileID: 254586487}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &254586495 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8342070120625931335, guid: fd66088361e11cd44b7ac7184598fef3,
+    type: 3}
+  m_PrefabInstance: {fileID: 254586487}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &254586496 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8342070122200298239, guid: fd66088361e11cd44b7ac7184598fef3,
+    type: 3}
+  m_PrefabInstance: {fileID: 254586487}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &254586497 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8342070120699841902, guid: fd66088361e11cd44b7ac7184598fef3,
+    type: 3}
+  m_PrefabInstance: {fileID: 254586487}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &254586498 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8342070121934695437, guid: fd66088361e11cd44b7ac7184598fef3,
+    type: 3}
+  m_PrefabInstance: {fileID: 254586487}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &254586499 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8342070121562359238, guid: fd66088361e11cd44b7ac7184598fef3,
+    type: 3}
+  m_PrefabInstance: {fileID: 254586487}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &254586500 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8342070120408520338, guid: fd66088361e11cd44b7ac7184598fef3,
+    type: 3}
+  m_PrefabInstance: {fileID: 254586487}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &386936094
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3091,37 +3244,37 @@ PrefabInstance:
     - target: {fileID: 4643290534432835213, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.0031439147
+      value: 0.003984929
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534432835213, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.9962585
+      value: 0.99449503
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534432835213, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.041115016
+      value: -0.04104271
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534432835213, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.07595211
+      value: 0.09632915
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534432835213, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 47.09359
+      value: 46.852386
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534432835213, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.8644106
+      value: 1.8644093
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534432835213, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 214.91058
+      value: 214.86847
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534444133298, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
@@ -3131,17 +3284,17 @@ PrefabInstance:
     - target: {fileID: 4643290534444133298, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.16321471
+      value: 0.16321473
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534444133298, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.590721
+      value: 0.59072113
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534444133298, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.12451983
+      value: 0.12451984
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534444133298, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
