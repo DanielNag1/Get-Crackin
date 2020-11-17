@@ -38,10 +38,14 @@ public class enemyhealth : MonoBehaviour
         if (rb != null)
         {
             currentHealth -= amount;
-            if (currentHealth > 0)
+            if (currentHealth > 0) //THIS
             {
                 Vector3 knockbackDirection = (rootGameObject.transform.position - damageDealer.position).normalized;
-                rb.AddForce(knockbackDirection * 6000000/*direction * 6.000.000 gave nice result(Save this)*/, ForceMode.Impulse);
+                float knockbackDistance = 2;
+                //rb.AddForce(knockbackDirection * 6000000/*direction * 6.000.000 gave nice result(Save this)*/, ForceMode.Impulse);
+                
+                rb.GetComponent<EnemyOne>().knockback.destination = (knockbackDirection * knockbackDistance) + rb.GetComponent<EnemyOne>().transform.position;//experimental new knockback
+                rb.GetComponent<EnemyOne>().SetFSMState("knockback");
                 SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), hurtSoundPaths[Random.Range(0, hurtSoundPaths.Count - 1)], 0, Time.fixedTime, volumeScales[0]);
             }
             else

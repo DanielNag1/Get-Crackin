@@ -61,6 +61,7 @@ public class RunAway : IState
             _navMeshAgent.SetDestination(away); //Set as destination.
             Debug.Log("RunAway TIMETICK");
         }
+        _navMeshAgent.transform.rotation = Quaternion.LookRotation(_navMeshAgent.velocity, Vector3.up);
     }
 
     private Vector3 GetNewPoint()

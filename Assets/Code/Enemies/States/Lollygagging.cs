@@ -52,7 +52,7 @@ public class Lollygagging : IState
 
     public void TimeTick()
     {
-        _navMeshAgent.transform.LookAt(targetPos);
+        _navMeshAgent.transform.rotation = Quaternion.LookRotation(_navMeshAgent.velocity, Vector3.up);
         _navMeshAgent.SetDestination(targetPos);
     }
     #endregion

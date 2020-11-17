@@ -38,7 +38,6 @@ public class WeaponCollision : MonoBehaviour
 
     private void Update()
     {
-      
         PurgeOldRecentTargetsHit();
         if (collisionActive)
         {
@@ -46,7 +45,6 @@ public class WeaponCollision : MonoBehaviour
             WeaponCollisionCheck();
             DeliverDamageToTargetsHit();
         }
-       
     }
 
     /// <summary>
@@ -60,6 +58,7 @@ public class WeaponCollision : MonoBehaviour
             currentWeaponPointPositions[i] = weaponPoints[i].position;
         }
     }
+
     /// <summary>
     /// Raycasts along the collision line.
     /// </summary>
@@ -72,22 +71,20 @@ public class WeaponCollision : MonoBehaviour
             {
                 if (hit.collider.tag == targetTag)
                 {
-
                     if (!CompereTargetsHit(hit))
                     {
                         if (!CompereItem2RecentTargetsHit(hit))
                         {
                             targetsHit.Add(hit.transform.gameObject);
                             recentTargetsHit.Add(new Tuple<float, GameObject>(0, hit.transform.gameObject));
-                      
                         }
                     }
                 }
-
             }
             Debug.DrawRay(previousWeaponPointPositions[i], transform.TransformDirection((currentWeaponPointPositions[i] - previousWeaponPointPositions[i]).normalized) * Vector3.Distance(previousWeaponPointPositions[i], currentWeaponPointPositions[i]), Color.white);
         }
     }
+
     public void DeliverDamageToTargetsHit()
     {
         for (int i = 0; i < targetsHit.Count; i++)

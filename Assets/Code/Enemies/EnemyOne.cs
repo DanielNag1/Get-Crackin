@@ -6,6 +6,7 @@ using UnityEngine.AI;
 
 public class EnemyOne : MonoBehaviour
 {
+    #region variables
     private FiniteStateMachine _finiteStateMachine = new FiniteStateMachine();
     private GameObject _player;
 
@@ -24,11 +25,20 @@ public class EnemyOne : MonoBehaviour
     public LayerMask playerLayerMask;
     public float highOffset = 0.25f;
     public NavMeshAgent navMeshAgent;
+    #endregion
+
+    #region States
     Idle idle;
     MoveTowardsPlayer moveTowardsPlayer;
     AttackPlayer attack;
     Return returnState;
     Lollygagging lollygagging;
+    Reload reload;
+    MoveToPosition moveToPosition;
+    EncircleTarget encircleTarget;
+    MoveToReloadPosition moveToReloadPosition;
+    public Knockback knockback;
+    #endregion
 
     private void Awake()
     {
@@ -43,31 +53,41 @@ public class EnemyOne : MonoBehaviour
         attack = new AttackPlayer(this, navMeshAgent, animator);
         returnState = new Return(this, navMeshAgent, animator);
         lollygagging = new Lollygagging(this, navMeshAgent, animator);
+        reload = new Reload(navMeshAgent, animator);
+        moveToPosition = new MoveToPosition(navMeshAgent, animator);
+        encircleTarget = new EncircleTarget(navMeshAgent, animator);
+        moveToReloadPosition = new MoveToReloadPosition(navMeshAgent, animator);
+        knockback = new Knockback(navMeshAgent, animator);
         #endregion
 
         //The Transitions (From, To, Condition)
         #region Transitions
         _finiteStateMachine.AddTransition(idle, moveTowardsPlayer, HasATarget());
         _finiteStateMachine.AddTransition(idle, lollygagging, BoredTimer());
-        _finiteStateMachine.AddTransition(moveTowardsPlayer, attack, AttackTarget());
+        _finiteStateMachine.AddTransition(moveTowardsPlayer, attack, WithinAttackRange());
         _finiteStateMachine.AddTransition(attack, moveTowardsPlayer, OutOfAttackRange());
         _finiteStateMachine.AddTransition(attack, returnState, HasNoTarget());
         _finiteStateMachine.AddTransition(moveTowardsPlayer, returnState, HasNoTarget());
         _finiteStateMachine.AddTransition(returnState, idle, AtSpawn());
-        _finiteStateMachine.AddTransition(lollygagging, idle, AtTargetPosition());
+        _finiteStateMachine.AddTransition(lollygagging, idle, AtLollygaggingPosition());
         _finiteStateMachine.AddTransition(lollygagging, moveTowardsPlayer, HasATarget());
+        _finiteStateMachine.AddTransition(knockback, moveTowardsPlayer, KnockBackFinished());//THIS
         _finiteStateMachine.SetState(idle);  //setting the default state (the initial state).
         #endregion
 
         //The Conditions
         #region conditions
-        Func<bool> AttackTarget() => () => isWithinAttackRange == true;
+        Func<bool> WithinAttackRange() => () => isWithinAttackRange == true;
         Func<bool> OutOfAttackRange() => () => isWithinAttackRange == false;
         Func<bool> HasATarget() => () => isWithinChaseRange == true && isWithinAttackRange == false;
         Func<bool> HasNoTarget() => () => isWithinChaseRange == false;
         Func<bool> AtSpawn() => () => Vector3.Distance(returnState.targetPos, transform.position) < 1.0f;
-        Func<bool> AtTargetPosition() => () => Vector3.Distance(lollygagging.targetPos, transform.position) < 1.0f;
+        Func<bool> AtLollygaggingPosition() => () => Vector3.Distance(lollygagging.targetPos, transform.position) < 1.0f;
         Func<bool> BoredTimer() => () => idle.boringTimer < 0;
+        Func<bool> AtTargetPosition() => () => Vector3.Distance(moveToPosition.destination, transform.position) < .1f;
+        Func<bool> AtReloadPosition() => () => Vector3.Distance(moveToReloadPosition.destination, transform.position) < moveToReloadPosition.interactionRange;
+        Func<bool> FinishedReloading() => () => reload._animationTimer < 0;
+        Func<bool> KnockBackFinished() => () => knockback._animationTimer < 0;//THIS
         #endregion
 
         Detect();
@@ -149,5 +169,21 @@ public class EnemyOne : MonoBehaviour
     public void Reset()
     {
         Detect();
+    }
+
+    public void SetFSMState(string stateName) //THIS
+    {
+        if (stateName == "idle")
+        {
+            _finiteStateMachine.SetState(idle);
+        }
+        else if (stateName == "moveTowardsPlayer")
+        {
+            _finiteStateMachine.SetState(moveTowardsPlayer);
+        }
+        else if (stateName == "knockback")
+        {
+            _finiteStateMachine.SetState(knockback);
+        }
     }
 }
