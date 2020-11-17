@@ -29,6 +29,7 @@ public class EnemyOne : MonoBehaviour
     AttackPlayer attack;
     Return returnState;
     Lollygagging lollygagging;
+    public KnockBack knockback;
 
     private void Awake()
     {
@@ -46,6 +47,7 @@ public class EnemyOne : MonoBehaviour
         attack = new AttackPlayer(this, navMeshAgent, animator);
         returnState = new Return(this, navMeshAgent, animator);
         lollygagging = new Lollygagging(this, navMeshAgent, animator);
+        knockback = new KnockBack(navMeshAgent, animator);
         #endregion
 
         //The Transitions (From, To, Condition)
@@ -59,6 +61,7 @@ public class EnemyOne : MonoBehaviour
         _finiteStateMachine.AddTransition(returnState, idle, AtSpawn());
         _finiteStateMachine.AddTransition(lollygagging, idle, AtTargetPosition());
         _finiteStateMachine.AddTransition(lollygagging, moveTowardsPlayer, HasATarget());
+        _finiteStateMachine.AddTransition(knockback, moveTowardsPlayer, KnockBackFinished());//THIS
         _finiteStateMachine.SetState(idle);  //setting the default state (the initial state).
         #endregion
 
@@ -71,6 +74,7 @@ public class EnemyOne : MonoBehaviour
         Func<bool> AtSpawn() => () => Vector3.Distance(returnState.targetPos, transform.position) < 1.0f;
         Func<bool> AtTargetPosition() => () => Vector3.Distance(lollygagging.targetPos, transform.position) < 1.0f;
         Func<bool> BoredTimer() => () => idle.boringTimer < 0;
+        Func<bool> KnockBackFinished() => () => knockback._animationTimer < 0;//THIS
         #endregion
 
         Detect();
@@ -136,6 +140,22 @@ public class EnemyOne : MonoBehaviour
         {
             isWithinAttackRange = false;
             isWithinChaseRange = false;
+        }
+    }
+
+    public void SetFSMState(string stateName) //THIS
+    {
+        if (stateName == "idle")
+        {
+            _finiteStateMachine.SetState(idle);
+        }
+        else if (stateName == "moveTowardsPlayer")
+        {
+            _finiteStateMachine.SetState(moveTowardsPlayer);
+        }
+        else if (stateName == "knockback")
+        {
+            _finiteStateMachine.SetState(knockback);
         }
     }
 

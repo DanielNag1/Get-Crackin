@@ -14,8 +14,8 @@ public class AttackPlayer : IState
 
     public int attackDamageMinimun;
     public int attackDamageMaximun;
-    public float attackCoolDownTimeMain = 0.983f;
-    public float attackCoolDownTime = 1;
+    public float attackCoolDownTimeMain = 1f;
+    public float attackCoolDownTime = 0.983f;
 
     private WeaponCollision weaponCollision;
     private GameObject _player;
