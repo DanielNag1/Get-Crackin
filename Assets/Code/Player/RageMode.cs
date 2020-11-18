@@ -39,10 +39,12 @@ public class RageMode : MonoBehaviour
 
     public void ModifyRage(float amount)
     {
-
-        currentRage += amount;
-        float currentRagePct = (float)currentRage / (float)maxRage;
-        onRagePctChanged(currentRagePct);
+        if (currentRage < maxRage)
+        {
+            currentRage += amount;
+            float currentRagePct = (float)currentRage / (float)maxRage;
+            onRagePctChanged(currentRagePct);
+        }
 
     }
 
