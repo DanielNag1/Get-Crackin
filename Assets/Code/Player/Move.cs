@@ -67,7 +67,6 @@ public class Move : MonoBehaviour
 
     void NormalMovement()
     {
-        RelativeToCameraMovement();
         Gravity();
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Dodge") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Die") &&
             !animator.GetCurrentAnimatorStateInfo(0).IsName("Get Hit") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Recover") &&
@@ -75,6 +74,7 @@ public class Move : MonoBehaviour
             !animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack3") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack4"))
         //What animation states does NOT allow the character to move.
         {
+            RelativeToCameraMovement();
             characterController.Move(desiredDirection * MovementSpeed * movementDirection.magnitude * Time.deltaTime);  //The object moves.
         }
 
