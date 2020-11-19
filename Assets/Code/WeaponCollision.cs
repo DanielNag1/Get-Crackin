@@ -98,6 +98,8 @@ public class WeaponCollision : MonoBehaviour
             if (targetTag != "Player")
             {
                 VFXEvents.Instance.VFX1Play();
+                FreeCameraShake.Instance.ShakeCamera(4f, 0.1f);
+                LockCameraShake.Instance.ShakeCamera(4f, 0.1f);
                 if (targetsHit[i].GetComponent<Animator>().GetBool("Rage Mode") == false)
                 {
                     RageMode.Instance.ModifyRage(10); //Increase rage meter
