@@ -4,21 +4,19 @@ using UnityEngine;
 using UnityEngine.Experimental.TerrainAPI;
 
 
-[ExecuteInEditMode]
+
 public class TerrainTest : MonoBehaviour
 {
-    public TerrainLayer assda;
     Ray ray;
     RaycastHit hit;
     public GameObject test;
-
-    public int surfaceIndex = 0;
 
     private Terrain terrain;
     private TerrainData terrainData;
     private Vector3 terrainPos;
 
     public float[] textureValues;
+    public CreateGrid grid;
 
     // Start is called before the first frame update
     void Start()
@@ -26,36 +24,33 @@ public class TerrainTest : MonoBehaviour
         terrain = Terrain.activeTerrain;
         terrainData = terrain.terrainData;
         terrainPos = terrain.transform.position;
-
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        Physics.Raycast(test.transform.position, Vector3.down, out hit, 500, 1);
-        Debug.DrawRay(test.transform.position, Vector3.down * 500, Color.red);
-
-        GetTextureMix(hit.point);
-
-
-        if (textureValues[0] > 0)
+        if (Input.GetKeyUp(KeyCode.Space))
         {
-            Debug.Log("dirt");
+            foreach (var g in grid.losListos)
+            {
+                Physics.Raycast(g.transform.position, Vector3.down, out hit, 500, 1);
+                Debug.DrawRay(g.transform.position, Vector3.down * 500, Color.red);
+                GetTextureMix(hit.point);
+                if (textureValues[0] > 0)
+                {
+                    Debug.Log("dirt");
+                }
+                if (textureValues[1] > 0)
+                {
+                    Debug.Log("snow");
+                }
+            }
         }
-        if (textureValues[1] > 0)
-        {
-            Debug.Log("snow");
-        }
 
+        //Physics.Raycast(test.transform.position, Vector3.down, out hit, 500, 1);
+        //Debug.DrawRay(test.transform.position, Vector3.down * 500, Color.red);
+        
 
-
-
-
-    }
-
-    void OnGUI()
-    {
 
     }
 
@@ -77,8 +72,6 @@ public class TerrainTest : MonoBehaviour
         textureValues[0] = splatmapData[0, 0, 0];
         textureValues[1] = splatmapData[0, 0, 1];
         //textureValues[2] = splatmapData[0, 0, 2];
-
-
 
     }
 
