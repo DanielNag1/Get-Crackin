@@ -74,7 +74,8 @@ public class FiniteStateMachine
         //loop through anyTransitions (The transitions comming from any state because they dont have a from state).
         foreach (var transition in _aTransition)
         {
-            if (transition.Condition())  //does the condition return true?
+            //OBS!!! ADDED && _currentState != transition.NewState, as it lead to problems with not beein able to leave it's own state.
+            if (transition.Condition() && _currentState != transition.NewState)  //does the condition return true? 
             {
                 return transition;
             }

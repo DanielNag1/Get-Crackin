@@ -2,22 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using System;
 
-public class MoveTowardsPlayer : IState
+public class MoveToWithinAttackRange : IState
 {
     #region Variables
+
     private NavMeshAgent _navMeshAgent;
     private readonly Animator _animator;
     private GameObject _player;
-
     #endregion
 
-    public MoveTowardsPlayer(GameObject enemy, NavMeshAgent navMeshAgent, Animator animator)
+    public MoveToWithinAttackRange(GameObject player, NavMeshAgent navMeshAgent, Animator animator)
     {
         this._navMeshAgent = navMeshAgent;
         this._animator = animator;
-        _player = GameObject.FindGameObjectWithTag("Player");
+        _player = player;
     }
 
     #region Interface Functions

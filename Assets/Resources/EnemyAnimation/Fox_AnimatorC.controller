@@ -37,7 +37,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: Fox_Attack
+    m_ConditionEvent: Fox_Melee_Attack
     m_EventTreshold: 0
   - m_ConditionMode: 2
     m_ConditionEvent: Fox_Run
@@ -196,7 +196,7 @@ AnimatorStateTransition:
     m_ConditionEvent: Fox_Run
     m_EventTreshold: 0
   - m_ConditionMode: 2
-    m_ConditionEvent: Fox_Attack
+    m_ConditionEvent: Fox_Melee_Attack
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1575020714502671036}
@@ -232,7 +232,7 @@ AnimatorStateMachine:
     m_Position: {x: 600, y: 30, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6668279493402885358}
-    m_Position: {x: 720, y: -110, z: 0}
+    m_Position: {x: 650, y: -190, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6596921714709001413}
     m_Position: {x: 400, y: 340, z: 0}
@@ -255,7 +255,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: Fox_Attack
+    m_ConditionEvent: Fox_Melee_Attack
     m_EventTreshold: 0
   - m_ConditionMode: 2
     m_ConditionEvent: Fox_Idle
@@ -281,7 +281,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Fox_Attack
+  m_Name: Fox_Melee_Attack
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -391,7 +391,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: Fox_Attack
+  - m_Name: Fox_Melee_Attack
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -520,7 +520,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: Fox_Attack
+    m_ConditionEvent: Fox_Melee_Attack
     m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: Fox_Idle

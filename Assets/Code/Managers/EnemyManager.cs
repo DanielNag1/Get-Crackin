@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 /// <summary>
 /// DON'T TOUCH! The spawn system
@@ -97,6 +98,15 @@ public class EnemyManager : MonoBehaviour
             }
             enemy.enemy.transform.position = spawnSet[setToUse].spawnPoints[i].transform.position;
             enemy.enemy.transform.rotation = spawnSet[setToUse].spawnPoints[i].transform.rotation;
+            NavMeshHit hit;
+            int yes = 1;
+            while (!NavMesh.SamplePosition(spawnSet[setToUse].spawnPoints[i].transform.position, out hit, yes, NavMesh.AllAreas)) //get where we should go on the navMesh      
+            {
+                yes++;
+            }
+            enemy.enemy.GetComponentInChildren<NavMeshAgent>().Warp(hit.position);
+          
+
         }
     }
     public EnemyPool Find(string prefabName, List<EnemyPool> enemyPool)
