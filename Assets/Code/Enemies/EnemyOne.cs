@@ -34,7 +34,6 @@ public class EnemyOne : MonoBehaviour
     Return returnState;
     Lollygagging lollygagging;
     Reload reload;
-    MoveToPosition moveToPosition;
     EncircleTarget encircleTarget;
     MoveToReloadPosition moveToReloadPosition;
     public Knockback knockback;
@@ -49,12 +48,11 @@ public class EnemyOne : MonoBehaviour
         //The States
         #region States
         idle = new Idle(/*this,*/ animator, navMeshAgent);
-        moveTowardsPlayer = new MoveTowardsPlayer(this, navMeshAgent, animator);
-        attack = new AttackPlayer(this, navMeshAgent, animator);
-        returnState = new Return(this, navMeshAgent, animator);
-        lollygagging = new Lollygagging(this, navMeshAgent, animator);
+        moveTowardsPlayer = new MoveTowardsPlayer(this.gameObject, navMeshAgent, animator);
+        attack = new AttackPlayer(this.gameObject, navMeshAgent, animator);
+        returnState = new Return(this.gameObject, navMeshAgent, animator);
+        lollygagging = new Lollygagging(this.gameObject, navMeshAgent, animator);
         reload = new Reload(navMeshAgent, animator);
-        moveToPosition = new MoveToPosition(navMeshAgent, animator);
         encircleTarget = new EncircleTarget(navMeshAgent, animator);
         moveToReloadPosition = new MoveToReloadPosition(navMeshAgent, animator);
         knockback = new Knockback(navMeshAgent, animator);
@@ -81,13 +79,12 @@ public class EnemyOne : MonoBehaviour
         Func<bool> OutOfAttackRange() => () => isWithinAttackRange == false;
         Func<bool> HasATarget() => () => isWithinChaseRange == true && isWithinAttackRange == false;
         Func<bool> HasNoTarget() => () => isWithinChaseRange == false;
-        Func<bool> AtSpawn() => () => Vector3.Distance(returnState.targetPos, transform.position) < 1.0f;
+        Func<bool> AtSpawn() => () => Vector3.Distance(returnState.spawnPosition, transform.position) < 1.0f;
         Func<bool> AtLollygaggingPosition() => () => Vector3.Distance(lollygagging.targetPos, transform.position) < 1.0f;
         Func<bool> BoredTimer() => () => idle.boringTimer < 0;
-        Func<bool> AtTargetPosition() => () => Vector3.Distance(moveToPosition.destination, transform.position) < .1f;
         Func<bool> AtReloadPosition() => () => Vector3.Distance(moveToReloadPosition.destination, transform.position) < moveToReloadPosition.interactionRange;
-        Func<bool> FinishedReloading() => () => reload._animationTimer < 0;
-        Func<bool> KnockBackFinished() => () => knockback._animationTimer < 0;//THIS
+        Func<bool> FinishedReloading() => () => reload.animationTimer < 0;
+        Func<bool> KnockBackFinished() => () => knockback.animationTimer < 0;//THIS
         #endregion
 
         Detect();

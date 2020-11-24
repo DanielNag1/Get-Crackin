@@ -35,7 +35,7 @@ public class MoveToWithinAttackRange : IState
     public void TimeTick()
     {
         _navMeshAgent.transform.LookAt(new Vector3(_player.transform.position.x, _navMeshAgent.transform.position.y, _player.transform.position.z));
-       // _navMeshAgent.SetDestination(_player.transform.position - Vector3.
+        _navMeshAgent.SetDestination(_player.transform.position);
     }
     #endregion
 }

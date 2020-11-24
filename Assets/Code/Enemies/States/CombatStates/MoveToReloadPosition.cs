@@ -28,7 +28,9 @@ public class MoveToReloadPosition : IState
     public void OnEnter()
     {
         //Go thrue list of all reload positions and pick the closest as destination
+        destination = FindClosestReloadStation();
         _animator.SetBool("Fox_Run", true);
+        _navMeshAgent.SetDestination(destination);
     }
 
     /// <summary>
@@ -45,7 +47,15 @@ public class MoveToReloadPosition : IState
     public void TimeTick()
     {
         _navMeshAgent.transform.rotation = Quaternion.LookRotation(_navMeshAgent.velocity, Vector3.up);
-        _navMeshAgent.SetDestination(destination);
+    }
+
+    /// <summary>
+    /// OBS!!!UNIPLEMENTED!
+    /// </summary>
+    /// <returns></returns>
+    private Vector3 FindClosestReloadStation()
+    {
+        return Vector3.zero;
     }
     #endregion
 }

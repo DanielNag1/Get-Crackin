@@ -107,7 +107,7 @@ public class WeaponCollision : MonoBehaviour
                 //If we want knockback to depend on weapon hit location.
                 //targetsHit[i].GetComponent<enemyhealth>().TakeDamage(weaponDamage, weaponPoints[0].transform); // if this breaks check weaponpoints noll
                 //If we want knockback to depend on player position.
-                targetsHit[i].GetComponent<enemyhealth>().TakeDamage(weaponDamage, weaponPoints[0].transform.root);
+                targetsHit[i].GetComponent<Enemyhealth>().TakeDamage(weaponDamage, weaponPoints[0].transform.root);
 
                 SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), SoundPaths[Random.Range(0, SoundPaths.Count - 1)], 0, Time.fixedTime, VolumeScales[0]);
             }

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
-public class enemyhealth : MonoBehaviour
+public class Enemyhealth : MonoBehaviour
 {
 
     public int currentHealth;
@@ -44,8 +44,8 @@ public class enemyhealth : MonoBehaviour
                 float knockbackDistance = 2;
                 //rb.AddForce(knockbackDirection * 6000000/*direction * 6.000.000 gave nice result(Save this)*/, ForceMode.Impulse);
                 
-                rb.GetComponent<EnemyOne>().knockback.destination = (knockbackDirection * knockbackDistance) + rb.GetComponent<EnemyOne>().transform.position;//experimental new knockback
-                rb.GetComponent<EnemyOne>().SetFSMState("knockback");
+                rb.GetComponent<FoxAgentFSM>().knockback.destination = (knockbackDirection * knockbackDistance) + rb.GetComponent<FoxAgentFSM>().transform.position;//experimental new knockback
+                rb.GetComponent<FoxAgentFSM>().knockback.GotHit = true;
                 SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), hurtSoundPaths[Random.Range(0, hurtSoundPaths.Count - 1)], 0, Time.fixedTime, volumeScales[0]);
             }
             else

@@ -6,7 +6,6 @@ using UnityEngine.AI;
 public class EncircleTarget : IState
 {
     #region Variables
-    private EnemyOne _AgentBehavior;
     private Animator _animator;
     private NavMeshAgent _navMeshAgent;
     #endregion
@@ -23,7 +22,7 @@ public class EncircleTarget : IState
     /// </summary>
     public void OnEnter()
     {
-        _animator.SetBool("Animation_Name", true);
+        _animator.SetBool("Fox_Idle", true);
     }
 
     /// <summary>
@@ -31,7 +30,7 @@ public class EncircleTarget : IState
     /// </summary>
     public void OnExit()
     {
-        _animator.SetBool("Animation_Name", false);
+        _animator.SetBool("Fox_Idle", false);
     }
 
     /// <summary>
@@ -39,6 +38,9 @@ public class EncircleTarget : IState
     /// </summary>
     public void TimeTick()
     {
+        /*
+         destination = CM.SteeringBehaviorDestinationUpdate();
+         */
     }
     #endregion
 }

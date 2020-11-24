@@ -6,18 +6,17 @@ using UnityEngine.AI;
 public class Reload : IState
 {
     #region Variables
-    private EnemyOne _AgentBehavior;
     private Animator _animator;
     private NavMeshAgent _navMeshAgent;
-    private float _animationTime = 1.0f/*OBS!!! Change to animationTime!!*/;
-    public float _animationTimer = 0;
+    private float _animationTime = 1.0f;/*OBS!!! Change to animationTime!!*/
+    public float animationTimer = 0;
     #endregion
 
     public Reload(NavMeshAgent navMeshAgent, Animator animator)
     {
         this._animator = animator;
         _navMeshAgent = navMeshAgent;
-        _animationTimer = _animationTime;
+        animationTimer = _animationTime;
     }
 
     #region Interface functions
@@ -35,7 +34,7 @@ public class Reload : IState
     public void OnExit()
     {
         _animator.SetBool("Fox_Reload", false);
-        _animationTimer = _animationTime;
+        animationTimer = _animationTime;
     }
 
     /// <summary>
@@ -43,7 +42,7 @@ public class Reload : IState
     /// </summary>
     public void TimeTick()
     {
-        _animationTimer -= Time.deltaTime;
+        animationTimer -= Time.deltaTime;
     }
     #endregion
 }

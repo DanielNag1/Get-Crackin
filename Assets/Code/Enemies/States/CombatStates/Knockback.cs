@@ -6,8 +6,9 @@ public class Knockback : IState
     #region Variables
     private Animator _animator;
     private NavMeshAgent _navMeshAgent;
-    private float _animationTime = 0.317f; //OBS!!! Change to animationTime!!
-    public float _animationTimer = 0;
+    private float _animationTimeResetValue = 0.317f;
+    public float animationTimer = 0.317f;
+    public bool GotHit;
     public Vector3 destination = Vector3.zero;
     #endregion
 
@@ -18,7 +19,7 @@ public class Knockback : IState
     {
         this._animator = animator;
         _navMeshAgent = navMeshAgent;
-        _animationTimer = _animationTime;
+        animationTimer = _animationTimeResetValue;
     }
 
     #region Interface functions
@@ -28,6 +29,18 @@ public class Knockback : IState
     public void OnEnter()
     {
         _animator.SetBool("Fox_Stagger", true);
+        animationTimer = _animationTimeResetValue;
+        #region Testing if this works
+        NavMeshHit hit;
+        int i = 1;
+        while (!NavMesh.SamplePosition(destination, out hit, i, NavMesh.AllAreas)) //get where we should go on the navMesh
+        {
+            i++; 
+        }
+        destination = hit.position; //set as target position.
+        //destination.y = destination.y + 1; //Unsure if we need this!
+        #endregion
+
         _navMeshAgent.SetDestination(destination);
     }
 
@@ -37,7 +50,7 @@ public class Knockback : IState
     public void OnExit()
     {
         _animator.SetBool("Fox_Stagger", false);
-        _animationTimer = _animationTime;
+        GotHit = false;
     }
 
     /// <summary>
@@ -45,8 +58,11 @@ public class Knockback : IState
     /// </summary>
     public void TimeTick()
     {
-        _animationTimer -= Time.deltaTime;
-        _navMeshAgent.transform.rotation = Quaternion.LookRotation(_navMeshAgent.velocity * -1, Vector3.up);
+        animationTimer -= Time.deltaTime;
+        if (_navMeshAgent.velocity != Vector3.zero) // maybe a solution to our problem  #Twerk
+        {
+            _navMeshAgent.transform.rotation = Quaternion.LookRotation(_navMeshAgent.velocity * -1, Vector3.up); // vektor * -1 ger motsatt vektor
+        }
     }
     #endregion
 }

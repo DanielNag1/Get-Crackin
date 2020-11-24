@@ -6,31 +6,27 @@ using UnityEngine.AI;
 public class AttackPlayer : IState
 {
     #region Variables
-
-    private EnemyOne _enemy;
     private NavMeshAgent _navMeshAgent;
     private Animator _animator;
     private Rigidbody rb;
 
     public int attackDamageMinimun;
     public int attackDamageMaximun;
-    public float attackCoolDownTimeMain = 0.983f;
-    public float attackCoolDownTime = 1;
+    public float attackCoolDownTimeResetValue = 0.983f;
+    public float attackCoolDownTimer = 0;
 
     private WeaponCollision weaponCollision;
     private GameObject _player;
-
     #endregion
 
 
-    public AttackPlayer(EnemyOne enemy, NavMeshAgent navMeshAgent, Animator animator)
+    public AttackPlayer(GameObject enemy, NavMeshAgent navMeshAgent, Animator animator)
     {
-        this._enemy = enemy;
         this._navMeshAgent = navMeshAgent;
         this._animator = animator;
         weaponCollision = enemy.GetComponent<WeaponCollision>();
         _player = GameObject.FindGameObjectWithTag("Player");
-        rb = _enemy.GetComponent<Rigidbody>();
+        rb = enemy.GetComponent<Rigidbody>();
     }
 
     #region Interface Methods
@@ -53,15 +49,15 @@ public class AttackPlayer : IState
     {
         Vector3 targetPos = new Vector3(_player.transform.position.x, _navMeshAgent.transform.position.y, _player.transform.position.z);
         _navMeshAgent.transform.LookAt(targetPos);// OBS!!! Check if this is correct!
-        if (attackCoolDownTime > 0)
+        if (attackCoolDownTimer > 0)
         {
             _animator.SetBool("Fox_Idle", false);
             _animator.SetBool("Fox_Attack", true);
-            attackCoolDownTime -= Time.deltaTime;
+            attackCoolDownTimer -= Time.deltaTime;
         }
         else
         {
-            attackCoolDownTime = attackCoolDownTimeMain;
+            attackCoolDownTimer = attackCoolDownTimeResetValue;
             _animator.SetBool("Fox_Attack", false);
             _animator.SetBool("Fox_Idle", true);
         }

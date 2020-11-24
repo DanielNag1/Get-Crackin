@@ -6,39 +6,32 @@ public class Return : IState
     #region Variables
     private NavMeshAgent _navMeshAgent;
     private readonly Animator _animator;
-    private Rigidbody rb;
-    public Vector3 targetPos;
+    public Vector3 spawnPosition;
     #endregion
 
-    public Return(EnemyOne enemy, NavMeshAgent navMeshAgent, Animator animator)
+    public Return(GameObject enemy, NavMeshAgent navMeshAgent, Animator animator)
     {
         this._navMeshAgent = navMeshAgent;
         this._animator = animator;
-        rb = enemy.GetComponent<Rigidbody>();
-
+        spawnPosition = new Vector3(_navMeshAgent.transform.root.position.x, _navMeshAgent.transform.root.position.y, _navMeshAgent.transform.root.position.z);
     }
 
     #region Interface Functions
 
     public void OnEnter()
     {
-        rb.isKinematic = false;
-        targetPos = new Vector3(_navMeshAgent.transform.root.position.x, _navMeshAgent.transform.root.position.y, _navMeshAgent.transform.root.position.z);
-        _navMeshAgent.enabled = true;
         _animator.SetBool("Fox_Run", true);
+        _navMeshAgent.SetDestination(spawnPosition);
     }
 
     public void OnExit()
     {
-        _navMeshAgent.enabled = false;
         _animator.SetBool("Fox_Run", false);
     }
 
     public void TimeTick()
     {
-
         _navMeshAgent.transform.rotation = Quaternion.LookRotation(_navMeshAgent.velocity, Vector3.up);
-        _navMeshAgent.SetDestination(targetPos);
     }
     #endregion
 }
