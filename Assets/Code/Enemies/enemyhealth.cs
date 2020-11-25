@@ -25,7 +25,6 @@ public class enemyhealth : MonoBehaviour
 
     void Start()
     {
-
         rb = rootGameObject.GetComponent<Rigidbody>();
         characterController = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>();
         currentHealth = startHealth;
@@ -59,9 +58,9 @@ public class enemyhealth : MonoBehaviour
             }
             else
             {
+                EnemyManager.Instance.AgentLeftCombat(transform.root.gameObject);
                 VFXEvents.Instance.VFX6Play(transform);
-                EnemyManager enemyManager = EnemyManager.Instance;
-                enemyManager.enemyPool.Find(x => x.enemy.transform.root.GetInstanceID() == rootGameObject.transform.root.GetInstanceID()).elementAvailable = true;//If this crashes someone else fucked up! All enemies should exist in the EnemyManagers enemyPool!
+                EnemyManager.Instance.enemyPool.Find(x => x.enemy.transform.root.GetInstanceID() == rootGameObject.transform.root.GetInstanceID()).elementAvailable = true;//If this crashes someone else fucked up! All enemies should exist in the EnemyManagers enemyPool!
                 StartCoroutine(DeathCoroutine());
             }
         }

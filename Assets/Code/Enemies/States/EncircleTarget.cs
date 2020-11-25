@@ -6,14 +6,16 @@ using UnityEngine.AI;
 public class EncircleTarget : IState
 {
     #region Variables
+    private GameObject _gameObject;
     private Animator _animator;
     private NavMeshAgent _navMeshAgent; // We need this. 
     #endregion
 
-    public EncircleTarget(NavMeshAgent navMeshAgent, Animator animator)
+    public EncircleTarget(GameObject gameObject, NavMeshAgent navMeshAgent, Animator animator)
     {
         this._animator = animator;
         this._navMeshAgent = navMeshAgent;
+        this._gameObject = gameObject;
     }
 
     #region Interface functions
@@ -22,6 +24,7 @@ public class EncircleTarget : IState
     /// </summary>
     public void OnEnter()
     {
+        EnemyManager.Instance.SetReadyToAttack(_gameObject, true);
         _animator.SetBool("Fox_Idle", true);
     }
 
@@ -30,6 +33,7 @@ public class EncircleTarget : IState
     /// </summary>
     public void OnExit()
     {
+        EnemyManager.Instance.SetReadyToAttack(_gameObject, false);
         _animator.SetBool("Fox_Idle", false);
     }
 

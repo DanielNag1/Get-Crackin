@@ -9,6 +9,7 @@ public class AttackPlayerMelee : IState
     private Animator _animator;
     private WeaponCollision weaponCollision;
     private GameObject _player;
+    private GameObject _enemy;
 
     public float attackAnimationDurationTimeResetValue = 0.983f;
     public float attackAnimationDurationTimer = 0.983f;
@@ -20,12 +21,14 @@ public class AttackPlayerMelee : IState
         this._animator = animator;
         weaponCollision = enemy.GetComponent<WeaponCollision>();
         _player = GameObject.FindGameObjectWithTag("Player");
+        _enemy = enemy;
     }
 
     #region Interface Methods
 
     public void OnEnter()
     {
+        _enemy.GetComponent<FoxAgentFSM>().attacking = false;
         attackAnimationDurationTimer = attackAnimationDurationTimeResetValue;
         weaponCollision.collisionActive = true;
         _animator.SetBool("Fox_Melee_Attack", true);

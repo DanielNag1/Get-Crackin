@@ -4,11 +4,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-/// <summary>
-/// DON'T TOUCH! The spawn system
-/// </summary>
+
 public class EnemyManager : MonoBehaviour
 {
+    #region Singleton
+    public static EnemyManager Instance;
+    private void Awake()
+    {
+        Instance = this;
+    }
+    #endregion
+
+    #region SpawnSystem
+    // DON'T TOUCH! The spawn system
     /// <summary>
     /// To configuate which type of pools we want from the inspecter
     /// </summary>
@@ -32,13 +40,6 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    #region Singleton
-    public static EnemyManager Instance;
-    private void Awake()
-    {
-        Instance = this;
-    }
-    #endregion
 
     public List<SpawnSet> spawnSet;//Holds the groups to be spawned
     public List<EnemyPool> enemyPool;//Holds the enemies for re-use
@@ -105,8 +106,6 @@ public class EnemyManager : MonoBehaviour
                 yes++;
             }
             enemy.enemy.GetComponentInChildren<NavMeshAgent>().Warp(hit.position);
-          
-
         }
     }
     public EnemyPool Find(string prefabName, List<EnemyPool> enemyPool)
@@ -121,4 +120,123 @@ public class EnemyManager : MonoBehaviour
         }
         return null;
     }
+    #endregion
+
+    #region CombatManager
+    public class CombatAgentdata
+    {
+        public GameObject agentGameObject;
+        public bool isReady;
+        public CombatAgentdata(GameObject agentGameObject, bool ready)
+        {
+            isReady = ready;
+            this.agentGameObject = agentGameObject;
+        }
+    }
+
+    public List<CombatAgentdata> agentsInCombat = new List<CombatAgentdata>();
+    public List<CombatAgentdata> agentsReadyToAttack = new List<CombatAgentdata>();
+    private float coolDownTime = 0.1f;
+
+    /// <summary>
+    /// Alerts all close agents of the players presence
+    /// </summary>
+    /// <param name="detectingAgent"></param>
+    /// <param name="foxAgentFSM"></param>
+    public void AgentDetectedPlayer(GameObject detectingAgent, float talkingDistance)
+    {
+        //elementAvailable==false means the agent is active in the scene.
+        //Get a list of all active agents within talkingDistance.
+        var tempList = enemyPool.FindAll((x) => x.elementAvailable == false
+        && Vector3.Distance(x.enemy.GetComponentInChildren<Transform>().position, detectingAgent.transform.position) < talkingDistance);
+        foreach (var gameObject in tempList)
+        {
+            bool unique = true;
+            for (int i = 0; i < agentsInCombat.Count; i++)
+            {
+                if (agentsInCombat[i].agentGameObject.GetInstanceID() == gameObject.enemy.GetInstanceID())
+                {
+                    unique = false;
+                    break;
+                }
+            }
+            if (unique)
+            {
+                agentsInCombat.Add(new CombatAgentdata(gameObject.enemy, false));
+            }
+        }
+    }
+
+    /// <summary>
+    /// Removes an agent from the agentInCombat collection, returns true if removed
+    /// </summary>
+    /// <param name="foxAgentFSM"></param>
+    /// <returns></returns>
+    public bool AgentLeftCombat(GameObject foxAgentGameObject)
+    {
+        if (agentsInCombat.Exists((x) => x.agentGameObject.GetInstanceID() == foxAgentGameObject.transform.root.gameObject.GetInstanceID()))
+        {
+            agentsInCombat.Remove(agentsInCombat.Find((x) => x.agentGameObject.GetInstanceID() == foxAgentGameObject.transform.root.gameObject.GetInstanceID()));
+            return true;
+        }
+        return false;
+    }
+
+    public void Update()
+    {
+        if (IssueAttackOrderToReadyAgent())
+        {
+            coolDownTime = UnityEngine.Random.Range(2, 5);
+        }
+    }
+
+    /// <summary>
+    /// Attempts to find an agentInCombat that is able to attack, Then at random tells one of the agents to start an attack.
+    /// returns true if an attack order was sent.
+    /// </summary>
+    public bool IssueAttackOrderToReadyAgent()
+    {
+        var temp = agentsInCombat.FindAll((x) => x.isReady == true);
+        if (temp.Count != 0)
+        {
+            coolDownTime -= Time.deltaTime;
+            if (coolDownTime < 0)
+            {
+                temp[UnityEngine.Random.Range(0, agentsReadyToAttack.Count)].agentGameObject.GetComponentInChildren<FoxAgentFSM>().attacking = true;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// Sets the readyToAttack bool in the agentsInCombat collection to readyToAttack, if the agent is not in the collection we add it.
+    /// </summary>
+    /// <param name="agent"></param>
+    /// <param name="readyToAttack"></param>
+    public void SetReadyToAttack(GameObject agent, bool readyToAttack)
+    {
+        if (agentsInCombat.Exists((x) => x.agentGameObject.GetInstanceID() == agent.transform.root.gameObject.GetInstanceID()))
+        {
+            agentsInCombat.Find((x) => x.agentGameObject.GetInstanceID() == agent.transform.root.gameObject.GetInstanceID()).isReady = readyToAttack;
+        }
+        else
+        {
+            Debug.Log("All Agents should be in the list allready. If you read this something went wrong!");
+            agentsInCombat.Add(new CombatAgentdata(agent.transform.root.gameObject, readyToAttack));
+        }
+    }
+
+
+    public void EvaluateWeaponeToUse()
+    {
+
+    }
+
+
+    public void SteeringBehaviorDestinationUpdate()
+    {
+
+    }
+    #endregion
 }

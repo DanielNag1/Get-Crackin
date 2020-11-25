@@ -22,5 +22,6 @@ public class GameManager : MonoBehaviour
     {
         InputManager.Instance.Update();
         SoundEngine.Instance.Update();
+        EnemyManager.Instance.Update();
     }
 }

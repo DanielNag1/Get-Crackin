@@ -26,6 +26,7 @@ public class FoxAgentFSM : MonoBehaviour
     public float runningSpeed = 3.5f;
     //---------------------------
     private bool isWithinAttackRange = false;
+    private bool insideMaxViewDistance = false;
     private CombatRole combatRole = CombatRole.Melee; //OBS!!! Change to None!
     public bool attacking = false;
     public float meleeAttackRange = 1.61f;
@@ -61,12 +62,12 @@ public class FoxAgentFSM : MonoBehaviour
         #region States
         idle = new Idle(animator, navMeshAgent);
         lollygagging = new Lollygagging(this.gameObject, navMeshAgent, animator);
-        enterCombat = new EnterCombat();
+        enterCombat = new EnterCombat(this.gameObject, talkingDistance);
         combatIdle = new CombatIdle(animator);
         moveToReloadPosition = new MoveToReloadPosition(navMeshAgent, animator);
         reload = new Reload(navMeshAgent, animator);
         moveToCircle = new MoveToCircle(navMeshAgent, animator);
-        encircleTarget = new EncircleTarget(navMeshAgent, animator);
+        encircleTarget = new EncircleTarget(this.gameObject, navMeshAgent, animator);
         moveTowardsPlayer = new MoveTowardsPlayer(this.gameObject, navMeshAgent, animator);
         returnState = new Return(this.gameObject, navMeshAgent, animator);
         attackPlayerMelee = new AttackPlayerMelee(this.gameObject, navMeshAgent, animator);
@@ -105,13 +106,13 @@ public class FoxAgentFSM : MonoBehaviour
         #region conditions
         Func<bool> IdleTimer() => () => idle.boringTimer < 0;
         Func<bool> LollygaggingPositionReached() => () => Vector3.Distance(lollygagging.targetPos, transform.position) < 0.1f;
-        Func<bool> PlayerDetected() => () => true;
+        Func<bool> PlayerDetected() => () => CanThisAgentOrOtherAgentWithinTalkingDistanceSeeThePlayer();
         Func<bool> FinishedEnteringCombat() => () => enterCombat.finishedEnteringCombat;
         Func<bool> AssignedMeleeCombatRole() => () => combatRole == CombatRole.Melee;
         Func<bool> AssignedRangedCombatRole() => () => combatRole == CombatRole.Ranged;
         Func<bool> WithinReloadInteractRange() => () => Vector3.Distance(moveToReloadPosition.destination, transform.position) < moveToReloadPosition.interactionRange;
         Func<bool> FinishedReloading() => () => reload.animationTimer < 0;
-        Func<bool> CombatHasEnded() => () => (Vector3.Distance(_player.transform.position, transform.position) > viewDistance) /*&& combatManager.distanceClosestOtherAgent() > talkingDistance*/;
+        Func<bool> CombatHasEnded() => () => !CanThisAgentOrOtherAgentWithinTalkingDistanceSeeThePlayer();
         Func<bool> CirclingTarget() => () => Vector3.Distance(_player.transform.position, transform.position) < circleRadius;
         Func<bool> ToFarFromCircle() => () => Vector3.Distance(_player.transform.position, transform.position) > (circleRadius + circleRadius / 10);
         Func<bool> Attacking() => () => attacking;
@@ -125,14 +126,14 @@ public class FoxAgentFSM : MonoBehaviour
         Func<bool> AgentReturnedToSpawnPosition() => () => Vector3.Distance(returnState.spawnPosition, transform.position) < 1.0f;
         #endregion
 
-        Detect();
+        FieldOfViewCheck();
     }
 
     /// <summary>
     /// Checks if player is within agents view cone (FOV). Returns true if player is within FOV.
     /// </summary>
     /// <returns></returns>
-    private bool Detect()
+    private bool FieldOfViewCheck()
     {
         #region Don't touch
         rayDirection = _player.transform.position - this.transform.position;
@@ -166,10 +167,38 @@ public class FoxAgentFSM : MonoBehaviour
         #endregion
     }
 
+    private bool CanThisAgentOrOtherAgentWithinTalkingDistanceSeeThePlayer()
+    {
+        if (Vector3.Distance(_player.transform.position, transform.position) < 3)
+        {
+            return true;
+        }
+        if (FieldOfViewCheck() && insideMaxViewDistance)
+        {
+            return true;
+        }
+        foreach (var agent in EnemyManager.Instance.agentsInCombat)
+        {
+            if (agent.agentGameObject.Equals(this))
+            {
+                continue;
+            }
+            if (talkingDistance > Vector3.Distance(agent.agentGameObject.transform.position, transform.position))
+            {
+                if (agent.agentGameObject.GetComponentInChildren<FoxAgentFSM>().FieldOfViewCheck() && agent.agentGameObject.GetComponentInChildren<FoxAgentFSM>().insideMaxViewDistance)
+                {
+                    return true;
+                }
+                continue;
+            }
+        }
+        return false;
+    }  
+
     private void RangeBools()
     {
         Physics.Raycast(this.transform.position, rayDirection, out hit, Mathf.Infinity, playerLayerMask);
-        if (Detect())
+        if (FieldOfViewCheck())
         {
             if (hit.distance <= meleeAttackRange)
             {
@@ -181,17 +210,17 @@ public class FoxAgentFSM : MonoBehaviour
             }
             if (hit.distance <= viewDistance)
             {
-                //isWithinChaseRange = true;
+                insideMaxViewDistance = true;
             }
             else
             {
-                //isWithinChaseRange = false;
+                insideMaxViewDistance = false;
             }
         }
         else
         {
             isWithinAttackRange = false;
-            //isWithinChaseRange = false;
+            insideMaxViewDistance = false;
         }
     }
 
@@ -207,7 +236,7 @@ public class FoxAgentFSM : MonoBehaviour
 
     public void Reset()
     {
-        Detect();
+        FieldOfViewCheck();
     }
 
     public void SetFSMState(string stateName) //THIS

@@ -22,7 +22,7 @@ public class MoveToCircle : IState
     public void OnEnter()
     {
         _animator.SetBool("Fox_Run", true);
-        Debug.Log("Destination OnEnter: " + _navMeshAgent.destination);
+        //Debug.Log("Destination OnEnter: " + _navMeshAgent.destination);
     }
 
     public void OnExit()
@@ -33,7 +33,7 @@ public class MoveToCircle : IState
 
     public void TimeTick()
     {
-        Debug.Log("Destination: " + _navMeshAgent.destination);
+        //Debug.Log("Destination: " + _navMeshAgent.destination);
         _navMeshAgent.transform.rotation = Quaternion.LookRotation(_navMeshAgent.velocity, Vector3.up);
         _navMeshAgent.SetDestination(_player.transform.position);
     }
