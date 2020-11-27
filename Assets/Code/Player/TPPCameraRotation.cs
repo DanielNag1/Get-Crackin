@@ -21,7 +21,7 @@ public class TPPCameraRotation : MonoBehaviour
 
         if(movementDirectionX!=0)
         {
-            freeLookCamera.m_XAxis.m_MaxSpeed = 3000;
+            freeLookCamera.m_XAxis.m_MaxSpeed = 1800;
 
         }
         else

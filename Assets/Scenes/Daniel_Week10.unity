@@ -1447,6 +1447,11 @@ PrefabInstance:
       propertyPath: highOffset
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 6793778528719022586, guid: 28230520bdbe3574cbe4af10423ddbb4,
+        type: 3}
+      propertyPath: MovementSpeed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6793778528719022590, guid: 28230520bdbe3574cbe4af10423ddbb4,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3357,6 +3362,21 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4643290534283778667, guid: e9f5a604cda4ff8429ff8bcb5317107d,
+        type: 3}
+      propertyPath: m_HorizontalDamping
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4643290534320184492, guid: e9f5a604cda4ff8429ff8bcb5317107d,
+        type: 3}
+      propertyPath: m_TrackedObjectOffset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4643290534320184492, guid: e9f5a604cda4ff8429ff8bcb5317107d,
+        type: 3}
+      propertyPath: m_HorizontalDamping
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 4643290534432835210, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_Follow
@@ -3365,37 +3385,37 @@ PrefabInstance:
     - target: {fileID: 4643290534432835213, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.0022341628
+      value: -0.001802184
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534432835213, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.99733746
+      value: 0.99805254
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534432835213, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.034991402
+      value: -0.03506559
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534432835213, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.06394341
+      value: -0.05155842
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534432835213, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.2483413
+      value: 3.100738
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534432835213, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.5904933
+      value: 1.5910827
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534432835213, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 12.778249
+      value: 12.795346
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534444133298, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
@@ -3405,17 +3425,17 @@ PrefabInstance:
     - target: {fileID: 4643290534444133298, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.11116239
+      value: 0.111162774
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534444133298, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.28679448
+      value: 0.2867944
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534444133298, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.1263293
+      value: 0.12632942
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534444133298, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
@@ -3516,6 +3536,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Camera Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 4643290534881238180, guid: e9f5a604cda4ff8429ff8bcb5317107d,
+        type: 3}
+      propertyPath: m_HorizontalDamping
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 6500589147788102315, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}

@@ -33,7 +33,7 @@ public class FreeCameraShake : MonoBehaviour
         {
             if (cinemachineBrain.IsLive(freeLookCamera)) //Resets the amplitude of the shake to 0
             {
-                //Time.timeScale = 1; //Reset gamespeed
+                Time.timeScale = 1; //Reset gamespeed
                 freeLookCamera.GetRig(0).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
                 freeLookCamera.GetRig(1).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
                 freeLookCamera.GetRig(2).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
@@ -47,7 +47,7 @@ public class FreeCameraShake : MonoBehaviour
         shakeTimer = time;
         if (cinemachineBrain.IsLive(freeLookCamera)) //Sets the amplitude of the shake
         {
-            //Time.timeScale = 0.2f; //Slow down gamespeed
+            Time.timeScale = 0.2f; //Slow down gamespeed
             freeLookCamera.GetRig(0).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = intensity;
             freeLookCamera.GetRig(1).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = intensity;
             freeLookCamera.GetRig(2).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = intensity;
