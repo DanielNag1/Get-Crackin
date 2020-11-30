@@ -10,6 +10,9 @@ public class AnimationEvents : MonoBehaviour
     [SerializeField] GameObject slash3;
     [SerializeField] GameObject slash4;
 
+    [Header("Rage Slashes")]
+    [SerializeField] GameObject rageslash1;
+
     void Slash1()
     {
         Quaternion rotation = Quaternion.Euler(30, 90, 0);
@@ -31,5 +34,11 @@ public class AnimationEvents : MonoBehaviour
     {
         Quaternion rotation = Quaternion.Euler(0, 90, 0);
         Instantiate(slash4, transform.position, transform.rotation * rotation);
+    }
+
+    void RageSlash1()
+    {
+        Quaternion rotation = Quaternion.Euler(0, 90, 0);
+        Instantiate(rageslash1, transform.position, transform.rotation * rotation);
     }
 }
