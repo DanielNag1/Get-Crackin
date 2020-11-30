@@ -13,12 +13,13 @@ public class FoxAgentFSM : MonoBehaviour
         Ranged = 0b_0010,  // 2
     }
     private FiniteStateMachine _finiteStateMachine = new FiniteStateMachine();
-    private GameObject _player;
+    public GameObject player;
     private RaycastHit hit;
     private Vector3 rayDirection;
     private int layerMaskValue = 10;
     public int fieldOfView = 120;
     public float viewDistance = 20f;
+    public float radiusOfHearing = 5f;
     public float talkingDistance = 15f;
     public LayerMask playerLayerMask;
     public float highOffset = 0.25f;
@@ -32,6 +33,7 @@ public class FoxAgentFSM : MonoBehaviour
     public float meleeAttackRange = 1.61f;
     public float rangedAttackRange = 10;
     public float circleRadius = 4;
+    public Vector3 destination;
     #endregion
 
     #region States
@@ -54,7 +56,7 @@ public class FoxAgentFSM : MonoBehaviour
 
     private void Awake()
     {
-        _player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
         NavMeshAgent navMeshAgent = GetComponent<NavMeshAgent>();
         Animator animator = GetComponent<Animator>();
 
@@ -66,7 +68,7 @@ public class FoxAgentFSM : MonoBehaviour
         combatIdle = new CombatIdle(animator);
         moveToReloadPosition = new MoveToReloadPosition(navMeshAgent, animator);
         reload = new Reload(navMeshAgent, animator);
-        moveToCircle = new MoveToCircle(navMeshAgent, animator);
+        moveToCircle = new MoveToCircle(this.gameObject, navMeshAgent, animator);
         encircleTarget = new EncircleTarget(this.gameObject, navMeshAgent, animator);
         moveTowardsPlayer = new MoveTowardsPlayer(this.gameObject, navMeshAgent, animator);
         returnState = new Return(this.gameObject, navMeshAgent, animator);
@@ -113,12 +115,12 @@ public class FoxAgentFSM : MonoBehaviour
         Func<bool> WithinReloadInteractRange() => () => Vector3.Distance(moveToReloadPosition.destination, transform.position) < moveToReloadPosition.interactionRange;
         Func<bool> FinishedReloading() => () => reload.animationTimer < 0;
         Func<bool> CombatHasEnded() => () => !CanThisAgentOrOtherAgentWithinTalkingDistanceSeeThePlayer();
-        Func<bool> CirclingTarget() => () => Vector3.Distance(_player.transform.position, transform.position) < circleRadius;
-        Func<bool> ToFarFromCircle() => () => Vector3.Distance(_player.transform.position, transform.position) > (circleRadius + circleRadius / 10);
+        Func<bool> CirclingTarget() => () => Vector3.Distance(destination, transform.position) <1f;
+        Func<bool> ToFarFromCircle() => () => Vector3.Distance(destination, transform.position) > 2f;
         Func<bool> Attacking() => () => attacking;
-        Func<bool> TargetToFarAwayToAttack() => () => Vector3.Distance(_player.transform.position, transform.position) > circleRadius * 1.4f;
-        Func<bool> TargetWithinMeleeAttackRange() => () => Vector3.Distance(_player.transform.position, transform.position) < meleeAttackRange && combatRole == CombatRole.Melee;
-        Func<bool> TargetWithinRangedAttackRange() => () => Vector3.Distance(_player.transform.position, transform.position) < meleeAttackRange && combatRole == CombatRole.Ranged;
+        Func<bool> TargetToFarAwayToAttack() => () => Vector3.Distance(player.transform.position, transform.position) > circleRadius * 1.4f;
+        Func<bool> TargetWithinMeleeAttackRange() => () => Vector3.Distance(player.transform.position, transform.position) < meleeAttackRange && combatRole == CombatRole.Melee;
+        Func<bool> TargetWithinRangedAttackRange() => () => Vector3.Distance(player.transform.position, transform.position) < meleeAttackRange && combatRole == CombatRole.Ranged;
         Func<bool> FinishedMeleeAttack() => () => attackPlayerMelee.attackAnimationDurationTimer < 0;
         Func<bool> FinishedRangedAttack() => () => attackPlayerRanged.attackAnimationDurationTimer < 0;
         Func<bool> AgentHitByPlayerAttack() => () => knockback.GotHit;
@@ -136,9 +138,9 @@ public class FoxAgentFSM : MonoBehaviour
     private bool FieldOfViewCheck()
     {
         #region Don't touch
-        rayDirection = _player.transform.position - this.transform.position;
+        rayDirection = player.transform.position - this.transform.position;
         float AngleBetweenFacingAndPlayerpos = 0f;
-        if (_player.transform.position.x < this.transform.position.x)
+        if (player.transform.position.x < this.transform.position.x)
         {
             AngleBetweenFacingAndPlayerpos = 360.0f - Vector3.Angle(Vector3.forward, rayDirection);//player in third or fourth quadrant
         }
@@ -169,7 +171,7 @@ public class FoxAgentFSM : MonoBehaviour
 
     private bool CanThisAgentOrOtherAgentWithinTalkingDistanceSeeThePlayer()
     {
-        if (Vector3.Distance(_player.transform.position, transform.position) < 3)
+        if (Vector3.Distance(player.transform.position, transform.position) < radiusOfHearing)
         {
             return true;
         }

@@ -1477,6 +1477,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fieldOfView: 120
   viewDistance: 20
+  radiusOfHearing: 10
   talkingDistance: 50
   playerLayerMask:
     serializedVersion: 2
@@ -1488,6 +1489,7 @@ MonoBehaviour:
   meleeAttackRange: 2.5
   rangedAttackRange: 10
   circleRadius: 4
+  destination: {x: 0, y: 0, z: 0}
 --- !u!1 &6325156050180504588
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,6 +9,7 @@ public class EncircleTarget : IState
     private GameObject _gameObject;
     private Animator _animator;
     private NavMeshAgent _navMeshAgent; // We need this. 
+    //private
     #endregion
 
     public EncircleTarget(GameObject gameObject, NavMeshAgent navMeshAgent, Animator animator)

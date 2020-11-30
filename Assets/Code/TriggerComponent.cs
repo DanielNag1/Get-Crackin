@@ -47,7 +47,7 @@ public class TriggerComponent : MonoBehaviour
             }
         }
 
-        triggerDebug.Fuu(parameterItem1, parameterItem2, parameterItem3, parameterItem4); //Method in script to be called.
+        //triggerDebug.Fuu(parameterItem1, parameterItem2, parameterItem3, parameterItem4); //Method in script to be called.
         GameObject temp = Instantiate(SoundObjectPrefab, this.transform.position, Quaternion.identity); //Creates the temporary SoundObject
         SoundComponent tempComponent = temp.GetComponent<SoundComponent>(); //Gets the temporary SoundObjects SoundComponent.
         tempComponent.soundPath = SoundPath; //Assignes the correct sound to the SoundComponent.

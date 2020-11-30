@@ -184,10 +184,10 @@ public class EnemyManager : MonoBehaviour
 
     public void Update()
     {
-        if (IssueAttackOrderToReadyAgent())
-        {
-            coolDownTime = UnityEngine.Random.Range(2, 5);
-        }
+        //if (IssueAttackOrderToReadyAgent())
+        //{
+        //    coolDownTime = UnityEngine.Random.Range(2, 5);
+        //}
     }
 
     /// <summary>
@@ -236,7 +236,132 @@ public class EnemyManager : MonoBehaviour
 
     public void SteeringBehaviorDestinationUpdate()
     {
+        //List<GameObject> agent;
+        //Vector3 agentDirection;
+        //float agentCircleRadius;
+        //Vector3 agentPositionOnCircle;
+        //Vector3 desiredMinimumDistanceBetweenAgents = 1.5;
+        //after calculating the position on the circle we can add separation
+
+        //List<GameObject> agentsWithAgentPositionOnCircleCloseEnoughToInfluenceMe;
+        //Vector3 
 
     }
-    #endregion
+
+    /// <summary>
+    /// Calculates and returns the direction towards a perticular GameObject
+    /// </summary>
+    public void Approach(GameObject agent, GameObject targetToApprach)
+    {
+        Vector3 steeringVector = Vector3.zero;
+        //Start-End gives direction from where we are to where we want to go.
+        steeringVector = agentsInCombat[0].agentGameObject.GetComponentInChildren<Transform>().position - targetToApprach.transform.position;
+        steeringVector.Normalize();
+    }
+
+    /// <summary>
+    /// Calculates and returns the direction towards a perticular point
+    /// </summary>
+    public Vector3 Approach(GameObject agent, Vector3 targetToApprach)
+    {
+        Vector3 steeringVector = Vector3.zero;
+        //Start-End gives direction from where we are to where we want to go.
+        steeringVector = agentsInCombat[0].agentGameObject.GetComponentInChildren<Transform>().position - targetToApprach;
+        steeringVector.Normalize();
+        return steeringVector;
+    }
+
+    public void Evade()
+    {
+        ////get where others are on circle, 
+        //for (int i = 0; i < agentsInCombat.Count; i++)
+        //{
+        //    for (int j = i + 1; j < agentsInCombat.Count; j++)
+        //    {
+        //        if (i == j)
+        //        {
+        //            continue;
+        //        }
+        //        //Possible problem with agents allways moving to the right of the eachother ???
+        //        if (Vector3.Distance(
+        //            agentsInCombat[i].agentGameObject.GetComponentInChildren<NavMeshAgent>().destination,
+        //            agentsInCombat[j].agentGameObject.GetComponentInChildren<NavMeshAgent>().destination) < 2/*Minimum distance before corrections*/)
+        //        {
+        //            Debug.Log("ToClose!");
+        //            double alpha = Math.Asin(3/*desired distance*// (2 * agentsInCombat[j].agentGameObject.GetComponentInChildren<FoxAgentFSM>().circleRadius)) * 2;
+        //            NavMeshHit hit;
+        //            int k = 1;
+        //            while (!NavMesh.SamplePosition(new Vector3((float)Math.Cos(alpha), 0, (float)Math.Sin(alpha)) * agentsInCombat[j].agentGameObject.GetComponentInChildren<FoxAgentFSM>().circleRadius + agentsInCombat[j].agentGameObject.GetComponentInChildren<FoxAgentFSM>().player.transform.position, out hit, k, NavMesh.AllAreas)) //get where we should go on the navMesh
+        //            {
+        //                k++;
+        //            }
+        //            agentsInCombat[j].agentGameObject.GetComponentInChildren<FoxAgentFSM>().destination = hit.position; //set as target position.
+        //            Debug.Log(agentsInCombat[j].agentGameObject.GetComponentInChildren<FoxAgentFSM>().destination);
+        //            agentsInCombat[j].agentGameObject.GetComponentInChildren<NavMeshAgent>().destination = agentsInCombat[j].agentGameObject.GetComponentInChildren<FoxAgentFSM>().destination;
+        //        }
+        //    }
+        //}
+    }
+
+    public Vector3 Evade(GameObject agentGameObject)
+    {
+        #region boids
+        Vector3 resVec = Vector3.zero;
+        var neighborCount = 0;
+        foreach (var item in agentsInCombat)
+        {
+            if (item.agentGameObject.GetInstanceID() == agentGameObject.transform.root.gameObject.GetInstanceID())
+            {
+                continue;
+            }
+            if (Vector3.Distance(item.agentGameObject.GetComponentInChildren<NavMeshAgent>().destination,
+                agentGameObject.GetComponent<NavMeshAgent>().destination) < 2/*Minimum distance before corrections*/)
+            {
+                resVec.x += item.agentGameObject.GetComponentInChildren<NavMeshAgent>().transform.position.x - agentGameObject.transform.position.x;
+                resVec.z += item.agentGameObject.GetComponentInChildren<NavMeshAgent>().transform.position.z - agentGameObject.transform.position.y;
+                neighborCount++;
+            }
+        }
+
+        if (neighborCount == 0)
+            return resVec;
+        resVec.x /= neighborCount;
+        resVec.z /= neighborCount;
+        resVec.x *= -1;
+        resVec.z *= -1;
+        resVec.Normalize();
+        return resVec;
+        #endregion
+
+        #region MathRadius
+        ////get where others are on circle, 
+        //for (int i = 0; i < agentsInCombat.Count; i++)
+        //{
+        //    if (agentsInCombat[i].agentGameObject.GetInstanceID() == agentGameObject.transform.root.gameObject.GetInstanceID())
+        //    {
+        //        continue;
+        //    }
+
+        //    //Possible problem with agents allways moving to the right of the eachother ???
+        //    if (Vector3.Distance(
+        //        agentsInCombat[i].agentGameObject.GetComponentInChildren<NavMeshAgent>().destination,
+        //        agentGameObject.GetComponent<NavMeshAgent>().destination) < 2/*Minimum distance before corrections*/)
+        //    {
+        //        Debug.Log("ToClose!");
+        //        double alpha = Math.Asin(3/*desired distance*// (2 * agentGameObject.GetComponent<FoxAgentFSM>().circleRadius)) * 2;
+
+        //        NavMeshHit hit;
+        //        int k = 1;
+        //        while (!NavMesh.SamplePosition(new Vector3((float)Math.Cos(alpha), 0, (float)Math.Sin(alpha)) * agentGameObject.GetComponent<FoxAgentFSM>().circleRadius + agentGameObject.GetComponent<FoxAgentFSM>().player.transform.position, out hit, k, NavMesh.AllAreas)) //get where we should go on the navMesh
+        //        {
+        //            k++;
+        //        }
+        //        agentGameObject.GetComponent<FoxAgentFSM>().destination = hit.position; //set as target position.
+        //        Debug.Log("New destination" + agentGameObject.GetComponent<FoxAgentFSM>().destination);
+        //        agentGameObject.GetComponent<NavMeshAgent>().destination = agentGameObject.GetComponent<FoxAgentFSM>().destination;
+        //    }
+        //}
+        #endregion
+    }
 }
+#endregion
