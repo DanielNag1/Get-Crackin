@@ -71,7 +71,9 @@ public class Move : MonoBehaviour
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Dodge") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Die") &&
             !animator.GetCurrentAnimatorStateInfo(0).IsName("Get Hit") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Recover") &&
             !animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack1") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack2") &&
-            !animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack3") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack4"))
+            !animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack3") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack4") &&
+            !animator.GetCurrentAnimatorStateInfo(0).IsName("Rage Mode_Attack1") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Rage Mode_Attack2") &&
+            !animator.GetCurrentAnimatorStateInfo(0).IsName("Rage Mode_Attack3"))
         //What animation states does NOT allow the character to move.
         {
             RelativeToCameraMovement();
