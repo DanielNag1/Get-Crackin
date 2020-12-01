@@ -7,6 +7,10 @@ public class InputManager : ScriptableObject
     #region Variables
     private float leftTrigger;
     private float rightTrigger;
+    private float UpButton;
+    private float DownButton;
+    private float LeftButton;
+    private float RightButton;
     private List<KeyCode> PressedButtons = new List<KeyCode>(10);
     #endregion
 
@@ -91,8 +95,26 @@ public class InputManager : ScriptableObject
             PressedButtons.Add(KeyCode.Joystick1Button11);//This might not work, we added new buttons in projectSettings, If something breakes we know why! :D ^^
             //Debug.Log("Pressed Right Trigger");
         }
+        if (UpButtonPressed() > 0)
+        {
+            PressedButtons.Add(KeyCode.Joystick1Button12);
+        }
+        if (DownButtonPressed() > 0)
+        {
+            PressedButtons.Add(KeyCode.Joystick1Button13);
+        }
+        if (LeftButtonPressed() > 0)
+        {
+            PressedButtons.Add(KeyCode.Joystick1Button14);
+        }
+        if (RightButtonPressed() > 0)
+        {
+            PressedButtons.Add(KeyCode.Joystick1Button15);
+        }
         InputBuffer.Instance.PressedButtons = PressedButtons;
         InputBuffer.Instance.StartBuffer();
+        InputSave.Instance.PressedButtons = PressedButtons;
+        InputSave.Instance.SaveBuffer();
     }
 
     #region Methods
@@ -149,6 +171,26 @@ public class InputManager : ScriptableObject
     {
         rightTrigger = Input.GetAxis("RightTrigger");
         return rightTrigger;
+    }
+    private float UpButtonPressed()
+    {
+        UpButton = Input.GetAxis("UpKeyCode");
+        return UpButton;
+    }
+    private float DownButtonPressed()
+    {
+        DownButton = Input.GetAxis("DownKeyCode");
+        return DownButton;
+    }
+    private float LeftButtonPressed()
+    {
+        LeftButton = Input.GetAxis("LeftKeyCode");
+        return LeftButton;
+    }
+    private float RightButtonPressed()
+    {
+        RightButton = Input.GetAxis("RightKeyCode");
+        return RightButton;
     }
     #endregion
 }

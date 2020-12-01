@@ -124,10 +124,14 @@ public class Menu : MonoBehaviour
             pauseMenu.SetActive(false);
             mainMenu.SetActive(false);
             optionsMenu.SetActive(false);
-            Application.Quit();
+            Application.wantsToQuit += WantsToQuit;
         }
     }
+    static bool WantsToQuit()
+    {
+        return InputSave.Instance.WantToQuit();
 
+    }
     public void ResumeButton()
     {
         pauseMenu.SetActive(false);
