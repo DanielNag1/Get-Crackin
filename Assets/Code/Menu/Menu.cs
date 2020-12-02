@@ -115,7 +115,7 @@ public class Menu : MonoBehaviour
     static bool WantsToQuit()
     {
         return InputSave.Instance.WantToQuit();
-
+    }
     //public void ResumeButton()
     //{
     //    pauseMenu.SetActive(false);

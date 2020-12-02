@@ -109,7 +109,6 @@ public class InputBuffer : ScriptableObject
             case KeyCode.Joystick1Button0: //A Attack
                 GroundCombos();
                 RageGroundCombos();
-
                 break;
             case KeyCode.Joystick1Button1: //B Dodge
                 GroundDodge();
@@ -161,7 +160,6 @@ public class InputBuffer : ScriptableObject
         }
         else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack1")) //If the player continues the chain from 1 to 2
         {
-
             animator.SetInteger("GroundChain", 2);
             player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
 
@@ -187,7 +185,6 @@ public class InputBuffer : ScriptableObject
             {
                 animator.SetInteger("Rage GroundChain", 1);
                 animator.SetTrigger("Rage Attack");
-
                 //player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
             }
         }

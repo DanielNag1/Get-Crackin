@@ -92,7 +92,7 @@ public class Move : MonoBehaviour
             if (hit.distance > highOffset + 0.5f)
             {
                 characterController.Move(-Vector3.up * Mathf.Min(hit.distance, fallSpeed));
-                fallSpeed += Time.deltaTime * .982f;
+                fallSpeed =9.82f;
             }
             else if (hit.distance > highOffset)
             {
