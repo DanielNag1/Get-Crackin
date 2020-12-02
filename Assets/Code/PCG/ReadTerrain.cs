@@ -12,8 +12,9 @@ public class ReadTerrain : MonoBehaviour
     private Terrain terrain;
     private TerrainData terrainData;
     private Vector3 terrainPos;
-
+    [Header("Texture Array Size")]
     public float[] textureValues;
+
     public CreateGrid grid;
 
     public GameObject objectToSpawn;

@@ -6,13 +6,25 @@ public class CreateGrid : MonoBehaviour
 {
     public float[,] Grid;
     private float Vertical, Horizontal;
+    [Header("Grid Settings")]
+    [Range(1, 50)]
+    public int horizontalFrequence;
+    [Range(1, 50)]
+    public int verticalFrequence;
     [Range(1, 500)]
-    public float Columns, Rows, seed;
+    public float Columns;
+    [Range(1, 500)]
+    public float Rows;
+    [Header("Noise Settings")]
     [Range(1, 10)]
     public float noiseScale;
-    [Range(1, 50)]
-    public int horizontalFrequence, verticalFrequence;
+    [Range(1, 100)]
+    public float seed;
+
+    [Header("Size of Terrain")]
     public TerrainData terrainData;
+
+    [HideInInspector]
     public Sprite picture;
     public List<GameObject> positionList;
 
