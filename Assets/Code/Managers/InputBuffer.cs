@@ -153,7 +153,6 @@ public class InputBuffer : ScriptableObject
         }
         //Debug.Log("BufferDone");
     }
-
     void GroundCombos()
     {
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") ||  //If the player is in Idle/Walk/Run
@@ -339,7 +338,6 @@ public class InputBuffer : ScriptableObject
             animator.SetBool("InAir", true);
         }
     }
-
     void ActivateRageMode()
     {
         animator.ResetTrigger("Attack");

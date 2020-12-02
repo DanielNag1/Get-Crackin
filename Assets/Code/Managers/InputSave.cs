@@ -41,27 +41,27 @@ public class InputSave : ScriptableObject
         while (File.Exists(Application.dataPath + @"InputSave" + number + ".txt"))
         {
             number++;
-            if (number==11)
+            if (number == 11)
             {
                 if (File.Exists(Application.dataPath + @"InputSave" + number + ".txt"))
                 {
                     File.Delete(Application.dataPath + @"InputSave" + number + ".txt");
                 }
             }
-        } 
+        }
         streamWriter = new StreamWriter(Application.dataPath + @"InputSave" + number + ".txt", true);
     }
     public bool WantToQuit()
     {
         streamWriter.Write("#|ButtonX|ButtonY|ButtonA|ButtonB|ButtonRT|ButtonRB|ButtonLT|ButtonLB|ButtonStart|ButtonSelect|ButtonR3|ButtonL3|ButtonUp|ButtonDown|ButtonLeft|ButtonRight" + "\r\n");
-        streamWriter.Write(ButtonX + "|" + ButtonY + "|" + ButtonA + "|" + ButtonB + "|" + ButtonRT + "|" + ButtonRB + "|" + ButtonLT + "|" + ButtonLB + "|" + ButtonStart + "|" + ButtonSelect + "|" + ButtonR3 + "|" + ButtonL3 + "|" + ButtonUp + "|" + ButtonDown + "|" + ButtonLeft + "|" + ButtonRight);
+        streamWriter.Write("$|"+ ButtonX + "|" + ButtonY + "|" + ButtonA + "|" + ButtonB + "|" + ButtonRT + "|" + ButtonRB + "|" + ButtonLT + "|" + ButtonLB + "|" + ButtonStart + "|" + ButtonSelect + "|" + ButtonR3 + "|" + ButtonL3 + "|" + ButtonUp + "|" + ButtonDown + "|" + ButtonLeft + "|" + ButtonRight);
         streamWriter.Close();
         return true;
     }
     public void SaveSeed(int seed)
     {
         streamWriter.Write("#|seed" + "\r\n");
-        streamWriter.Write(seed + "\r\n");
+        streamWriter.Write("£|" + seed + "\r\n");
         streamWriter.Write("#|MoveX|MoveY|CamX|CamY|ButtonKeyCodes" + "\r\n");
     }
 
