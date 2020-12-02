@@ -310,7 +310,7 @@ Transform:
   m_Children:
   - {fileID: 1634715053}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!2083052967 &517710703 stripped
 VisualEffect:
@@ -373,6 +373,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3760979190343455003, guid: 28230520bdbe3574cbe4af10423ddbb4,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3760979190343455076, guid: 28230520bdbe3574cbe4af10423ddbb4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3931738415636858030, guid: 28230520bdbe3574cbe4af10423ddbb4,
         type: 3}
       propertyPath: VFX1
@@ -418,11 +428,17 @@ PrefabInstance:
       propertyPath: targetIcon
       value: 
       objectReference: {fileID: 5731896952953291379}
+    - target: {fileID: 4232900083458598479, guid: 28230520bdbe3574cbe4af10423ddbb4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6793778528719022535, guid: 28230520bdbe3574cbe4af10423ddbb4,
         type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+<<<<<<< HEAD:Assets/Scenes/Daniel_Week9.unity
     - target: {fileID: 6793778528719022586, guid: 28230520bdbe3574cbe4af10423ddbb4,
         type: 3}
       propertyPath: knockbackAmount
@@ -432,11 +448,17 @@ PrefabInstance:
         type: 3}
       propertyPath: knockbackTimer
       value: 0.3
+=======
+    - target: {fileID: 6793778528719022535, guid: 28230520bdbe3574cbe4af10423ddbb4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+>>>>>>> Frederik_Production:Assets/Scenes/Week8Merge_rework.unity
       objectReference: {fileID: 0}
     - target: {fileID: 6793778528719022590, guid: 28230520bdbe3574cbe4af10423ddbb4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 73.8
       objectReference: {fileID: 0}
     - target: {fileID: 6793778528719022590, guid: 28230520bdbe3574cbe4af10423ddbb4,
         type: 3}
@@ -446,7 +468,7 @@ PrefabInstance:
     - target: {fileID: 6793778528719022590, guid: 28230520bdbe3574cbe4af10423ddbb4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 153.1
       objectReference: {fileID: 0}
     - target: {fileID: 6793778528719022590, guid: 28230520bdbe3574cbe4af10423ddbb4,
         type: 3}
@@ -517,6 +539,16 @@ PrefabInstance:
         type: 3}
       propertyPath: SoundPaths.Array.data[2]
       value: SFX/ImpactSounds/Body_Slashed3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7997354238359120628, guid: 28230520bdbe3574cbe4af10423ddbb4,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7997354238359120629, guid: 28230520bdbe3574cbe4af10423ddbb4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28230520bdbe3574cbe4af10423ddbb4, type: 3}
@@ -636,7 +668,7 @@ PrefabInstance:
     - target: {fileID: 7783500969872200597, guid: 2b6f8f0d074abb64480868b998a4a8bf,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7783500969872200597, guid: 2b6f8f0d074abb64480868b998a4a8bf,
         type: 3}
@@ -977,10 +1009,20 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[3]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5871716587805698618, guid: 00535e17a62eed249849830bbdfc9e73,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7014369340518222758, guid: 00535e17a62eed249849830bbdfc9e73,
         type: 3}
       propertyPath: m_Name
       value: Mushrooms (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7014369340518222758, guid: 00535e17a62eed249849830bbdfc9e73,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7643694253680005404, guid: 00535e17a62eed249849830bbdfc9e73,
         type: 3}
@@ -1020,7 +1062,7 @@ PrefabInstance:
     - target: {fileID: 7643694253680005404, guid: 00535e17a62eed249849830bbdfc9e73,
         type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7643694253680005404, guid: 00535e17a62eed249849830bbdfc9e73,
         type: 3}
@@ -1219,10 +1261,79 @@ PrefabInstance:
     - target: {fileID: 3107409200941717367, guid: 18789ac0f5f560042855bd929dc4c8f6,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 18789ac0f5f560042855bd929dc4c8f6, type: 3}
+--- !u!1001 &4418992847993449457
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4418992848461810017, guid: c462a4798ef88484dafcd16116117d27,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -88.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4418992848461810017, guid: c462a4798ef88484dafcd16116117d27,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4418992848461810017, guid: c462a4798ef88484dafcd16116117d27,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13
+      objectReference: {fileID: 0}
+    - target: {fileID: 4418992848461810017, guid: c462a4798ef88484dafcd16116117d27,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4418992848461810017, guid: c462a4798ef88484dafcd16116117d27,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4418992848461810017, guid: c462a4798ef88484dafcd16116117d27,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4418992848461810017, guid: c462a4798ef88484dafcd16116117d27,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4418992848461810017, guid: c462a4798ef88484dafcd16116117d27,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 4418992848461810017, guid: c462a4798ef88484dafcd16116117d27,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4418992848461810017, guid: c462a4798ef88484dafcd16116117d27,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4418992848461810017, guid: c462a4798ef88484dafcd16116117d27,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4418992848461810044, guid: c462a4798ef88484dafcd16116117d27,
+        type: 3}
+      propertyPath: m_Name
+      value: Part1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c462a4798ef88484dafcd16116117d27, type: 3}
 --- !u!1001 &4754208940413883101
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1334,6 +1445,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[3]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 712889349215277756, guid: be92abfa6def1d9449141f349b9cef82,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2481644013800087347, guid: be92abfa6def1d9449141f349b9cef82,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1353,6 +1469,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[3]
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2481644013800087347, guid: be92abfa6def1d9449141f349b9cef82,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2830795632982379234, guid: be92abfa6def1d9449141f349b9cef82,
         type: 3}
@@ -1379,11 +1500,49 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[4]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2830795632982379234, guid: be92abfa6def1d9449141f349b9cef82,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4990282174843113868, guid: be92abfa6def1d9449141f349b9cef82,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 0}
+<<<<<<< HEAD:Assets/Scenes/Daniel_Week9.unity
+=======
+    - target: {fileID: 4990282174843113868, guid: be92abfa6def1d9449141f349b9cef82,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4990282174843113868, guid: be92abfa6def1d9449141f349b9cef82,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4990282174843113871, guid: be92abfa6def1d9449141f349b9cef82,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4990282174843113871, guid: be92abfa6def1d9449141f349b9cef82,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4990282174843113871, guid: be92abfa6def1d9449141f349b9cef82,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4990282174843113871, guid: be92abfa6def1d9449141f349b9cef82,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+>>>>>>> Frederik_Production:Assets/Scenes/Week8Merge_rework.unity
     - target: {fileID: 6112053864807305160, guid: be92abfa6def1d9449141f349b9cef82,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1422,7 +1581,7 @@ PrefabInstance:
     - target: {fileID: 6112053864807305160, guid: be92abfa6def1d9449141f349b9cef82,
         type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6112053864807305160, guid: be92abfa6def1d9449141f349b9cef82,
         type: 3}
@@ -1484,10 +1643,20 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[6]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8107933440250815964, guid: be92abfa6def1d9449141f349b9cef82,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9172114926217598531, guid: be92abfa6def1d9449141f349b9cef82,
         type: 3}
       propertyPath: m_Name
       value: VFXManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172114926217598531, guid: be92abfa6def1d9449141f349b9cef82,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be92abfa6def1d9449141f349b9cef82, type: 3}
@@ -1501,22 +1670,34 @@ PrefabInstance:
     - target: {fileID: 4643290533148460063, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalRotation.x
+<<<<<<< HEAD:Assets/Scenes/Daniel_Week9.unity
       value: -0.07095021
+=======
+      value: -0.087948345
+>>>>>>> Frederik_Production:Assets/Scenes/Week8Merge_rework.unity
       objectReference: {fileID: 0}
     - target: {fileID: 4643290533148460063, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalRotation.z
+<<<<<<< HEAD:Assets/Scenes/Daniel_Week9.unity
       value: -0.025375023
+=======
+      value: -0.020105397
+>>>>>>> Frederik_Production:Assets/Scenes/Week8Merge_rework.unity
       objectReference: {fileID: 0}
     - target: {fileID: 4643290533148460063, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalRotation.w
+<<<<<<< HEAD:Assets/Scenes/Daniel_Week9.unity
       value: 0.4626933
+=======
+      value: 0.52009106
+>>>>>>> Frederik_Production:Assets/Scenes/Week8Merge_rework.unity
       objectReference: {fileID: 0}
     - target: {fileID: 4643290533148460063, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.88331026
+      value: 0.84933275
       objectReference: {fileID: 0}
     - target: {fileID: 4643290533148460063, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
@@ -1536,22 +1717,38 @@ PrefabInstance:
     - target: {fileID: 4643290534143699969, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalRotation.x
+<<<<<<< HEAD:Assets/Scenes/Daniel_Week9.unity
       value: -0.05781614
+=======
+      value: -0.06318359
+>>>>>>> Frederik_Production:Assets/Scenes/Week8Merge_rework.unity
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534143699969, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalRotation.z
+<<<<<<< HEAD:Assets/Scenes/Daniel_Week9.unity
       value: 0.07979324
+=======
+      value: 0.07561428
+>>>>>>> Frederik_Production:Assets/Scenes/Week8Merge_rework.unity
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534143699969, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalRotation.w
+<<<<<<< HEAD:Assets/Scenes/Daniel_Week9.unity
       value: 0.58388627
+=======
+      value: 0.63809156
+>>>>>>> Frederik_Production:Assets/Scenes/Week8Merge_rework.unity
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534143699969, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalRotation.y
+<<<<<<< HEAD:Assets/Scenes/Daniel_Week9.unity
       value: 0.8058333
+=======
+      value: 0.7636292
+>>>>>>> Frederik_Production:Assets/Scenes/Week8Merge_rework.unity
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534143699969, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
@@ -1561,32 +1758,56 @@ PrefabInstance:
     - target: {fileID: 4643290534143699969, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalPosition.x
+<<<<<<< HEAD:Assets/Scenes/Daniel_Week9.unity
       value: -2.8507695
+=======
+      value: 70.84775
+>>>>>>> Frederik_Production:Assets/Scenes/Week8Merge_rework.unity
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534143699969, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalPosition.z
+<<<<<<< HEAD:Assets/Scenes/Daniel_Week9.unity
       value: 0.9344051
+=======
+      value: 153.63309
+>>>>>>> Frederik_Production:Assets/Scenes/Week8Merge_rework.unity
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534237614738, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalRotation.x
+<<<<<<< HEAD:Assets/Scenes/Daniel_Week9.unity
       value: -0.104033045
+=======
+      value: 0.11974437
+>>>>>>> Frederik_Production:Assets/Scenes/Week8Merge_rework.unity
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534237614738, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalRotation.y
+<<<<<<< HEAD:Assets/Scenes/Daniel_Week9.unity
       value: 0.8800274
+=======
+      value: -0.8454361
+>>>>>>> Frederik_Production:Assets/Scenes/Week8Merge_rework.unity
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534237614738, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalRotation.z
+<<<<<<< HEAD:Assets/Scenes/Daniel_Week9.unity
       value: -0.042712666
+=======
+      value: 0.03959953
+>>>>>>> Frederik_Production:Assets/Scenes/Week8Merge_rework.unity
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534237614738, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalRotation.w
+<<<<<<< HEAD:Assets/Scenes/Daniel_Week9.unity
       value: 0.46141586
+=======
+      value: -0.51897115
+>>>>>>> Frederik_Production:Assets/Scenes/Week8Merge_rework.unity
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534237614738, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
@@ -1611,57 +1832,101 @@ PrefabInstance:
     - target: {fileID: 4643290534432835213, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalRotation.x
+<<<<<<< HEAD:Assets/Scenes/Daniel_Week9.unity
       value: 0.01963237
+=======
+      value: 0.0017793847
+>>>>>>> Frederik_Production:Assets/Scenes/Week8Merge_rework.unity
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534432835213, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalRotation.y
+<<<<<<< HEAD:Assets/Scenes/Daniel_Week9.unity
       value: 0.9803761
+=======
+      value: 0.97948766
+>>>>>>> Frederik_Production:Assets/Scenes/Week8Merge_rework.unity
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534432835213, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalRotation.z
+<<<<<<< HEAD:Assets/Scenes/Daniel_Week9.unity
       value: -0.13800915
+=======
+      value: -0.008610713
+>>>>>>> Frederik_Production:Assets/Scenes/Week8Merge_rework.unity
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534432835213, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalRotation.w
+<<<<<<< HEAD:Assets/Scenes/Daniel_Week9.unity
       value: 0.13939418
+=======
+      value: 0.20131235
+>>>>>>> Frederik_Production:Assets/Scenes/Week8Merge_rework.unity
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534432835213, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalPosition.x
+<<<<<<< HEAD:Assets/Scenes/Daniel_Week9.unity
       value: -1.6073914
+=======
+      value: 71.43399
+>>>>>>> Frederik_Production:Assets/Scenes/Week8Merge_rework.unity
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534432835213, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalPosition.y
+<<<<<<< HEAD:Assets/Scenes/Daniel_Week9.unity
       value: 2.82645
+=======
+      value: 1.2755079
+>>>>>>> Frederik_Production:Assets/Scenes/Week8Merge_rework.unity
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534432835213, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalPosition.z
+<<<<<<< HEAD:Assets/Scenes/Daniel_Week9.unity
       value: 5.5382733
+=======
+      value: 158.61281
+>>>>>>> Frederik_Production:Assets/Scenes/Week8Merge_rework.unity
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534444133298, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalRotation.x
+<<<<<<< HEAD:Assets/Scenes/Daniel_Week9.unity
       value: -0.09560689
+=======
+      value: -0.11594577
+>>>>>>> Frederik_Production:Assets/Scenes/Week8Merge_rework.unity
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534444133298, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalRotation.y
+<<<<<<< HEAD:Assets/Scenes/Daniel_Week9.unity
       value: 0.88644075
+=======
+      value: 0.8526217
+>>>>>>> Frederik_Production:Assets/Scenes/Week8Merge_rework.unity
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534444133298, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalRotation.z
+<<<<<<< HEAD:Assets/Scenes/Daniel_Week9.unity
       value: 0.025388204
+=======
+      value: 0.028693035
+>>>>>>> Frederik_Production:Assets/Scenes/Week8Merge_rework.unity
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534444133298, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalRotation.w
+<<<<<<< HEAD:Assets/Scenes/Daniel_Week9.unity
       value: 0.4521478
+=======
+      value: 0.5086941
+>>>>>>> Frederik_Production:Assets/Scenes/Week8Merge_rework.unity
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534444133298, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
@@ -1696,12 +1961,20 @@ PrefabInstance:
     - target: {fileID: 4643290534632294805, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalPosition.x
+<<<<<<< HEAD:Assets/Scenes/Daniel_Week9.unity
       value: -2.8507695
+=======
+      value: 70.84775
+>>>>>>> Frederik_Production:Assets/Scenes/Week8Merge_rework.unity
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534632294805, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalPosition.z
+<<<<<<< HEAD:Assets/Scenes/Daniel_Week9.unity
       value: 0.9344051
+=======
+      value: 153.63309
+>>>>>>> Frederik_Production:Assets/Scenes/Week8Merge_rework.unity
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534674649372, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
@@ -1890,95 +2163,75 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00535e17a62eed249849830bbdfc9e73, type: 3}
---- !u!1001 &8262745442370391527
+--- !u!1001 &8046548891853290746
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8262745442033201002, guid: 48de6323c4746734ba919d1ecefd0718,
-        type: 3}
-      propertyPath: m_Name
-      value: Terrain
-      objectReference: {fileID: 0}
-    - target: {fileID: 8262745442033201002, guid: 48de6323c4746734ba919d1ecefd0718,
-        type: 3}
-      propertyPath: m_TagString
-      value: Ground
-      objectReference: {fileID: 0}
-    - target: {fileID: 8262745442033201002, guid: 48de6323c4746734ba919d1ecefd0718,
-        type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8262745442033201002, guid: 48de6323c4746734ba919d1ecefd0718,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8262745442033201002, guid: 48de6323c4746734ba919d1ecefd0718,
-        type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8262745442033201015, guid: 48de6323c4746734ba919d1ecefd0718,
+    - target: {fileID: 8046548891197194539, guid: 3f0b402472401214d8abf457a8c124a8,
         type: 3}
       propertyPath: m_LocalPosition.x
       value: -88.3
       objectReference: {fileID: 0}
-    - target: {fileID: 8262745442033201015, guid: 48de6323c4746734ba919d1ecefd0718,
+    - target: {fileID: 8046548891197194539, guid: 3f0b402472401214d8abf457a8c124a8,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.8
       objectReference: {fileID: 0}
-    - target: {fileID: 8262745442033201015, guid: 48de6323c4746734ba919d1ecefd0718,
+    - target: {fileID: 8046548891197194539, guid: 3f0b402472401214d8abf457a8c124a8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -13
+      value: 237
       objectReference: {fileID: 0}
-    - target: {fileID: 8262745442033201015, guid: 48de6323c4746734ba919d1ecefd0718,
+    - target: {fileID: 8046548891197194539, guid: 3f0b402472401214d8abf457a8c124a8,
         type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8262745442033201015, guid: 48de6323c4746734ba919d1ecefd0718,
+    - target: {fileID: 8046548891197194539, guid: 3f0b402472401214d8abf457a8c124a8,
         type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8262745442033201015, guid: 48de6323c4746734ba919d1ecefd0718,
+    - target: {fileID: 8046548891197194539, guid: 3f0b402472401214d8abf457a8c124a8,
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8262745442033201015, guid: 48de6323c4746734ba919d1ecefd0718,
+    - target: {fileID: 8046548891197194539, guid: 3f0b402472401214d8abf457a8c124a8,
         type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8262745442033201015, guid: 48de6323c4746734ba919d1ecefd0718,
+    - target: {fileID: 8046548891197194539, guid: 3f0b402472401214d8abf457a8c124a8,
         type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 14
       objectReference: {fileID: 0}
-    - target: {fileID: 8262745442033201015, guid: 48de6323c4746734ba919d1ecefd0718,
+    - target: {fileID: 8046548891197194539, guid: 3f0b402472401214d8abf457a8c124a8,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8262745442033201015, guid: 48de6323c4746734ba919d1ecefd0718,
+    - target: {fileID: 8046548891197194539, guid: 3f0b402472401214d8abf457a8c124a8,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8262745442033201015, guid: 48de6323c4746734ba919d1ecefd0718,
+    - target: {fileID: 8046548891197194539, guid: 3f0b402472401214d8abf457a8c124a8,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8046548891197194548, guid: 3f0b402472401214d8abf457a8c124a8,
+        type: 3}
+      propertyPath: m_Name
+      value: Part2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 48de6323c4746734ba919d1ecefd0718, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 3f0b402472401214d8abf457a8c124a8, type: 3}
 --- !u!2083052967 &8584038863747561241 stripped
 VisualEffect:
   m_CorrespondingSourceObject: {fileID: 3630370720176174735, guid: be92abfa6def1d9449141f349b9cef82,
