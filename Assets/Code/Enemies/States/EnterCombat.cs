@@ -20,10 +20,8 @@ public class EnterCombat : IState
     public void OnEnter()
     {
         EnemyManager.Instance.AgentDetectedPlayer(gameObject, talkingDistance);
-         /*
-         CM.AssignCombatRole(this);
-         CM.SetCircleRange(this);
-         */
+        EnemyManager.Instance.AssignCombatRoleAndCircleRadius(gameObject);
+        EnemyManager.Instance.AssignSquare(gameObject);
         finishedEnteringCombat = true;
     }
 

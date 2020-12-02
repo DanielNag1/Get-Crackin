@@ -14,7 +14,7 @@ public class EnemyManager : MonoBehaviour
         Instance = this;
     }
     #endregion
-
+    public List<positionSquaresData> positionSquaresUsed;
     #region SpawnSystem
     // DON'T TOUCH! The spawn system
     /// <summary>
@@ -46,9 +46,15 @@ public class EnemyManager : MonoBehaviour
     public List<GameObject> enemyCompareList;//One of each type of enemy to use for comparison purposes
     public Dictionary<string, GameObject> enemyPrefabList = new Dictionary<string, GameObject>();
     //Guessing you could instantiate an object to get it's name and then place the string and prefab in the dictionary, then delete the compare list
-
     public void Start()
     {
+        positionSquaresUsed = new List<positionSquaresData>();
+        Transform tempTransform = GameObject.FindGameObjectWithTag("Player").transform.Find("NormalizedCirclePosition");
+        for (int i = 0; i < 12; i++)
+        {
+            positionSquaresUsed.Add(new positionSquaresData(tempTransform.Find("Position " + i), i, true));
+        }
+
         enemyPool = new List<EnemyPool>();
         for (int i = 0; i < enemyCompareList.Count; i++)
         {
@@ -134,9 +140,24 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
+    public class positionSquaresData
+    {
+        public Transform squareTransform;
+        public bool isAvailable;
+        public int id;
+        public positionSquaresData(Transform squareTransform, int id, bool available)
+        {
+            isAvailable = available;
+            this.squareTransform = squareTransform;
+            this.id = id;
+        }
+    }
+
     public List<CombatAgentdata> agentsInCombat = new List<CombatAgentdata>();
     public List<CombatAgentdata> agentsReadyToAttack = new List<CombatAgentdata>();
     private float coolDownTime = 0.1f;
+    private int meleeCombatants = 0;
+    private int rangedComtabatants = 0;
 
     /// <summary>
     /// Alerts all close agents of the players presence
@@ -176,6 +197,19 @@ public class EnemyManager : MonoBehaviour
     {
         if (agentsInCombat.Exists((x) => x.agentGameObject.GetInstanceID() == foxAgentGameObject.transform.root.gameObject.GetInstanceID()))
         {
+            switch (foxAgentGameObject.GetComponent<FoxAgentFSM>().combatRole)
+            {
+                case FoxAgentFSM.CombatRole.None:
+                    break;
+                case FoxAgentFSM.CombatRole.Melee:
+                    meleeCombatants--;
+                    break;
+                case FoxAgentFSM.CombatRole.Ranged:
+                    rangedComtabatants--;
+                    break;
+            }
+            foxAgentGameObject.GetComponent<FoxAgentFSM>().combatRole = FoxAgentFSM.CombatRole.None;
+            positionSquaresUsed[foxAgentGameObject.GetComponent<FoxAgentFSM>().squareID].isAvailable = true;
             agentsInCombat.Remove(agentsInCombat.Find((x) => x.agentGameObject.GetInstanceID() == foxAgentGameObject.transform.root.gameObject.GetInstanceID()));
             return true;
         }
@@ -184,10 +218,10 @@ public class EnemyManager : MonoBehaviour
 
     public void Update()
     {
-        //if (IssueAttackOrderToReadyAgent())
-        //{
-        //    coolDownTime = UnityEngine.Random.Range(2, 5);
-        //}
+        if (IssueAttackOrderToReadyAgent())
+        {
+            coolDownTime = UnityEngine.Random.Range(2, 5);
+        }
     }
 
     /// <summary>
@@ -227,12 +261,63 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-
-    public void EvaluateWeaponeToUse()
+    public void AssignCombatRoleAndCircleRadius(GameObject gameObject)
     {
+        foreach (var item in agentsInCombat)
+        {
+            if (meleeCombatants / 2 > rangedComtabatants)
+            {
 
+                rangedComtabatants++;
+                item.agentGameObject.GetComponentInChildren<FoxAgentFSM>().combatRole = FoxAgentFSM.CombatRole.Ranged;
+                item.agentGameObject.GetComponentInChildren<FoxAgentFSM>().circleRadius = 8;
+            }
+            else
+            {
+                meleeCombatants++;
+                item.agentGameObject.GetComponentInChildren<FoxAgentFSM>().combatRole = FoxAgentFSM.CombatRole.Melee;
+                item.agentGameObject.GetComponentInChildren<FoxAgentFSM>().circleRadius = 4;
+            }
+        }
     }
 
+    public void SetCombatRole(GameObject gameObject, FoxAgentFSM.CombatRole combatRole)
+    {
+        switch (gameObject.GetComponent<FoxAgentFSM>().combatRole)
+        {
+            case FoxAgentFSM.CombatRole.None:
+                break;
+            case FoxAgentFSM.CombatRole.Melee:
+                meleeCombatants--;
+                break;
+            case FoxAgentFSM.CombatRole.Ranged:
+                rangedComtabatants--;
+                break;
+        }
+        if (combatRole == FoxAgentFSM.CombatRole.Melee)
+        {
+            rangedComtabatants++;
+            gameObject.GetComponent<FoxAgentFSM>().combatRole = FoxAgentFSM.CombatRole.Ranged;
+            gameObject.GetComponent<FoxAgentFSM>().circleRadius = 8;
+        }
+        else if (combatRole == FoxAgentFSM.CombatRole.Melee)
+        {
+            meleeCombatants++;
+            gameObject.GetComponent<FoxAgentFSM>().combatRole = FoxAgentFSM.CombatRole.Melee;
+            gameObject.GetComponent<FoxAgentFSM>().circleRadius = 4;
+        }
+        else if (combatRole == FoxAgentFSM.CombatRole.None)
+        {
+            gameObject.GetComponent<FoxAgentFSM>().combatRole = FoxAgentFSM.CombatRole.None;
+        }
+    }
+    public void AssignSquare(GameObject agent)
+    {
+        int tempID = positionSquaresUsed.Find((x) => x.isAvailable == true).id;
+        agent.GetComponent<FoxAgentFSM>().squareID = positionSquaresUsed[tempID].id;
+        agent.GetComponent<FoxAgentFSM>().squareNormalisedPosition = positionSquaresUsed[tempID].squareTransform.localPosition;
+        positionSquaresUsed[tempID].isAvailable = false;
+    }
 
     public void SteeringBehaviorDestinationUpdate()
     {
@@ -303,39 +388,41 @@ public class EnemyManager : MonoBehaviour
         //}
     }
 
-    public Vector3 Evade(GameObject agentGameObject)
+    public void Evade(GameObject agentGameObject)
     {
         #region boids
-        Vector3 resVec = Vector3.zero;
-        var neighborCount = 0;
-        foreach (var item in agentsInCombat)
-        {
-            if (item.agentGameObject.GetInstanceID() == agentGameObject.transform.root.gameObject.GetInstanceID())
-            {
-                continue;
-            }
-            if (Vector3.Distance(item.agentGameObject.GetComponentInChildren<NavMeshAgent>().destination,
-                agentGameObject.GetComponent<NavMeshAgent>().destination) < 2/*Minimum distance before corrections*/)
-            {
-                resVec.x += item.agentGameObject.GetComponentInChildren<NavMeshAgent>().transform.position.x - agentGameObject.transform.position.x;
-                resVec.z += item.agentGameObject.GetComponentInChildren<NavMeshAgent>().transform.position.z - agentGameObject.transform.position.y;
-                neighborCount++;
-            }
-        }
+        //Vector3 resVec = Vector3.zero;
+        //var neighborCount = 0;
+        //foreach (var item in agentsInCombat)
+        //{
+        //    if (item.agentGameObject.GetInstanceID() == agentGameObject.transform.root.gameObject.GetInstanceID())
+        //    {
+        //        continue;
+        //    }
+        //    if (Vector3.Distance(item.agentGameObject.GetComponentInChildren<NavMeshAgent>().destination,
+        //        agentGameObject.GetComponent<NavMeshAgent>().destination) < 2/*Minimum distance before corrections*/)
+        //    {
+        //        resVec.x += item.agentGameObject.GetComponentInChildren<NavMeshAgent>().transform.position.x - agentGameObject.transform.position.x;
+        //        resVec.z += item.agentGameObject.GetComponentInChildren<NavMeshAgent>().transform.position.z - agentGameObject.transform.position.y;
+        //        neighborCount++;
+        //    }
+        //}
 
-        if (neighborCount == 0)
-            return resVec;
-        resVec.x /= neighborCount;
-        resVec.z /= neighborCount;
-        resVec.x *= -1;
-        resVec.z *= -1;
-        resVec.Normalize();
-        return resVec;
+        //if (neighborCount == 0)
+        //    return resVec;
+        //resVec.x /= neighborCount;
+        //resVec.z /= neighborCount;
+        //resVec.x *= -1;
+        //resVec.z *= -1;
+        //resVec.Normalize();
+        //return resVec;
         #endregion
 
         #region MathRadius
         ////get where others are on circle, 
-        //for (int i = 0; i < agentsInCombat.Count; i++)
+        //int i = 0;
+        //while (i < agentsInCombat.Count)
+        ////for (int i = 0; i < agentsInCombat.Count; i++)
         //{
         //    if (agentsInCombat[i].agentGameObject.GetInstanceID() == agentGameObject.transform.root.gameObject.GetInstanceID())
         //    {
@@ -348,19 +435,50 @@ public class EnemyManager : MonoBehaviour
         //        agentGameObject.GetComponent<NavMeshAgent>().destination) < 2/*Minimum distance before corrections*/)
         //    {
         //        Debug.Log("ToClose!");
+        //        Vector3 playerToAgent = agentGameObject.GetComponent<FoxAgentFSM>().player.transform.position - agentsInCombat[i].agentGameObject.GetComponentInChildren<NavMeshAgent>().destination;
+        //        playerToAgent.y = 0;
+        //        playerToAgent.Normalize();
+        //        double degrees = (180 / Math.PI) * Math.Atan2(playerToAgent.y, playerToAgent.x);
+        //        Debug.Log("degrees=" + degrees);
         //        double alpha = Math.Asin(3/*desired distance*// (2 * agentGameObject.GetComponent<FoxAgentFSM>().circleRadius)) * 2;
-
+        //        Debug.Log("alpha=" + alpha);
         //        NavMeshHit hit;
         //        int k = 1;
-        //        while (!NavMesh.SamplePosition(new Vector3((float)Math.Cos(alpha), 0, (float)Math.Sin(alpha)) * agentGameObject.GetComponent<FoxAgentFSM>().circleRadius + agentGameObject.GetComponent<FoxAgentFSM>().player.transform.position, out hit, k, NavMesh.AllAreas)) //get where we should go on the navMesh
+        //        while (!NavMesh.SamplePosition(new Vector3((float)Math.Cos(alpha + degrees), 0, (float)Math.Sin(alpha + degrees)) * agentGameObject.GetComponent<FoxAgentFSM>().circleRadius + agentGameObject.GetComponent<FoxAgentFSM>().player.transform.position, out hit, k, NavMesh.AllAreas)) //get where we should go on the navMesh
         //        {
         //            k++;
         //        }
         //        agentGameObject.GetComponent<FoxAgentFSM>().destination = hit.position; //set as target position.
         //        Debug.Log("New destination" + agentGameObject.GetComponent<FoxAgentFSM>().destination);
         //        agentGameObject.GetComponent<NavMeshAgent>().destination = agentGameObject.GetComponent<FoxAgentFSM>().destination;
+        //        i = 0;
         //    }
+        //    else
+        //    {
+        //        i++;
+        //    }
+
         //}
+        #endregion
+
+        #region MathMoveRadius
+        //int angleBetweenAgents = 360 / agentsInCombat.Count;
+        //int i = 0;
+        //foreach (var agent in agentsInCombat)
+        //{
+        //    NavMeshHit hit;
+        //    int k = 1;
+        //    while (!NavMesh.SamplePosition((new Vector3((float)Math.Cos(angleBetweenAgents*i), 0, (float)Math.Sin(angleBetweenAgents * i)) * agentGameObject.GetComponent<FoxAgentFSM>().circleRadius) + agentGameObject.GetComponent<FoxAgentFSM>().player.transform.position, out hit, k, NavMesh.AllAreas)) //get where we should go on the navMesh
+        //    {
+        //        k++;
+        //    }
+        //    agent.agentGameObject.GetComponentInChildren<FoxAgentFSM>().destination = hit.position; //set as target position.
+        //    agent.agentGameObject.GetComponentInChildren<NavMeshAgent>().destination = agent.agentGameObject.GetComponentInChildren<FoxAgentFSM>().destination;
+        //}
+        #endregion
+
+        #region AssignAvailableSquare
+
         #endregion
     }
 }

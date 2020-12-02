@@ -6,9 +6,11 @@ using UnityEngine.AI;
 public class EncircleTarget : IState
 {
     #region Variables
-    private GameObject _gameObject;
+    private GameObject _agent;
     private Animator _animator;
     private NavMeshAgent _navMeshAgent; // We need this. 
+    private GameObject _player;
+    private Vector3 _playerPreviousPos;
     //private
     #endregion
 
@@ -16,7 +18,8 @@ public class EncircleTarget : IState
     {
         this._animator = animator;
         this._navMeshAgent = navMeshAgent;
-        this._gameObject = gameObject;
+        this._agent = gameObject;
+        _player = GameObject.FindGameObjectWithTag("Player");
     }
 
     #region Interface functions
@@ -25,8 +28,9 @@ public class EncircleTarget : IState
     /// </summary>
     public void OnEnter()
     {
-        EnemyManager.Instance.SetReadyToAttack(_gameObject, true);
+        EnemyManager.Instance.SetReadyToAttack(_agent, true);
         _animator.SetBool("Fox_Idle", true);
+        _playerPreviousPos = _player.transform.position;
     }
 
     /// <summary>
@@ -34,7 +38,7 @@ public class EncircleTarget : IState
     /// </summary>
     public void OnExit()
     {
-        EnemyManager.Instance.SetReadyToAttack(_gameObject, false);
+        EnemyManager.Instance.SetReadyToAttack(_agent, false);
         _animator.SetBool("Fox_Idle", false);
     }
 
@@ -43,9 +47,17 @@ public class EncircleTarget : IState
     /// </summary>
     public void TimeTick()
     {
-        /*
-         destination = CM.SteeringBehaviorDestinationUpdate();
-         */
+        NavMeshHit hit;
+        int i = 1;
+        while (!NavMesh.SamplePosition(_agent.GetComponent<FoxAgentFSM>().destination + (_player.transform.position - _playerPreviousPos), out hit, i, NavMesh.AllAreas)) //get where we should go on the navMesh
+        {
+            i++;
+        }
+        _agent.GetComponent<FoxAgentFSM>().destination = hit.position; //set as target position.
+        Debug.Log("SamplePosition On Circle Adjusted for Player movement=" + hit.position);
+        //_navMeshAgent.SetDestination(_agent.GetComponent<FoxAgentFSM>().destination);
+        _playerPreviousPos = _player.transform.position;
+        _navMeshAgent.transform.LookAt(new Vector3(_player.transform.position.x, _navMeshAgent.transform.position.y, _player.transform.position.z));
     }
     #endregion
 }

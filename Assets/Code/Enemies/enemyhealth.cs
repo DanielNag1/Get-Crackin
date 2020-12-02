@@ -58,7 +58,7 @@ public class enemyhealth : MonoBehaviour
             }
             else
             {
-                EnemyManager.Instance.AgentLeftCombat(transform.root.gameObject);
+                EnemyManager.Instance.AgentLeftCombat(gameObject);
                 VFXEvents.Instance.VFX6Play(transform);
                 EnemyManager.Instance.enemyPool.Find(x => x.enemy.transform.root.GetInstanceID() == rootGameObject.transform.root.GetInstanceID()).elementAvailable = true;//If this crashes someone else fucked up! All enemies should exist in the EnemyManagers enemyPool!
                 StartCoroutine(DeathCoroutine());
@@ -81,6 +81,7 @@ public class enemyhealth : MonoBehaviour
         SoundComponent tempComponent = temp.GetComponent<SoundComponent>(); //Gets the temporary SoundObjects SoundComponent.
         tempComponent.soundPath = deathSoundPaths[deathSound]; //Assignes the correct sound to the SoundComponent.
         tempComponent.volumeScale = volumeScales[0];//Assignes the correct soundVolume to the SoundComponent.
+        
         rootGameObject.SetActive(false);
 
         //yield on a new YieldInstruction that waits the duration of the AudioClip.
