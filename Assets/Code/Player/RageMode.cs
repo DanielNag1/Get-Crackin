@@ -9,7 +9,7 @@ public class RageMode : MonoBehaviour
 
     [SerializeField]
     public int maxRage = 100;
-    private int startRage = 0;
+    public int startRage;
     [SerializeField]
     private float TimerSec;
     private float elapsedTime;
@@ -39,10 +39,12 @@ public class RageMode : MonoBehaviour
 
     public void ModifyRage(float amount)
     {
-
-        currentRage += amount;
-        float currentRagePct = (float)currentRage / (float)maxRage;
-        onRagePctChanged(currentRagePct);
+        if (currentRage < maxRage)
+        {
+            currentRage += amount;
+            float currentRagePct = (float)currentRage / (float)maxRage;
+            onRagePctChanged(currentRagePct);
+        }
 
     }
 

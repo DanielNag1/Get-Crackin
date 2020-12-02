@@ -67,50 +67,44 @@ public class Move : MonoBehaviour
 
     void NormalMovement()
     {
-        RelativeToCameraMovement();
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Jump") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Land") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Dodge")
-            && !animator.GetCurrentAnimatorStateInfo(0).IsName("Air Dodge") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Die") &&
+        Gravity();
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Dodge") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Die") &&
             !animator.GetCurrentAnimatorStateInfo(0).IsName("Get Hit") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Recover") &&
             !animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack1") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack2") &&
-            !animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack3") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack4"))
+            !animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack3") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack4") &&
+            !animator.GetCurrentAnimatorStateInfo(0).IsName("Rage Mode_Attack1") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Rage Mode_Attack2") &&
+            !animator.GetCurrentAnimatorStateInfo(0).IsName("Rage Mode_Attack3"))
         //What animation states does NOT allow the character to move.
         {
+            RelativeToCameraMovement();
             characterController.Move(desiredDirection * MovementSpeed * movementDirection.magnitude * Time.deltaTime);  //The object moves.
         }
 
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Jump") && !animator.GetBool("InAir"))
-        {
-            animator.SetBool("InAir", true);
-        }
-        else if (!animator.GetBool("InAir") || animator.GetCurrentAnimatorStateInfo(0).IsName("Fall") && !jumping)
-        {
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, Vector3.down, out hit, Mathf.Infinity, layerMask))
-            {
 
-                if (hit.distance > highOffset + 0.5f && animator.GetBool("InAir"))
-                {
-                    characterController.Move(-Vector3.up * Mathf.Min(hit.distance, fallSpeed));
-                    fallSpeed += Time.deltaTime * .982f;
-                }
-                else if (animator.GetBool("InAir"))
-                {
-                    animator.SetTrigger("onGround");
-                    animator.SetBool("InAir", false);
-                    fallSpeed = 0;
-                }
-                else if (hit.distance > highOffset)
-                {
-                    characterController.Move(-Vector3.up * Mathf.Min(hit.distance, 0.2f));
-                }
-                else
-                {
-                    characterController.Move(Vector3.up * (float)(highOffset - hit.distance));
-                }
-            }
-        }
     }
 
+    private void Gravity()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, Mathf.Infinity, layerMask))
+        {
+
+            if (hit.distance > highOffset + 0.5f)
+            {
+                characterController.Move(-Vector3.up * Mathf.Min(hit.distance, fallSpeed));
+                fallSpeed += Time.deltaTime * .982f;
+            }
+            else if (hit.distance > highOffset)
+            {
+                characterController.Move(-Vector3.up * Mathf.Min(hit.distance, 0.2f));
+            }
+            else
+            {
+                characterController.Move(Vector3.up * (float)(highOffset - hit.distance));
+            }
+        }
+
+    }
     public void Knockback(Vector3 direction)
     {
         animator.ResetTrigger("Get Hit");
@@ -131,25 +125,6 @@ public class Move : MonoBehaviour
         }
     }
 
-    public void JumpMovementStart(Transform trans)
-    {
-        StartCoroutine(JumpMovement(trans));
-    }
-    public IEnumerator JumpMovement(Transform trans)
-    {
-        float timer = 0.283f;
-        jumping = true;
-        while (timer > 0)
-        {
-            if (timer < 0.183f)
-            {
-                characterController.Move(Vector3.up * ((DodgeDistance / 2) / 0.283f) * Time.deltaTime);  //The object moves.
-            }
-            timer -= Time.deltaTime;
-            yield return null;
-        }
-        jumping = false;
-    }
 
     public void AttackTowardsMovementStart(Transform trans)
     {
