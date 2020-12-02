@@ -16,10 +16,14 @@ public class Menu : MonoBehaviour
 
     private bool mainMenuActive = false, optionMenuActive = false, pauseMenuActive = false;
 
-    public Animator animator;
+    public GameObject levelLoader;
 
-    public float transitionTime = 1f;
+    
 
+
+    
+
+    
 
     void Update()
     {
@@ -91,10 +95,9 @@ public class Menu : MonoBehaviour
 
     public void PlayGame()
     {
-        StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
+        levelLoader.GetComponent<LoadLevel>().LoadNextLevel();
 
-        mainMenu.SetActive(false);
-        mainMenuActive = false;
+        
         Time.timeScale = 1f;
     }
 
@@ -143,7 +146,7 @@ public class Menu : MonoBehaviour
         optionMenuActive = false;
         // Pause can be activeted in main menu
         // MainActive = true;
-        pauseMenu.SetActive(false);
+        //pauseMenu.SetActive(false);
         optionsMenu.SetActive(false);
         mainMenu.SetActive(true);
 
@@ -156,17 +159,10 @@ public class Menu : MonoBehaviour
     {
         optionsMenu.SetActive(false);
         mainMenu.SetActive(true);
-        pauseMenu.SetActive(false);
+        //pauseMenu.SetActive(false);
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(pauseResumeButton);
     }
 
-    IEnumerator LoadLevel(int levelIndex)
-    {
-        animator.SetTrigger("TriggerTransition");
-
-        yield return new WaitForSeconds(transitionTime);
-
-        SceneManager.LoadScene(levelIndex);
-    }
+    
 }

@@ -8,6 +8,8 @@ public class TextWriter : MonoBehaviour
     private static TextWriter instance;
 
     private List<SingularTextPart> textPart;
+    public GameObject levelLoader;
+    LoadLevel load;
 
     public static void AddWriterStatic(Text uiText, string theText, float characterTime, bool invisible)
     {
@@ -23,6 +25,8 @@ public class TextWriter : MonoBehaviour
     {
         instance = this;
         textPart = new List<SingularTextPart>();
+
+        load = levelLoader.GetComponent<LoadLevel>();
     }
 
     private void Update()
@@ -36,6 +40,15 @@ public class TextWriter : MonoBehaviour
                 i--;
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Joystick1Button0))
+        {
+            load.LoadNextLevel();
+        }
+
+        
+
+
     }
 
     public class SingularTextPart
