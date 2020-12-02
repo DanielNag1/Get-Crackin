@@ -17,7 +17,7 @@ public class ReadTerrain : MonoBehaviour
 
     public CreateGrid grid;
 
-    public GameObject objectToSpawn;
+    public GameObject[] objectsToSpawn;
     public string fileName;
 
     private List<GameObject> spawnedObjects;
@@ -60,8 +60,11 @@ public class ReadTerrain : MonoBehaviour
     private void CreateTree(Vector3 position, Quaternion rotation)
     {
         float scale = Random.Range(1, 2.5f);
+        var objectToSpawn = objectsToSpawn[Random.Range(0, objectsToSpawn.Length)];
+
         GameObject spawnedObject = Instantiate(objectToSpawn, position, rotation, transform);
-        spawnedObject.transform.localScale = new Vector3(scale, scale, scale);
+
+        //spawnedObject.transform.localScale = new Vector3(scale, scale, scale);
         spawnedObjects.Add(spawnedObject);
     }
 
