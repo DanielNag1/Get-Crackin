@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -58,7 +59,7 @@ public class EnemyManager : MonoBehaviour
         enemyPool = new List<EnemyPool>();
         for (int i = 0; i < enemyCompareList.Count; i++)
         {
-            GameObject prefabName = Instantiate(enemyCompareList[i]);
+            GameObject prefabName = Instantiate(enemyCompareList[i],transform.position,Quaternion.identity);
             string temp = prefabName.name;
             enemyPrefabList.Add(temp, enemyCompareList[i]); //unsure how changing temp to prefabName.name is acctually going to be handled.
             Destroy(prefabName);
@@ -85,7 +86,7 @@ public class EnemyManager : MonoBehaviour
                 //  + "(Clone)") is added because we took the name from an instanciated prefab.
                 if (enemyPrefabList.ContainsKey(spawnSet[setToUse].spawnPrefabName[i] + "(Clone)"))
                 {
-                    enemyPool.Add(new EnemyPool(Instantiate(enemyPrefabList[spawnSet[setToUse].spawnPrefabName[i] + "(Clone)"]), false));
+                    enemyPool.Add(new EnemyPool(Instantiate(enemyPrefabList[spawnSet[setToUse].spawnPrefabName[i] + "(Clone)"], transform.position, Quaternion.identity), false));
                     enemy = enemyPool[enemyPool.Count - 1];
                     for (int J = 0; J < enemy.enemy.transform.childCount; J++)
                     {
@@ -265,9 +266,8 @@ public class EnemyManager : MonoBehaviour
     {
         foreach (var item in agentsInCombat)
         {
-            if (meleeCombatants / 2 > rangedComtabatants)
+            if (false/*meleeCombatants / 2 > rangedComtabatants*/)//OBS! DISABLED FOR PRESENTATION BUILD
             {
-
                 rangedComtabatants++;
                 item.agentGameObject.GetComponentInChildren<FoxAgentFSM>().combatRole = FoxAgentFSM.CombatRole.Ranged;
                 item.agentGameObject.GetComponentInChildren<FoxAgentFSM>().circleRadius = 8;
@@ -313,10 +313,12 @@ public class EnemyManager : MonoBehaviour
     }
     public void AssignSquare(GameObject agent)
     {
+
         int tempID = positionSquaresUsed.Find((x) => x.isAvailable == true).id;
+        positionSquaresUsed[tempID].isAvailable = false;
         agent.GetComponent<FoxAgentFSM>().squareID = positionSquaresUsed[tempID].id;
         agent.GetComponent<FoxAgentFSM>().squareNormalisedPosition = positionSquaresUsed[tempID].squareTransform.localPosition;
-        positionSquaresUsed[tempID].isAvailable = false;
+        
     }
 
     public void SteeringBehaviorDestinationUpdate()

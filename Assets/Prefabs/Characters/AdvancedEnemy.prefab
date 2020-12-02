@@ -350,7 +350,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2257629015008893172}
   m_Layer: 0
-  m_Name: DoubleTrouble
+  m_Name: AdvancedEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1391,7 +1391,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -1475,21 +1475,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04fb7aa92c10a914fad88d81cb47b8c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   fieldOfView: 120
   viewDistance: 20
   radiusOfHearing: 10
-  talkingDistance: 50
+  talkingDistance: 35
   playerLayerMask:
     serializedVersion: 2
     m_Bits: 1024
   highOffset: 0.25
-  walkingSpeed: 1.5
-  runningSpeed: 3.5
+  walkingSpeed: 2
+  runningSpeed: 5
+  combatRole: 0
   attacking: 0
   meleeAttackRange: 2.5
-  rangedAttackRange: 10
+  rangedAttackRange: 8
   circleRadius: 4
   destination: {x: 0, y: 0, z: 0}
+  squareID: 0
+  squareNormalisedPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &6325156050180504588
 GameObject:
   m_ObjectHideFlags: 0
