@@ -157,30 +157,23 @@ public class InputBuffer : ScriptableObject
         {
             animator.SetTrigger("Attack");
             animator.SetInteger("GroundChain", 1);
-            player.GetComponentInChildren<WeaponCollision>().collisionActive = true;
             player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
         }
         else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack1")) //If the player continues the chain from 1 to 2
         {
 
             animator.SetInteger("GroundChain", 2);
-            player.GetComponentInChildren<WeaponCollision>().collisionActive = true;
-
             player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
 
         }
         else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack2")) //If the player continues the chain from 2 to 3
         {
             animator.SetInteger("GroundChain", 3);
-            player.GetComponentInChildren<WeaponCollision>().collisionActive = true;
-
             player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
         }
         else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack3")) //If the player continues the chain from 3 to 4
         {
             animator.SetInteger("GroundChain", 4);
-            player.GetComponentInChildren<WeaponCollision>().collisionActive = true;
-
             player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
         }
     }
@@ -192,7 +185,6 @@ public class InputBuffer : ScriptableObject
         {
             if (animator.GetBool("Rage Mode") == true) //If the player is in rage mode -> Do the rage chain
             {
-
                 animator.SetInteger("Rage GroundChain", 1);
                 animator.SetTrigger("Rage Attack");
 
@@ -203,18 +195,15 @@ public class InputBuffer : ScriptableObject
         else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Rage Mode_Attack1")) //If the player continues the chain from 1 to 2
         {
             animator.SetInteger("Rage GroundChain", 2);
-
             player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
         }
         else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Rage Mode_Attack2")) //If the player continues the chain from 2 to 3
         {
             animator.SetInteger("Rage GroundChain", 3);
-
             player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
         }
         else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Rage Mode_Attack3")) //If the player is in chain 3
         {
-
             player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
         }
 
@@ -225,9 +214,7 @@ public class InputBuffer : ScriptableObject
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") ||
                             animator.GetCurrentAnimatorStateInfo(0).IsName("Walk") ||
                             animator.GetCurrentAnimatorStateInfo(0).IsName("Run"))
-
         {
-
             if (animator.GetFloat("movementMagnitude") > 0)
             {
                 animator.SetTrigger("Dodge");
@@ -236,9 +223,7 @@ public class InputBuffer : ScriptableObject
                 move.DodgeMovementStart(player.GetComponent<Transform>());
             }
         }
-
     }
-
 
     void ActivateRageMode()
     {

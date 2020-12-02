@@ -23233,10 +23233,9 @@ GameObject:
   - component: {fileID: 7782437706851999924}
   - component: {fileID: 7782437706851999915}
   - component: {fileID: 7782437706851999914}
-  - component: {fileID: 2210122756252791218}
   m_Layer: 8
   m_Name: Forest_Part1
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -23450,27 +23449,6 @@ TerrainCollider:
   m_Enabled: 1
   m_TerrainData: {fileID: 15600000, guid: 714470a0dbd412345bc36c9861482716, type: 2}
   m_EnableTreeColliders: 1
---- !u!114 &2210122756252791218
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7782437706851999913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a84a5f8185c0b98498dfe7c982104479, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textureValues:
-  - 1
-  - 0
-  grid: {fileID: 0}
-  objectsToSpawn:
-  - {fileID: 919132149155446097, guid: 4f8f71d12214144468adb81ac3ceca9a, type: 3}
-  - {fileID: 8520639236513187755, guid: 52204f9a751952d4881c8ccc35ac93a5, type: 3}
-  - {fileID: 3152980295048745356, guid: 6dc1ead041631d34b9f787c86c66ad82, type: 3}
-  fileName: Forest_Part1
 --- !u!1 &7793829180203352136
 GameObject:
   m_ObjectHideFlags: 0

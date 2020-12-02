@@ -221,7 +221,7 @@ public class EnemyManager : MonoBehaviour
     {
         if (IssueAttackOrderToReadyAgent())
         {
-            coolDownTime = UnityEngine.Random.Range(2, 5);
+            coolDownTime = UnityEngine.Random.Range(0, 2);
         }
     }
 

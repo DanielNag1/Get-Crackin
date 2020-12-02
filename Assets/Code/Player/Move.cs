@@ -142,14 +142,17 @@ public class Move : MonoBehaviour
             {
                 Vector3 targetPos = new Vector3(targetTransform.position.x, transform.position.y, targetTransform.position.z);
                 transform.LookAt(targetPos);
+
+                //OBS!!! We should not dash closer to the enemy then needed for an attack(may solve collision).
+                if (Vector3.Distance(target.GetEnemyTransform().position, transform.position) < attackTowardsDistance)
+                {
+                    characterController.Move(target.GetEnemyDirection().normalized * ((Vector3.Distance(targetTransform.position, transform.position) - 1) / attackTowardSeconds) * Time.deltaTime);  //The object moves.
+                }
+                else
+                {
+                    characterController.Move(target.GetEnemyDirection().normalized * (attackTowardsDistance / attackTowardSeconds) * Time.deltaTime);  //The object moves.
+                }
             }
-            //OBS!!! We should not dash closer to the enemy then needed for an attack(may solve collision).
-            //if (Vector3.Distance(target.GetEnemyTransform().position, transform.position) < attackTowardsDistance)
-            //{
-            //    characterController.Move(target.GetEnemyDirection().normalized * (Mathf.Min(Vector3.Distance(target.GetEnemyTransform().position, transform.position) - 1, attackTowardsDistance) / attackTowardSeconds) * Time.deltaTime);  //The object moves.
-            //}
-            characterController.Move(target.GetEnemyDirection().normalized * (attackTowardsDistance / attackTowardSeconds) * Time.deltaTime);  //The object moves.
-            //transform.LookAt(target.GetEnemyTransform());
             timer -= Time.deltaTime;
             yield return null;
         }

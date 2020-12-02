@@ -72,18 +72,15 @@ public class WeaponCollision : MonoBehaviour
             {
                 if (hit.collider.tag == targetTag)
                 {
-
                     if (!CompereTargetsHit(hit))
                     {
                         if (!CompereItem2RecentTargetsHit(hit))
                         {
                             targetsHit.Add(hit.transform.gameObject);
                             recentTargetsHit.Add(new Tuple<float, GameObject>(0, hit.transform.gameObject));
-
                         }
                     }
                 }
-
             }
             Debug.DrawRay(previousWeaponPointPositions[i], transform.TransformDirection((currentWeaponPointPositions[i] - previousWeaponPointPositions[i]).normalized) * Vector3.Distance(previousWeaponPointPositions[i], currentWeaponPointPositions[i]), Color.white);
         }
@@ -92,7 +89,6 @@ public class WeaponCollision : MonoBehaviour
     {
         for (int i = 0; i < targetsHit.Count; i++)
         {
-
             Debug.Log(targetsHit[i].name);
             //deal Damage Here
             if (targetTag != "Player")
@@ -100,7 +96,7 @@ public class WeaponCollision : MonoBehaviour
                 VFXEvents.Instance.VFX1Play();
                 FreeCameraShake.Instance.ShakeCamera(4f, 0.1f);
                 LockCameraShake.Instance.ShakeCamera(4f, 0.1f);
-                if (targetsHit[i].GetComponent<Animator>().GetBool("Rage Mode") == false)
+                if (!gameObject.GetComponent<Animator>().GetBool("Rage Mode"))
                 {
                     RageMode.Instance.ModifyRage(10); //Increase rage meter
                 }
@@ -121,7 +117,7 @@ public class WeaponCollision : MonoBehaviour
                 targetsHit[i].GetComponent<Move>().Knockback(knockbackDirection); //Set knockback on player
                 targetsHit[i].GetComponent<Animator>().SetTrigger("GetHit");
                 health = targetsHit[i].GetComponentInChildren<Health>();
-                health.ModifyHealth(-5);
+                health.ModifyHealth(-weaponDamage);
                 SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), SoundPaths[Random.Range(0, SoundPaths.Count - 1)], 0, Time.fixedTime, VolumeScales[0]);
             }
         }
@@ -169,5 +165,14 @@ public class WeaponCollision : MonoBehaviour
                 recentTargetsHit.RemoveAt(i);
             }
         }
+    }
+
+    public void EnableCollision()
+    {
+        collisionActive = true;
+    }
+    public void DisableCollision()
+    {
+        collisionActive = false;
     }
 }

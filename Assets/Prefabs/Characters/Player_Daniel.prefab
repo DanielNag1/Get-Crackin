@@ -520,10 +520,10 @@ GameObject:
   - component: {fileID: 6793778528719022586}
   - component: {fileID: 6793778528719022532}
   - component: {fileID: 6793778528719022584}
-  - component: {fileID: 876823701}
   - component: {fileID: 5602473436880409283}
   - component: {fileID: 84947479}
   - component: {fileID: 7774743324023600733}
+  - component: {fileID: 8054717837295288600}
   - component: {fileID: 3931738415636858030}
   - component: {fileID: 7549676529129411895}
   m_Layer: 10
@@ -613,18 +613,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &876823701
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6793778528719022535}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ac3fd7937e4fe549895780df5fe928f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &5602473436880409283
 AudioSource:
   m_ObjectHideFlags: 0
@@ -737,6 +725,8 @@ MonoBehaviour:
   slash2: {fileID: 1391434060059608235, guid: 593c139fd447fb64780903ce9393ab90, type: 3}
   slash3: {fileID: 1391434060059608235, guid: ab97999ba379bde448baac941ebfc256, type: 3}
   slash4: {fileID: 1391434060059608235, guid: d246a8f0f5cbf664da4a32c3f54c5347, type: 3}
+  rageslash1: {fileID: 0}
+  rageslash2: {fileID: 0}
 --- !u!114 &7774743324023600733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -755,7 +745,7 @@ MonoBehaviour:
   - SFX/ImpactSounds/Body_Slashed3
   VolumeScales:
   - 0.2
-  weaponDamage: 10
+  weaponDamage: 1
   targetTag: Enemy
   layerMaskValue: 10
   weaponPoints:
@@ -767,6 +757,18 @@ MonoBehaviour:
   - {fileID: 7660421928429704941}
   InvulnerabilityTime: 0.3
   collisionActive: 0
+--- !u!114 &8054717837295288600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6793778528719022535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0de6fa71da9fbd4c870a4ec8eee0750, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3931738415636858030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -797,7 +799,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b19e93d370ba8244a61aa2119f8001a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 10
   currentHealth: 0
   animator: {fileID: 6793778528719022584}
   healthPickedUp: 0

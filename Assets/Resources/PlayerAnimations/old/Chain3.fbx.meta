@@ -21,8 +21,7 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
-    animationImportWarnings: Event VFX1Stop has a time (0.544330) outside the clip's
-      valid range (0.000000..0.533333). It will never be fired
+    animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -64,6 +63,22 @@ ModelImporter:
         functionName: Slash3
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: bd730548f3b38c24d94441ba6770f0e7,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.15700704
+        functionName: EnableCollision
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 69d5659865216724dbb79c86dc3afbd8,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.81685644
+        functionName: DisableCollision
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 69d5659865216724dbb79c86dc3afbd8,
           type: 3}
         floatParameter: 0
         intParameter: 0
