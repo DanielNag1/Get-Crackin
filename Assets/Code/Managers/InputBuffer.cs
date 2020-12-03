@@ -107,8 +107,14 @@ public class InputBuffer : ScriptableObject
         switch (inputKeyCode)
         {
             case KeyCode.Joystick1Button0: //A Attack
-                GroundCombos();
-                RageGroundCombos();
+                if (animator.GetBool("Rage Mode")) //If the player is in rage mode -> Do the rage chain
+                {
+                    RageGroundCombos();
+                }
+                else
+                {
+                    GroundCombos();
+                }
                 break;
             case KeyCode.Joystick1Button1: //B Dodge
                 GroundDodge();
@@ -181,14 +187,10 @@ public class InputBuffer : ScriptableObject
                     animator.GetCurrentAnimatorStateInfo(0).IsName("Walk") ||
                     animator.GetCurrentAnimatorStateInfo(0).IsName("Run"))
         {
-            if (animator.GetBool("Rage Mode") == true) //If the player is in rage mode -> Do the rage chain
-            {
-                animator.SetInteger("Rage GroundChain", 1);
-                animator.SetTrigger("Rage Attack");
-                //player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
-            }
+            animator.SetInteger("Rage GroundChain", 1);
+            animator.SetTrigger("Rage Attack");
+            player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
         }
-
         else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Rage Mode_Attack1")) //If the player continues the chain from 1 to 2
         {
             animator.SetInteger("Rage GroundChain", 2);
@@ -203,8 +205,6 @@ public class InputBuffer : ScriptableObject
         {
             player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
         }
-
-
     }
     void GroundDodge()
     {
@@ -224,24 +224,21 @@ public class InputBuffer : ScriptableObject
 
     void ActivateRageMode()
     {
-        animator.ResetTrigger("Attack");
         if (RageMode.Instance.currentRage > 0)
         {
-            if (!animator.GetBool("Rage Mode"))
+            if (animator.GetBool("Rage Mode"))
+            {
+                animator.SetBool("Rage Mode", false);
+                VFXEvents.Instance.VFX5Stop();
+                VFXEvents.Instance.VFX4Play();
+            }
+            else
             {
                 animator.SetBool("Rage Mode", true);
                 VFXEvents.Instance.VFX4Stop();
                 VFXEvents.Instance.VFX5Play();
             }
-            else if (animator.GetBool("Rage Mode"))
-            {
-                animator.SetBool("Rage Mode", false);
-                VFXEvents.Instance.VFX5Stop();
-            }
-
         }
-
     }
-
     #endregion
 }

@@ -34,58 +34,65 @@ public class RageMode : MonoBehaviour
     private void OnEnable()
     {
         currentRage = startRage;
-
     }
-
+    //public void ActivateRageMode()
+    //{
+    //    if (currentRage > 0)
+    //    {
+    //        if (animator.GetBool("Rage Mode"))
+    //        {
+    //            animator.SetBool("Rage Mode", false);
+    //            VFXEvents.Instance.VFX5Stop();
+    //            VFXEvents.Instance.VFX4Play();
+    //        }
+    //        else
+    //        {
+    //            animator.SetBool("Rage Mode", true);
+    //            VFXEvents.Instance.VFX4Stop();
+    //            VFXEvents.Instance.VFX5Play();
+    //        }
+    //    }
+    //}
     public void ModifyRage(float amount)
     {
-        if (currentRage < maxRage)
+        if (amount > 0)
         {
-            currentRage += amount;
-            float currentRagePct = (float)currentRage / (float)maxRage;
-            onRagePctChanged(currentRagePct);
+            currentRage = Math.Min(maxRage, currentRage + amount);
+            if (!animator.GetBool("Rage Mode"))
+            {
+                VFXEvents.Instance.VFX4Play();
+            }
         }
-
+        else
+        {
+            currentRage = Math.Max(0, currentRage + amount);
+            if (currentRage == 0)
+            {
+                //animator.ResetTrigger("Attack");
+                animator.SetBool("Rage Mode", false);
+                VFXEvents.Instance.VFX4Stop();
+                VFXEvents.Instance.VFX5Stop();
+            }
+        }
+        float currentRagePct = (float)currentRage / (float)maxRage;
+        onRagePctChanged(currentRagePct);
     }
-
 
     // Update is called once per frame
     void Update()
     {
         //elapsedTime += Time.deltaTime;
-
-        if (currentRage <= 0)
-        {
-            animator.ResetTrigger("Attack");
-            animator.SetBool("Rage Mode", false);
-            VFXEvents.Instance.VFX4Stop();
-            VFXEvents.Instance.VFX5Stop();
-        }
-        if (currentRage > 0 && animator.GetBool("Rage Mode") != true)
-        {
-            VFXEvents.Instance.VFX4Play();
-        }
-
-
         //if (elapsedTime >= TimerSec)
         //{
         //    elapsedTime = 0;
         //    ResetRageMode();
-
         //}
     }
-
-
 
     private void ResetRageMode()
     {
         currentRage = startRage;
         rags.fillAmount = 0;
-
-
         //Debug.Log("RAGE MODE RESET");
-
     }
-
-
 }

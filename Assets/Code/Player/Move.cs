@@ -111,7 +111,7 @@ public class Move : MonoBehaviour
         StartCoroutine(KnockbackMovement(direction));
     }
 
-    public void ModifyAttackSpeed()
+    public void ModifyAttackSpeed() //MoveToRageMode
     {
         if (animator.GetBool("Rage Mode"))
         {
@@ -146,7 +146,7 @@ public class Move : MonoBehaviour
                 //OBS!!! We should not dash closer to the enemy then needed for an attack(may solve collision).
                 if (Vector3.Distance(target.GetEnemyTransform().position, transform.position) < attackTowardsDistance)
                 {
-                    characterController.Move(target.GetEnemyDirection().normalized * ((Vector3.Distance(targetTransform.position, transform.position) - 1) / attackTowardSeconds) * Time.deltaTime);  //The object moves.
+                    characterController.Move(target.GetEnemyDirection().normalized * ((Vector3.Distance(targetTransform.position, transform.position) - 0.5f) / attackTowardSeconds) * Time.deltaTime);  //The object moves.
                 }
                 else
                 {

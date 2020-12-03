@@ -7,80 +7,62 @@ using UnityEngine.SceneManagement;
 public class Menu : MonoBehaviour
 {
     public GameObject pauseMenu, optionsMenu, mainMenu, pauseOptionMenu;
-
     public GameObject pauseResumeButton, optionButton, mainMenuButton, quitToDesktopButton;
-
     //public GameObject customKeybindingButton, masterVolumeButton, soundEffectsButton, musicVolumeButton;
-
     public GameObject backButton, playButton, optionsMainMenuButton, quitGameButton, continueButton;
-
     private bool mainMenuActive = false, optionMenuActive = false, pauseMenuActive = false;
-
     public GameObject levelLoader;
-
-
-
-
-
-
-
 
     void Update()
     {
-
-            if (optionsMenu.activeInHierarchy)
+        if (optionsMenu.activeInHierarchy)
+        {
+            optionMenuActive = true;
+            if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Joystick1Button1))
             {
-                optionMenuActive = true;
-                if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Joystick1Button1))
+                if (EventSystem.current.currentSelectedGameObject == backButton)
                 {
-                    if (EventSystem.current.currentSelectedGameObject == backButton)
-                    {
-                        OpenMainMenu();
-                    }
-                    else if (EventSystem.current.currentSelectedGameObject == backButton && pauseMenuActive)
-                    {
-                        BackButton();
-                    }
+                    OpenMainMenu();
+                }
+                else if (EventSystem.current.currentSelectedGameObject == backButton && pauseMenuActive)
+                {
+                    BackButton();
                 }
             }
+        }
 
-            else if (mainMenu.activeInHierarchy)
+        else if (mainMenu.activeInHierarchy)
+        {
+            mainMenuActive = true;
+            if (Input.GetKeyDown(KeyCode.Joystick1Button0))
             {
-
-                mainMenuActive = true;
-
-                if (Input.GetKeyDown(KeyCode.Joystick1Button0))
+                if (EventSystem.current.currentSelectedGameObject == playButton)
                 {
-                    if (EventSystem.current.currentSelectedGameObject == playButton)
-                    {
-                        PlayGame();
-                    }
-                    else if (EventSystem.current.currentSelectedGameObject == optionsMainMenuButton)
-                    {
-                        OpenOptions();
-                    }
-                    else if (EventSystem.current.currentSelectedGameObject == quitGameButton)
-                    {
-                        ExitGame();
-                    }
-                    else if (EventSystem.current.currentSelectedGameObject == continueButton)
-                    {
-                        ExitGame();
-                    }
+                    PlayGame();
+                }
+                else if (EventSystem.current.currentSelectedGameObject == optionsMainMenuButton)
+                {
+                    OpenOptions();
+                }
+                else if (EventSystem.current.currentSelectedGameObject == quitGameButton)
+                {
+                    ExitGame();
+                }
+                else if (EventSystem.current.currentSelectedGameObject == continueButton)
+                {
+                    ExitGame();
                 }
             }
-
-
+        }
     }
 
     //public void PauseGame()
     //{
-    //    if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Joystick1Button6))
+    //    if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Joystick1Button6)) //OBS! All input should be handled by the InputManager
     //    {
     //        //pauseMenuActive = true;
     //        mainMenuActive = false;
     //        optionMenuActive = false;
-
     //        //pauseMenu.SetActive(true);
     //        mainMenu.SetActive(false);
     //        optionsMenu.SetActive(false);
@@ -96,8 +78,6 @@ public class Menu : MonoBehaviour
     public void PlayGame()
     {
         levelLoader.GetComponent<LoadLevel>().LoadNextLevel();
-
-
         Time.timeScale = 1f;
     }
 
@@ -116,6 +96,7 @@ public class Menu : MonoBehaviour
     {
         return InputSave.Instance.WantToQuit();
     }
+
     //public void ResumeButton()
     //{
     //    pauseMenu.SetActive(false);

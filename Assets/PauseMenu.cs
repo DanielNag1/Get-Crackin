@@ -18,7 +18,7 @@ public class PauseMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Joystick1Button7))
+        if (Input.GetKeyDown(KeyCode.Joystick1Button7))//OBS!! all input should be handled in the input manager
         {
             if (GameIsPaused)
             {
@@ -28,8 +28,6 @@ public class PauseMenu : MonoBehaviour
             {
                 Pause();
             }
-
-
         }
     }
 
@@ -55,5 +53,4 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadSceneAsync("MainMenu");
     }
-
 }
