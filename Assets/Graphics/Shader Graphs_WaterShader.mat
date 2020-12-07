@@ -19,10 +19,19 @@ Material:
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
-    m_TexEnvs: []
+    m_TexEnvs:
+    - _MainNormal:
+        m_Texture: {fileID: 2800000, guid: 984b455d1f61bd34e8b74f7e1817e933, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SecondNormal:
+        m_Texture: {fileID: 2800000, guid: 703d1f74c69fc95498dcfd0afe8e1d61, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Depth: -0.42
-    - _Strength: 1.15
+    - _Depth: -1.15
+    - _Normal_Strength: 1
+    - _Strength: 2
     m_Colors:
-    - _DeepWaterColor: {r: 0.053221796, g: 0.34273145, b: 0.49056602, a: 0}
-    - _ShawllowWaterColor: {r: 0.16420436, g: 0.74945086, b: 0.7735849, a: 0}
+    - _DeepWaterColor: {r: 0.053221755, g: 0.3427314, b: 0.8392157, a: 0}
+    - _ShawllowWaterColor: {r: 0.0047169924, g: 0.7511792, b: 1, a: 0.4392157}
