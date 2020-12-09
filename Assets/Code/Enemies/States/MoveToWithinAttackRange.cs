@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
 public class MoveToWithinAttackRange : IState
@@ -16,7 +14,7 @@ public class MoveToWithinAttackRange : IState
     {
         this._navMeshAgent = navMeshAgent;
         this._animator = animator;
-        _player = player;
+        this._player = player;
     }
 
     #region Interface Functions

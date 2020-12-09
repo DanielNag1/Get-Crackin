@@ -29,17 +29,13 @@ public class Knockback : IState
     {
         _animator.SetBool("Fox_Stagger", true);
         animationTimer = _animationTimeResetValue;
-        #region Testing if this works
         NavMeshHit hit;
-        int i = 1;
-        while (!NavMesh.SamplePosition(destination, out hit, i, NavMesh.AllAreas)) //get where we should go on the navMesh
+        int samplePosition = 1;
+        while (!NavMesh.SamplePosition(destination, out hit, samplePosition, NavMesh.AllAreas)) //get where we should go on the navMesh
         {
-            i++;
+            samplePosition++;
         }
         destination = hit.position; //set as target position.
-        //destination.y = destination.y + 1; //Unsure if we need this!
-        #endregion
-
         _navMeshAgent.SetDestination(destination);
     }
 
@@ -58,10 +54,6 @@ public class Knockback : IState
     public void TimeTick()
     {
         animationTimer -= Time.deltaTime;
-        if (_navMeshAgent.velocity != Vector3.zero)
-        {
-            _navMeshAgent.transform.rotation = Quaternion.LookRotation(_navMeshAgent.velocity * -1, Vector3.up); // vektor * -1 ger motsatt vektor
-        }
     }
     #endregion
 }

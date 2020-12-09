@@ -1,40 +1,34 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Data;
 using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-
-    [SerializeField]
-    private int maxHealth = 30;
+    #region Variables
+    [SerializeField] private int _maxHealth = 30;
     public int currentHealth;
     public event Action<float> onHealthPctChanged = delegate { };
-    [SerializeField] Animator animator;
+    [SerializeField] private Animator animator;
     public bool healthPickedUp;
-
-    // Start is called before the first frame update
+    #endregion
+    #region Methods
     void Start()
     {
-        currentHealth = maxHealth;
+        currentHealth = _maxHealth;
     }
 
     private void OnEnable()
     {
-        currentHealth = maxHealth;
-
+        currentHealth = _maxHealth;
     }
 
     public void ModifyHealth(int amount)
     {
         currentHealth += amount;
-        float currentHealthPct = (float)currentHealth / (float)maxHealth;
+        float currentHealthPct = (float)currentHealth / (float)_maxHealth;
         onHealthPctChanged(currentHealthPct);
     }
 
-
-    // Update is called once per frame
     void Update()
     {
         DrawHealthPickUpVFX();
@@ -46,25 +40,29 @@ public class Health : MonoBehaviour
                 animator.SetBool("isDead", true);
             }
         }
+#if UNITY_EDITOR
+
         if (Input.GetKeyDown(KeyCode.H))
         {
             Debug.Log("minus health");
             ModifyHealth(-10);
         }
+#endif
     }
 
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (hit.collider.gameObject.tag == "Health" && currentHealth != maxHealth)
+        if (hit.collider.gameObject.tag == "Health" && currentHealth != _maxHealth)
         {
             HealthPickup HP;
             HP = hit.collider.gameObject.GetComponent<HealthPickup>();
             healthPickedUp = true;
+            //OBS! If we want mushroms to make sound when picked up add here.
             HP.PickupHealth();
             ModifyHealth(HP.healingValue);
-            Debug.Log("Gained 10 Health");
         }
     }
+
     /// <summary>
     /// Triggers the healing particles on the player.
     /// </summary>
@@ -83,7 +81,5 @@ public class Health : MonoBehaviour
         yield return new WaitForSeconds(1.3f);
         VFXEvents.Instance.VFX2Stop();
     }
-
-
-
+    #endregion
 }

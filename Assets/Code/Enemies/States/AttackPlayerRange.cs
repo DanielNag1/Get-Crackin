@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
 public class AttackPlayerRanged : IState
@@ -11,7 +9,7 @@ public class AttackPlayerRanged : IState
     private WeaponCollision weaponCollision;
     private GameObject _player;
     private GameObject _enemy;
-    public float attackAnimationDurationTimeResetValue = 0.983f;
+    public float attackAnimationDurationTimeResetValue = 0.983f;//OBS!!! Set RangedAttackAnimationDuration!
     public float attackAnimationDurationTimer = 0.983f;
     #endregion
 
@@ -22,11 +20,10 @@ public class AttackPlayerRanged : IState
         this._animator = animator;
         weaponCollision = enemy.GetComponent<WeaponCollision>();
         _player = GameObject.FindGameObjectWithTag("Player");
-        _enemy = enemy;
+        this._enemy = enemy;
     }
 
     #region Interface Methods
-
     public void OnEnter()
     {
         _enemy.GetComponent<FoxAgentFSM>().attacking = false;

@@ -5,17 +5,15 @@ using UnityEngine;
 public class InputSave : ScriptableObject
 {
     #region Variables
-    public List<KeyCode> PressedButtons = new List<KeyCode>(16); //Get input
-    private Stack<KeyCode> bufferStack = new Stack<KeyCode>();
-    private bool bufferMode = true;
-    private float bufferTimer = 0;
-    public LockToTarget LockToTarget;
+    public List<KeyCode> pressedButtons = new List<KeyCode>(16); //Get input
+    public LockToTarget lockToTarget;
+    private bool _bufferMode = true;
+    private Stack<KeyCode> _bufferStack = new Stack<KeyCode>();
 
     private int ButtonX, ButtonY, ButtonA, ButtonB, ButtonRT, ButtonRB, ButtonLT, ButtonLB, ButtonStart, ButtonSelect, ButtonR3, ButtonL3, ButtonUp, ButtonDown, ButtonLeft, ButtonRight = 0;
     private Vector3 MoveVectorInput, LookVectorInput;
 
-    StreamWriter streamWriter;
-    Stream stream;
+    private StreamWriter _streamWriter;
     #endregion
 
     #region singleton
@@ -35,7 +33,7 @@ public class InputSave : ScriptableObject
 
     #region Methods
 
-    void Awake()
+    private void Awake()
     {
         int number = 0;
         while (File.Exists(Application.dataPath + @"InputSave" + number + ".txt"))
@@ -49,77 +47,75 @@ public class InputSave : ScriptableObject
                 }
             }
         }
-        streamWriter = new StreamWriter(Application.dataPath + @"InputSave" + number + ".txt", true);
+        _streamWriter = new StreamWriter(Application.dataPath + @"InputSave" + number + ".txt", true);
     }
     public bool WantToQuit()
     {
-        streamWriter.Write("#|ButtonX|ButtonY|ButtonA|ButtonB|ButtonRT|ButtonRB|ButtonLT|ButtonLB|ButtonStart|ButtonSelect|ButtonR3|ButtonL3|ButtonUp|ButtonDown|ButtonLeft|ButtonRight" + "\r\n");
-        streamWriter.Write("$|"+ ButtonX + "|" + ButtonY + "|" + ButtonA + "|" + ButtonB + "|" + ButtonRT + "|" + ButtonRB + "|" + ButtonLT + "|" + ButtonLB + "|" + ButtonStart + "|" + ButtonSelect + "|" + ButtonR3 + "|" + ButtonL3 + "|" + ButtonUp + "|" + ButtonDown + "|" + ButtonLeft + "|" + ButtonRight);
-        streamWriter.Close();
+        _streamWriter.Write("#|ButtonX|ButtonY|ButtonA|ButtonB|ButtonRT|ButtonRB|ButtonLT|ButtonLB|ButtonStart|ButtonSelect|ButtonR3|ButtonL3|ButtonUp|ButtonDown|ButtonLeft|ButtonRight" + "\r\n");
+        _streamWriter.Write("$|"+ ButtonX + "|" + ButtonY + "|" + ButtonA + "|" + ButtonB + "|" + ButtonRT + "|" + ButtonRB + "|" + ButtonLT + "|" + ButtonLB + "|" + ButtonStart + "|" + ButtonSelect + "|" + ButtonR3 + "|" + ButtonL3 + "|" + ButtonUp + "|" + ButtonDown + "|" + ButtonLeft + "|" + ButtonRight);
+        _streamWriter.Close();
         return true;
     }
     public void SaveSeed(int seed)
     {
-        streamWriter.Write("#|seed" + "\r\n");
-        streamWriter.Write("£|" + seed + "\r\n");
-        streamWriter.Write("#|MoveX|MoveY|CamX|CamY|ButtonKeyCodes" + "\r\n");
+        _streamWriter.Write("#|seed" + "\r\n");
+        _streamWriter.Write("£|" + seed + "\r\n");
+        _streamWriter.Write("#|MoveX|MoveY|CamX|CamY|ButtonKeyCodes" + "\r\n");
     }
-
 
     public void SaveBuffer()
     {
         SaveJoystickInput();
         CheckInput();
-        streamWriter.Write("\r\n");
+        _streamWriter.Write("\r\n");
     }
+
     private void SaveJoystickInput()
     {
-        streamWriter.Write(Input.GetAxis("Horizontal") + "|" + Input.GetAxis("Vertical") + "|" + Input.GetAxis("Mouse X") + "|" + Input.GetAxis("Mouse Y"));
+        _streamWriter.Write(Input.GetAxis("Horizontal") + "|" + Input.GetAxis("Vertical") + "|" + Input.GetAxis("Mouse X") + "|" 
+            + Input.GetAxis("Mouse Y"));
     }
+
     private void SaveKeyCode(KeyCode keyCode)
     {
-        streamWriter.Write("|" + keyCode);
+        _streamWriter.Write("|" + keyCode);
     }
 
     private void CheckInput()
     {
-        if (bufferMode == false)
+        if (_bufferMode == false)
         {
-            for (int i = 0; i < PressedButtons.Count; i++)
+            for (int i = 0; i < pressedButtons.Count; i++)
             {
-                ExecuteInput(PressedButtons[i]);
+                ExecuteInput(pressedButtons[i]);
             }
             return;
         }
 
-        for (int i = 0; i < PressedButtons.Count; i++)
+        for (int i = 0; i < pressedButtons.Count; i++)
         {
-            if (PressedButtons[i] == KeyCode.Joystick1Button6 || PressedButtons[i] == KeyCode.Joystick1Button7 || PressedButtons[i] == KeyCode.Joystick1Button5)
+            if (pressedButtons[i] == KeyCode.Joystick1Button6 || pressedButtons[i] == KeyCode.Joystick1Button7 ||
+                pressedButtons[i] == KeyCode.Joystick1Button5)
             {
-                ExecuteInput(PressedButtons[i]);
+                ExecuteInput(pressedButtons[i]);
                 continue;
             }
-            BufferInput(PressedButtons[i]);
+            BufferInput(pressedButtons[i]);
         }
         ExecuteBuffer();
     }
     private void BufferInput(KeyCode pressedButton)
     {
-        bufferStack.Push(pressedButton);
+        _bufferStack.Push(pressedButton);
     }
     private void ExecuteBuffer()
     {
-        if (bufferStack.Count <= 0)
+        if (_bufferStack.Count <= 0)
         {
             return;
         }
-        while (bufferTimer <= 0)
-        {
-            bufferTimer -= Time.deltaTime;
-            break;
-        }
-        ExecuteInput(bufferStack.Pop());
-        bufferStack.Clear();
+        ExecuteInput(_bufferStack.Pop());
+        _bufferStack.Clear();
     }
 
     //Change keycodes to a bit representation might be faster
@@ -148,7 +144,7 @@ public class InputSave : ScriptableObject
                 ButtonLB++;
                 break;
             case KeyCode.Joystick1Button5: //RB
-                if (LockToTarget.closestEnemy != null)
+                if (lockToTarget.closestEnemy != null)
                 {
                     SaveKeyCode(inputKeyCode);
                     ButtonRB++;

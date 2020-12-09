@@ -1,31 +1,27 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class SoundLooper : MonoBehaviour
 {
-    [SerializeField] private List<string> SoundPaths; //sound paths
-    [SerializeField] private float volumeScale = 1; //volume scale
-    int currentSong = 0;
+    [SerializeField] private List<string> _soundPaths; //sound paths
+    [SerializeField] private float _volumeScale = 1; //volume scale
+    private int _currentSong = 0;
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (SoundPaths == null || SoundPaths.Count <= 0)
+        if (_soundPaths == null || _soundPaths.Count <= 0)
         {
             return;
         }
         
-
         if (!transform.GetComponent<AudioSource>().isPlaying)
         {
-            SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), SoundPaths[currentSong], 0, Time.fixedTime,volumeScale);
-            ++currentSong;
-            if (currentSong >= SoundPaths.Count)
+            SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), _soundPaths[_currentSong], 0, Time.fixedTime,_volumeScale);
+            ++_currentSong;
+            if (_currentSong >= _soundPaths.Count)
             {
-                currentSong = 0;
+                _currentSong = 0;
             }
-            
         }
     }
 }

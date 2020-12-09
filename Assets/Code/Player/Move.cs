@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Move : MonoBehaviour
 {
+    #region Variables
     private CharacterController characterController;
     private Vector2 movementDirection = new Vector2();
     private Transform cameraTransform;
@@ -21,7 +22,8 @@ public class Move : MonoBehaviour
     [SerializeField] float highOffset = 1.58f;
     [SerializeField] float knockbackAmount;
     [SerializeField] float knockbackTimer;
-
+    #endregion
+    #region Methods
     void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -30,7 +32,6 @@ public class Move : MonoBehaviour
         layerMask = 1 << layerMaskValue;
         layerMask = ~layerMask;
     }
-
     void Update()
     {
         ModifyAttackSpeed();
@@ -79,8 +80,6 @@ public class Move : MonoBehaviour
             RelativeToCameraMovement();
             characterController.Move(desiredDirection * MovementSpeed * movementDirection.magnitude * Time.deltaTime);  //The object moves.
         }
-
-
     }
 
     private void Gravity()
@@ -92,7 +91,7 @@ public class Move : MonoBehaviour
             if (hit.distance > highOffset + 0.5f)
             {
                 characterController.Move(-Vector3.up * Mathf.Min(hit.distance, fallSpeed));
-                fallSpeed =9.82f;
+                fallSpeed = 9.82f;
             }
             else if (hit.distance > highOffset)
             {
@@ -103,8 +102,8 @@ public class Move : MonoBehaviour
                 characterController.Move(Vector3.up * (float)(highOffset - hit.distance));
             }
         }
-
     }
+
     public void Knockback(Vector3 direction)
     {
         animator.ResetTrigger("Get Hit");
@@ -116,20 +115,18 @@ public class Move : MonoBehaviour
         if (animator.GetBool("Rage Mode"))
         {
             attackTowardsDistance = 7;
-            //attackTowardSeconds = 0.34f;
         }
         else
         {
             attackTowardsDistance = 2;
-            //attackTowardSeconds = 0.34f;
         }
     }
-
 
     public void AttackTowardsMovementStart(Transform trans)
     {
         StartCoroutine(AttackTowardsMovement(trans));
     }
+
     public IEnumerator AttackTowardsMovement(Transform trans)
     {
         float timer = attackTowardSeconds;
@@ -137,7 +134,6 @@ public class Move : MonoBehaviour
         {
             var target = GetComponentInChildren<LockToTarget>();
             Transform targetTransform = target.GetEnemyTransform();
-
             if (targetTransform != null)
             {
                 Vector3 targetPos = new Vector3(targetTransform.position.x, transform.position.y, targetTransform.position.z);
@@ -162,6 +158,7 @@ public class Move : MonoBehaviour
     {
         StartCoroutine(DodgeMovement(trans));
     }
+
     public IEnumerator DodgeMovement(Transform trans)
     {
         float timer = DodgeTimeSeconds;
@@ -174,7 +171,6 @@ public class Move : MonoBehaviour
             timer -= Time.deltaTime;
             yield return null;
         }
-
     }
 
     public IEnumerator KnockbackMovement(Vector3 direction)
@@ -199,4 +195,5 @@ public class Move : MonoBehaviour
             return Vector3.zero;
         }
     }
+#endregion
 }

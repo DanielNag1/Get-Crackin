@@ -1,28 +1,28 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
 public class VFXEvents : MonoBehaviour
 {
+    #region Variables
     [Header("Visual Effects")]
-    [SerializeField] VisualEffect VFX1;
-    [SerializeField] VisualEffect VFX2;
-    [SerializeField] VisualEffect VFX3;
-    [SerializeField] VisualEffect VFX4;
-    [SerializeField] VisualEffect VFX5;
-    [SerializeField] VisualEffect VFX6;
-
-
-
+    [SerializeField] private VisualEffect VFX1;
+    [SerializeField] private VisualEffect VFX2;
+    [SerializeField] private VisualEffect VFX3;
+    [SerializeField] private VisualEffect VFX4;
+    [SerializeField] private VisualEffect VFX5;
+    [SerializeField] private VisualEffect VFX6;
     public static VFXEvents Instance { get; private set; }
 
+    #endregion
+    #region Methods
     private void Start()
     {
         Instance = this;
         VFX4.gameObject.SetActive(false);
         VFX5.gameObject.SetActive(false);
     }
+
     private void Update()
     {
         VFX2.transform.position = new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z);
@@ -33,12 +33,12 @@ public class VFXEvents : MonoBehaviour
     public void VFX1Play()
     {
         Vector3 forward = (transform.rotation * Vector3.forward).normalized;
-
         VFX1.transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
         VFX1.transform.position += forward * 1;
         var VisualEffect = Instantiate(VFX1);
         StartCoroutine(VFX1Timer(VisualEffect));
     }
+
     IEnumerator VFX1Timer(VisualEffect vfx)
     {
         vfx.Play();
@@ -68,7 +68,6 @@ public class VFXEvents : MonoBehaviour
     void VFX3Play()
     {
         Vector3 forward = (transform.rotation * Vector3.forward).normalized;
-
         VFX3.transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
         VFX3.transform.position += forward * 2;
         VFX3.transform.rotation = transform.rotation;
@@ -93,7 +92,6 @@ public class VFXEvents : MonoBehaviour
     {
         VFX5.gameObject.SetActive(true);
     }
-
     public void VFX5Stop()
     {
         VFX5.gameObject.SetActive(false);
@@ -105,7 +103,5 @@ public class VFXEvents : MonoBehaviour
         var VisualEffect = Instantiate(VFX6);
         StartCoroutine(VFX6Timer(VisualEffect));
     }
-
-
-
+    #endregion
 }

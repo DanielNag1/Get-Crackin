@@ -1,44 +1,45 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class WeaponCollision : MonoBehaviour
 {
-    [SerializeField] private List<string> SoundPaths;
-    [SerializeField] private List<float> VolumeScales;
-    private Health health;
-    Random random;
-
+    //OBS!!! ADD COMMENTS!!!!!
+    #region variables
+    [SerializeField] private List<string> _soundPaths;
+    [SerializeField] private List<float> _volumeScales;
+    private Health _health;
     public int weaponDamage = 1;
     public string targetTag;
     public int layerMaskValue;
     public List<Transform> weaponPoints;
-    public float InvulnerabilityTime;
+    public float invulnerabilityTime;
     public bool collisionActive = false;
-    private List<Vector3> currentWeaponPointPositions = new List<Vector3>();
-    private List<Vector3> previousWeaponPointPositions = new List<Vector3>();
-    private int layerMask;
-    private List<GameObject> targetsHit = new List<GameObject>();
-    private List<Tuple<float, GameObject>> recentTargetsHit = new List<Tuple<float, GameObject>>();
+    [SerializeField] private int _rageAdjustmentValue = 10;
+    [SerializeField] private float _shakeIntensity = 4f;
+    [SerializeField] private float _shakeTime = 0.1f;
+    private List<Vector3> _currentWeaponPointPositions = new List<Vector3>();
+    private List<Vector3> _previousWeaponPointPositions = new List<Vector3>();
+    private int _layerMask; //Make int LAYERMASK type
+    private List<GameObject> _targetsHit = new List<GameObject>();
+    private List<Tuple<float, GameObject>> _recentTargetsHit = new List<Tuple<float, GameObject>>();
+    #endregion
 
-
-
+    #region methods
     private void Start()
     {
         for (int i = 0; i < weaponPoints.Count; i++)
         {
-            currentWeaponPointPositions.Add(weaponPoints[i].position);
-            previousWeaponPointPositions.Add(currentWeaponPointPositions[i]);
+            _currentWeaponPointPositions.Add(weaponPoints[i].position);
+            _previousWeaponPointPositions.Add(_currentWeaponPointPositions[i]);
         }
-        layerMask = 1 << layerMaskValue;
-        layerMask = ~layerMask;
+        _layerMask = 1 << layerMaskValue;
+        _layerMask = ~_layerMask;
     }
 
     private void Update()
     {
-
         PurgeOldRecentTargetsHit();
         if (collisionActive)
         {
@@ -46,7 +47,6 @@ public class WeaponCollision : MonoBehaviour
             WeaponCollisionCheck();
             DeliverDamageToTargetsHit();
         }
-
     }
 
     /// <summary>
@@ -56,10 +56,11 @@ public class WeaponCollision : MonoBehaviour
     {
         for (int i = 0; i < weaponPoints.Count; i++)
         {
-            previousWeaponPointPositions[i] = currentWeaponPointPositions[i];
-            currentWeaponPointPositions[i] = weaponPoints[i].position;
+            _previousWeaponPointPositions[i] = _currentWeaponPointPositions[i];
+            _currentWeaponPointPositions[i] = weaponPoints[i].position;
         }
     }
+
     /// <summary>
     /// Raycasts along the collision line.
     /// </summary>
@@ -68,80 +69,80 @@ public class WeaponCollision : MonoBehaviour
         for (int i = 0; i < weaponPoints.Count; i++)
         {
             RaycastHit hit;
-            if (Physics.Raycast(previousWeaponPointPositions[i], transform.TransformDirection((currentWeaponPointPositions[i] - previousWeaponPointPositions[i]).normalized), out hit, Vector3.Distance(previousWeaponPointPositions[i], currentWeaponPointPositions[i]), layerMask))
+            if (Physics.Raycast(_previousWeaponPointPositions[i], transform.TransformDirection(
+                (_currentWeaponPointPositions[i] - _previousWeaponPointPositions[i]).normalized), out hit, 
+                Vector3.Distance(_previousWeaponPointPositions[i], _currentWeaponPointPositions[i]), _layerMask))
             {
                 if (hit.collider.tag == targetTag)
                 {
-                    if (!CompereTargetsHit(hit))
+                    if (!CompareTargetsHit(hit) && !CompareItem2RecentTargetsHit(hit))
                     {
-                        if (!CompereItem2RecentTargetsHit(hit))
-                        {
-                            targetsHit.Add(hit.transform.gameObject);
-                            recentTargetsHit.Add(new Tuple<float, GameObject>(0, hit.transform.gameObject));
-                        }
+                        _targetsHit.Add(hit.transform.gameObject);
+                        _recentTargetsHit.Add(new Tuple<float, GameObject>(0, hit.transform.gameObject));
                     }
                 }
             }
-            Debug.DrawRay(previousWeaponPointPositions[i], transform.TransformDirection((currentWeaponPointPositions[i] - previousWeaponPointPositions[i]).normalized) * Vector3.Distance(previousWeaponPointPositions[i], currentWeaponPointPositions[i]), Color.white);
+            Debug.DrawRay(_previousWeaponPointPositions[i], transform.TransformDirection(
+                (_currentWeaponPointPositions[i] - _previousWeaponPointPositions[i]).normalized) * 
+                Vector3.Distance(_previousWeaponPointPositions[i], _currentWeaponPointPositions[i]), Color.white);
         }
     }
     public void DeliverDamageToTargetsHit()
     {
-        for (int i = 0; i < targetsHit.Count; i++)
+        for (int i = 0; i < _targetsHit.Count; i++)
         {
-            Debug.Log(targetsHit[i].name);
+            Debug.Log(_targetsHit[i].name);
             //deal Damage Here
             if (targetTag != "Player")
             {
                 VFXEvents.Instance.VFX1Play();
-                FreeCameraShake.Instance.ShakeCamera(4f, 0.1f);
-                LockCameraShake.Instance.ShakeCamera(4f, 0.1f);
+                FreeCameraShake.Instance.ShakeCamera(_shakeIntensity, _shakeTime);
+                LockCameraShake.Instance.ShakeCamera(_shakeIntensity, _shakeTime);
                 if (!gameObject.GetComponent<Animator>().GetBool("Rage Mode"))
                 {
-                    RageMode.Instance.ModifyRage(10); //Increase rage meter
+                    RageMode.Instance.ModifyRage(_rageAdjustmentValue); //Increase rage meter
                 }
                 else
                 {
-                    RageMode.Instance.ModifyRage(-10); //Decrease rage meter
+                    RageMode.Instance.ModifyRage(-_rageAdjustmentValue); //Decrease rage meter
                 }
                 //OBS!! weaponPoint location is hard coded, add info on what weaponPoint made the hit to the list: targetsHit
-                //If we want knockback to depend on weapon hit location.
-                //targetsHit[i].GetComponent<enemyhealth>().TakeDamage(weaponDamage, weaponPoints[0].transform); // if this breaks check weaponpoints noll
                 //If we want knockback to depend on player position.
-                targetsHit[i].GetComponent<enemyhealth>().TakeDamage(weaponDamage, weaponPoints[0].transform.root);
-                SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), SoundPaths[Random.Range(0, SoundPaths.Count - 1)], 0, Time.fixedTime, VolumeScales[0]);
+                _targetsHit[i].GetComponent<enemyhealth>().TakeDamage(weaponDamage, weaponPoints[0].transform.root);
+                SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), _soundPaths[Random.Range(0, _soundPaths.Count - 1)], 0,
+                    Time.fixedTime, _volumeScales[0]);
             }
             else
             {
-                Vector3 knockbackDirection = (targetsHit[i].transform.position - transform.position).normalized; //The direction from the enemy that hit the player
-                targetsHit[i].GetComponent<Move>().Knockback(knockbackDirection); //Set knockback on player
-                targetsHit[i].GetComponent<Animator>().SetTrigger("GetHit");
-                health = targetsHit[i].GetComponentInChildren<Health>();
-                health.ModifyHealth(-weaponDamage);
-                SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), SoundPaths[Random.Range(0, SoundPaths.Count - 1)], 0, Time.fixedTime, VolumeScales[0]);
+                Vector3 knockbackDirection = (_targetsHit[i].transform.position - transform.position).normalized; //The direction from the enemy that hit the player
+                _targetsHit[i].GetComponent<Move>().Knockback(knockbackDirection); //Set knockback on player
+                _targetsHit[i].GetComponent<Animator>().SetTrigger("GetHit");
+                _health = _targetsHit[i].GetComponentInChildren<Health>();
+                _health.ModifyHealth(-weaponDamage);
+                SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), _soundPaths[Random.Range(0, _soundPaths.Count - 1)], 0,
+                    Time.fixedTime, _volumeScales[0]);
             }
         }
-
-        targetsHit.Clear();
+        _targetsHit.Clear();
     }
 
-
-    bool CompereTargetsHit(RaycastHit hit)
+    bool CompareTargetsHit(RaycastHit hit)
     {
-        for (int i = 0; i < targetsHit.Count; i++)
+        for (int i = 0; i < _targetsHit.Count; i++)
         {
-            if (targetsHit[i].GetInstanceID() == hit.transform.gameObject.GetInstanceID())
+            if (_targetsHit[i].GetInstanceID() == hit.transform.gameObject.GetInstanceID())
             {
                 return true;
             }
         }
         return false;
     }
-    bool CompereItem2RecentTargetsHit(RaycastHit hit)
+
+    bool CompareItem2RecentTargetsHit(RaycastHit hit)
     {
-        for (int i = 0; i < recentTargetsHit.Count; i++)
+        for (int i = 0; i < _recentTargetsHit.Count; i++)
         {
-            if (recentTargetsHit[i].Item2.GetInstanceID() == hit.transform.gameObject.GetInstanceID())
+            if (_recentTargetsHit[i].Item2.GetInstanceID() == hit.transform.gameObject.GetInstanceID())
             {
                 return true;
             }
@@ -151,28 +152,31 @@ public class WeaponCollision : MonoBehaviour
 
     void PurgeOldRecentTargetsHit()
     {
-        for (int i = recentTargetsHit.Count - 1; i >= 0; i--)
+        for (int i = _recentTargetsHit.Count - 1; i >= 0; i--)
         {
-            if (recentTargetsHit[i].Item1 < InvulnerabilityTime)
+            if (_recentTargetsHit[i].Item1 < invulnerabilityTime)
             {
-                GameObject tempObject = recentTargetsHit[i].Item2;
-                float tempTime = recentTargetsHit[i].Item1 + Time.deltaTime;
-                recentTargetsHit.RemoveAt(i);
-                recentTargetsHit.Add(new Tuple<float, GameObject>(tempTime, tempObject));
+                GameObject tempObject = _recentTargetsHit[i].Item2;
+                float tempTime = _recentTargetsHit[i].Item1 + Time.deltaTime;
+                _recentTargetsHit.RemoveAt(i);
+                _recentTargetsHit.Add(new Tuple<float, GameObject>(tempTime, tempObject));
             }
             else
             {
-                recentTargetsHit.RemoveAt(i);
+                _recentTargetsHit.RemoveAt(i);
             }
         }
     }
 
+    //Used as animatorEvents
     public void EnableCollision()
     {
         collisionActive = true;
     }
+    //Used as animatorEvents
     public void DisableCollision()
     {
         collisionActive = false;
     }
+    #endregion
 }

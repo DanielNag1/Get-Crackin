@@ -4,11 +4,11 @@ using UnityEngine.UI;
 
 public class RageBar : MonoBehaviour
 {
-
-    [SerializeField]
-    public Image RageBarss;
-    private float updateSpeedSec = 0.5f;
-
+    #region Variables
+    [SerializeField] public Image rageBar;
+    private float _updateSpeedSec = 0.5f;
+    #endregion
+    #region Methods
     private void Awake()
     {
         GetComponentInParent<RageMode>().onRagePctChanged += HandleRageChanged;
@@ -21,23 +21,21 @@ public class RageBar : MonoBehaviour
 
     private IEnumerator ChangeToPct(float pct)
     {
-        float preChangedPct = RageBarss.fillAmount;
+        float preChangedPct = rageBar.fillAmount;
         float elapsed = 0f;
 
-        while (elapsed < updateSpeedSec)
+        while (elapsed < _updateSpeedSec)
         {
             elapsed += Time.deltaTime;
-            RageBarss.fillAmount = Mathf.Lerp(preChangedPct, pct, elapsed / updateSpeedSec);
+            rageBar.fillAmount = Mathf.Lerp(preChangedPct, pct, elapsed / _updateSpeedSec);
             yield return null;
         }
-        RageBarss.fillAmount = pct;
+        rageBar.fillAmount = pct;
     }
-
     private void LateUpdate()
     {
         transform.LookAt(Camera.main.transform);
         transform.Rotate(0, 180, 0);
     }
-
-
+    #endregion
 }

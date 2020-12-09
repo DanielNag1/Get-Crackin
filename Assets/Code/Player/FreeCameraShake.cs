@@ -1,56 +1,61 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Cinemachine;
 
+/// <summary>
+/// OBS!!! Add simple explination!
+/// </summary>
 public class FreeCameraShake : MonoBehaviour
 {
-    [SerializeField] CinemachineFreeLook freeLookCamera;
-    [SerializeField] CinemachineBrain cinemachineBrain;
-    private float shakeTimer;
-    private float intensity;
+    #region Variables
+    [SerializeField] CinemachineFreeLook _freeLookCamera;
+    [SerializeField] CinemachineBrain _cinemachineBrain;
+    private float _shakeTimer;
+    private float _intensity;
     public static FreeCameraShake Instance { get; private set; }
+    #endregion
 
-    // Start is called before the first frame update
+    #region Methods
     private void Start()
     {
-        cinemachineBrain = Camera.main.GetComponent<CinemachineBrain>();
-        freeLookCamera = GetComponent<CinemachineFreeLook>();
+        _cinemachineBrain = Camera.main.GetComponent<CinemachineBrain>();
+        _freeLookCamera = GetComponent<CinemachineFreeLook>();
 
         Instance = this;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
 
-        if (shakeTimer > 0)
+        if (_shakeTimer > 0)
         {
-            shakeTimer -= Time.deltaTime;
-            intensity -= 0.1f;
+            _shakeTimer -= Time.deltaTime;
+            _intensity -= 0.1f;
         }
-        if (shakeTimer <= 0)
+        if (_shakeTimer <= 0)
         {
-            if (cinemachineBrain.IsLive(freeLookCamera)) //Resets the amplitude of the shake to 0
+            if (_cinemachineBrain.IsLive(_freeLookCamera)) //Resets the amplitude of the shake to 0
             {
+                //timeScale is used for slowmo effect
                 //Time.timeScale = 1; //Reset gamespeed
-                freeLookCamera.GetRig(0).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
-                freeLookCamera.GetRig(1).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
-                freeLookCamera.GetRig(2).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
+                _freeLookCamera.GetRig(0).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
+                _freeLookCamera.GetRig(1).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
+                _freeLookCamera.GetRig(2).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
             }
         }
     }
 
     public void ShakeCamera(float Inputintensity, float time)
     {
-        intensity = Inputintensity;
-        shakeTimer = time;
-        if (cinemachineBrain.IsLive(freeLookCamera)) //Sets the amplitude of the shake
+        _intensity = Inputintensity;
+        _shakeTimer = time;
+        if (_cinemachineBrain.IsLive(_freeLookCamera)) //Sets the amplitude of the shake
         {
+            //timeScale is used for slowmo effect
             //Time.timeScale = 0.2f; //Slow down gamespeed
-            freeLookCamera.GetRig(0).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = intensity;
-            freeLookCamera.GetRig(1).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = intensity;
-            freeLookCamera.GetRig(2).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = intensity;
+            _freeLookCamera.GetRig(0).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = _intensity;
+            _freeLookCamera.GetRig(1).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = _intensity;
+            _freeLookCamera.GetRig(2).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = _intensity;
         }
     }
+    #endregion
 }

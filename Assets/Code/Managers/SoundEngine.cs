@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class SoundEngine : ScriptableObject
 {
+
+    #region Singleton
     /// <summary>
     /// Handles audio clips in audio sources.
     /// </summary>
-
     private static SoundEngine instance;
     public static SoundEngine Instance
     {
@@ -20,12 +21,16 @@ public class SoundEngine : ScriptableObject
             return instance;
         }
     }
+    #endregion
 
+
+    [SerializeField] private int _musicTrackCount;
+    [SerializeField] private int _concurrentSFXPlaying;
     public List<AudioSource> audioSources;
-    [SerializeField] private int musicTrackCount;
-    [SerializeField] private int concurrentSFXPlaying;
-    public List<Tuple<AudioSource, string /*trackPath*/, int /*priority*/, double /*requestSentTime*/>> requestList = new List<Tuple<AudioSource, string, int, double>>(); //requests sent from audioHandlers get placed here
+    public List<Tuple<AudioSource, string /*trackPath*/, int /*priority*/, double /*requestSentTime*/>> requestList = 
+        new List<Tuple<AudioSource, string, int, double>>(); //requests sent from audioHandlers get placed here
     public List<float> volumeScales = new List<float>();
+    
     /// <summary>
     /// Call this to send a request to play a sound.
     /// </summary>
@@ -33,9 +38,10 @@ public class SoundEngine : ScriptableObject
     /// <param name="trackPath"></param>
     /// <param name="priority"></param>
     /// <param name="requestSentTime"></param>
-    public void RequestSFX(AudioSource source, string trackPath, int priority, double requestSentTime,float volumeScale)
+    public void RequestSFX(AudioSource source, string trackPath, int priority, double requestSentTime, float volumeScale)
     {
-        Tuple<AudioSource, string, int, double> tempTuple = new Tuple<AudioSource, string, int, double>(source, trackPath, priority, requestSentTime);
+        Tuple<AudioSource, string, int, double> tempTuple = new Tuple<AudioSource, string, int, double>
+            (source, trackPath, priority, requestSentTime);
         requestList.Add(tempTuple);
         volumeScales.Add(volumeScale);
     }
@@ -62,14 +68,14 @@ public class SoundEngine : ScriptableObject
             //sort the list by priority
             //requestList.Sort((x, y) => x.Item3.CompareTo(y.Item3));
 
-            concurrentSFXPlaying = 0;
+            _concurrentSFXPlaying = 0;
 
             //get currently playing sounds count, add playing list
             foreach (var SFX in requestList)
             {
                 if (SFX.Item1.isPlaying)
                 {
-                    concurrentSFXPlaying++;
+                    _concurrentSFXPlaying++;
                 }
             }
 
@@ -93,12 +99,12 @@ public class SoundEngine : ScriptableObject
     private void LoadAudioClip(Tuple<AudioSource, string, int, double> request, float volumeScale)
     {
         request.Item1.clip = Resources.Load<AudioClip>(request.Item2);
-        PlaySoundClip(request,volumeScale);
+        PlaySoundClip(request, volumeScale);
     }
 
     private void PlaySoundClip(Tuple<AudioSource, string, int, double> request, float volumeScale)
     {
-        request.Item1.PlayOneShot(request.Item1.clip,volumeScale);
+        request.Item1.PlayOneShot(request.Item1.clip, volumeScale);
     }
 
 
@@ -115,9 +121,9 @@ public class SoundEngine : ScriptableObject
         }
 
         //Checks if the audio clip selected is music.
-        if (soundID < musicTrackCount)
+        if (soundID < _musicTrackCount)
         {
-            for (int i = 0; i < musicTrackCount; i++)
+            for (int i = 0; i < _musicTrackCount; i++)
             {
                 if (audioSources[i] != null)
                 {
@@ -130,6 +136,13 @@ public class SoundEngine : ScriptableObject
                 }
             }
         }
+    }
+    public void SetVolume(float slidervalue)
+    {
+        //OBS!!! IMPLEMENT THIS!
+        //private SoundComponent sound = new SoundComponent();
+        //private Slider slider;
+        //    sound.VolumeSet = slidervalue;
     }
 }
 
@@ -162,7 +175,8 @@ public class SoundEngine : ScriptableObject
             //if we are moving we play a sound, and set the timer to 0
             if (verticalAxis != 0 || h != horizontalAxis) 
             {
-                SoundEngine.Instance.RequestSFX(transform.root.GetComponent<AudioSource>(),SoundPaths[Random.Range(0,SoundPaths.Count)],1,Time.fixedTime);
+                SoundEngine.Instance.RequestSFX
+                    (transform.root.GetComponent<AudioSource>(),SoundPaths[Random.Range(0,SoundPaths.Count)],1,Time.fixedTime);
                 walkingSFXtimer = 0;
             }
         }

@@ -1,64 +1,40 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class RageMode : MonoBehaviour
 {
-
-    [SerializeField]
-    public int maxRage = 100;
+    #region Variables
+    [SerializeField] public int maxRage = 100;
     public int startRage;
-    [SerializeField]
-    private float TimerSec;
-    private float elapsedTime;
-    private Image rags;
-
+    [SerializeField] private float _timerSec;
+    private float _elapsedTime;
+    private Image _rags;
     public float currentRage;//Set this value when loading!
-
     public event Action<float> onRagePctChanged = delegate { };
-
-    [SerializeField] Animator animator;
-
+    [SerializeField] private Animator _animator;
     public static RageMode Instance { get; private set; }
-    // Start is called before the first frame update
-    void Start()
+    #endregion
+
+    #region Methods
+    private void Start()
     {
         Instance = this;
         currentRage = startRage;
-        rags = GetComponentInParent<RageBar>().RageBarss;
+        _rags = GetComponentInParent<RageBar>().rageBar;
     }
-
 
     private void OnEnable()
     {
         currentRage = startRage;
     }
-    //public void ActivateRageMode()
-    //{
-    //    if (currentRage > 0)
-    //    {
-    //        if (animator.GetBool("Rage Mode"))
-    //        {
-    //            animator.SetBool("Rage Mode", false);
-    //            VFXEvents.Instance.VFX5Stop();
-    //            VFXEvents.Instance.VFX4Play();
-    //        }
-    //        else
-    //        {
-    //            animator.SetBool("Rage Mode", true);
-    //            VFXEvents.Instance.VFX4Stop();
-    //            VFXEvents.Instance.VFX5Play();
-    //        }
-    //    }
-    //}
+
     public void ModifyRage(float amount)
     {
         if (amount > 0)
         {
             currentRage = Math.Min(maxRage, currentRage + amount);
-            if (!animator.GetBool("Rage Mode"))
+            if (!_animator.GetBool("Rage Mode"))
             {
                 VFXEvents.Instance.VFX4Play();
             }
@@ -68,8 +44,7 @@ public class RageMode : MonoBehaviour
             currentRage = Math.Max(0, currentRage + amount);
             if (currentRage == 0)
             {
-                //animator.ResetTrigger("Attack");
-                animator.SetBool("Rage Mode", false);
+                _animator.SetBool("Rage Mode", false);
                 VFXEvents.Instance.VFX4Stop();
                 VFXEvents.Instance.VFX5Stop();
             }
@@ -77,22 +52,5 @@ public class RageMode : MonoBehaviour
         float currentRagePct = (float)currentRage / (float)maxRage;
         onRagePctChanged(currentRagePct);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //elapsedTime += Time.deltaTime;
-        //if (elapsedTime >= TimerSec)
-        //{
-        //    elapsedTime = 0;
-        //    ResetRageMode();
-        //}
-    }
-
-    private void ResetRageMode()
-    {
-        currentRage = startRage;
-        rags.fillAmount = 0;
-        //Debug.Log("RAGE MODE RESET");
-    }
+#endregion
 }

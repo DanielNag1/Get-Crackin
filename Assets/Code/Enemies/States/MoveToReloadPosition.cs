@@ -10,7 +10,7 @@ public class MoveToReloadPosition : IState
     private NavMeshAgent _navMeshAgent;
     public Vector3 destination;
     public float interactionRange = 1.0f;
-    private GameObject gameObject;
+    private GameObject _gameObject;
     #endregion
 
     /// <summary>
@@ -20,7 +20,12 @@ public class MoveToReloadPosition : IState
     {
         this._animator = animator;
         this._navMeshAgent = navMeshAgent;
-        gameObject = GameObject.FindGameObjectWithTag("ReloadStation");
+        this._gameObject = GameObject.FindGameObjectWithTag("ReloadStation");
+    }
+    private Vector3 FindClosestReloadStation()
+    {
+        Vector3 temp = new Vector3(_gameObject.transform.position.x, _navMeshAgent.transform.position.y, _gameObject.transform.position.z);
+        return temp;
     }
 
     #region Interface functions
@@ -50,12 +55,6 @@ public class MoveToReloadPosition : IState
     public void TimeTick()
     {
         _navMeshAgent.transform.rotation = Quaternion.LookRotation(_navMeshAgent.velocity, Vector3.up);
-    }
-
-    private Vector3 FindClosestReloadStation()
-    {
-        Vector3 temp = new Vector3(gameObject.transform.position.x, _navMeshAgent.transform.position.y, gameObject.transform.position.z);
-        return temp;
     }
     #endregion
 }
