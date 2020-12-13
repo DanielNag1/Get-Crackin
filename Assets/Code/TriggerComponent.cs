@@ -1,49 +1,40 @@
-﻿using UnityEngine;
-using System.Collections;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class TriggerComponent : MonoBehaviour
 {
-    private LevelManager levelManager;
-    private EnemyManager enemyManager;
-    private SaveFileManager saveFileManager;
-
-    [SerializeField] private string SoundPath; //The sound to be played when the trigger is activated
-    [SerializeField] private float volumeScale = 1; //volume scale
-    [SerializeField] private GameObject SoundObjectPrefab; //Creates a temporary SoundObject on the location of the trigger that destroys itself when done.
-    [SerializeField] private List<string> ClassesToBeCalled;
-
+    #region Variables
+    private EnemyManager _enemyManager;
+    [SerializeField] private string _soundPath; //The sound to be played when the trigger is activated
+    [SerializeField] private float _volumeScale = 1; //volume scale
+    [SerializeField] private GameObject _soundObjectPrefab; //Creates a temporary SoundObject on the location of the trigger that destroys itself when done.
+    [SerializeField] private List<string> _classesToBeCalled;
     //Parameters that you want to send to the methods the trigger calls.
-    [SerializeField] private int setToUse;
+    [SerializeField] private int _setToUse;
+    #endregion
 
+    #region Methods
     public void Start()
     {
-        levelManager = LevelManager.Instance;
-        enemyManager = EnemyManager.Instance;
-        saveFileManager = SaveFileManager.Instance;
+        _enemyManager = EnemyManager.Instance;
     }
 
     public void ActivateTrigger() //Activates the trigger when CharacterController collides with trigger hitbox.
     {
-        for (int i = 0; ClassesToBeCalled.Count > i; ++i)
+        for (int i = 0; _classesToBeCalled.Count > i; ++i)
         {
-            if (ClassesToBeCalled[i] == "LevelManager")
+            if (_classesToBeCalled[i] == "EnemyManager")
             {
-                levelManager.LoadNextLevel();
-                continue;
-            }
-            else if (ClassesToBeCalled[i] == "EnemyManager")
-            {
-                enemyManager.SpawnEnemyFromTrigger(setToUse);
+                _enemyManager.SpawnEnemyFromTrigger(_setToUse);
                 continue;
             }
         }
 
-        GameObject temp = Instantiate(SoundObjectPrefab, this.transform.position, Quaternion.identity); //Creates the temporary SoundObject
+        GameObject temp = Instantiate(_soundObjectPrefab, this.transform.position, Quaternion.identity); //Creates the temporary SoundObject
         SoundComponent tempComponent = temp.GetComponent<SoundComponent>(); //Gets the temporary SoundObjects SoundComponent.
-        tempComponent.soundPath = SoundPath; //Assignes the correct sound to the SoundComponent.
-        tempComponent.volumeScale = volumeScale;//Assignes the correct soundVolume to the SoundComponent.
+        tempComponent.soundPath = _soundPath; //Assignes the correct sound to the SoundComponent.
+        tempComponent.volumeScale = _volumeScale;//Assignes the correct soundVolume to the SoundComponent.
         Destroy(this.gameObject); //Destroyes the trigger object, freeing up resources and avoiding the trigger beeing activated twice.
     }
+    #endregion
 }

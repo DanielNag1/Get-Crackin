@@ -1,13 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 public class AttackPlayerMelee : IState
 {
     #region Variables
     private NavMeshAgent _navMeshAgent;
     private Animator _animator;
-    private WeaponCollision weaponCollision;
+    private WeaponCollision _weaponCollision;
     private GameObject _player;
     private GameObject _enemy;
 
@@ -19,24 +17,23 @@ public class AttackPlayerMelee : IState
     {
         this._navMeshAgent = navMeshAgent;
         this._animator = animator;
-        weaponCollision = enemy.GetComponent<WeaponCollision>();
+        _weaponCollision = enemy.GetComponent<WeaponCollision>();
         _player = GameObject.FindGameObjectWithTag("Player");
-        _enemy = enemy;
+        this._enemy = enemy;
     }
 
     #region Interface Methods
-
     public void OnEnter()
     {
         _enemy.GetComponent<FoxAgentFSM>().attacking = false;
         attackAnimationDurationTimer = attackAnimationDurationTimeResetValue;
-        weaponCollision.collisionActive = true;
+        _weaponCollision.collisionActive = true;
         _animator.SetBool("Fox_Melee_Attack", true);
     }
 
     public void OnExit()
     {
-        weaponCollision.collisionActive = false;
+        _weaponCollision.collisionActive = false;
         _animator.SetBool("Fox_Melee_Attack", false);
     }
 

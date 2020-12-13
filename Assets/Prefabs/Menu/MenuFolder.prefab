@@ -3243,7 +3243,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Main Menu
+  m_text: Return to main menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3835,15 +3835,17 @@ MonoBehaviour:
   pauseMenu: {fileID: 8342070120540979324}
   optionsMenu: {fileID: 8342070121234136659}
   mainMenu: {fileID: 8342070120894953975}
-  pauseResumeButton: {fileID: 0}
-  optionButton: {fileID: 0}
-  mainMenuButton: {fileID: 0}
-  quitToDesktopButton: {fileID: 0}
-  customKeybindingButton: {fileID: 0}
-  masterVolumeButton: {fileID: 0}
-  soundEffectsButton: {fileID: 0}
-  musicVolumeButton: {fileID: 0}
-  backButton: {fileID: 0}
+  pauseOptionMenu: {fileID: 8342070120408520338}
+  pauseResumeButton: {fileID: 8342070120878672445}
+  optionButton: {fileID: 8342070120408520338}
+  mainMenuButton: {fileID: 8342070121562359238}
+  quitToDesktopButton: {fileID: 8342070121934695437}
+  backButton: {fileID: 8342070120907950758}
+  playButton: {fileID: 8342070121346096317}
+  optionsMainMenuButton: {fileID: 8342070121123672145}
+  quitGameButton: {fileID: 8342070120575916386}
+  continueButton: {fileID: 8342070122381703253}
+  levelLoader: {fileID: 0}
 --- !u!1 &8342070121707684372
 GameObject:
   m_ObjectHideFlags: 0
@@ -4441,7 +4443,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Quit
+  m_text: Quit Game
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

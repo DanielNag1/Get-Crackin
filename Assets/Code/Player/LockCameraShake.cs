@@ -5,38 +5,34 @@ using Cinemachine;
 
 public class LockCameraShake : MonoBehaviour
 {
-    [SerializeField] CinemachineVirtualCamera lockCamera;
-    [SerializeField] CinemachineBrain cinemachineBrain;
-    private float shakeTimer;
-    private float intensity;
+    #region Variables
+    [SerializeField] private CinemachineVirtualCamera _lockCamera;
+    [SerializeField] private CinemachineBrain _cinemachineBrain;
+    private float _shakeTimer;
+    private float _intensity;
     public static LockCameraShake Instance { get; private set; }
-
-    // Start is called before the first frame update
+    #endregion
+    #region Methods
     private void Start()
     {
-        cinemachineBrain = Camera.main.GetComponent<CinemachineBrain>();
-        lockCamera = GetComponent<CinemachineVirtualCamera>();
-
-
+        _cinemachineBrain = Camera.main.GetComponent<CinemachineBrain>();
+        _lockCamera = GetComponent<CinemachineVirtualCamera>();
         Instance = this;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (shakeTimer > 0)
+        if (_shakeTimer > 0)
         {
-            shakeTimer -= Time.deltaTime;
-            intensity -= 0.1f;
-
+            _shakeTimer -= Time.deltaTime;
+            _intensity -= 0.1f;
         }
-        if (shakeTimer <= 0)
+        if (_shakeTimer <= 0)
         {
-            if (cinemachineBrain.IsLive(lockCamera)) //Resets the amplitude of the shake to 0
+            if (_cinemachineBrain.IsLive(_lockCamera)) //Resets the amplitude of the shake to 0
             {
                 CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin =
-                    lockCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-
+                    _lockCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
                 cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 0;
             }
         }
@@ -44,12 +40,13 @@ public class LockCameraShake : MonoBehaviour
 
     public void ShakeCamera(float Inputintensity, float time)
     {
-        intensity = Inputintensity;
-        shakeTimer = time;
-        if (cinemachineBrain.IsLive(lockCamera)) //Sets the amplitude of the shake
+        _intensity = Inputintensity;
+        _shakeTimer = time;
+        if (_cinemachineBrain.IsLive(_lockCamera)) //Sets the amplitude of the shake
         {
-            CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin = lockCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-            cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = intensity;
+            CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin = _lockCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+            cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = _intensity;
         }
     }
+    #endregion
 }

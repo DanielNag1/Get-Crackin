@@ -1,18 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// OBS!!! Add simple explination!
+/// </summary>
 public class ChangeCamera : MonoBehaviour
 {
-    private Cinemachine.CinemachineVirtualCamera LockOn;
-    private Cinemachine.CinemachineFreeLook ThirdPerson;
-    private Cinemachine.CinemachineTargetGroup targetGroup;
+    #region variables
+    private Cinemachine.CinemachineVirtualCamera _lockOn;
+    private Cinemachine.CinemachineFreeLook _thirdPerson;
+    private Cinemachine.CinemachineTargetGroup _targetGroup;
+    #endregion
 
-    void Start()
+    #region Methods
+    private void Start()
     {
-        LockOn = GetComponentInChildren<Cinemachine.CinemachineVirtualCamera>();
-        ThirdPerson = GetComponentInChildren<Cinemachine.CinemachineFreeLook>();
-        targetGroup = GetComponentInChildren<Cinemachine.CinemachineTargetGroup>();
+        _lockOn = GetComponentInChildren<Cinemachine.CinemachineVirtualCamera>();
+        _thirdPerson = GetComponentInChildren<Cinemachine.CinemachineFreeLook>();
+        _targetGroup = GetComponentInChildren<Cinemachine.CinemachineTargetGroup>();
     }
 
     /// <summary>
@@ -20,8 +24,8 @@ public class ChangeCamera : MonoBehaviour
     /// </summary>
     public void EnterLockCamera()
     {
-        LockOn.Priority = 2;
-        ThirdPerson.Priority = 1;
+        _lockOn.Priority = 2;
+        _thirdPerson.Priority = 1;
     }
 
     /// <summary>
@@ -29,7 +33,8 @@ public class ChangeCamera : MonoBehaviour
     /// </summary>
     public void EnterFreeCamera()
     {
-        ThirdPerson.Priority = 2;
-        LockOn.Priority = 1;
+        _thirdPerson.Priority = 2;
+        _lockOn.Priority = 1;
     }
+    #endregion
 }

@@ -1,12 +1,9 @@
 ﻿using UnityEngine;
-using UnityEngine.AI;
 
 public class CombatIdle : IState
 {
     #region Variables
-   
     private readonly Animator _animator;
-    
     #endregion
 
     public CombatIdle(Animator animator)
@@ -28,6 +25,7 @@ public class CombatIdle : IState
 
     public void TimeTick()
     {
+
     }
     #endregion
 }

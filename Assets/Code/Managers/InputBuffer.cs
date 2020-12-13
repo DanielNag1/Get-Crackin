@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -12,19 +11,16 @@ using UnityEngine;
 //wait for timer
 //execute latest action in buffer if size>0
 
-
-
 public class InputBuffer : ScriptableObject
 {
 
     #region Variables
-    public List<KeyCode> PressedButtons = new List<KeyCode>(10); //Get input
-    private Stack<KeyCode> bufferStack = new Stack<KeyCode>();
-    private bool bufferMode = true;
-    private float bufferTimer = 0;
+    private bool _bufferMode = true;
+    private bool _menuMode = false;
+    private Stack<KeyCode> _bufferStack = new Stack<KeyCode>();
+    public List<KeyCode> pressedButtons = new List<KeyCode>(10); //Get input
     public GameObject player;
-    private Rigidbody enemyRB;
-    public LockToTarget LockToTarget;
+    public LockToTarget lockToTarget;
     public Animator animator;
     #endregion
 
@@ -46,64 +42,60 @@ public class InputBuffer : ScriptableObject
     #region Methods
     public void StartBuffer()
     {
-        //Debug.Log("BufferStart");
         CheckInput();
-
     }
+
     /// <summary>
     /// Analyse input
     /// </summary>
     private void CheckInput()
     {
-        //Debug.Log("BufferMode="+bufferMode);
         //if bufferMode is off execute input
-        if (bufferMode == false)
+        if (_bufferMode == false)
         {
-            Debug.Log("pressedButtons.Count=" + PressedButtons.Count);
-            for (int i = 0; i < PressedButtons.Count; i++)
+            for (int i = 0; i < pressedButtons.Count; i++)
             {
-                Debug.Log("PressedButtons[i] = " + PressedButtons[i]);
-                ExecuteInput(PressedButtons[i]);
+                ExecuteInput(pressedButtons[i]);
             }
             return;
         }
 
-        for (int i = 0; i < PressedButtons.Count; i++)
+        for (int i = 0; i < pressedButtons.Count; i++)
         {
             //execute input that is imidiate actions
-            if (PressedButtons[i] == KeyCode.Joystick1Button6 || PressedButtons[i] == KeyCode.Joystick1Button7 || PressedButtons[i] == KeyCode.Joystick1Button5)
+            if (pressedButtons[i] == KeyCode.Joystick1Button6 || pressedButtons[i] == KeyCode.Joystick1Button7 ||
+                    pressedButtons[i] == KeyCode.Joystick1Button5)
             {
-                //Debug.Log("ImidiateActionButton =" +PressedButtons[i]);
-                ExecuteInput(PressedButtons[i]);
+                ExecuteInput(pressedButtons[i]);
                 continue;
             }
-            BufferInput(PressedButtons[i]); //buffer input
+            BufferInput(pressedButtons[i]); //buffer input
         }
         ExecuteBuffer();
     }
+
     private void BufferInput(KeyCode pressedButton)
     {
-        //Debug.Log("BufferInput pushed ="+ pressedButton);
-        bufferStack.Push(pressedButton); // populate the buffer in correct order, nice.
+        _bufferStack.Push(pressedButton); //populate the buffer in correct order, nice.
     }
+
     private void ExecuteBuffer()
     {
-        if (bufferStack.Count <= 0)
+        if (_bufferStack.Count <= 0)
         {
             return;
         }
-        //Debug.Log("BufferExecute Start");
-        while (bufferTimer <= 0) // Wait for timer
-        {
-            bufferTimer -= Time.deltaTime;
-            break;
-        }
-        ExecuteInput(bufferStack.Pop()); //execute the latest input on the stack
-        bufferStack.Clear(); //clear the stack of inputs
+        ExecuteInput(_bufferStack.Pop()); //execute the latest input on the stack
+        _bufferStack.Clear(); //clear the stack of inputs
     }
+
     private void ExecuteInput(KeyCode inputKeyCode)
     {
-        //Debug.Log("ExecuteInput Start, KeyCode ="+inputKeyCode);
+        if (_menuMode)
+        {
+            ExecuteMenuInput(inputKeyCode);
+            return;
+        }
         switch (inputKeyCode)
         {
             case KeyCode.Joystick1Button0: //A Attack
@@ -116,27 +108,44 @@ public class InputBuffer : ScriptableObject
                     GroundCombos();
                 }
                 break;
+            case KeyCode.Mouse0:
+                if (animator.GetBool("Rage Mode")) //If the player is in rage mode -> Do the rage chain
+                {
+                    RageGroundCombos();
+                }
+                else
+                {
+                    GroundCombos();
+                }
+                break;
             case KeyCode.Joystick1Button1: //B Dodge
                 GroundDodge();
                 break;
-            case KeyCode.Joystick1Button2: //X Jump
-                break;
-            case KeyCode.Joystick1Button3: //Y
+            case KeyCode.Mouse1:
+                GroundDodge();
                 break;
             case KeyCode.Joystick1Button4: //LB
                 ActivateRageMode();
                 break;
             case KeyCode.Joystick1Button5: //RB
-                if (LockToTarget.closestEnemy != null)
+                if (lockToTarget.closestEnemy != null)
                 {
                     Debug.Log("ExecuteInput LockToTarget");
-                    LockToTarget.ManualTargeting();
+                    lockToTarget.ManualTargeting();
                 }
                 break;
-            case KeyCode.Joystick1Button6: //Start Button
+            case KeyCode.Joystick1Button7: //Start Button
+                _menuMode = true;
+                PauseMenu.Instance.Pause();
+                break;
+            #region Unused Buttons
+            case KeyCode.Joystick1Button2: //X Jump
 
                 break;
-            case KeyCode.Joystick1Button7: //Back
+            case KeyCode.Joystick1Button3: //Y
+
+                break;
+            case KeyCode.Joystick1Button6: //Back
 
                 break;
             case KeyCode.Joystick1Button8: //Left Stick Click
@@ -151,10 +160,24 @@ public class InputBuffer : ScriptableObject
             case KeyCode.Joystick1Button11: //RT
 
                 break;
+                #endregion
         }
-        //Debug.Log("BufferDone");
     }
-    void GroundCombos()
+    private void ExecuteMenuInput(KeyCode inputKeyCode)
+    {
+        switch (inputKeyCode)
+        {
+            case KeyCode.Joystick1Button7:
+                _menuMode = false;
+                PauseMenu.Instance.Resume();
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    private void GroundCombos()
     {
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") ||  //If the player is in Idle/Walk/Run
                     animator.GetCurrentAnimatorStateInfo(0).IsName("Walk") ||
@@ -168,7 +191,6 @@ public class InputBuffer : ScriptableObject
         {
             animator.SetInteger("GroundChain", 2);
             player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
-
         }
         else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Chain1_Attack2")) //If the player continues the chain from 2 to 3
         {
@@ -181,7 +203,8 @@ public class InputBuffer : ScriptableObject
             player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
         }
     }
-    void RageGroundCombos()
+
+    private void RageGroundCombos()
     {
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") ||  //If the player is in Idle/Walk/Run
                     animator.GetCurrentAnimatorStateInfo(0).IsName("Walk") ||
@@ -201,12 +224,9 @@ public class InputBuffer : ScriptableObject
             animator.SetInteger("Rage GroundChain", 3);
             player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
         }
-        else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Rage Mode_Attack3")) //If the player is in chain 3
-        {
-            player.GetComponent<Move>().AttackTowardsMovementStart(player.GetComponent<Transform>());
-        }
     }
-    void GroundDodge()
+
+    private void GroundDodge()
     {
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") ||
                             animator.GetCurrentAnimatorStateInfo(0).IsName("Walk") ||
@@ -222,7 +242,7 @@ public class InputBuffer : ScriptableObject
         }
     }
 
-    void ActivateRageMode()
+    private void ActivateRageMode()
     {
         if (RageMode.Instance.currentRage > 0)
         {

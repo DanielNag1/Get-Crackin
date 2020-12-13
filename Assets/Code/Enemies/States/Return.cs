@@ -15,8 +15,6 @@ public class Return : IState
         this._navMeshAgent = navMeshAgent;
         this._animator = animator;
         this._enemy = enemy;
-
-
     }
 
     #region Interface Functions
@@ -24,7 +22,8 @@ public class Return : IState
     public void OnEnter()
     {
         EnemyManager.Instance.AgentLeftCombat(_enemy);
-        spawnPosition = new Vector3(_navMeshAgent.transform.root.position.x, _navMeshAgent.transform.root.position.y, _navMeshAgent.transform.root.position.z);
+        spawnPosition = new Vector3(_navMeshAgent.transform.root.position.x, _navMeshAgent.transform.root.position.y,
+            _navMeshAgent.transform.root.position.z);
         _animator.SetBool("Fox_Run", true);
         _navMeshAgent.SetDestination(spawnPosition);
     }

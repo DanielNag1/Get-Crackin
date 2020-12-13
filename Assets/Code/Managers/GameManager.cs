@@ -1,16 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-
+    #region Variables
     [SerializeField] private LockToTarget LockToTarget;
     [SerializeField] private Animator animator;
     [SerializeField] private GameObject player;
+    #endregion
 
+    #region Methods
     private void Awake()
     {
+        //Used to "generate" and save seed value for the Random class, needed for playback ability in logging tool
+        #region Init Seed
         int SeedVal = (int)Random.Range(0, 9.99f);
         int seed = -1;
         switch (SeedVal)
@@ -71,22 +73,22 @@ public class GameManager : MonoBehaviour
                 Random.InitState(seed);
                 break;
         }
+        #endregion
     }
 
-    // Start is called before the first frame update
     void Start()
     {
-        InputBuffer.Instance.LockToTarget = LockToTarget;
+        InputBuffer.Instance.lockToTarget = LockToTarget;
         InputBuffer.Instance.animator = animator;
         InputBuffer.Instance.player = player;
-        InputSave.Instance.LockToTarget = LockToTarget;
+        InputSave.Instance.lockToTarget = LockToTarget;
     }
 
-    // Update is called once per frame
     void Update()
     {
         InputManager.Instance.Update();
         SoundEngine.Instance.Update();
         EnemyManager.Instance.Update();
     }
+    #endregion
 }

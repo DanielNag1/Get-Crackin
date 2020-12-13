@@ -3,7 +3,6 @@ using UnityEngine.AI;
 public class Idle : IState
 {
     #region Variables
-  //  private EnemyOne _enemy;
     private Animator _animator;
     private NavMeshAgent _navMeshAgent;
     private Quaternion _localRotation;

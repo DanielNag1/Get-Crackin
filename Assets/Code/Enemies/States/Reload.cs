@@ -15,7 +15,7 @@ public class Reload : IState
     public Reload(NavMeshAgent navMeshAgent, Animator animator)
     {
         this._animator = animator;
-        _navMeshAgent = navMeshAgent;
+        this._navMeshAgent = navMeshAgent;
     }
 
     #region Interface functions

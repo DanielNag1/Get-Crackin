@@ -1,16 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class TextWriter : MonoBehaviour
 {
+    #region Variables
     private static TextWriter instance;
-
     private List<SingularTextPart> textPart;
+    private LoadLevel load;
     public GameObject levelLoader;
-    LoadLevel load;
+    #endregion
 
+    #region Methods
     public static void AddWriterStatic(Text uiText, string theText, float characterTime, bool invisible)
     {
         instance.AddWriter(uiText, theText, characterTime, invisible);
@@ -25,7 +26,6 @@ public class TextWriter : MonoBehaviour
     {
         instance = this;
         textPart = new List<SingularTextPart>();
-
         load = levelLoader.GetComponent<LoadLevel>();
     }
 
@@ -34,21 +34,16 @@ public class TextWriter : MonoBehaviour
         for (int i = 0; i < textPart.Count; i++)
         {
             bool textDone = textPart[i].Update();
-            if(textDone)
+            if (textDone)
             {
                 textPart.RemoveAt(i);
                 i--;
             }
         }
-
         if (Input.GetKeyDown(KeyCode.Joystick1Button0))
         {
             load.LoadNextLevel();
         }
-
-        
-
-
     }
 
     public class SingularTextPart
@@ -71,7 +66,6 @@ public class TextWriter : MonoBehaviour
 
         public bool Update()
         {
-
             timer -= Time.deltaTime;
             while (timer <= 0f)
             {
@@ -80,7 +74,7 @@ public class TextWriter : MonoBehaviour
                 string shownText = theText.Substring(0, index);
                 if (invisible)
                 {
-                    shownText += "<color=#00000000>" + theText.Substring(index) + "</color>";  //RGBA color
+                    shownText += "<color=#00000000>"/*transparant*/ + theText.Substring(index) + "</color>";  //RGBA color
                 }
                 text.text = shownText;
 
@@ -93,4 +87,5 @@ public class TextWriter : MonoBehaviour
             return false;
         }
     }
+    #endregion
 }
