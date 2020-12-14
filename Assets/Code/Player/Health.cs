@@ -3,41 +3,52 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
 
     [SerializeField]
-    private int maxHealth = 30;
+    private int _maxHealth = 30;
     public int currentHealth;
     public event Action<float> onHealthPctChanged = delegate { };
     [SerializeField] Animator animator;
     public bool healthPickedUp;
+   
+    private float _lerpTimer;
+    public Image frontHealthBar;
+    public Image backHealthBar;
+    public float chipSpeed = 2f;
 
-    // Start is called before the first frame update
+
+
     void Start()
     {
-        currentHealth = maxHealth;
+        currentHealth = _maxHealth;
     }
 
     private void OnEnable()
     {
-        currentHealth = maxHealth;
+        currentHealth = _maxHealth;
 
     }
 
     public void ModifyHealth(int amount)
     {
         currentHealth += amount;
-        float currentHealthPct = (float)currentHealth / (float)maxHealth;
-        onHealthPctChanged(currentHealthPct);
+        _lerpTimer = 0f;
+
     }
 
 
-    // Update is called once per frame
     void Update()
     {
+        currentHealth = Mathf.Clamp(currentHealth, 0, _maxHealth);
         DrawHealthPickUpVFX();
+        float currentHealthPct = (float)currentHealth / (float)_maxHealth;
+
+        UpdateHealthUI(currentHealthPct);
+        
 
         if (currentHealth <= 0)
         {
@@ -46,16 +57,14 @@ public class Health : MonoBehaviour
                 animator.SetBool("isDead", true);
             }
         }
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            Debug.Log("minus health");
-            ModifyHealth(-10);
-        }
+        
     }
+
+    
 
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (hit.collider.gameObject.tag == "Health" && currentHealth != maxHealth)
+        if (hit.collider.gameObject.tag == "Health" && currentHealth != _maxHealth)
         {
             HealthPickup HP;
             HP = hit.collider.gameObject.GetComponent<HealthPickup>();
@@ -65,6 +74,34 @@ public class Health : MonoBehaviour
             Debug.Log("Gained 10 Health");
         }
     }
+
+    private void UpdateHealthUI(float pct)
+    {
+        float _fillF = frontHealthBar.fillAmount;
+        float _fillB = backHealthBar.fillAmount;
+        
+
+        if (_fillB > pct)
+        {
+            frontHealthBar.fillAmount = pct;
+            backHealthBar.color = Color.red;
+            _lerpTimer += Time.deltaTime;
+            float _percentComplete = _lerpTimer / chipSpeed;
+            _percentComplete = _percentComplete * _percentComplete;
+            backHealthBar.fillAmount = Mathf.Lerp(_fillB, pct, _percentComplete);
+        }
+
+        if (_fillF < pct)
+        {
+            backHealthBar.color = Color.green;
+            backHealthBar.fillAmount = pct;
+            _lerpTimer += Time.deltaTime;
+            float _percentComplete = _lerpTimer / chipSpeed;
+            _percentComplete = _percentComplete * _percentComplete;
+            frontHealthBar.fillAmount = Mathf.Lerp(_fillF, backHealthBar.fillAmount, _percentComplete);
+        }
+    }
+
     /// <summary>
     /// Triggers the healing particles on the player.
     /// </summary>

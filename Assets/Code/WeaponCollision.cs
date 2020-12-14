@@ -100,10 +100,10 @@ public class WeaponCollision : MonoBehaviour
                 {
                     RageMode.Instance.ModifyRage(10); //Increase rage meter
                 }
-                else
-                {
-                    RageMode.Instance.ModifyRage(-10); //Decrease rage meter
-                }
+                //else
+                //{
+                //    RageMode.Instance.ModifyRage(-10); //Decrease rage meter
+                //}
                 //OBS!! weaponPoint location is hard coded, add info on what weaponPoint made the hit to the list: targetsHit
                 //If we want knockback to depend on weapon hit location.
                 //targetsHit[i].GetComponent<enemyhealth>().TakeDamage(weaponDamage, weaponPoints[0].transform); // if this breaks check weaponpoints noll

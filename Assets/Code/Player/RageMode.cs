@@ -35,24 +35,7 @@ public class RageMode : MonoBehaviour
     {
         currentRage = startRage;
     }
-    //public void ActivateRageMode()
-    //{
-    //    if (currentRage > 0)
-    //    {
-    //        if (animator.GetBool("Rage Mode"))
-    //        {
-    //            animator.SetBool("Rage Mode", false);
-    //            VFXEvents.Instance.VFX5Stop();
-    //            VFXEvents.Instance.VFX4Play();
-    //        }
-    //        else
-    //        {
-    //            animator.SetBool("Rage Mode", true);
-    //            VFXEvents.Instance.VFX4Stop();
-    //            VFXEvents.Instance.VFX5Play();
-    //        }
-    //    }
-    //}
+    
     public void ModifyRage(float amount)
     {
         if (amount > 0)
@@ -81,14 +64,10 @@ public class RageMode : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //elapsedTime += Time.deltaTime;
-        //if (elapsedTime >= TimerSec)
-        //{
-        //    elapsedTime = 0;
-        //    ResetRageMode();
-        //}
+        ModifyRage(Time.deltaTime);
     }
 
+    
     private void ResetRageMode()
     {
         currentRage = startRage;
