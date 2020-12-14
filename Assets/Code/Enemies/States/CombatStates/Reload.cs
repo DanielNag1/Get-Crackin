@@ -10,12 +10,14 @@ public class Reload : IState
     private NavMeshAgent _navMeshAgent;
     private float _animationTime = 1.5f;
     public float animationTimer = 1.5f;
+    private WeaponCollision _weaponCollision;
     #endregion
 
-    public Reload(NavMeshAgent navMeshAgent, Animator animator)
+    public Reload(NavMeshAgent navMeshAgent, Animator animator, WeaponCollision weaponCollision)
     {
         this._animator = animator;
         this._navMeshAgent = navMeshAgent;
+        this._weaponCollision = weaponCollision;
     }
 
     #region Interface functions
@@ -44,6 +46,7 @@ public class Reload : IState
         animationTimer -= Time.deltaTime;
         if (animationTimer < 0.5f)
         {
+            _weaponCollision.transform.GetComponent<MeshRenderer>().forceRenderingOff = false;
             _animator.SetBool("Fox_Reload", false);
             _animator.SetBool("Fox_Idle", true);
         }

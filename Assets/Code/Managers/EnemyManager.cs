@@ -281,7 +281,7 @@ public class EnemyManager : MonoBehaviour
             if (item.agentGameObject.GetComponentInChildren<FoxAgentFSM>().combatRole == FoxAgentFSM.CombatRole.None)
             {
 
-                if (true/*_meleeCombatants - _rangedComtabatants >= 2*/)
+                if (_meleeCombatants - _rangedComtabatants >= 2)
                 {
                     //We only need to calculate temp if the agent could become a rangedCombatant.
                     //can be imporved by either making it only save the bool, or assigning the position to the object.

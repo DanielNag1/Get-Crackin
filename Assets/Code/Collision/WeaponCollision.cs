@@ -11,6 +11,7 @@ public class WeaponCollision : MonoBehaviour
     [SerializeField] private List<float> _volumeScales;
     private Health _health;
     public int weaponDamage = 1;
+    public bool destroyOnImpact = false;
     public string targetTag;
     public int layerMaskValue;
     public List<Transform> weaponPoints;
@@ -70,7 +71,7 @@ public class WeaponCollision : MonoBehaviour
         {
             RaycastHit hit;
             if (Physics.Raycast(_previousWeaponPointPositions[i], transform.TransformDirection(
-                (_currentWeaponPointPositions[i] - _previousWeaponPointPositions[i]).normalized), out hit, 
+                (_currentWeaponPointPositions[i] - _previousWeaponPointPositions[i]).normalized), out hit,
                 Vector3.Distance(_previousWeaponPointPositions[i], _currentWeaponPointPositions[i]), _layerMask))
             {
                 if (hit.collider.tag == targetTag)
@@ -83,7 +84,7 @@ public class WeaponCollision : MonoBehaviour
                 }
             }
             Debug.DrawRay(_previousWeaponPointPositions[i], transform.TransformDirection(
-                (_currentWeaponPointPositions[i] - _previousWeaponPointPositions[i]).normalized) * 
+                (_currentWeaponPointPositions[i] - _previousWeaponPointPositions[i]).normalized) *
                 Vector3.Distance(_previousWeaponPointPositions[i], _currentWeaponPointPositions[i]), Color.white);
         }
     }
@@ -115,7 +116,15 @@ public class WeaponCollision : MonoBehaviour
             else
             {
                 Vector3 knockbackDirection = (_targetsHit[i].transform.position - transform.position).normalized; //The direction from the enemy that hit the player
-                _targetsHit[i].GetComponent<Move>().Knockback(knockbackDirection); //Set knockback on player
+                if (destroyOnImpact)
+                {
+                    _targetsHit[i].GetComponent<Move>().Knockback(-knockbackDirection); //Projectiles get position behind player thus we reverse direction of knockback
+                    GetComponent<MeshRenderer>().forceRenderingOff = true;
+                }
+                else
+                {
+                    _targetsHit[i].GetComponent<Move>().Knockback(knockbackDirection); //Set knockback on player
+                }
                 _targetsHit[i].GetComponent<Animator>().SetTrigger("GetHit");
                 _health = _targetsHit[i].GetComponentInChildren<Health>();
                 _health.ModifyHealth(-weaponDamage);

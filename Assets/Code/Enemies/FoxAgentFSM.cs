@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -34,6 +35,8 @@ public class FoxAgentFSM : MonoBehaviour
     public Vector3 destination;
     public int squareID;
     public Vector3 squareNormalisedPosition;
+    public WeaponCollision meleeWeapon;
+    public WeaponCollision rangedWeapon;
     #endregion
 
     #region States
@@ -60,6 +63,19 @@ public class FoxAgentFSM : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         NavMeshAgent navMeshAgent = GetComponent<NavMeshAgent>();
         Animator animator = GetComponent<Animator>();
+        var weapons = GetComponentsInChildren<WeaponCollision>();
+        for (int element = 0; element < weapons.Length; element++)
+        {
+            switch (weapons[element].name)
+            {
+                case "Stone":
+                    rangedWeapon = weapons[element];
+                    break;
+                case "SpikedBallV1.1":
+                    meleeWeapon = weapons[element];
+                    break;
+            }
+        }
         StatesInitialise(navMeshAgent, animator);
         TransitionsAndConditionsInitialise();
     }
@@ -72,13 +88,13 @@ public class FoxAgentFSM : MonoBehaviour
         enterCombat = new EnterCombat(this.gameObject, talkingDistance);
         combatIdle = new CombatIdle(animator);
         moveToReloadPosition = new MoveToReloadPosition(this.gameObject, navMeshAgent, animator, maxSearchDistance);
-        reload = new Reload(navMeshAgent, animator);
+        reload = new Reload(navMeshAgent, animator, rangedWeapon);
         moveToCircle = new MoveToCircle(this.gameObject, navMeshAgent, animator);
         encircleTarget = new EncircleTarget(this.gameObject, navMeshAgent, animator);
         _moveToWithinAttackRange = new MoveToWithinAttackRange(player, navMeshAgent, animator);
         returnState = new Return(this.gameObject, navMeshAgent, animator, walkingSpeed, runningSpeed);
-        attackPlayerMelee = new AttackPlayerMelee(this.gameObject, navMeshAgent, animator);
-        attackPlayerRanged = new AttackPlayerRanged(this.gameObject, navMeshAgent, animator);
+        attackPlayerMelee = new AttackPlayerMelee(this.gameObject, navMeshAgent, animator, meleeWeapon);
+        attackPlayerRanged = new AttackPlayerRanged(this.gameObject, navMeshAgent, animator, rangedWeapon);
         knockback = new Knockback(navMeshAgent, animator);
     }
 

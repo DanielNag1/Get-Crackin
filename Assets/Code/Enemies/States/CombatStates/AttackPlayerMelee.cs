@@ -13,12 +13,12 @@ public class AttackPlayerMelee : IState
     public float attackAnimationDurationTimer = 0.983f;
     #endregion
 
-    public AttackPlayerMelee(GameObject enemy, NavMeshAgent navMeshAgent, Animator animator)
+    public AttackPlayerMelee(GameObject enemy, NavMeshAgent navMeshAgent, Animator animator, WeaponCollision weaponCollision)
     {
         this._navMeshAgent = navMeshAgent;
         this._animator = animator;
-        _weaponCollision = enemy.GetComponent<WeaponCollision>();
-        _player = GameObject.FindGameObjectWithTag("Player");
+        this._weaponCollision = weaponCollision;
+        this._player = GameObject.FindGameObjectWithTag("Player");
         this._enemy = enemy;
     }
 
