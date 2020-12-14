@@ -7,18 +7,23 @@ public class Lollygagging : IState
     private NavMeshAgent _navMeshAgent;
     private readonly Animator _animator;
     public Vector3 targetPos;
+    private float _walkSpeed;
+    private float _runSpeed;
     #endregion
 
-    public Lollygagging(GameObject enemy, NavMeshAgent navMeshAgent, Animator animator)
+    public Lollygagging(NavMeshAgent navMeshAgent, Animator animator, float walkSpeed, float runSpeed)
     {
         this._navMeshAgent = navMeshAgent;
         this._animator = animator;
+        this._walkSpeed = walkSpeed;
+        this._runSpeed = runSpeed;
     }
 
     #region Interface Functions
 
     public void OnEnter()
     {
+        _navMeshAgent.speed = _walkSpeed;
         float angle = Random.Range(0, 360);
         Vector3 HomeVector = new Vector3(_navMeshAgent.transform.root.position.x, _navMeshAgent.transform.root.position.y,
             _navMeshAgent.transform.root.position.z);
@@ -42,6 +47,7 @@ public class Lollygagging : IState
     }
     public void OnExit()
     {
+        _navMeshAgent.speed = _runSpeed;
         _animator.SetBool("Fox_Walk", false);
     }
 
@@ -49,6 +55,7 @@ public class Lollygagging : IState
     {
         _navMeshAgent.transform.rotation = Quaternion.LookRotation(_navMeshAgent.velocity, Vector3.up);
         _navMeshAgent.SetDestination(targetPos);
+        _animator.SetFloat("maxSpeed / currentSpeed", (_navMeshAgent.velocity / _navMeshAgent.speed).magnitude);
     }
     #endregion
 }

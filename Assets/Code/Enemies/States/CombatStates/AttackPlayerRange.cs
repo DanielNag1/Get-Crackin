@@ -9,8 +9,8 @@ public class AttackPlayerRanged : IState
     private WeaponCollision weaponCollision;
     private GameObject _player;
     private GameObject _enemy;
-    public float attackAnimationDurationTimeResetValue = 0.983f;//OBS!!! Set RangedAttackAnimationDuration!
-    public float attackAnimationDurationTimer = 0.983f;
+    public float attackAnimationDurationTimeResetValue = 2f;//OBS!!! Set RangedAttackAnimationDuration!
+    public float attackAnimationDurationTimer = 2f;
     #endregion
 
 
@@ -35,12 +35,17 @@ public class AttackPlayerRanged : IState
     public void OnExit()
     {
         weaponCollision.collisionActive = false;
-        _animator.SetBool("Fox_Ranged_Attack", false);
+        _animator.SetBool("Fox_Idle", false);
     }
 
     public void TimeTick()
     {
         attackAnimationDurationTimer -= Time.deltaTime;
+        if (attackAnimationDurationTimer < 1f)
+        {
+            _animator.SetBool("Fox_Ranged_Attack", false);
+            _animator.SetBool("Fox_Idle", true);
+        }
         _navMeshAgent.transform.LookAt(new Vector3(_player.transform.position.x, _navMeshAgent.transform.position.y, _player.transform.position.z));
     }
     #endregion

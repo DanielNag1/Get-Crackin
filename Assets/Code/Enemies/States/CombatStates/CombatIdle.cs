@@ -12,7 +12,6 @@ public class CombatIdle : IState
     }
 
     #region Interface Functions
-
     public void OnEnter()
     {
         _animator.SetBool("Fox_Idle", true);

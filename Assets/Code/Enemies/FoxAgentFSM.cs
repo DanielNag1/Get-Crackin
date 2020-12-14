@@ -12,23 +12,24 @@ public class FoxAgentFSM : MonoBehaviour
         Melee = 0b_0001,  // 1
         Ranged = 0b_0010,  // 2
     }
-    private FiniteStateMachine _finiteStateMachine = new FiniteStateMachine();
+    protected FiniteStateMachine _finiteStateMachine = new FiniteStateMachine();
     public GameObject player;
-    private RaycastHit _hit;
-    private Vector3 _rayDirection;
+    protected RaycastHit _hit;
+    protected Vector3 _rayDirection;
     public int fieldOfView = 120;
     public float viewDistance = 20f;
-    public float radiusOfHearing = 5f;
-    public float talkingDistance = 15f;
-    public LayerMask playerLayerMask;
-    public float walkingSpeed = 1.5f;
-    public float runningSpeed = 3.5f;
+    public float radiusOfHearing = 10f;
+    public float talkingDistance = 35f;
+    public float walkingSpeed = 3f;
+    public float runningSpeed = 7f;
+    public float interactionRange = 1.5f;
     //---------------------------
-    private bool _insideMaxViewDistance = false;
+    protected bool _insideMaxViewDistance = false;
     public CombatRole combatRole = CombatRole.None;
     public bool attacking = false;
-    public float meleeAttackRange = 1.61f;
-    public float rangedAttackRange = 10;
+    public float meleeAttackRange = 2.5f;
+    public float rangedAttackRange = 10f;
+    public float maxSearchDistance = 100f;
     public float circleRadius = 4;
     public Vector3 destination;
     public int squareID;
@@ -36,25 +37,25 @@ public class FoxAgentFSM : MonoBehaviour
     #endregion
 
     #region States
-    private Idle idle;
-    private Lollygagging lollygagging;
+    protected Idle idle;
+    protected Lollygagging lollygagging;
     #region CombatBlock
-    private EnterCombat enterCombat;
-    private CombatIdle combatIdle;
-    private MoveToReloadPosition moveToReloadPosition;
-    private Reload reload;
-    private MoveToCircle moveToCircle;
-    private EncircleTarget encircleTarget;
-    private MoveToWithinAttackRange _moveToWithinAttackRange;
-    private Return returnState;
-    private AttackPlayerMelee attackPlayerMelee;
-    private AttackPlayerRanged attackPlayerRanged;
+    protected EnterCombat enterCombat;
+    protected CombatIdle combatIdle;
+    protected MoveToReloadPosition moveToReloadPosition;
+    protected Reload reload;
+    protected MoveToCircle moveToCircle;
+    protected EncircleTarget encircleTarget;
+    protected MoveToWithinAttackRange _moveToWithinAttackRange;
+    protected Return returnState;
+    protected AttackPlayerMelee attackPlayerMelee;
+    protected AttackPlayerRanged attackPlayerRanged;
     public Knockback knockback;
     #endregion
     #endregion
 
     #region Methods
-    private void Awake()
+    protected void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         NavMeshAgent navMeshAgent = GetComponent<NavMeshAgent>();
@@ -63,25 +64,25 @@ public class FoxAgentFSM : MonoBehaviour
         TransitionsAndConditionsInitialise();
     }
 
-    private void StatesInitialise(NavMeshAgent navMeshAgent, Animator animator)
+    protected void StatesInitialise(NavMeshAgent navMeshAgent, Animator animator)
     {
         //The States
         idle = new Idle(animator, navMeshAgent);
-        lollygagging = new Lollygagging(this.gameObject, navMeshAgent, animator);
+        lollygagging = new Lollygagging(navMeshAgent, animator, walkingSpeed, runningSpeed);
         enterCombat = new EnterCombat(this.gameObject, talkingDistance);
         combatIdle = new CombatIdle(animator);
-        moveToReloadPosition = new MoveToReloadPosition(navMeshAgent, animator);
+        moveToReloadPosition = new MoveToReloadPosition(this.gameObject, navMeshAgent, animator, maxSearchDistance);
         reload = new Reload(navMeshAgent, animator);
         moveToCircle = new MoveToCircle(this.gameObject, navMeshAgent, animator);
         encircleTarget = new EncircleTarget(this.gameObject, navMeshAgent, animator);
         _moveToWithinAttackRange = new MoveToWithinAttackRange(player, navMeshAgent, animator);
-        returnState = new Return(this.gameObject, navMeshAgent, animator);
+        returnState = new Return(this.gameObject, navMeshAgent, animator, walkingSpeed, runningSpeed);
         attackPlayerMelee = new AttackPlayerMelee(this.gameObject, navMeshAgent, animator);
         attackPlayerRanged = new AttackPlayerRanged(this.gameObject, navMeshAgent, animator);
         knockback = new Knockback(navMeshAgent, animator);
     }
 
-    private void TransitionsAndConditionsInitialise()
+    public virtual void TransitionsAndConditionsInitialise()
     {
         //The Transitions (From, To, Condition)
         #region Transitions
@@ -90,15 +91,17 @@ public class FoxAgentFSM : MonoBehaviour
         _finiteStateMachine.AddTransition(lollygagging, idle, LollygaggingPositionReached());
         _finiteStateMachine.AddTransition(lollygagging, enterCombat, PlayerDetected());
         _finiteStateMachine.AddTransition(enterCombat, combatIdle, FinishedEnteringCombat());
+        _finiteStateMachine.AddTransition(enterCombat, idle, CannotEnterCombat());
         _finiteStateMachine.AddTransition(combatIdle, moveToCircle, AssignedMeleeCombatRole());
         _finiteStateMachine.AddTransition(combatIdle, moveToReloadPosition, AssignedRangedCombatRole());
         _finiteStateMachine.AddTransition(moveToReloadPosition, reload, WithinReloadInteractRange());
+        _finiteStateMachine.AddTransition(moveToReloadPosition, combatIdle, NoAvailableReloadStation());
         _finiteStateMachine.AddTransition(reload, moveToCircle, FinishedReloading());
         _finiteStateMachine.AddTransition(moveToCircle, returnState, CombatHasEnded());
         _finiteStateMachine.AddTransition(moveToCircle, encircleTarget, CirclingTarget());
         _finiteStateMachine.AddTransition(encircleTarget, moveToCircle, ToFarFromCircle());
         _finiteStateMachine.AddTransition(encircleTarget, _moveToWithinAttackRange, Attacking());
-        _finiteStateMachine.AddTransition(_moveToWithinAttackRange, combatIdle, TargetToFarAwayToAttack());
+        _finiteStateMachine.AddTransition(_moveToWithinAttackRange, moveToCircle, TargetToFarAwayToAttack());
         _finiteStateMachine.AddTransition(_moveToWithinAttackRange, returnState, CombatHasEnded());
         _finiteStateMachine.AddTransition(_moveToWithinAttackRange, attackPlayerMelee, TargetWithinMeleeAttackRange());
         _finiteStateMachine.AddTransition(_moveToWithinAttackRange, attackPlayerRanged, TargetWithinRangedAttackRange());
@@ -116,9 +119,11 @@ public class FoxAgentFSM : MonoBehaviour
         Func<bool> LollygaggingPositionReached() => () => Vector3.Distance(lollygagging.targetPos, transform.position) < 0.1f;
         Func<bool> PlayerDetected() => () => CanThisAgentOrOtherAgentWithinTalkingDistanceSeeThePlayer();
         Func<bool> FinishedEnteringCombat() => () => enterCombat.finishedEnteringCombat;
+        Func<bool> CannotEnterCombat() => () => !enterCombat.ableToEnterCombat;
         Func<bool> AssignedMeleeCombatRole() => () => combatRole == CombatRole.Melee;
         Func<bool> AssignedRangedCombatRole() => () => combatRole == CombatRole.Ranged;
-        Func<bool> WithinReloadInteractRange() => () => Vector3.Distance(moveToReloadPosition.destination, transform.position) < moveToReloadPosition.interactionRange;
+        Func<bool> WithinReloadInteractRange() => () => Vector3.Distance(moveToReloadPosition.destination, transform.position) < interactionRange;
+        Func<bool> NoAvailableReloadStation() => () => !moveToReloadPosition.reloadStation.Item2;
         Func<bool> FinishedReloading() => () => reload.animationTimer < 0;
         Func<bool> CombatHasEnded() => () => !CanThisAgentOrOtherAgentWithinTalkingDistanceSeeThePlayer();
         Func<bool> CirclingTarget() => () => Vector2.Distance(new Vector2(destination.x, destination.z), new Vector2(transform.position.x, transform.position.z)) < 0.5f;
@@ -139,7 +144,7 @@ public class FoxAgentFSM : MonoBehaviour
     /// Checks if player is within agents view cone (FOV). Returns true if player is within FOV.
     /// </summary>
     /// <returns></returns>
-    private bool FieldOfViewCheck()
+    protected bool FieldOfViewCheck()
     {
         #region Don't touch
         _rayDirection = player.transform.position - this.transform.position;
@@ -172,27 +177,39 @@ public class FoxAgentFSM : MonoBehaviour
         #endregion
     }
 
-    private bool CanThisAgentOrOtherAgentWithinTalkingDistanceSeeThePlayer()
+    protected bool CanThisAgentOrOtherAgentWithinTalkingDistanceSeeThePlayer()
     {
-        Physics.Raycast(this.transform.position, _rayDirection, out _hit, Mathf.Infinity, playerLayerMask);
-        if (_hit.distance <= viewDistance)
-        {
-            _insideMaxViewDistance = true;
-        }
-        else
-        {
-            _insideMaxViewDistance = false;
-        }
-
-
+        //Close enough to hear the player, We allways detect the player if that is the case
         if (Vector3.Distance(player.transform.position, transform.position) < radiusOfHearing)
         {
             return true;
         }
 
-        if (FieldOfViewCheck() && _insideMaxViewDistance)
+        //Are we facing towards the player, then we can make the raycast to check that we have an unobscured view of the player.
+        if (FieldOfViewCheck())
         {
-            return true;
+            //What layers should block the AI's vision
+            string[] maskStrings = new string[2] { "Player", "ground" };
+            LayerMask mask = LayerMask.GetMask(maskStrings);
+
+            if (Physics.Raycast(this.transform.position, _rayDirection, out _hit, Mathf.Infinity, mask))
+            {
+                if (_hit.collider.tag == player.tag)
+                {
+                    if (_hit.distance <= viewDistance)
+                    {
+                        _insideMaxViewDistance = true;
+                    }
+                    else
+                    {
+                        _insideMaxViewDistance = false;
+                    }
+                }
+            }
+            if (_insideMaxViewDistance)
+            {
+                return true;
+            }
         }
 
         foreach (var agent in EnemyManager.Instance.agentsInCombat)
@@ -213,9 +230,9 @@ public class FoxAgentFSM : MonoBehaviour
         return false;
     }
 
-    private void Update()
+    protected void Update()
     {
-        _finiteStateMachine.TimeTick();
+        _finiteStateMachine.TimeTick(GetInstanceID());
     }
 
     public void SetFSMState(string stateName)

@@ -8,8 +8,8 @@ public class Reload : IState
     #region Variables
     private Animator _animator;
     private NavMeshAgent _navMeshAgent;
-    private float _animationTime = 1.0f;/*OBS!!! Change to animationTime!!*/
-    public float animationTimer = 0;
+    private float _animationTime = 1.5f;
+    public float animationTimer = 1.5f;
     #endregion
 
     public Reload(NavMeshAgent navMeshAgent, Animator animator)
@@ -33,7 +33,7 @@ public class Reload : IState
     /// </summary>
     public void OnExit()
     {
-        _animator.SetBool("Fox_Reload", false);
+        _animator.SetBool("Fox_Idle", false);
     }
 
     /// <summary>
@@ -42,6 +42,11 @@ public class Reload : IState
     public void TimeTick()
     {
         animationTimer -= Time.deltaTime;
+        if (animationTimer < 0.5f)
+        {
+            _animator.SetBool("Fox_Reload", false);
+            _animator.SetBool("Fox_Idle", true);
+        }
     }
     #endregion
 }

@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,23 +8,24 @@ public class MoveToReloadPosition : IState
     private Animator _animator;
     private NavMeshAgent _navMeshAgent;
     public Vector3 destination;
-    public float interactionRange = 1.0f;
+    private float maxSearchDistance;
+    public Tuple<Vector3, bool> reloadStation;
     private GameObject _gameObject;
     #endregion
 
     /// <summary>
     /// Move to a destination other then Vector3.zero!
     /// </summary>
-    public MoveToReloadPosition(NavMeshAgent navMeshAgent, Animator animator)
+    public MoveToReloadPosition(GameObject gameObject, NavMeshAgent navMeshAgent, Animator animator, float maxSearchDistance)
     {
         this._animator = animator;
         this._navMeshAgent = navMeshAgent;
-        this._gameObject = GameObject.FindGameObjectWithTag("ReloadStation");
+        this._gameObject = gameObject;
+        this.maxSearchDistance = maxSearchDistance;
     }
-    private Vector3 FindClosestReloadStation()
+    private Tuple<Vector3, bool> FindClosestReloadStation()
     {
-        Vector3 temp = new Vector3(_gameObject.transform.position.x, _navMeshAgent.transform.position.y, _gameObject.transform.position.z);
-        return temp;
+        return EnemyManager.Instance.ClosestReloadStation(_gameObject.transform, maxSearchDistance);
     }
 
     #region Interface functions
@@ -36,9 +36,20 @@ public class MoveToReloadPosition : IState
     {
         //Go thrue list of all reload positions and pick the closest as destination
         // if this returns false, become melee and go to Idle. 
-        destination = FindClosestReloadStation();
-        _animator.SetBool("Fox_Run", true);
+        reloadStation = FindClosestReloadStation();
+        if (reloadStation.Item2)
+        {
+            destination = reloadStation.Item1;
+            Debug.Log("Ranged Moving to reload at:" + destination);
+            _animator.SetBool("Fox_Run", true);
+        }
+        else
+        {
+            _animator.SetBool("Fox_Idle", true);
+            destination = _navMeshAgent.transform.position;
+        }
         _navMeshAgent.SetDestination(destination);
+
     }
 
     /// <summary>
@@ -46,7 +57,9 @@ public class MoveToReloadPosition : IState
     /// </summary>
     public void OnExit()
     {
+        _navMeshAgent.SetDestination(_navMeshAgent.transform.position);
         _animator.SetBool("Fox_Run", false);
+        _animator.SetBool("Fox_Idle", false);
     }
 
     /// <summary>
@@ -55,6 +68,7 @@ public class MoveToReloadPosition : IState
     public void TimeTick()
     {
         _navMeshAgent.transform.rotation = Quaternion.LookRotation(_navMeshAgent.velocity, Vector3.up);
+        _animator.SetFloat("maxSpeed / currentSpeed", (_navMeshAgent.velocity / _navMeshAgent.speed).magnitude);
     }
     #endregion
 }

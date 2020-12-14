@@ -25,6 +25,7 @@ public class MoveToWithinAttackRange : IState
 
     public void OnExit()
     {
+        _navMeshAgent.SetDestination(_navMeshAgent.transform.position);
         _animator.SetBool("Fox_Run", false);
     }
 
@@ -32,6 +33,7 @@ public class MoveToWithinAttackRange : IState
     {
         _navMeshAgent.transform.LookAt(new Vector3(_player.transform.position.x, _navMeshAgent.transform.position.y, _player.transform.position.z));
         _navMeshAgent.SetDestination(_player.transform.position);
+        _animator.SetFloat("maxSpeed / currentSpeed", (_navMeshAgent.velocity / _navMeshAgent.speed).magnitude);
     }
     #endregion
 }

@@ -9,6 +9,8 @@ public class MoveToCircle : IState
     private GameObject _player;
     private GameObject _agent;
     private Vector3 _playerPreviousPos;
+    private double _resetTime = 0.5f;
+    private double _time = 0.5f;
     #endregion
 
     public MoveToCircle(GameObject agent, NavMeshAgent navMeshAgent, Animator animator)
@@ -23,10 +25,14 @@ public class MoveToCircle : IState
 
     public void OnEnter()
     {
+        _time = _resetTime;
+        EnemyManager.Instance.UpdateAssignedSquare(_agent);
         _animator.SetBool("Fox_Run", true);
         _playerPreviousPos = _player.transform.position;
         #region SetDestinationFromSquare
-        _agent.GetComponent<FoxAgentFSM>().destination = (_agent.GetComponent<FoxAgentFSM>().squareNormalisedPosition * _agent.GetComponent<FoxAgentFSM>().circleRadius) + _player.transform.position;
+        _agent.GetComponent<FoxAgentFSM>().destination = (_agent.GetComponent<FoxAgentFSM>().squareNormalisedPosition *
+            _agent.GetComponent<FoxAgentFSM>().circleRadius) + _player.transform.position;
+
         NavMeshHit hit;
         int sampleDistance = 1;
         while (!NavMesh.SamplePosition(_agent.GetComponent<FoxAgentFSM>().destination, out hit, sampleDistance, NavMesh.AllAreas)) //get where we should go on the navMesh
@@ -46,6 +52,13 @@ public class MoveToCircle : IState
 
     public void TimeTick()
     {
+        _time -= Time.deltaTime;
+        if (_time < 0)
+        {
+            EnemyManager.Instance.UpdateAssignedSquare(_agent);
+            _time = _resetTime;
+        }
+
         NavMeshHit hit;
         int sampleDistance = 1;
         while (!NavMesh.SamplePosition(_agent.GetComponent<FoxAgentFSM>().destination + (_player.transform.position - _playerPreviousPos), out hit, sampleDistance, NavMesh.AllAreas)) //get where we should go on the navMesh
@@ -53,10 +66,11 @@ public class MoveToCircle : IState
             sampleDistance++;
         }
         _agent.GetComponent<FoxAgentFSM>().destination = hit.position; //set as target position.
-        Debug.Log("SamplePosition On Circle Adjusted for Player movement=" + hit.position);
+        //Debug.Log("SamplePosition On Circle Adjusted for Player movement=" + hit.position);
         _navMeshAgent.SetDestination(_agent.GetComponent<FoxAgentFSM>().destination);
         _playerPreviousPos = _player.transform.position;
         _navMeshAgent.transform.rotation = Quaternion.LookRotation(_navMeshAgent.velocity, Vector3.up);
+        _animator.SetFloat("maxSpeed / currentSpeed", (_navMeshAgent.velocity / _navMeshAgent.speed).magnitude);
     }
     #endregion
 }

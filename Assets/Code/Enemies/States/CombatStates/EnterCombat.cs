@@ -4,6 +4,7 @@ public class EnterCombat : IState
 {
     #region Variables
     public bool finishedEnteringCombat = false;
+    public bool ableToEnterCombat = false;
     private GameObject _gameObject;
     private float _talkingDistance;
     #endregion
@@ -19,13 +20,21 @@ public class EnterCombat : IState
     {
         EnemyManager.Instance.AgentDetectedPlayer(_gameObject, _talkingDistance);
         EnemyManager.Instance.AssignCombatRoleAndCircleRadius(_gameObject);
-        EnemyManager.Instance.AssignSquare(_gameObject);
-        finishedEnteringCombat = true;
+        if (EnemyManager.Instance.AssignSquare(_gameObject))
+        {
+            ableToEnterCombat = true;
+            finishedEnteringCombat = true;
+        }
+        else
+        {
+            ableToEnterCombat = false;
+        }
     }
 
     public void OnExit()
     {
         finishedEnteringCombat = false;
+        ableToEnterCombat = false;
     }
 
     public void TimeTick()
