@@ -70,7 +70,7 @@ public class WeaponCollision : MonoBehaviour
         {
             RaycastHit hit;
             if (Physics.Raycast(_previousWeaponPointPositions[i], transform.TransformDirection(
-                (_currentWeaponPointPositions[i] - _previousWeaponPointPositions[i]).normalized), out hit, 
+                (_currentWeaponPointPositions[i] - _previousWeaponPointPositions[i]).normalized), out hit,
                 Vector3.Distance(_previousWeaponPointPositions[i], _currentWeaponPointPositions[i]), _layerMask))
             {
                 if (hit.collider.tag == targetTag)
@@ -83,7 +83,7 @@ public class WeaponCollision : MonoBehaviour
                 }
             }
             Debug.DrawRay(_previousWeaponPointPositions[i], transform.TransformDirection(
-                (_currentWeaponPointPositions[i] - _previousWeaponPointPositions[i]).normalized) * 
+                (_currentWeaponPointPositions[i] - _previousWeaponPointPositions[i]).normalized) *
                 Vector3.Distance(_previousWeaponPointPositions[i], _currentWeaponPointPositions[i]), Color.white);
         }
     }
