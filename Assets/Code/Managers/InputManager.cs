@@ -152,7 +152,7 @@ public class InputManager : ScriptableObject
     }
     private bool BackButtonPressed()
     {
-        return Input.GetKeyDown(KeyCode.Joystick1Button7);
+        return Input.GetKeyDown(KeyCode.Joystick1Button7) || Input.GetKeyDown(KeyCode.Escape);
     }
     private bool LeftStickClicked()
     {
