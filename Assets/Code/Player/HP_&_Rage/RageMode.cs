@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class RageMode : MonoBehaviour
 {
-
     [SerializeField]
     public int maxRage = 100;
     public int startRage;
@@ -16,20 +15,17 @@ public class RageMode : MonoBehaviour
     private Image rags;
 
     public float currentRage;//Set this value when loading!
-
     public event Action<float> onRagePctChanged = delegate { };
 
     [SerializeField] Animator animator;
 
     public static RageMode Instance { get; private set; }
-    // Start is called before the first frame update
     void Start()
     {
         Instance = this;
         currentRage = startRage;
-        rags = GetComponentInParent<RageBar>().rageBar;
+        rags = GetComponentInChildren<RageBar>().rageBar;
     }
-
 
     private void OnEnable()
     {
@@ -61,17 +57,17 @@ public class RageMode : MonoBehaviour
         onRagePctChanged(currentRagePct);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        ModifyRage(Time.deltaTime);
+        if (animator.GetBool("Rage Mode"))
+        {
+            ModifyRage(-Time.deltaTime);
+        }
     }
 
-    
     private void ResetRageMode()
     {
         currentRage = startRage;
         rags.fillAmount = 0;
-        //Debug.Log("RAGE MODE RESET");
     }
 }
