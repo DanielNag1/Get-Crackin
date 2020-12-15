@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     #region Methods
     private void Awake()
     {
+        DontDestroyOnLoad(this.gameObject);
         //Used to "generate" and save seed value for the Random class, needed for playback ability in logging tool
         #region Init Seed
         int SeedVal = (int)Random.Range(0, 9.99f);

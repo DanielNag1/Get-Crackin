@@ -23,14 +23,24 @@ public class SoundEngine : ScriptableObject
     }
     #endregion
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(this);
+    }
 
     [SerializeField] private int _musicTrackCount;
     [SerializeField] private int _concurrentSFXPlaying;
     public List<AudioSource> audioSources;
-    public List<Tuple<AudioSource, string /*trackPath*/, int /*priority*/, double /*requestSentTime*/>> requestList = 
+    public List<Tuple<AudioSource, string /*trackPath*/, int /*priority*/, double /*requestSentTime*/>> requestList =
         new List<Tuple<AudioSource, string, int, double>>(); //requests sent from audioHandlers get placed here
     public List<float> volumeScales = new List<float>();
-    
+    public float masterVolume = 1; //volume scale
+
+    public float SetMasterVolume
+    {
+        get { return masterVolume; }
+        set { masterVolume = value; }
+    }
     /// <summary>
     /// Call this to send a request to play a sound.
     /// </summary>
@@ -48,6 +58,7 @@ public class SoundEngine : ScriptableObject
 
     public void Update()
     {
+        Debug.Log(masterVolume);
         CheckRequestList();
     }
 
@@ -104,7 +115,7 @@ public class SoundEngine : ScriptableObject
 
     private void PlaySoundClip(Tuple<AudioSource, string, int, double> request, float volumeScale)
     {
-        request.Item1.PlayOneShot(request.Item1.clip, volumeScale);
+        request.Item1.PlayOneShot(request.Item1.clip, volumeScale * masterVolume);
     }
 
 
@@ -136,13 +147,6 @@ public class SoundEngine : ScriptableObject
                 }
             }
         }
-    }
-    public void SetVolume(float slidervalue)
-    {
-        //OBS!!! IMPLEMENT THIS!
-        //private SoundComponent sound = new SoundComponent();
-        //private Slider slider;
-        //    sound.VolumeSet = slidervalue;
     }
 }
 
