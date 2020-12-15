@@ -1,17 +1,27 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-    #region Variables
-    [SerializeField] private int _maxHealth = 30;
+
+    [SerializeField]
+    private int _maxHealth = 30;
     public int currentHealth;
     public event Action<float> onHealthPctChanged = delegate { };
-    [SerializeField] private Animator animator;
+    [SerializeField] Animator animator;
     public bool healthPickedUp;
-    #endregion
-    #region Methods
+   
+    private float _lerpTimer;
+    public Image frontHealthBar;
+    public Image backHealthBar;
+    public float chipSpeed = 2f;
+
+
+
     void Start()
     {
         currentHealth = _maxHealth;
@@ -20,18 +30,25 @@ public class Health : MonoBehaviour
     private void OnEnable()
     {
         currentHealth = _maxHealth;
+
     }
 
     public void ModifyHealth(int amount)
     {
         currentHealth += amount;
-        float currentHealthPct = (float)currentHealth / (float)_maxHealth;
-        onHealthPctChanged(currentHealthPct);
+        _lerpTimer = 0f;
+
     }
+
 
     void Update()
     {
+        currentHealth = Mathf.Clamp(currentHealth, 0, _maxHealth);
         DrawHealthPickUpVFX();
+        float currentHealthPct = (float)currentHealth / (float)_maxHealth;
+
+        UpdateHealthUI(currentHealthPct);
+        
 
         if (currentHealth <= 0)
         {
@@ -40,15 +57,10 @@ public class Health : MonoBehaviour
                 animator.SetBool("isDead", true);
             }
         }
-#if UNITY_EDITOR
-
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            Debug.Log("minus health");
-            ModifyHealth(-10);
-        }
-#endif
+        
     }
+
+    
 
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
@@ -57,9 +69,36 @@ public class Health : MonoBehaviour
             HealthPickup HP;
             HP = hit.collider.gameObject.GetComponent<HealthPickup>();
             healthPickedUp = true;
-            //OBS! If we want mushroms to make sound when picked up add here.
             HP.PickupHealth();
             ModifyHealth(HP.healingValue);
+            Debug.Log("Gained 10 Health");
+        }
+    }
+
+    private void UpdateHealthUI(float pct)
+    {
+        float _fillF = frontHealthBar.fillAmount;
+        float _fillB = backHealthBar.fillAmount;
+        
+
+        if (_fillB > pct)
+        {
+            frontHealthBar.fillAmount = pct;
+            backHealthBar.color = Color.red;
+            _lerpTimer += Time.deltaTime;
+            float _percentComplete = _lerpTimer / chipSpeed;
+            _percentComplete = _percentComplete * _percentComplete;
+            backHealthBar.fillAmount = Mathf.Lerp(_fillB, pct, _percentComplete);
+        }
+
+        if (_fillF < pct)
+        {
+            backHealthBar.color = Color.green;
+            backHealthBar.fillAmount = pct;
+            _lerpTimer += Time.deltaTime;
+            float _percentComplete = _lerpTimer / chipSpeed;
+            _percentComplete = _percentComplete * _percentComplete;
+            frontHealthBar.fillAmount = Mathf.Lerp(_fillF, backHealthBar.fillAmount, _percentComplete);
         }
     }
 
@@ -81,5 +120,7 @@ public class Health : MonoBehaviour
         yield return new WaitForSeconds(1.3f);
         VFXEvents.Instance.VFX2Stop();
     }
-    #endregion
+
+
+
 }
