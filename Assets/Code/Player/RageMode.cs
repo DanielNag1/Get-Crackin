@@ -27,7 +27,7 @@ public class RageMode : MonoBehaviour
     {
         Instance = this;
         currentRage = startRage;
-        rags = GetComponentInParent<RageBar>().RageBarss;
+        rags = GetComponentInParent<RageBar>().rageBar;
     }
 
 
