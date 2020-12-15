@@ -8,6 +8,14 @@ public class SoundEngine : ScriptableObject
     /// Handles audio clips in audio sources.
     /// </summary>
 
+    public float masterVolume = 1; //volume scale
+
+    public float VolumeSet
+    {
+        get { return masterVolume; }
+        set { masterVolume = value; }
+    }
+
     private static SoundEngine instance;
     public static SoundEngine Instance
     {
@@ -98,7 +106,7 @@ public class SoundEngine : ScriptableObject
 
     private void PlaySoundClip(Tuple<AudioSource, string, int, double> request, float volumeScale)
     {
-        request.Item1.PlayOneShot(request.Item1.clip,volumeScale);
+        request.Item1.PlayOneShot(request.Item1.clip,volumeScale * masterVolume);
     }
 
 
