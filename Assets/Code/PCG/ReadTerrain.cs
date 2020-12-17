@@ -9,6 +9,8 @@ public class ReadTerrain : MonoBehaviour
     Ray ray;
     RaycastHit hit;
 
+    public LayerMask layerMask;
+
     private Terrain terrain;
     private TerrainData terrainData;
     private Vector3 terrainPos;
@@ -80,7 +82,7 @@ public class ReadTerrain : MonoBehaviour
 
         foreach (var g in grid.positionList) //Gör en raycast från varje spawnpoint och antingen skapar ett träd på hit punkten eller tar bort spawnpointen
         {
-            Physics.Raycast(g.transform.position, Vector3.down, out hit, 500, 1);
+            Physics.Raycast(g.transform.position, Vector3.down, out hit, 500, layerMask);
             //Debug.DrawRay(g.transform.position, Vector3.down * 500, Color.red);
 
             if (hit.point != null)
