@@ -9,10 +9,13 @@ public class WeaponCollision : MonoBehaviour
     #region variables
     [SerializeField] private List<string> _soundPaths;
     [SerializeField] private List<float> _volumeScales;
+    private ShatterCrate _shatterCrate;
     private Health _health;
     public int weaponDamage = 1;
     public bool destroyOnImpact = false;
     public string targetTag;
+    private string crateTag = "crate";
+    private GameObject crate;
     public int layerMaskValue;
     public List<Transform> weaponPoints;
     public float invulnerabilityTime;
@@ -37,6 +40,7 @@ public class WeaponCollision : MonoBehaviour
         }
         _layerMask = 1 << layerMaskValue;
         _layerMask = ~_layerMask;
+        crate = GameObject.FindGameObjectWithTag("crate");
     }
 
     private void Update()
@@ -74,12 +78,13 @@ public class WeaponCollision : MonoBehaviour
                 (_currentWeaponPointPositions[i] - _previousWeaponPointPositions[i]).normalized), out hit,
                 Vector3.Distance(_previousWeaponPointPositions[i], _currentWeaponPointPositions[i]), _layerMask))
             {
-                if (hit.collider.tag == targetTag)
+                if (hit.collider.tag == targetTag || hit.collider.tag == crateTag)
                 {
                     if (!CompareTargetsHit(hit) && !CompareItem2RecentTargetsHit(hit))
                     {
                         _targetsHit.Add(hit.transform.gameObject);
                         _recentTargetsHit.Add(new Tuple<float, GameObject>(0, hit.transform.gameObject));
+
                     }
                 }
             }
@@ -109,9 +114,17 @@ public class WeaponCollision : MonoBehaviour
                 }
                 //OBS!! weaponPoint location is hard coded, add info on what weaponPoint made the hit to the list: targetsHit
                 //If we want knockback to depend on player position.
-                _targetsHit[i].GetComponent<enemyhealth>().TakeDamage(weaponDamage, weaponPoints[0].transform.root);
-                SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), _soundPaths[Random.Range(0, _soundPaths.Count - 1)], 0,
-                    Time.fixedTime, _volumeScales[0]);
+                if (_targetsHit[i] != crate)
+                {
+                    _targetsHit[i].GetComponent<enemyhealth>().TakeDamage(weaponDamage, weaponPoints[0].transform.root);
+                    SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), _soundPaths[Random.Range(0, _soundPaths.Count - 1)], 0,
+                        Time.fixedTime, _volumeScales[0]);
+                }
+                else
+                {
+                    ShatterCrate.Instance.DestroyCrate();
+                    Debug.Log("AAAJ");
+                }
             }
             else
             {
