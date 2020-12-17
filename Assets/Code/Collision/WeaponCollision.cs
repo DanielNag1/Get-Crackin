@@ -9,7 +9,6 @@ public class WeaponCollision : MonoBehaviour
     #region variables
     [SerializeField] private List<string> _soundPaths;
     [SerializeField] private List<float> _volumeScales;
-    private ShatterCrate _shatterCrate;
     private Health _health;
     public int weaponDamage = 1;
     public bool destroyOnImpact = false;
@@ -123,7 +122,6 @@ public class WeaponCollision : MonoBehaviour
                 else
                 {
                     ShatterCrate.Instance.DestroyCrate();
-                    Debug.Log("AAAJ");
                 }
             }
             else

@@ -58,7 +58,7 @@ public class SoundEngine : ScriptableObject
 
     public void Update()
     {
-        Debug.Log(masterVolume);
+      //  Debug.Log(masterVolume);
         CheckRequestList();
     }
 
