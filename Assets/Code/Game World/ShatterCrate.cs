@@ -13,27 +13,19 @@ public class ShatterCrate : MonoBehaviour
     }
     #endregion
 
+    #region Variables
     public GameObject crate_shattered;
-    private float transitionTime = 1f;
+    private GameObject clone;
+    private float waitToDestroy = 5f;
+    #endregion
+    /// <summary>
+    /// Creates a clone of the shattered object, destroys the whole one and destroys the shattered object after 5 seconds.
+    /// </summary>
     public void DestroyCrate()
     {
-        Instantiate(crate_shattered, transform.position, transform.rotation);
+        clone = Instantiate(crate_shattered, transform.position, transform.rotation);
         Destroy(gameObject);
-      //  StartCoroutine(FadeCrate());
+        Destroy(clone, waitToDestroy);
     }
 
-    //IEnumerator FadeCrate()
-    //{
-    //    for (var i = crate_shattered.transform.childCount - 1; i >= 0; i--)
-    //    {
-    //        var objA = crate_shattered.transform;
-    //        var obj = crate_shattered.transform.GetChild(i);
-    //        obj.transform.parent = null;
-            
-    //        Destroy(obj);
-    //    }
-    //    Destroy(crate_shattered.transform.root);
-   
-    //    yield return new WaitForSeconds(transitionTime);
-    //}
 }
