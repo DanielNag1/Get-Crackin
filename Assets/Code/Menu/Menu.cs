@@ -3,15 +3,24 @@ using UnityEngine.EventSystems;
 
 public class Menu : MonoBehaviour
 {
+    #region singleton
+    public static Menu Instance { get; private set; }
+    #endregion
+
     #region Variables
     public GameObject pauseMenu, optionsMenu, mainMenu, pauseOptionMenu;
     public GameObject pauseResumeButton, optionButton, mainMenuButton, quitToDesktopButton;
     public GameObject backButton, playButton, optionsMainMenuButton, quitGameButton, continueButton;
-    private bool  _pauseMenuActive = false;
+    private bool _pauseMenuActive = false;
     public GameObject levelLoader;
     #endregion
 
-    #region Method
+    #region Methods
+
+    private void Awake()
+    {
+        Instance = this;
+    }
     private void Update()
     {
         if (optionsMenu.activeInHierarchy)
@@ -51,6 +60,38 @@ public class Menu : MonoBehaviour
                 }
             }
         }
+        else if (pauseMenu.activeInHierarchy)
+        {
+            GameObject.Find("Player").GetComponent<Move>().enabled = false;
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(pauseResumeButton);
+            if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Joystick1Button1)
+                || Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                if (EventSystem.current.currentSelectedGameObject == pauseResumeButton)
+                {
+                    ResumeGame();
+                }
+                else if (EventSystem.current.currentSelectedGameObject == quitGameButton)
+                {
+                    ExitGame();
+                }
+            }
+        }
+    }
+
+    private void PauseGame()
+    {
+        //if (Input.GetKeyDown(KeyCode.Joystick1Button6) || Input.GetKeyDown(KeyCode.Escape))
+        //{
+            pauseMenu.SetActive(true);
+            if(pauseMenu.activeInHierarchy)
+            {
+                Time.timeScale = 0f;
+                EventSystem.current.SetSelectedGameObject(null);
+                EventSystem.current.SetSelectedGameObject(pauseResumeButton);
+            }
+        //}
     }
 
     public void PlayGame()
@@ -69,6 +110,13 @@ public class Menu : MonoBehaviour
             Application.wantsToQuit += WantsToQuit;
         }
     }
+    private void ResumeGame()
+    {
+        pauseMenu.SetActive(false);
+        GameObject.Find("Player").GetComponent<Move>().enabled = true;
+        Time.timeScale = 1f;
+    }
+
     private static bool WantsToQuit()
     {
         return InputSave.Instance.WantToQuit();
