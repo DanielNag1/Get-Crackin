@@ -11007,12 +11007,22 @@ PrefabInstance:
         type: 3}
       propertyPath: optionButton
       value: 
-      objectReference: {fileID: 1609701144}
+      objectReference: {fileID: 1989700110}
     - target: {fileID: 8342070121689423324, guid: fd66088361e11cd44b7ac7184598fef3,
         type: 3}
       propertyPath: mainMenuButton
       value: 
       objectReference: {fileID: 1255144996}
+    - target: {fileID: 8342070121689423324, guid: fd66088361e11cd44b7ac7184598fef3,
+        type: 3}
+      propertyPath: pauseMenuUI
+      value: 
+      objectReference: {fileID: 769384053}
+    - target: {fileID: 8342070121689423324, guid: fd66088361e11cd44b7ac7184598fef3,
+        type: 3}
+      propertyPath: pauseOptionMenu
+      value: 
+      objectReference: {fileID: 1609701144}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd66088361e11cd44b7ac7184598fef3, type: 3}
 --- !u!1 &255759488
@@ -12390,6 +12400,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 913449532}
     m_Modifications:
+    - target: {fileID: 7495512587082395655, guid: 4cd3dd911139ef54d8236cd9d9c1a69d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7495512587438073120, guid: 4cd3dd911139ef54d8236cd9d9c1a69d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -18102,6 +18117,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 750258733}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &769384053 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7495512587144586358, guid: 4cd3dd911139ef54d8236cd9d9c1a69d,
+    type: 3}
+  m_PrefabInstance: {fileID: 367868233}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &781005698
 GameObject:
   m_ObjectHideFlags: 0
@@ -35217,6 +35238,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1985845107}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1989700110 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8342070121123672145, guid: fd66088361e11cd44b7ac7184598fef3,
+    type: 3}
+  m_PrefabInstance: {fileID: 254586487}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1990962159
 GameObject:
   m_ObjectHideFlags: 0
