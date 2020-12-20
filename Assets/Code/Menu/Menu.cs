@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class Menu : MonoBehaviour
     public GameObject pauseMenu, optionsMenu, mainMenu, pauseOptionMenu;
     public GameObject pauseResumeButton, optionButton, mainMenuButton, quitToDesktopButton;
     public GameObject backButton, playButton, optionsMainMenuButton, quitGameButton, continueButton;
+    public GameObject pauseMenuUI;
     private bool _pauseMenuActive = false;
     public GameObject levelLoader;
     #endregion
@@ -63,6 +65,7 @@ public class Menu : MonoBehaviour
         else if (pauseMenu.activeInHierarchy)
         {
             GameObject.Find("Player").GetComponent<Move>().enabled = false;
+            Time.timeScale = 0f;
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(pauseResumeButton);
             if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Joystick1Button1)
@@ -80,19 +83,16 @@ public class Menu : MonoBehaviour
         }
     }
 
-    private void PauseGame()
-    {
-        //if (Input.GetKeyDown(KeyCode.Joystick1Button6) || Input.GetKeyDown(KeyCode.Escape))
-        //{
-            pauseMenu.SetActive(true);
-            if(pauseMenu.activeInHierarchy)
-            {
-                Time.timeScale = 0f;
-                EventSystem.current.SetSelectedGameObject(null);
-                EventSystem.current.SetSelectedGameObject(pauseResumeButton);
-            }
-        //}
-    }
+    //private void PauseGame()
+    //{
+    //    pauseMenu.SetActive(true);
+    //    if (pauseMenu.activeInHierarchy)
+    //    {
+    //        Time.timeScale = 0f;
+    //        EventSystem.current.SetSelectedGameObject(null);
+    //        EventSystem.current.SetSelectedGameObject(pauseResumeButton);
+    //    }
+    //}
 
     public void PlayGame()
     {
@@ -134,7 +134,8 @@ public class Menu : MonoBehaviour
     {
         _pauseMenuActive = false;
         optionsMenu.SetActive(false);
-        mainMenu.SetActive(true);
+        SceneManager.LoadSceneAsync("MainMenu");
+        //mainMenu.SetActive(true);
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(playButton);
     }
