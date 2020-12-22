@@ -1415,12 +1415,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69d5659865216724dbb79c86dc3afbd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SoundPaths:
+  _soundPaths:
   - SFX/ImpactSounds/Body_Slashed1
-  - SFX/ImpactSounds/Body_Slashed2
-  - SFX/ImpactSounds/Body_Slashed3
-  VolumeScales:
-  - 0.1
+  _volumeScales:
+  - 1
   weaponDamage: 1
   targetTag: Player
   layerMaskValue: 9
@@ -1430,8 +1428,11 @@ MonoBehaviour:
   - {fileID: 1965804693031301582}
   - {fileID: 8514588476512455996}
   - {fileID: 4547946576026589931}
-  InvulnerabilityTime: 0.3
+  invulnerabilityTime: 0.3
   collisionActive: 0
+  _rageAdjustmentValue: 10
+  _shakeIntensity: 4
+  _shakeTime: 0.1
 --- !u!114 &2451296297546003247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1446,23 +1447,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 0
   startHealth: 3
-  hurtSoundPaths:
+  _hurtSoundPaths:
   - SFX/HurtSounds/goblin_fairy_hurt_pain_14
-  - SFX/HurtSounds/goblin_fairy_hurt_pain_15
-  - SFX/HurtSounds/goblin_fairy_hurt_pain_16
-  - SFX/HurtSounds/goblin_fairy_hurt_pain_17
-  - SFX/HurtSounds/goblin_fairy_hurt_pain_18
-  deathSoundPaths:
-  - SFX/HurtSounds/troll_monster_hurt_pain_01
-  - SFX/HurtSounds/troll_monster_hurt_pain_02
-  - SFX/HurtSounds/troll_monster_hurt_pain_03
-  - SFX/HurtSounds/troll_monster_hurt_pain_04
-  volumeScales:
-  - 0.1
-  SoundObjectPrefab: {fileID: 6447233000424186925, guid: a214008ad84fe8d4fb1ad97d04c3ed40,
+  _deathSoundPaths:
+  - SFX/DeathSounds/DeadTest_William
+  _volumeScales:
+  - 1
+  - 1
+  _soundObjectPrefab: {fileID: 6447233000424186925, guid: a214008ad84fe8d4fb1ad97d04c3ed40,
     type: 3}
+  knockbackAmountResetVal: 6000000
   rootGameObject: {fileID: 6278998372730203257}
-  knockbackAmount: 6000000
 --- !u!114 &6767320745520029617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1483,13 +1478,13 @@ MonoBehaviour:
   playerLayerMask:
     serializedVersion: 2
     m_Bits: 1024
-  highOffset: 0.25
   walkingSpeed: 4
   runningSpeed: 7
   combatRole: 0
   attacking: 0
   meleeAttackRange: 2.5
   rangedAttackRange: 8
+  maxSearchDistance: 30
   circleRadius: 4
   destination: {x: 0, y: 0, z: 0}
   squareID: 0
@@ -2312,6 +2307,51 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7043509098144786106}
     m_Modifications:
+    - target: {fileID: 1829499223523096489, guid: 91fb81c759cfd9a4db59fce4a64f30bd,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.00015
+      objectReference: {fileID: 0}
+    - target: {fileID: 1829499223523096489, guid: 91fb81c759cfd9a4db59fce4a64f30bd,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0099
+      objectReference: {fileID: 0}
+    - target: {fileID: 1829499223523096489, guid: 91fb81c759cfd9a4db59fce4a64f30bd,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.00007
+      objectReference: {fileID: 0}
+    - target: {fileID: 4014620972558730130, guid: 91fb81c759cfd9a4db59fce4a64f30bd,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.00004
+      objectReference: {fileID: 0}
+    - target: {fileID: 4014620972558730130, guid: 91fb81c759cfd9a4db59fce4a64f30bd,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.01387
+      objectReference: {fileID: 0}
+    - target: {fileID: 4014620972558730130, guid: 91fb81c759cfd9a4db59fce4a64f30bd,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.00002
+      objectReference: {fileID: 0}
+    - target: {fileID: 4411788734209170572, guid: 91fb81c759cfd9a4db59fce4a64f30bd,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.00013
+      objectReference: {fileID: 0}
+    - target: {fileID: 4411788734209170572, guid: 91fb81c759cfd9a4db59fce4a64f30bd,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.00383
+      objectReference: {fileID: 0}
+    - target: {fileID: 4411788734209170572, guid: 91fb81c759cfd9a4db59fce4a64f30bd,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.00004
+      objectReference: {fileID: 0}
     - target: {fileID: 4876955876099166648, guid: 91fb81c759cfd9a4db59fce4a64f30bd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2378,6 +2418,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 9195449415979614530, guid: 34bf887cbb2495845ac2c145fffac5db,
         type: 3}
+    - target: {fileID: 8362544804058860379, guid: 91fb81c759cfd9a4db59fce4a64f30bd,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.00007
+      objectReference: {fileID: 0}
+    - target: {fileID: 8362544804058860379, guid: 91fb81c759cfd9a4db59fce4a64f30bd,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.00682
+      objectReference: {fileID: 0}
+    - target: {fileID: 8362544804058860379, guid: 91fb81c759cfd9a4db59fce4a64f30bd,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.00007
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91fb81c759cfd9a4db59fce4a64f30bd, type: 3}
 --- !u!4 &8514588476512455996 stripped
