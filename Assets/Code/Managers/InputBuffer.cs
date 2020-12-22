@@ -136,7 +136,7 @@ public class InputBuffer : ScriptableObject
                 break;
             case KeyCode.Joystick1Button7: //Start Button
                 _menuMode = true;
-                PauseMenu.Instance.Pause();
+                Menu.Instance.pauseMenu.SetActive(true);
                 break;
             #region Unused Buttons
             case KeyCode.Joystick1Button2: //X Jump
@@ -169,7 +169,7 @@ public class InputBuffer : ScriptableObject
         {
             case KeyCode.Joystick1Button7:
                 _menuMode = false;
-                PauseMenu.Instance.Resume();
+                Menu.Instance.pauseResumeButton.SetActive(true);
                 break;
 
             default:
