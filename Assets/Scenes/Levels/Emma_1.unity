@@ -7911,6 +7911,11 @@ PrefabInstance:
       propertyPath: pauseOptionMenu
       value: 
       objectReference: {fileID: 1609701144}
+    - target: {fileID: 8342070121689423324, guid: fd66088361e11cd44b7ac7184598fef3,
+        type: 3}
+      propertyPath: quitToDesktopButton
+      value: 
+      objectReference: {fileID: 1437380587}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd66088361e11cd44b7ac7184598fef3, type: 3}
 --- !u!1 &271794596 stripped
@@ -9479,6 +9484,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6112053864807305160, guid: be92abfa6def1d9449141f349b9cef82,
     type: 3}
   m_PrefabInstance: {fileID: 4990282174445273494}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1437380587 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8342070120575916386, guid: fd66088361e11cd44b7ac7184598fef3,
+    type: 3}
+  m_PrefabInstance: {fileID: 254586487}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1487740237
 GameObject:
@@ -11558,22 +11569,22 @@ PrefabInstance:
     - target: {fileID: 4643290534237614738, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.7947373
+      value: 0.79473734
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534237614738, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.035295326
+      value: -0.03529535
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534237614738, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.5897177
+      value: 0.5897176
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534237614738, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.13921253
+      value: -0.1392125
       objectReference: {fileID: 0}
     - target: {fileID: 4643290534237614738, guid: e9f5a604cda4ff8429ff8bcb5317107d,
         type: 3}
