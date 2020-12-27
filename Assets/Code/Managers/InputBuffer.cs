@@ -169,7 +169,7 @@ public class InputBuffer : ScriptableObject
         {
             case KeyCode.Joystick1Button7:
                 _menuMode = false;
-                Menu.Instance.pauseResumeButton.SetActive(true);
+                //Menu.Instance.pauseResumeButton.SetActive(true);
                 break;
 
             default:
