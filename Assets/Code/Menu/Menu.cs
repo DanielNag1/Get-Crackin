@@ -26,11 +26,14 @@ public class Menu : MonoBehaviour
 
     private void Update()
     {
-        if (SceneManager.GetSceneByBuildIndex(1).isLoaded)
+        if (_pauseMenuActive)
         {
-            PauseGame();
             if (pauseMenu.activeInHierarchy)
             {
+                Debug.Log("Pause menu active");
+                GameObject.Find("Player").GetComponent<Move>().enabled = false;
+                //EventSystem.current.SetSelectedGameObject(null);
+                //EventSystem.current.SetSelectedGameObject(pauseResumeButton);
                 if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Joystick1Button1)
                     || Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Mouse1))
                 {
@@ -38,7 +41,7 @@ public class Menu : MonoBehaviour
                     {
                         ResumeGame();
                     }
-                    else if (EventSystem.current.currentSelectedGameObject == pauseOptionMenu)
+                    else if (EventSystem.current.currentSelectedGameObject == optionButton)
                     {
                         OpenOptionFromPause();
                     }
@@ -54,7 +57,7 @@ public class Menu : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Joystick1Button1)
                     || Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Mouse1))
                 {
-                    if (EventSystem.current.currentSelectedGameObject == backButtonPause && pauseMenu.activeInHierarchy)
+                    if (EventSystem.current.currentSelectedGameObject == backButton)
                     {
                         BackToPause();
                     }
@@ -62,7 +65,7 @@ public class Menu : MonoBehaviour
             }
         }
 
-        else if(SceneManager.GetSceneByBuildIndex(0).isLoaded)
+        if (SceneManager.GetSceneByBuildIndex(0).isLoaded)
         {
             if (optionsMenu.activeInHierarchy)
             {
@@ -82,6 +85,7 @@ public class Menu : MonoBehaviour
 
             else if (mainMenu.activeInHierarchy)
             {
+                Debug.Log("Main menu active");
                 if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Mouse0))
                 {
                     if (EventSystem.current.currentSelectedGameObject == playButton)
@@ -105,31 +109,20 @@ public class Menu : MonoBehaviour
         }
     }
 
-    private void PauseGame()
+    public void PauseGame()
     {
+        pauseMenu.SetActive(true);
         mainMenu.SetActive(false);
         pauseOptionMenu.SetActive(false);
-        if (pauseMenu.activeInHierarchy)
-        {
-            GameObject.Find("Player").GetComponent<Move>().enabled = false;
-            //Time.timeScale = 0f;
-            EventSystem.current.SetSelectedGameObject(null);
-            EventSystem.current.SetSelectedGameObject(pauseResumeButton);
-        }
-    }
-
-    private void GamePaused()
-    {
-        GameObject.Find("Player").GetComponent<Move>().enabled = false;
-        Time.timeScale = 0f;
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(pauseResumeButton);
+        _pauseMenuActive = true;
+        Debug.Log("inputbuffer paused game");
     }
 
     public void PlayGame()
     {
         levelLoader.GetComponent<LoadLevel>().LoadNextLevel();
         Time.timeScale = 1f;
+        _pauseMenuActive = false;
     }
 
     public void ExitGame()
@@ -147,6 +140,7 @@ public class Menu : MonoBehaviour
         pauseMenu.SetActive(false);
         GameObject.Find("Player").GetComponent<Move>().enabled = true;
         Time.timeScale = 1f;
+        _pauseMenuActive = false;
     }
 
     private static bool WantsToQuit()
@@ -164,11 +158,12 @@ public class Menu : MonoBehaviour
 
     public void OpenOptionFromPause()
     {
+        //Time.timeScale = 0f;
         pauseOptionMenu.SetActive(true);
         pauseMenu.SetActive(false);
         mainMenu.SetActive(false);
         EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(backButtonPause);
+        EventSystem.current.SetSelectedGameObject(backButton);
     }
 
     public void OpenMainMenu()
