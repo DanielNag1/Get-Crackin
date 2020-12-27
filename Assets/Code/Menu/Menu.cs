@@ -15,6 +15,7 @@ public class Menu : MonoBehaviour
     public GameObject pauseMenuUI;
     private bool _pauseMenuActive = false;
     public GameObject levelLoader;
+    private Animator _animator;
     #endregion
 
     #region Methods
@@ -24,16 +25,18 @@ public class Menu : MonoBehaviour
         Instance = this;
     }
 
+    private void Start()
+    {
+        _animator = this.GetComponent<Animator>();
+    }
+
     private void Update()
     {
         if (_pauseMenuActive)
         {
             if (pauseMenu.activeInHierarchy)
             {
-                Debug.Log("Pause menu active");
                 GameObject.Find("Player").GetComponent<Move>().enabled = false;
-                //EventSystem.current.SetSelectedGameObject(null);
-                //EventSystem.current.SetSelectedGameObject(pauseResumeButton);
                 if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Joystick1Button1)
                     || Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Mouse1))
                 {
@@ -76,16 +79,10 @@ public class Menu : MonoBehaviour
                     {
                         OpenMainMenu();
                     }
-                    //else if (EventSystem.current.currentSelectedGameObject == backButtonPause && pauseMenu.activeInHierarchy)
-                    //{
-                    //    BackToPause();
-                    //}
                 }
             }
-
             else if (mainMenu.activeInHierarchy)
             {
-                Debug.Log("Main menu active");
                 if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Mouse0))
                 {
                     if (EventSystem.current.currentSelectedGameObject == playButton)
@@ -115,7 +112,6 @@ public class Menu : MonoBehaviour
         mainMenu.SetActive(false);
         pauseOptionMenu.SetActive(false);
         _pauseMenuActive = true;
-        Debug.Log("inputbuffer paused game");
     }
 
     public void PlayGame()
@@ -158,7 +154,7 @@ public class Menu : MonoBehaviour
 
     public void OpenOptionFromPause()
     {
-        //Time.timeScale = 0f;
+        _animator.SetBool("Done", true);
         pauseOptionMenu.SetActive(true);
         pauseMenu.SetActive(false);
         mainMenu.SetActive(false);
@@ -171,7 +167,6 @@ public class Menu : MonoBehaviour
         _pauseMenuActive = false;
         pauseOptionMenu.SetActive(false);
         SceneManager.LoadSceneAsync("MainMenu");
-        //mainMenu.SetActive(true);
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(playButton);
     }
