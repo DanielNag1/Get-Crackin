@@ -11,7 +11,7 @@ public class Menu : MonoBehaviour
     #region Variables
     public GameObject pauseMenu, optionsMenu, mainMenu, pauseOptionMenu;
     public GameObject pauseResumeButton, optionButton, mainMenuButton, quitToDesktopButton;
-    public GameObject backButton, playButton, optionsMainMenuButton, quitGameButton, continueButton;
+    public GameObject backButton, backButtonPause, playButton, optionsMainMenuButton, quitGameButton, continueButton;
     public GameObject pauseMenuUI;
     private bool _pauseMenuActive = false;
     public GameObject levelLoader;
@@ -26,74 +26,93 @@ public class Menu : MonoBehaviour
 
     private void Update()
     {
-        if (optionsMenu.activeInHierarchy)
+        if (SceneManager.GetSceneByBuildIndex(1).isLoaded)
         {
-            if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Joystick1Button1)
-                || Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Mouse1))
+            PauseGame();
+            if (pauseMenu.activeInHierarchy)
             {
-                if (EventSystem.current.currentSelectedGameObject == backButton)
+                if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Joystick1Button1)
+                    || Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Mouse1))
                 {
-                    OpenMainMenu();
+                    if (EventSystem.current.currentSelectedGameObject == pauseResumeButton)
+                    {
+                        ResumeGame();
+                    }
+                    else if (EventSystem.current.currentSelectedGameObject == pauseOptionMenu)
+                    {
+                        OpenOptionFromPause();
+                    }
+                    else if (EventSystem.current.currentSelectedGameObject == mainMenuButton)
+                    {
+                        OpenMainMenu();
+                    }
                 }
-                else if (EventSystem.current.currentSelectedGameObject == backButton && _pauseMenuActive)
+
+            }
+            else if (pauseOptionMenu.activeInHierarchy)
+            {
+                if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Joystick1Button1)
+                    || Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Mouse1))
                 {
-                    BackButton();
+                    if (EventSystem.current.currentSelectedGameObject == backButtonPause && pauseMenu.activeInHierarchy)
+                    {
+                        BackToPause();
+                    }
                 }
             }
         }
-        else if (mainMenu.activeInHierarchy)
+
+        else if(SceneManager.GetSceneByBuildIndex(0).isLoaded)
         {
-            if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Mouse0))
+            if (optionsMenu.activeInHierarchy)
             {
-                if (EventSystem.current.currentSelectedGameObject == playButton)
+                if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Joystick1Button1)
+                    || Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Mouse1))
                 {
-                    PlayGame();
-                }
-                else if (EventSystem.current.currentSelectedGameObject == optionsMainMenuButton)
-                {
-                    OpenOptions();
-                }
-                else if (EventSystem.current.currentSelectedGameObject == quitGameButton)
-                {
-                    ExitGame();
-                }
-                else if (EventSystem.current.currentSelectedGameObject == continueButton)
-                {
-                    ExitGame();
+                    if (EventSystem.current.currentSelectedGameObject == backButton)
+                    {
+                        OpenMainMenu();
+                    }
+                    //else if (EventSystem.current.currentSelectedGameObject == backButtonPause && pauseMenu.activeInHierarchy)
+                    //{
+                    //    BackToPause();
+                    //}
                 }
             }
-        }
-        else if (pauseMenu.activeInHierarchy)
-        {
-            Debug.Log("WAZZAA");
-            //GamePaused();
-            Debug.Log("active button" + EventSystem.current.currentSelectedGameObject);
-            if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Joystick1Button1)
-                || Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Mouse1))
+
+            else if (mainMenu.activeInHierarchy)
             {
-                if (EventSystem.current.currentSelectedGameObject == pauseResumeButton)
+                if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Mouse0))
                 {
-                    ResumeGame();
-                }
-                else if(EventSystem.current.currentSelectedGameObject == pauseOptionMenu)
-                {
-                    OpenOptions();
-                }
-                else if (EventSystem.current.currentSelectedGameObject == mainMenuButton)
-                {
-                    OpenMainMenu();
+                    if (EventSystem.current.currentSelectedGameObject == playButton)
+                    {
+                        PlayGame();
+                    }
+                    else if (EventSystem.current.currentSelectedGameObject == optionsMainMenuButton)
+                    {
+                        OpenOptions();
+                    }
+                    else if (EventSystem.current.currentSelectedGameObject == quitGameButton)
+                    {
+                        ExitGame();
+                    }
+                    else if (EventSystem.current.currentSelectedGameObject == continueButton)
+                    {
+                        ExitGame();
+                    }
                 }
             }
-            
         }
     }
 
     private void PauseGame()
     {
-        pauseMenu.SetActive(true);
+        mainMenu.SetActive(false);
+        pauseOptionMenu.SetActive(false);
         if (pauseMenu.activeInHierarchy)
         {
-            Time.timeScale = 0f;
+            GameObject.Find("Player").GetComponent<Move>().enabled = false;
+            //Time.timeScale = 0f;
             EventSystem.current.SetSelectedGameObject(null);
             EventSystem.current.SetSelectedGameObject(pauseResumeButton);
         }
@@ -143,10 +162,19 @@ public class Menu : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(backButton);
     }
 
+    public void OpenOptionFromPause()
+    {
+        pauseOptionMenu.SetActive(true);
+        pauseMenu.SetActive(false);
+        mainMenu.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(backButtonPause);
+    }
+
     public void OpenMainMenu()
     {
         _pauseMenuActive = false;
-        optionsMenu.SetActive(false);
+        pauseOptionMenu.SetActive(false);
         SceneManager.LoadSceneAsync("MainMenu");
         //mainMenu.SetActive(true);
         EventSystem.current.SetSelectedGameObject(null);
@@ -157,6 +185,14 @@ public class Menu : MonoBehaviour
     {
         optionsMenu.SetActive(false);
         mainMenu.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(pauseResumeButton);
+    }
+
+    public void BackToPause()
+    {
+        pauseOptionMenu.SetActive(false);
+        pauseMenu.SetActive(true);
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(pauseResumeButton);
     }
