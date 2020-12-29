@@ -21,6 +21,10 @@ public class EndCutscene : MonoBehaviour
         {
             EndScene();
         }
+        else if (Input.GetKeyUp(KeyCode.Joystick1Button0) || Input.GetKeyUp(KeyCode.Mouse0))
+        {
+            EndScene();
+        }
     }
 
     private void EndScene()
