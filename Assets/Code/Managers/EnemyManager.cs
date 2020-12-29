@@ -67,6 +67,12 @@ public class EnemyManager : MonoBehaviour
         }
         enemyCompareList = null;
 
+        //init of combat only enemy prefabs will occupy a square on their initialisation.
+        foreach (var item in positionSquaresUsed)
+        {
+            item.isAvailable = true;
+        }
+
         PopulateReloadStationList();
     }
 
@@ -159,6 +165,7 @@ public class EnemyManager : MonoBehaviour
     }
 
     #region variables
+    [SerializeField] private TriggerComponent _triggerComponent;
     public List<CombatAgentdata> agentsInCombat = new List<CombatAgentdata>();
     public List<CombatAgentdata> agentsReadyToAttack = new List<CombatAgentdata>();
     public List<Transform> reloadStations = new List<Transform>();
@@ -168,7 +175,26 @@ public class EnemyManager : MonoBehaviour
     private int _rangedComtabatants = 0;
     [SerializeField] private float meleeCircleRadius = 4;
     [SerializeField] private float rangedCircleRadius = 8;
+    private bool _inArenaFight = false;
     #endregion
+
+    public void StartArenaFight(List<string> callList, List<int> setToUse, List<GameObject> objectToMove)
+    {
+        _inArenaFight = true;
+        int BreakElement = callList.FindIndex(x => x == "Break");
+        if (BreakElement != -1)
+        {
+            //if last element is break we wount get index out of bounds.
+            if (callList.Count >= BreakElement + 1)
+            {
+                _triggerComponent.ArenaFinishedClassesAndMethodsToBeCalled = callList.GetRange(BreakElement + 1, callList.Count - BreakElement - 1);
+                callList.RemoveRange(BreakElement, callList.Count - BreakElement);
+            }
+        }
+        _triggerComponent.ClassesAndMethodsToBeCalled = callList;
+        _triggerComponent.SetToUse = setToUse;
+        _triggerComponent.ObjectToMove = objectToMove;
+    }
 
     /// <summary>
     /// Alerts all close agents of the players presence
@@ -223,6 +249,11 @@ public class EnemyManager : MonoBehaviour
             positionSquaresUsed[foxAgentGameObject.GetComponent<FoxAgentFSM>().squareID].isAvailable = true;
             agentsInCombat.Remove(agentsInCombat.Find((x) => x.agentGameObject.GetInstanceID() ==
                 foxAgentGameObject.transform.root.gameObject.GetInstanceID()));
+            if (_inArenaFight && agentsInCombat.Count <= 0)
+            {
+                _inArenaFight = false;
+                _triggerComponent.ActivateTrigger();
+            }
             return true;
         }
         return false;
@@ -274,7 +305,7 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    public void AssignCombatRoleAndCircleRadius(GameObject gameObject)
+    public void AssignCombatRoleAndCircleRadius()
     {
         foreach (var item in agentsInCombat)
         {
@@ -368,6 +399,7 @@ public class EnemyManager : MonoBehaviour
         }
         return false;
     }
+
     public bool UpdateAssignedSquare(GameObject agent)
     {
         positionSquaresUsed[agent.GetComponent<FoxAgentFSM>().squareID].isAvailable = true;

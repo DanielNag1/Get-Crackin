@@ -18,8 +18,9 @@ public class EnterCombat : IState
     #region Interface Functions
     public void OnEnter()
     {
+        Debug.Log("skit" + _gameObject.GetInstanceID());
         EnemyManager.Instance.AgentDetectedPlayer(_gameObject, _talkingDistance);
-        EnemyManager.Instance.AssignCombatRoleAndCircleRadius(_gameObject);
+        EnemyManager.Instance.AssignCombatRoleAndCircleRadius();
         if (EnemyManager.Instance.AssignSquare(_gameObject))
         {
             ableToEnterCombat = true;

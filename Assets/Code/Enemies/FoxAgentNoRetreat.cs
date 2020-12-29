@@ -9,12 +9,8 @@ public class FoxAgentNoRetreat : FoxAgentFSM
     {
         //The Transitions (From, To, Condition)
         #region Transitions
-        _finiteStateMachine.AddTransition(idle, lollygagging, IdleTimer());
-        _finiteStateMachine.AddTransition(idle, enterCombat, PlayerDetected());
-        _finiteStateMachine.AddTransition(lollygagging, idle, LollygaggingPositionReached());
-        _finiteStateMachine.AddTransition(lollygagging, enterCombat, PlayerDetected());
         _finiteStateMachine.AddTransition(enterCombat, combatIdle, FinishedEnteringCombat());
-        _finiteStateMachine.AddTransition(enterCombat, idle, CannotEnterCombat());
+        _finiteStateMachine.AddTransition(enterCombat, enterCombat, CannotEnterCombat());
         _finiteStateMachine.AddTransition(combatIdle, moveToCircle, AssignedMeleeCombatRole());
         _finiteStateMachine.AddTransition(combatIdle, moveToReloadPosition, AssignedRangedCombatRole());
         _finiteStateMachine.AddTransition(moveToReloadPosition, reload, WithinReloadInteractRange());
@@ -30,14 +26,11 @@ public class FoxAgentNoRetreat : FoxAgentFSM
         _finiteStateMachine.AddTransition(attackPlayerRanged, combatIdle, FinishedRangedAttack());
         _finiteStateMachine.AddAnyTransition(knockback, AgentHitByPlayerAttack());
         _finiteStateMachine.AddTransition(knockback, combatIdle, FinishedKnockbackAnimation());
-        SetFSMState("idle");  //setting the default state (the initial state).
+        SetFSMState("enterCombat");  //setting the default state (the initial state).
         #endregion
 
         //The Conditions
         #region conditions
-        Func<bool> IdleTimer() => () => idle.boringTimer < 0;
-        Func<bool> LollygaggingPositionReached() => () => Vector3.Distance(lollygagging.targetPos, transform.position) < 0.1f;
-        Func<bool> PlayerDetected() => () => CanThisAgentOrOtherAgentWithinTalkingDistanceSeeThePlayer();
         Func<bool> FinishedEnteringCombat() => () => enterCombat.finishedEnteringCombat;
         Func<bool> CannotEnterCombat() => () => !enterCombat.ableToEnterCombat;
         Func<bool> AssignedMeleeCombatRole() => () => combatRole == CombatRole.Melee;
