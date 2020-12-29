@@ -37,6 +37,7 @@ public class Menu : MonoBehaviour
             if (pauseMenu.activeInHierarchy)
             {
                 GameObject.Find("Player").GetComponent<Move>().enabled = false;
+                Time.timeScale = 0f;
                 if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Joystick1Button1)
                     || Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Mouse1))
                 {
