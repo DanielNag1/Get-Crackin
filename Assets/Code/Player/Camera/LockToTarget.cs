@@ -14,12 +14,21 @@ public class LockToTarget : MonoBehaviour
     private bool _isLockedToTarget;
     private Renderer _iconRenderer;
     private GameObject _lockedEnemy;
+
+    private MaterialPropertyBlock blue, red;
     #endregion
     #region Methods
     private void Start()
     {
-        _enemiesInRange = new List<Transform>();
         _iconRenderer = _targetIcon.gameObject.GetComponent<Renderer>();
+
+        blue = new MaterialPropertyBlock();
+        red = new MaterialPropertyBlock();
+
+        blue.SetColor("_BaseColor", new Color(0, 0.3f, 1));
+        red.SetColor("_BaseColor", new Color(.8f, .3f, 0));
+
+        _enemiesInRange = new List<Transform>();
     }
 
     private void Update()
@@ -97,7 +106,8 @@ public class LockToTarget : MonoBehaviour
                     _lockedEnemy = closestEnemy.gameObject;
                 }
                 _changeCamera.EnterLockCamera();
-                _iconRenderer.material.color = new Color(0, 150, 200);
+                //_iconRenderer.material.color = new Color(0, 150, 200);
+                _iconRenderer.SetPropertyBlock(blue);
                 targetGroup.AddMember(closestEnemy, 1, 0); //The lockOn camera focuses on both the player and the target.
                 _isLockedToTarget = true;
                 SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), _soundPaths[1], 0, Time.fixedTime, _volumeScales[1]);
@@ -118,7 +128,8 @@ public class LockToTarget : MonoBehaviour
             if (!_isLockedToTarget) //The player has not manually locked on to one enemy.
             {
                 closestEnemy = FindClosestEnemy(_enemiesInRange); //Get the nearest enemy
-                _iconRenderer.material.color = new Color(160, 100, 0);
+                //_iconRenderer.material.color = new Color(160, 100, 0);
+                _iconRenderer.SetPropertyBlock(red);
                 if (closestEnemy != null)
                 {
                     _targetIcon.position = new Vector3(closestEnemy.position.x, closestEnemy.position.y + 1.5f, closestEnemy.position.z);
