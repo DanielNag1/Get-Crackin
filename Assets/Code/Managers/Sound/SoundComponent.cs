@@ -6,11 +6,7 @@ public class SoundComponent : MonoBehaviour
     public string soundPath; //sound paths
     public float volumeScale = 1; //volume scale
 
-    public float VolumeSet
-    {
-        get { return volumeScale; }
-        set { volumeScale = value; }
-    }
+  
 
     private void Start()
     {
