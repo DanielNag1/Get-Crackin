@@ -12,6 +12,7 @@ public class TPPCameraRotation : MonoBehaviour
     #region Methods
     private void Start()
     {
+        Cursor.visible = false;
         _freeLookCamera = GetComponent<CinemachineFreeLook>();
     }
     private bool IsMouseActive()
@@ -24,6 +25,7 @@ public class TPPCameraRotation : MonoBehaviour
         _movementDirectionX = Input.GetAxis("Horizontal");
         if (IsMouseActive())
         {
+            
             _freeLookCamera.m_XAxis.m_MaxSpeed = 150;
             _mouseActive = true;
         }
