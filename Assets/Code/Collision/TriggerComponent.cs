@@ -14,6 +14,7 @@ public class TriggerComponent : MonoBehaviour
     [SerializeField] private List<int> _setToUse;
     [SerializeField] private List<string> _arenaFinishedClassesAndMethodsToBeCalled; //Can add a specific break character to know when one arena phase is done, so as to allow more then two waves of enemies in one arena.
     [SerializeField] private List<GameObject> _objectToMove;
+    [SerializeField] private LoadLevel LoadLevel;
     #endregion
 
     #region Methods
@@ -68,6 +69,12 @@ public class TriggerComponent : MonoBehaviour
                 _objectToMove.RemoveAt(0);
                 continue;
             }
+            if (_classesAndMethodsToBeCalled[i] == "LoadLevel.LoadNextLevel")
+            {
+                LoadLevel.LoadNextLevel();
+                continue;
+            }
+            
             if (_classesAndMethodsToBeCalled[i] == "Break") //can be done in EnemyManager.StartArenaFight, IF we make sure to place everything in the correct order with EnemyManager.StartArenaFight beeing last!
             {
                 break;

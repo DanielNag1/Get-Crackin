@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class Menu : MonoBehaviour
     public GameObject pauseResumeButton, optionButton, mainMenuButton, quitToDesktopButton;
     public GameObject backButton, backButtonPause, playButton, optionsMainMenuButton, quitGameButton, continueButton;
     public GameObject pauseMenuUI;
+    public Slider optionsPauseSoundSlider;
     private bool _pauseMenuActive = false;
     public GameObject levelLoader;
     private Animator _animator;
@@ -38,23 +40,22 @@ public class Menu : MonoBehaviour
             {
                 GameObject.Find("Player").GetComponent<Move>().enabled = false;
                 Time.timeScale = 0f;
-                if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Joystick1Button1)
-                    || Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Mouse1))
-                {
-                    if (EventSystem.current.currentSelectedGameObject == pauseResumeButton)
-                    {
-                        ResumeGame();
-                    }
-                    else if (EventSystem.current.currentSelectedGameObject == optionButton)
-                    {
-                        OpenOptionFromPause();
-                    }
-                    else if (EventSystem.current.currentSelectedGameObject == mainMenuButton)
-                    {
-                        OpenMainMenu();
-                    }
-                }
-
+                //if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Joystick1Button1)
+                //    || Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Mouse1))
+                //{
+                //    if (EventSystem.current.currentSelectedGameObject == pauseResumeButton)
+                //    {
+                //        //ResumeGame();
+                //    }
+                //    else if (EventSystem.current.currentSelectedGameObject == optionButton)
+                //    {
+                //        //OpenOptionFromPause();
+                //    }
+                //    else if (EventSystem.current.currentSelectedGameObject == mainMenuButton)
+                //    {
+                //        //OpenMainMenu();
+                //    }
+                //}
             }
             else if (pauseOptionMenu.activeInHierarchy)
             {
@@ -113,6 +114,7 @@ public class Menu : MonoBehaviour
         mainMenu.SetActive(false);
         pauseOptionMenu.SetActive(false);
         _pauseMenuActive = true;
+        EventSystem.current.currentSelectedGameObject.GetComponent<Animator>().SetTrigger("Highlighted");
     }
 
     public void PlayGame()
@@ -134,6 +136,7 @@ public class Menu : MonoBehaviour
     }
     public void ResumeGame()
     {
+        EventSystem.current.currentSelectedGameObject.GetComponent<Animator>().SetTrigger("Normal");
         pauseMenu.SetActive(false);
         GameObject.Find("Player").GetComponent<Move>().enabled = true;
         Time.timeScale = 1f;
@@ -155,12 +158,12 @@ public class Menu : MonoBehaviour
 
     public void OpenOptionFromPause()
     {
-        _animator.SetBool("Done", true);
-        pauseOptionMenu.SetActive(true);
         pauseMenu.SetActive(false);
+        pauseOptionMenu.SetActive(true);
+        optionsPauseSoundSlider.value = SoundEngine.Instance.SetMasterVolume;
         mainMenu.SetActive(false);
         EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(backButton);
+        EventSystem.current.SetSelectedGameObject(backButtonPause);
     }
 
     public void OpenMainMenu()

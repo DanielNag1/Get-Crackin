@@ -24,6 +24,7 @@ public class FoxAgentFSM : MonoBehaviour
     public float walkingSpeed = 3f;
     public float runningSpeed = 7f;
     public float interactionRange = 1.5f;
+    public string defaultState = "idle";
     //---------------------------
     protected bool _insideMaxViewDistance = false;
     public CombatRole combatRole = CombatRole.None;

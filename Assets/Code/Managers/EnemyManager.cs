@@ -246,6 +246,7 @@ public class EnemyManager : MonoBehaviour
                     break;
             }
             foxAgentGameObject.GetComponent<FoxAgentFSM>().combatRole = FoxAgentFSM.CombatRole.None;
+            foxAgentGameObject.GetComponent<FoxAgentFSM>().SetFSMState(foxAgentGameObject.GetComponent<FoxAgentFSM>().defaultState);
             positionSquaresUsed[foxAgentGameObject.GetComponent<FoxAgentFSM>().squareID].isAvailable = true;
             agentsInCombat.Remove(agentsInCombat.Find((x) => x.agentGameObject.GetInstanceID() ==
                 foxAgentGameObject.transform.root.gameObject.GetInstanceID()));

@@ -15,6 +15,7 @@ public class CombatIdle : IState
     public void OnEnter()
     {
         _animator.SetBool("Fox_Idle", true);
+        EnemyManager.Instance.AssignCombatRoleAndCircleRadius();
     }
 
     public void OnExit()
