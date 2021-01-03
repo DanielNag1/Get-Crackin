@@ -15,12 +15,14 @@ public class TriggerComponent : MonoBehaviour
     [SerializeField] private List<string> _arenaFinishedClassesAndMethodsToBeCalled; //Can add a specific break character to know when one arena phase is done, so as to allow more then two waves of enemies in one arena.
     [SerializeField] private List<GameObject> _objectToMove;
     [SerializeField] private LoadLevel LoadLevel;
+    private TextManager _textManager;
     #endregion
 
     #region Methods
     public void Start()
     {
         _enemyManager = EnemyManager.Instance;
+        _textManager = TextManager.Instance;
     }
 
     #region Get/SET
@@ -51,6 +53,12 @@ public class TriggerComponent : MonoBehaviour
     {
         for (int i = 0; _classesAndMethodsToBeCalled.Count > i; ++i)
         {
+            if(_classesAndMethodsToBeCalled[i] == "TextManager")
+            {
+                _textManager.tutorialWindow.SetActive(true);
+                _textManager.TriggerTutorial();
+                continue;
+            }
             if (_classesAndMethodsToBeCalled[i] == "EnemyManager.SpawnEnemyFromTrigger")
             {
                 _enemyManager.SpawnEnemyFromTrigger(_setToUse[0]);
