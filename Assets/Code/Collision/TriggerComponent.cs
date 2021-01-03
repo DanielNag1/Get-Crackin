@@ -63,9 +63,9 @@ public class TriggerComponent : MonoBehaviour
                 continue;
             }
             //Assuming we move enviroment objects using animations.
-            if (_classesAndMethodsToBeCalled[i] == "TEMP.MoveGameObject")
+            if (_classesAndMethodsToBeCalled[i] == "MoveGameObject")
             {
-                _objectToMove[0].GetComponent<Animator>().SetBool("Move", !_objectToMove[0].GetComponent<Animator>().GetBool("Move"));
+                _objectToMove[0].GetComponent<Animator>().SetBool("Move", true/*!_objectToMove[0].GetComponent<Animator>().GetBool("Move")*/);
                 _objectToMove.RemoveAt(0);
                 continue;
             }
