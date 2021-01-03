@@ -205,8 +205,9 @@ public class FoxAgentFSM : MonoBehaviour
         if (FieldOfViewCheck())
         {
             //What layers should block the AI's vision
-            string[] maskStrings = new string[2] { "Player", "ground" };
-            LayerMask mask = LayerMask.GetMask(maskStrings);
+            //string[] maskStrings = new string[2] { "Player", "ground" };
+            //LayerMask mask = LayerMask.GetMask(maskStrings);
+            LayerMask mask = LayerMask.GetMask("TEST");//Needs testing
 
             if (Physics.Raycast(this.transform.position, _rayDirection, out _hit, Mathf.Infinity, mask))
             {
@@ -260,6 +261,10 @@ public class FoxAgentFSM : MonoBehaviour
         else if (stateName == "knockback")
         {
             _finiteStateMachine.SetState(knockback);
+        }
+        else if (stateName == "enterCombat")
+        {
+            _finiteStateMachine.SetState(enterCombat);
         }
     }
     #endregion
