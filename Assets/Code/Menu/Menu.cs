@@ -17,7 +17,6 @@ public class Menu : MonoBehaviour
     public Slider optionsPauseSoundSlider;
     private bool _pauseMenuActive = false;
     public GameObject levelLoader;
-    private Animator _animator;
     #endregion
 
     #region Methods
@@ -27,17 +26,13 @@ public class Menu : MonoBehaviour
         Instance = this;
     }
 
-    private void Start()
-    {
-        _animator = this.GetComponent<Animator>();
-    }
-
     private void Update()
     {
         if (_pauseMenuActive)
         {
             if (pauseMenu.activeInHierarchy)
             {
+
                 GameObject.Find("Player").GetComponent<Move>().enabled = false;
                 Time.timeScale = 0f;
                 //if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Joystick1Button1)
@@ -45,15 +40,15 @@ public class Menu : MonoBehaviour
                 //{
                 //    if (EventSystem.current.currentSelectedGameObject == pauseResumeButton)
                 //    {
-                //        //ResumeGame();
+                //        ResumeGame();
                 //    }
                 //    else if (EventSystem.current.currentSelectedGameObject == optionButton)
                 //    {
-                //        //OpenOptionFromPause();
+                //        OpenOptionFromPause();
                 //    }
                 //    else if (EventSystem.current.currentSelectedGameObject == mainMenuButton)
                 //    {
-                //        //OpenMainMenu();
+                //        OpenMainMenu();
                 //    }
                 //}
             }
@@ -114,7 +109,6 @@ public class Menu : MonoBehaviour
         mainMenu.SetActive(false);
         pauseOptionMenu.SetActive(false);
         _pauseMenuActive = true;
-        EventSystem.current.currentSelectedGameObject.GetComponent<Animator>().SetTrigger("Highlighted");
     }
 
     public void PlayGame()
@@ -122,6 +116,9 @@ public class Menu : MonoBehaviour
         levelLoader.GetComponent<LoadLevel>().LoadNextLevel();
         Time.timeScale = 1f;
         _pauseMenuActive = false;
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(pauseResumeButton);
+        
     }
 
     public void ExitGame()
@@ -136,11 +133,12 @@ public class Menu : MonoBehaviour
     }
     public void ResumeGame()
     {
-        EventSystem.current.currentSelectedGameObject.GetComponent<Animator>().SetTrigger("Normal");
         pauseMenu.SetActive(false);
         GameObject.Find("Player").GetComponent<Move>().enabled = true;
         Time.timeScale = 1f;
         _pauseMenuActive = false;
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(pauseResumeButton);
     }
 
     private static bool WantsToQuit()

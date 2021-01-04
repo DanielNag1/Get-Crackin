@@ -94,7 +94,6 @@ public class InputBuffer : ScriptableObject
         if (_menuMode)
         {
             ExecuteMenuInput(inputKeyCode);
-            return;
         }
         switch (inputKeyCode)
         {
@@ -167,9 +166,8 @@ public class InputBuffer : ScriptableObject
     {
         switch (inputKeyCode)
         {
-            case KeyCode.Joystick1Button7:
+            case KeyCode.Joystick1Button7:  
                 _menuMode = false;
-                //Menu.Instance.pauseMenu.SetActive(false);
                 break;
 
             default:
