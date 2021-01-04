@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class enemyhealth : MonoBehaviour
+public class EnemyHealth : MonoBehaviour
 {
     #region Variables
     public int currentHealth;
@@ -85,6 +85,11 @@ public class enemyhealth : MonoBehaviour
 
         //yield on a new YieldInstruction that waits the duration of the AudioClip.
         yield return new WaitForSeconds(Resources.Load<AudioClip>(_deathSoundPaths[_deathSound]).length);
+    }
+
+    public void KillCurrentEnemy()
+    {
+        TakeDamage(100, transform);
     }
     #endregion
 }

@@ -1287,9 +1287,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 30
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -1322,7 +1322,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1420,6 +1420,7 @@ MonoBehaviour:
   _volumeScales:
   - 1
   weaponDamage: 1
+  destroyOnImpact: 0
   targetTag: Player
   layerMaskValue: 9
   weaponPoints:
@@ -1475,11 +1476,10 @@ MonoBehaviour:
   viewDistance: 20
   radiusOfHearing: 10
   talkingDistance: 35
-  playerLayerMask:
-    serializedVersion: 2
-    m_Bits: 1024
   walkingSpeed: 4
   runningSpeed: 7
+  interactionRange: 1.5
+  defaultState: idle
   combatRole: 0
   attacking: 0
   meleeAttackRange: 2.5
@@ -1489,6 +1489,8 @@ MonoBehaviour:
   destination: {x: 0, y: 0, z: 0}
   squareID: 0
   squareNormalisedPosition: {x: 0, y: 0, z: 0}
+  meleeWeapon: {fileID: 0}
+  rangedWeapon: {fileID: 0}
 --- !u!1 &6325156050180504588
 GameObject:
   m_ObjectHideFlags: 0

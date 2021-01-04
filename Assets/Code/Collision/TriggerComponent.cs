@@ -83,6 +83,11 @@ public class TriggerComponent : MonoBehaviour
                 LoadLevel.LoadNextLevel();
                 continue;
             }
+            if (_classesAndMethodsToBeCalled[i] == "EnemyManager.KillCurrentEnemies")
+            {
+                _enemyManager.KillCurrentEnemies();
+                continue;
+            }
             
             if (_classesAndMethodsToBeCalled[i] == "Break") //can be done in EnemyManager.StartArenaFight, IF we make sure to place everything in the correct order with EnemyManager.StartArenaFight beeing last!
             {

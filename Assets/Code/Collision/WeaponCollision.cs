@@ -115,7 +115,7 @@ public class WeaponCollision : MonoBehaviour
                 //If we want knockback to depend on player position.
                 if (_targetsHit[i] != crate)
                 {
-                    _targetsHit[i].GetComponent<enemyhealth>().TakeDamage(weaponDamage, weaponPoints[0].transform.root);
+                    _targetsHit[i].GetComponent<EnemyHealth>().TakeDamage(weaponDamage, weaponPoints[0].transform.root);
                     SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), _soundPaths[Random.Range(5, _soundPaths.Count - 1)], 0,
                         Time.fixedTime, _volumeScales[2]);
                 }

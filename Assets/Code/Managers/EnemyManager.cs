@@ -76,6 +76,14 @@ public class EnemyManager : MonoBehaviour
         PopulateReloadStationList();
     }
 
+    public void KillCurrentEnemies()
+    {
+        foreach (var enemy in enemyPool)
+        {
+            enemy.enemy.GetComponentInChildren<EnemyHealth>().KillCurrentEnemy();
+        }
+    }
+
     /// <summary>
     /// Spawns enemies from a specified spawnSet, only creates new enemies if there are none of the required enemy type available.
     /// </summary>
