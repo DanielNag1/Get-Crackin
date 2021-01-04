@@ -14,6 +14,9 @@ public class RageMode : MonoBehaviour
     private float elapsedTime;
     private Image rags;
 
+    [SerializeField] private List<string> _soundPaths;
+    [SerializeField] private List<float> _volumeScales;
+
     public float currentRage;//Set this value when loading!
     public event Action<float> onRagePctChanged = delegate { };
 
@@ -31,7 +34,31 @@ public class RageMode : MonoBehaviour
     {
         currentRage = startRage;
     }
-    
+
+    public void ActivateRageMode()
+    {
+        animator.SetBool("Rage Mode", true);
+        VFXEvents.Instance.VFX4Stop();
+        VFXEvents.Instance.VFX5Play();
+        SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), _soundPaths[UnityEngine.Random.Range(0, _soundPaths.Count - 1)],
+            0, Time.fixedTime, _volumeScales[0]);
+    }
+
+    public void DisableRageMode()
+    {
+        //animator.ResetTrigger("Attack");
+        animator.SetBool("Rage Mode", false);
+        VFXEvents.Instance.VFX5Stop();
+        if (currentRage > 0)
+        {
+            VFXEvents.Instance.VFX4Play();
+        }
+        else
+        {
+            VFXEvents.Instance.VFX4Stop();
+        }
+    }
+
     public void ModifyRage(float amount)
     {
         if (amount > 0)
@@ -47,10 +74,7 @@ public class RageMode : MonoBehaviour
             currentRage = Math.Max(0, currentRage + amount);
             if (currentRage == 0)
             {
-                //animator.ResetTrigger("Attack");
-                animator.SetBool("Rage Mode", false);
-                VFXEvents.Instance.VFX4Stop();
-                VFXEvents.Instance.VFX5Stop();
+                DisableRageMode();
             }
         }
         float currentRagePct = (float)currentRage / (float)maxRage;

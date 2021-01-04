@@ -25,8 +25,8 @@ public class TPPCameraRotation : MonoBehaviour
         _movementDirectionX = Input.GetAxis("Horizontal");
         if (_movementDirectionX != 0)
         {
-            _freeLookCamera.m_XAxis.m_MaxSpeed = 150;
-            _mouseActive = true;
+            _freeLookCamera.m_XAxis.m_MaxSpeed = 1800;
+            //_mouseActive = true;
         }
        else
         {
@@ -40,8 +40,6 @@ public class TPPCameraRotation : MonoBehaviour
             //    _freeLookCamera.m_XAxis.m_MaxSpeed = 1500;
             //}
         }
-       
-
     }
     #endregion
 }

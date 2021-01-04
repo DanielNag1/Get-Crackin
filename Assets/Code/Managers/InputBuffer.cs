@@ -248,15 +248,11 @@ public class InputBuffer : ScriptableObject
         {
             if (animator.GetBool("Rage Mode"))
             {
-                animator.SetBool("Rage Mode", false);
-                VFXEvents.Instance.VFX5Stop();
-                VFXEvents.Instance.VFX4Play();
+                RageMode.Instance.DisableRageMode();
             }
             else
             {
-                animator.SetBool("Rage Mode", true);
-                VFXEvents.Instance.VFX4Stop();
-                VFXEvents.Instance.VFX5Play();
+                RageMode.Instance.ActivateRageMode();
             }
         }
     }

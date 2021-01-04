@@ -7,20 +7,23 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-
+    #region Variables
     [SerializeField]
     private int _maxHealth = 30;
     public int currentHealth;
     public event Action<float> onHealthPctChanged = delegate { };
     [SerializeField] Animator animator;
     public bool healthPickedUp;
-   
+
     private float _lerpTimer;
     public Image frontHealthBar;
     public Image backHealthBar;
     public float chipSpeed = 2f;
 
-
+    [SerializeField] private List<string> _soundPaths;
+    [SerializeField] private List<float> _volumeScales;
+    #endregion
+    #region Methods
 
     void Start()
     {
@@ -48,7 +51,7 @@ public class Health : MonoBehaviour
         float currentHealthPct = (float)currentHealth / (float)_maxHealth;
 
         UpdateHealthUI(currentHealthPct);
-        
+
 
         if (currentHealth <= 0)
         {
@@ -57,10 +60,10 @@ public class Health : MonoBehaviour
                 animator.SetBool("isDead", true);
             }
         }
-        
+
     }
 
-    
+
 
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
@@ -72,6 +75,8 @@ public class Health : MonoBehaviour
             HP.PickupHealth();
             ModifyHealth(HP.healingValue);
             Debug.Log("Gained 10 Health");
+            SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), _soundPaths[UnityEngine.Random.Range(0, _soundPaths.Count - 1)], 0,
+                Time.fixedTime, _volumeScales[0]);
         }
     }
 
@@ -79,7 +84,7 @@ public class Health : MonoBehaviour
     {
         float _fillF = frontHealthBar.fillAmount;
         float _fillB = backHealthBar.fillAmount;
-        
+
 
         if (_fillB > pct)
         {
@@ -122,5 +127,5 @@ public class Health : MonoBehaviour
     }
 
 
-
+    #endregion
 }

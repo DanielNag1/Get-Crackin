@@ -116,8 +116,8 @@ public class WeaponCollision : MonoBehaviour
                 if (_targetsHit[i] != crate)
                 {
                     _targetsHit[i].GetComponent<enemyhealth>().TakeDamage(weaponDamage, weaponPoints[0].transform.root);
-                    SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), _soundPaths[Random.Range(0, _soundPaths.Count - 1)], 0,
-                        Time.fixedTime, _volumeScales[0]);
+                    SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), _soundPaths[Random.Range(5, _soundPaths.Count - 1)], 0,
+                        Time.fixedTime, _volumeScales[2]);
                 }
                 else
                 {
@@ -197,6 +197,28 @@ public class WeaponCollision : MonoBehaviour
     public void DisableCollision()
     {
         collisionActive = false;
+    }
+    public void PlaySwingSFX(int selector)
+    {
+        switch (selector)
+        {
+            case 1:
+                SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), _soundPaths[Random.Range(0, 1)], 0,
+                    Time.fixedTime, _volumeScales[0]);
+                break;
+            case 2:
+                SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), _soundPaths[Random.Range(2, 3)], 0,
+                    Time.fixedTime, _volumeScales[1]);
+                break;
+
+            case 3:
+                SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), _soundPaths[Random.Range(4, 4)], 0,
+                    Time.fixedTime, _volumeScales[1]);
+                break;
+            default:
+                break;
+        }
+
     }
     #endregion
 }
