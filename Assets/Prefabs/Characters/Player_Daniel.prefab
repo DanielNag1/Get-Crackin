@@ -137,7 +137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6233757425404657015
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1403,6 +1403,8 @@ MonoBehaviour:
   highOffset: 0.1
   knockbackAmount: 10
   knockbackTimer: 0.5
+  _soundPaths: []
+  _volumeScales: []
 --- !u!143 &6793778528719022532
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1569,10 +1571,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _soundPaths:
-  - SFX/SwingSounds/Sword_Whoosh1
+  - SFX/SwingSounds/Sword_Whoosh_1
+  - SFX/SwingSounds/Sword_Whoosh_2
+  - SFX/SwingSounds/Sword_Whoosh_3
+  - SFX/SwingSounds/Sword_Whoosh_4
+  - SFX/SwingSounds/Sword_Whoosh_Spin1
+  - SFX/ImpactSounds/Sword_Impact_1
+  - SFX/ImpactSounds/Sword_Impact_2
+  - SFX/ImpactSounds/Sword_Impact_3
   _volumeScales:
   - 1
-  weaponDamage: 3
+  - 0.6
+  - 1
+  weaponDamage: 1
   destroyOnImpact: 0
   targetTag: Enemy
   layerMaskValue: 10
@@ -1651,12 +1662,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 10
-  currentHealth: 10
+  currentHealth: 6
   animator: {fileID: 6793778528719022584}
   healthPickedUp: 0
   frontHealthBar: {fileID: 8104502215665690054}
   backHealthBar: {fileID: 8104502214163610377}
   chipSpeed: 2
+  _soundPaths:
+  - SFX/EnviromentSounds/HealthPickup
+  _volumeScales:
+  - 0.05
 --- !u!114 &7219189955116254551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1670,8 +1685,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxRage: 100
-  startRage: 0
+  startRage: 100
   TimerSec: 2
+  _soundPaths:
+  - SFX/InputFeedbackSounds/Activate_Rage
+  _volumeScales:
+  - 0.25
   currentRage: 0
   animator: {fileID: 6793778528719022584}
 --- !u!1 &7038056455805487911
@@ -1914,19 +1933,6 @@ Transform:
   m_Father: {fileID: 687424376668366646}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7883158985685346117
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8104502214834017824}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35ae8540712ed684381ff777496601a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rageBar: {fileID: 8104502214674168921}
 --- !u!114 &4462279322848306499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1949,6 +1955,19 @@ MonoBehaviour:
   triggerMushroom: {fileID: 0}
   triggerGoodbye: {fileID: 0}
   triggerLast: {fileID: 0}
+--- !u!114 &7883158985685346117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8104502214834017824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35ae8540712ed684381ff777496601a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rageBar: {fileID: 8104502214674168921}
 --- !u!1 &8159463225183144676
 GameObject:
   m_ObjectHideFlags: 0
@@ -2072,8 +2091,8 @@ MonoBehaviour:
   _changeCamera: {fileID: 0}
   _targetIcon: {fileID: 0}
   _soundPaths:
-  - SFX/InputFeedbackSounds/Lock
   - SFX/InputFeedbackSounds/Unlock
+  - SFX/InputFeedbackSounds/Lock
   _volumeScales:
   - 1
   - 1
@@ -2219,8 +2238,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _soundPaths:
-  - BackgroundMusicFolder/calm_tree_of_life
-  _volumeScale: 0.1
+  - BackgroundMusicFolder/Summer_Bird_Ambience
+  _volumeScale: 0.6
 --- !u!82 &692588069049597892
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2231,8 +2250,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 7857408ff617a094088a15c6720ca4b4, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

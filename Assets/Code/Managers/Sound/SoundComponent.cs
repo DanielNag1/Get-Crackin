@@ -5,8 +5,8 @@ public class SoundComponent : MonoBehaviour
 {
     public string soundPath; //sound paths
     public float volumeScale = 1; //volume scale
+    public bool looper = false;
 
-  
 
     private void Start()
     {
@@ -17,8 +17,29 @@ public class SoundComponent : MonoBehaviour
             return;
         }
         //Starts a coroutine as there is a wait in the execution.
-        StartCoroutine(SoundCoroutine());
+        if (looper)
+        {
+            StartCoroutine(LooperSoundCoroutine());
+        }
+        else
+        {
+            StartCoroutine(SoundCoroutine());
+        }
+
     }
+
+    private IEnumerator LooperSoundCoroutine()
+    {
+        while (true)
+        {
+            if (!transform.GetComponent<AudioSource>().isPlaying)
+            {
+                SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), soundPath, 0, Time.fixedTime, volumeScale);
+            }
+            yield return new WaitForSeconds(Resources.Load<AudioClip>(soundPath).length);
+        }
+    }
+
     private IEnumerator SoundCoroutine()
     {
         //Sends a request to play a specific sound.

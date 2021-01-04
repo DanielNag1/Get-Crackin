@@ -22,6 +22,8 @@ public class Move : MonoBehaviour
     [SerializeField] float highOffset = 1.58f;
     [SerializeField] float knockbackAmount;
     [SerializeField] float knockbackTimer;
+    [SerializeField] private List<string> _soundPaths;
+    [SerializeField] private List<float> _volumeScales;
     #endregion
     #region Methods
     void Start()
@@ -34,7 +36,7 @@ public class Move : MonoBehaviour
     }
     void Update()
     {
-        ModifyAttackSpeed();
+        ModifyAttackSpeed();//should be called when we activate and deactivate rage mode! Not always!
         NormalMovement();
         animator.SetFloat("movementMagnitude", movementDirection.magnitude);
     }
@@ -195,5 +197,24 @@ public class Move : MonoBehaviour
             return Vector3.zero;
         }
     }
-#endregion
+
+    public void WalkingSFX(int selector)
+    {
+        switch (selector)
+        {
+            case 1:
+                SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), _soundPaths[Random.Range(0, _soundPaths.Count - 1)], 0,
+                    Time.fixedTime, _volumeScales[0]);
+                break;
+            case 2:
+                SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), _soundPaths[Random.Range(2, 3)], 0,
+                    Time.fixedTime, _volumeScales[1]);
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    #endregion
 }
