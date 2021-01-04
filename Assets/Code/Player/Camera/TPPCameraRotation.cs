@@ -15,29 +15,30 @@ public class TPPCameraRotation : MonoBehaviour
         Cursor.visible = false;
         _freeLookCamera = GetComponent<CinemachineFreeLook>();
     }
-    private bool IsMouseActive()
-    {
-        return (Input.GetAxis("Mouse X") != 0) || (Input.GetAxis("Mouse Y") != 0);
-    }
+    //private bool IsMouseActive()
+    //{
+    //    return (Input.GetAxis("Mouse X") != 0) || (Input.GetAxis("Mouse Y") != 0);
+    //}
 
     private void Update()
     {
         _movementDirectionX = Input.GetAxis("Horizontal");
-        if (IsMouseActive())
+        if (_movementDirectionX != 0)
         {
             _freeLookCamera.m_XAxis.m_MaxSpeed = 150;
             _mouseActive = true;
         }
-        if (!IsMouseActive())
+       else
         {
-            if (_movementDirectionX != 0)
-            {
-                _freeLookCamera.m_XAxis.m_MaxSpeed = 1800;
-            }
-            else
-            {
-                _freeLookCamera.m_XAxis.m_MaxSpeed = 1500;
-            }
+            _freeLookCamera.m_XAxis.m_MaxSpeed = 1500;
+            //if (_movementDirectionX != 0)
+            //{
+            //    _freeLookCamera.m_XAxis.m_MaxSpeed = 1800;
+            //}
+            //else
+            //{
+            //    _freeLookCamera.m_XAxis.m_MaxSpeed = 1500;
+            //}
         }
        
 
