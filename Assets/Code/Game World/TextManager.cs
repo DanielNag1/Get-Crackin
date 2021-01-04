@@ -179,8 +179,8 @@ public class TextManager : MonoBehaviour
     }
     private string TutorialGoodbye(Text textUI)
     {
-        _textToShow = "This is were you're going on your own, " + "\n" +
-            "goodluck have fun and don't die noob.";
+        _textToShow = " See that icon over the foxes head?  " + "\n" +
+            "Press 'RB' to lock on a target";
         TextUI.text = _textToShow;
         return _textToShow;
     }
