@@ -12,7 +12,7 @@ public class TPPCameraRotation : MonoBehaviour
     #region Methods
     private void Start()
     {
-        Cursor.visible = false;
+        Cursor.visible = true;
         _freeLookCamera = GetComponent<CinemachineFreeLook>();
     }
     //private bool IsMouseActive()

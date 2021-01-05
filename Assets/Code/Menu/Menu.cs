@@ -136,7 +136,7 @@ public class Menu : MonoBehaviour
         pauseMenu.SetActive(false);
         GameObject.Find("Player").GetComponent<Move>().enabled = true;
         Time.timeScale = 1f;
-        _pauseMenuActive = false;
+       // _pauseMenuActive = false;
     }
 
     private static bool WantsToQuit()
