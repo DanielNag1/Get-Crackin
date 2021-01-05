@@ -34,41 +34,39 @@ public class Menu : MonoBehaviour
 
     private void Update()
     {
-        if (_pauseMenuActive)
+        if (pauseMenu.activeInHierarchy)
         {
-            if (pauseMenu.activeInHierarchy)
+            GameObject.Find("Player").GetComponent<Move>().enabled = false;
+            Time.timeScale = 0f;
+            if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Joystick1Button1)
+                || Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Mouse1))
             {
-                GameObject.Find("Player").GetComponent<Move>().enabled = false;
-                Time.timeScale = 0f;
-                //if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Joystick1Button1)
-                //    || Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Mouse1))
-                //{
-                //    if (EventSystem.current.currentSelectedGameObject == pauseResumeButton)
-                //    {
-                //        //ResumeGame();
-                //    }
-                //    else if (EventSystem.current.currentSelectedGameObject == optionButton)
-                //    {
-                //        //OpenOptionFromPause();
-                //    }
-                //    else if (EventSystem.current.currentSelectedGameObject == mainMenuButton)
-                //    {
-                //        //OpenMainMenu();
-                //    }
-                //}
-            }
-            else if (pauseOptionMenu.activeInHierarchy)
-            {
-                if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Joystick1Button1)
-                    || Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Mouse1))
+                if (EventSystem.current.currentSelectedGameObject == pauseResumeButton)
                 {
-                    if (EventSystem.current.currentSelectedGameObject == backButton)
-                    {
-                        BackToPause();
-                    }
+                    ResumeGame();
+                }
+                else if (EventSystem.current.currentSelectedGameObject == optionButton)
+                {
+                    OpenOptionFromPause();
+                }
+                else if (EventSystem.current.currentSelectedGameObject == mainMenuButton)
+                {
+                    OpenMainMenu();
                 }
             }
         }
+        if (pauseOptionMenu.activeInHierarchy)
+        {
+            if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Joystick1Button1)
+                || Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                if (EventSystem.current.currentSelectedGameObject == backButton)
+                {
+                    BackToPause();
+                }
+            }
+        }
+
 
         if (SceneManager.GetSceneByBuildIndex(0).isLoaded)
         {
@@ -111,9 +109,6 @@ public class Menu : MonoBehaviour
     public void PauseGame()
     {
         pauseMenu.SetActive(true);
-        mainMenu.SetActive(false);
-        pauseOptionMenu.SetActive(false);
-        _pauseMenuActive = true;
         EventSystem.current.currentSelectedGameObject.GetComponent<Animator>().SetTrigger("Highlighted");
     }
 
@@ -130,6 +125,7 @@ public class Menu : MonoBehaviour
         {
             Debug.Log("Quit");
             mainMenu.SetActive(false);
+            pauseMenu.SetActive(false);
             optionsMenu.SetActive(false);
             Application.wantsToQuit += WantsToQuit;
         }
@@ -161,7 +157,6 @@ public class Menu : MonoBehaviour
         pauseMenu.SetActive(false);
         pauseOptionMenu.SetActive(true);
         optionsPauseSoundSlider.value = SoundEngine.Instance.SetMasterVolume;
-        mainMenu.SetActive(false);
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(backButtonPause);
     }

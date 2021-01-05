@@ -91,11 +91,6 @@ public class InputBuffer : ScriptableObject
 
     private void ExecuteInput(KeyCode inputKeyCode)
     {
-        if (_menuMode)
-        {
-            ExecuteMenuInput(inputKeyCode);
-            return;
-        }
         switch (inputKeyCode)
         {
             case KeyCode.Joystick1Button0: //A Attack
@@ -135,7 +130,6 @@ public class InputBuffer : ScriptableObject
                 }
                 break;
             case KeyCode.Joystick1Button7: //Start Button
-                _menuMode = true;
                 Menu.Instance.PauseGame();
                 break;
             #region Unused Buttons
@@ -169,7 +163,6 @@ public class InputBuffer : ScriptableObject
         {
             case KeyCode.Joystick1Button7:
                 _menuMode = false;
-                //Menu.Instance.pauseMenu.SetActive(false);
                 break;
 
             default:
