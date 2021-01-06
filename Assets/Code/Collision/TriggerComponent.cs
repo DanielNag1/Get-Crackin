@@ -74,7 +74,9 @@ public class TriggerComponent : MonoBehaviour
             //Assuming we move enviroment objects using animations.
             if (_classesAndMethodsToBeCalled[i] == "MoveGameObject")
             {
-                _objectToMove[0].GetComponent<Animator>().SetBool("Move", true/*!_objectToMove[0].GetComponent<Animator>().GetBool("Move")*/);
+                //Uncomment this if you want the stone opening to fly away! 
+              // StoneOpening.Instance.DestroyStone();
+               _objectToMove[0].GetComponent<Animator>().SetBool("Move", true/*!_objectToMove[0].GetComponent<Animator>().GetBool("Move")*/);
                 _objectToMove.RemoveAt(0);
                 continue;
             }
