@@ -91,6 +91,10 @@ public class InputBuffer : ScriptableObject
 
     private void ExecuteInput(KeyCode inputKeyCode)
     {
+        if (_menuMode)
+        {
+            ExecuteMenuInput(inputKeyCode);
+        }
         switch (inputKeyCode)
         {
             case KeyCode.Joystick1Button0: //A Attack

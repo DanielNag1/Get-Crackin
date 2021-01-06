@@ -74,7 +74,7 @@ public class Health : MonoBehaviour
             healthPickedUp = true;
             HP.PickupHealth();
             ModifyHealth(HP.healingValue);
-            Debug.Log("Gained 10 Health");
+          
             SoundEngine.Instance.RequestSFX(transform.GetComponent<AudioSource>(), _soundPaths[UnityEngine.Random.Range(0, _soundPaths.Count - 1)], 0,
                 Time.fixedTime, _volumeScales[0]);
         }

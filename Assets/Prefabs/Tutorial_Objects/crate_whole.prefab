@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 7391585042712735620}
   - component: {fileID: 5853541496819851297}
   - component: {fileID: 8565569086600533227}
-  - component: {fileID: 6998195876699490411}
   - component: {fileID: 6998195876699490408}
-  - component: {fileID: 6998195876699490409}
+  - component: {fileID: 1739521701}
+  - component: {fileID: 2926565116442076079}
   m_Layer: 0
   m_Name: crate_whole
   m_TagString: crate
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 7917327885194229054}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 38, y: 0.06, z: 13}
-  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_LocalScale: {x: 200, y: 200, z: 200}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -82,22 +82,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!54 &6998195876699490411
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7917327885194229054}
-  serializedVersion: 2
-  m_Mass: 10
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!65 &6998195876699490408
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -111,7 +95,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.009999999, y: 0.009999999, z: 0.009999999}
   m_Center: {x: 0, y: 0.004507939, z: 0}
---- !u!114 &6998195876699490409
+--- !u!114 &1739521701
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,5 +107,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28ee202976aaa9b49a60c95a897d219a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crate_shattered: {fileID: 3600173733451680268, guid: 636b9a8294917134f9542c5d21ed3001,
+  crate_shattered: {fileID: 4545798794834009233, guid: aa02ac50585751a46870dfe9ac530e3a,
     type: 3}
+--- !u!54 &2926565116442076079
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7917327885194229054}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
