@@ -127,11 +127,6 @@ public class TextManager : MonoBehaviour
     /// </summary>
     /// <returns></returns>
     #region TutorialText
-    private string TutorialCrateText()
-    {
-        _textToShow = "Press 'A' to destroy the crate.";
-        return _textToShow;
-    }
     private string TutorialCrate(Text textUI)
     {
         _textToShow = "Press 'A' to destroy the crate.";
@@ -159,7 +154,7 @@ public class TextManager : MonoBehaviour
     }
     private string TutorialDodge(Text textUI)
     {
-        _textToShow = "Try to avoid the attack from the fox by pressing 'B'. ";
+        _textToShow = "Try to avoid his attack by pressing 'B'. ";
         TextUI.text = _textToShow;
         return _textToShow;
     }
@@ -171,23 +166,24 @@ public class TextManager : MonoBehaviour
     }
     private string TutorialMushroom(Text textUI)
     {
-        _textToShow = "If you were a pussy ass motherfucker and got hurt, " + "\n"
-            + "don't worry" + "\n" +
-            "there is a mushroom down the brigde that gives you health. ";
+        _textToShow = "If you got hurt, don't worry! " + "\n" +
+            "There is a mushroom down the brigde that gives you health. ";
         TextUI.text = _textToShow;
         return _textToShow;
     }
     private string TutorialGoodbye(Text textUI)
     {
-        _textToShow = " See that icon over the foxes head?  " + "\n" +
-            "Press 'RB' to lock on a target";
+        _textToShow = " See that red icon over the foxes head?  " + "\n" +
+            "Press 'RB' to lock on a target" + "\n" +
+        "To unlock the target you press 'RB' again.";
         TextUI.text = _textToShow;
         return _textToShow;
     }
     private string TutorialLast(Text textUI)
     {
-        _textToShow = " Oh by the way, look out for the ranged enemies," + "\n" +
-            "okay fuck off now.";
+        _textToShow = "Good luck and have fun! " + "\n" +
+            " Oh by the way, look out for the ranged enemies..";
+
         TextUI.text = _textToShow;
         return _textToShow;
     }

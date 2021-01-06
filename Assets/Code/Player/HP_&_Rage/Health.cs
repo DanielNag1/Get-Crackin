@@ -71,7 +71,6 @@ public class Health : MonoBehaviour
             healthPickedUp = true;
             HP.PickupHealth();
             ModifyHealth(HP.healingValue);
-            Debug.Log("Gained 10 Health");
         }
     }
 
