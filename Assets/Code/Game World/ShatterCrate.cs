@@ -27,7 +27,7 @@ public class ShatterCrate : MonoBehaviour
     public GameObject crate_shattered;
     private GameObject clone_shattered;
     private GameObject clone_whole;
-    private float waitToDestroy = 5f;
+    private float waitToDestroy = 2f;
     #endregion
   
     /// <summary>

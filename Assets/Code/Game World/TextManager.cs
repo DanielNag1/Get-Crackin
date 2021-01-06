@@ -21,14 +21,12 @@ public class TextManager : MonoBehaviour
     public GameObject tutorialWindow;
     private string _textToShow;
     private float timer = 2f;
-    private float rageTimer = 5f;
+    private float rageTimer = 3f;
     private float lastTutorialTimer = 3f;
     [SerializeField]
     private GameObject triggerCrate;
     [SerializeField]
     private GameObject triggerRagebar;
-    [SerializeField]
-    private GameObject triggerBridge;
     [SerializeField]
     private GameObject triggerFox;
     [SerializeField]
@@ -56,7 +54,6 @@ public class TextManager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().buildIndex == 2)
         {
-
             TriggerTutorial();
         }
     }
@@ -80,10 +77,6 @@ public class TextManager : MonoBehaviour
             if (triggerRagebar == null)
             {
                 TutorialRageBar(TextUI);
-            }
-            if (triggerBridge == null)
-            {
-                TutorialBridge(TextUI);
             }
             if (triggerFox == null)
             {
@@ -137,12 +130,6 @@ public class TextManager : MonoBehaviour
     {
         _textToShow = "See that red under your healthbar? " + "\n" +
             "That is your ragebar, it increases with every successfull hit.";
-        TextUI.text = _textToShow;
-        return _textToShow;
-    }
-    private string TutorialBridge(Text textUI)
-    {
-        _textToShow = "If you walk up this bridge we are going to try to test out your skills.";
         TextUI.text = _textToShow;
         return _textToShow;
     }

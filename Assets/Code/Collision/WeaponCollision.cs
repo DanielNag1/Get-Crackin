@@ -110,7 +110,7 @@ public class WeaponCollision : MonoBehaviour
 
                 FreeCameraShake.Instance.ShakeCamera(_shakeIntensity, _shakeTime);
                 LockCameraShake.Instance.ShakeCamera(_shakeIntensity, _shakeTime);
-  SlowMotionOnHit.Instance.StartSlowMotion(0.1f, 0.008f);
+                SlowMotionOnHit.Instance.StartSlowMotion(0.1f, 0.008f);
                 RageModifier();
 
                 //OBS!! weaponPoint location is hard coded, add info on what weaponPoint made the hit to the list: targetsHit
