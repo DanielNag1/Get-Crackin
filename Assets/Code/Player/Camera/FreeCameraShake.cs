@@ -35,8 +35,6 @@ public class FreeCameraShake : MonoBehaviour
         {
             if (_cinemachineBrain.IsLive(_freeLookCamera)) //Resets the amplitude of the shake to 0
             {
-                //timeScale is used for slowmo effect
-                //Time.timeScale = 1; //Reset gamespeed
                 _freeLookCamera.GetRig(0).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
                 _freeLookCamera.GetRig(1).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
                 _freeLookCamera.GetRig(2).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
@@ -50,8 +48,6 @@ public class FreeCameraShake : MonoBehaviour
         _shakeTimer = time;
         if (_cinemachineBrain.IsLive(_freeLookCamera)) //Sets the amplitude of the shake
         {
-            //timeScale is used for slowmo effect
-            //Time.timeScale = 0.2f; //Slow down gamespeed
             _freeLookCamera.GetRig(0).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = _intensity;
             _freeLookCamera.GetRig(1).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = _intensity;
             _freeLookCamera.GetRig(2).GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = _intensity;

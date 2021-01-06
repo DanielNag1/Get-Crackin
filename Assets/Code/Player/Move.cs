@@ -38,6 +38,10 @@ public class Move : MonoBehaviour
     {
         ModifyAttackSpeed();//should be called when we activate and deactivate rage mode! Not always!
         NormalMovement();
+
+        movementDirection.x = Input.GetAxis("Horizontal");
+        movementDirection.y = Input.GetAxis("Vertical");
+
         animator.SetFloat("movementMagnitude", movementDirection.magnitude);
     }
 
@@ -47,9 +51,6 @@ public class Move : MonoBehaviour
     void RelativeToCameraMovement()
     {
         cameraTransform = Camera.main.transform;
-
-        movementDirection.x = Input.GetAxis("Horizontal");
-        movementDirection.y = Input.GetAxis("Vertical");
 
         Vector3 vertical = cameraTransform.forward;
         Vector3 horizontal = cameraTransform.right;

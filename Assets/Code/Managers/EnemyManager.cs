@@ -80,7 +80,10 @@ public class EnemyManager : MonoBehaviour
     {
         foreach (var enemy in enemyPool)
         {
-            enemy.enemy.GetComponentInChildren<EnemyHealth>().KillCurrentEnemy();
+            if(!enemy.elementAvailable)
+            {
+                enemy.enemy.GetComponentInChildren<EnemyHealth>().KillCurrentEnemy();
+            }
         }
     }
 

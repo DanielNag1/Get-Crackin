@@ -59,14 +59,6 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.2053282
-        functionName: Slash3
-        data: 
-        objectReferenceParameter: {fileID: 11500000, guid: bd730548f3b38c24d94441ba6770f0e7,
-          type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
       - time: 0.15700704
         functionName: EnableCollision
         data: 
@@ -75,10 +67,10 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.81685644
-        functionName: DisableCollision
+      - time: 0.2053282
+        functionName: Slash3
         data: 
-        objectReferenceParameter: {fileID: 11500000, guid: 69d5659865216724dbb79c86dc3afbd8,
+        objectReferenceParameter: {fileID: 11500000, guid: bd730548f3b38c24d94441ba6770f0e7,
           type: 3}
         floatParameter: 0
         intParameter: 0
@@ -90,6 +82,14 @@ ModelImporter:
           type: 3}
         floatParameter: 0
         intParameter: 2
+        messageOptions: 0
+      - time: 0.6650538
+        functionName: DisableCollision
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 69d5659865216724dbb79c86dc3afbd8,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
         messageOptions: 0
       transformMask: []
       maskType: 3

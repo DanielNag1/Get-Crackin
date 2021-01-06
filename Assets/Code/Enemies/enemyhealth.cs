@@ -44,7 +44,7 @@ public class EnemyHealth : MonoBehaviour
                 }
                 else
                 {
-                    _knockbackAmount = knockbackAmountResetVal;
+                    _knockbackAmount = knockbackAmountResetVal/2;
                 }
                 //Direction * 6.000.000 gave nice result(Save this)
                 _rb.AddForce(knockbackDirection * _knockbackAmount, ForceMode.Impulse);
