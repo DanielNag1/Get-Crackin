@@ -2,6 +2,7 @@
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class Menu : MonoBehaviour
 {
@@ -10,13 +11,14 @@ public class Menu : MonoBehaviour
     #endregion
 
     #region Variables
-    public GameObject pauseMenu, optionsMenu, mainMenu, pauseOptionMenu;
+    public GameObject pauseMenu, optionsMenu, mainMenu, pauseOptionMenu, creditsMenu;
     public GameObject pauseResumeButton, optionButton, mainMenuButton, quitToDesktopButton;
-    public GameObject backButton, backButtonPause, playButton, optionsMainMenuButton, quitGameButton, continueButton;
+    public GameObject backButton, backButtonPause, playButton, optionsMainMenuButton, quitGameButton, continueButton, backToMainMenu;
     public GameObject pauseMenuUI;
     public Slider optionsPauseSoundSlider;
     private bool _pauseMenuActive = false;
     public GameObject levelLoader;
+    public GameObject videoPlayer;
     #endregion
 
     #region Methods
@@ -191,6 +193,21 @@ public class Menu : MonoBehaviour
         pauseMenu.SetActive(true);
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(pauseResumeButton);
+    }
+
+    public void BackToMainMenu()
+    {
+        creditsMenu.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(playButton);
+    }
+
+    public void OpenCredits()
+    {
+        creditsMenu.SetActive(true);
+        videoPlayer.GetComponent<VideoPlayer>().Play();
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(backToMainMenu);
     }
     #endregion
 }
