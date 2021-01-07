@@ -833,6 +833,7 @@ MonoBehaviour:
   quitGameButton: {fileID: 1753181488}
   continueButton: {fileID: 0}
   backToMainMenu: {fileID: 1460017213}
+  creditButton: {fileID: 2027799120}
   pauseMenuUI: {fileID: 0}
   optionsPauseSoundSlider: {fileID: 0}
   levelLoader: {fileID: 1562262312811361600}
@@ -1922,12 +1923,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 418409486}
-        m_MethodName: BackToMainMenu
+      - m_Target: {fileID: 0}
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2979,7 +2980,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: BACK
+  m_Text: Press B to back
 --- !u!222 &1932345565
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3399,12 +3400,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 418409486}
-        m_MethodName: OpenCredits
+      - m_Target: {fileID: 0}
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

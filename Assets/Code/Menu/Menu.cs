@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,12 +14,13 @@ public class Menu : MonoBehaviour
     #region Variables
     public GameObject pauseMenu, optionsMenu, mainMenu, pauseOptionMenu, creditsMenu;
     public GameObject pauseResumeButton, optionButton, mainMenuButton, quitToDesktopButton;
-    public GameObject backButton, backButtonPause, playButton, optionsMainMenuButton, quitGameButton, continueButton, backToMainMenu;
+    public GameObject backButton, backButtonPause, playButton, optionsMainMenuButton, quitGameButton, continueButton, backToMainMenu, creditButton;
     public GameObject pauseMenuUI;
     public Slider optionsPauseSoundSlider;
     private bool _pauseMenuActive = false;
     public GameObject levelLoader;
     public GameObject videoPlayer;
+    private GameObject _lastSelectedGameObject, _currentSelectedGameObject;
     #endregion
 
     #region Methods
@@ -26,6 +28,17 @@ public class Menu : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+    }
+
+    private GameObject GetTheLastSelectedGameobject()
+    {
+        if (EventSystem.current.currentSelectedGameObject != _currentSelectedGameObject)
+        {
+            _lastSelectedGameObject = _currentSelectedGameObject;
+            _currentSelectedGameObject = EventSystem.current.currentSelectedGameObject;
+            return _lastSelectedGameObject;
+        }
+        return null;
     }
 
     private void Update()
@@ -70,9 +83,10 @@ public class Menu : MonoBehaviour
             }
         }
 
-
         if (SceneManager.GetSceneByBuildIndex(0).isLoaded)
         {
+            Debug.Log("current selected: " + EventSystem.current.currentSelectedGameObject);
+
             if (optionsMenu.activeInHierarchy)
             {
                 if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Joystick1Button1)
@@ -84,29 +98,47 @@ public class Menu : MonoBehaviour
                     }
                 }
             }
-            else if (mainMenu.activeInHierarchy)
+            if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Mouse0))
             {
-                if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Mouse0))
+                Debug.Log("Key pressed");
+                if (EventSystem.current.currentSelectedGameObject == playButton)
                 {
-                    if (EventSystem.current.currentSelectedGameObject == playButton)
-                    {
-                        PlayGame();
-                    }
-                    else if (EventSystem.current.currentSelectedGameObject == optionsMainMenuButton)
-                    {
-                        OpenOptions();
-                    }
-                    else if (EventSystem.current.currentSelectedGameObject == quitGameButton)
-                    {
-                        ExitGame();
-                    }
-                    else if (EventSystem.current.currentSelectedGameObject == continueButton)
-                    {
-                        ExitGame();
-                    }
+                    Debug.Log("play game");
+                    PlayGame();
+                }
+                else if (EventSystem.current.currentSelectedGameObject == optionsMainMenuButton)
+                {
+                    OpenOptions();
+                }
+                else if (EventSystem.current.currentSelectedGameObject == creditButton)
+                {
+                    Debug.Log("Credits open");
+                    OpenCredits();
+                }
+                else if (EventSystem.current.currentSelectedGameObject == quitGameButton)
+                {
+                    ExitGame();
+                }
+                else if (EventSystem.current.currentSelectedGameObject == continueButton)
+                {
+                    ExitGame();
+                }
+            }
+
+            if (creditsMenu.activeInHierarchy)
+            {
+                if (Input.GetKeyDown(KeyCode.Joystick1Button1) || Input.GetKeyDown(KeyCode.Mouse0))
+                {
+                    CloseCredits();
                 }
             }
         }
+    }
+
+    private void CloseCredits()
+    {
+        Debug.Log("back to main");
+        BackToMainMenu();
     }
 
     public void PauseGame()
@@ -200,14 +232,19 @@ public class Menu : MonoBehaviour
         creditsMenu.SetActive(false);
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(playButton);
+        EventSystem.current.currentSelectedGameObject.GetComponent<Animator>().SetTrigger("Highlighted");
     }
 
     public void OpenCredits()
     {
         creditsMenu.SetActive(true);
         videoPlayer.GetComponent<VideoPlayer>().Play();
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(backToMainMenu);
+    }
+
+    private IEnumerator WaitToSelectBack()
+    {
+        Debug.Log("waiting");
+        yield return new WaitForSeconds(2);
     }
     #endregion
 }
