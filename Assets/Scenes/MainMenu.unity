@@ -831,7 +831,6 @@ MonoBehaviour:
   playButton: {fileID: 2061414098}
   optionsMainMenuButton: {fileID: 1489596848}
   quitGameButton: {fileID: 1753181488}
-  continueButton: {fileID: 0}
   backToMainMenu: {fileID: 1460017213}
   creditButton: {fileID: 2027799120}
   pauseMenuUI: {fileID: 0}
@@ -2149,7 +2148,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1489596852}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1489596852
 MonoBehaviour:
   m_ObjectHideFlags: 0

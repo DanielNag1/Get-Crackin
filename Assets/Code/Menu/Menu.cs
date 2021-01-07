@@ -14,7 +14,7 @@ public class Menu : MonoBehaviour
     #region Variables
     public GameObject pauseMenu, optionsMenu, mainMenu, pauseOptionMenu, creditsMenu;
     public GameObject pauseResumeButton, optionButton, mainMenuButton, quitToDesktopButton;
-    public GameObject backButton, backButtonPause, playButton, optionsMainMenuButton, quitGameButton, continueButton, backToMainMenu, creditButton;
+    public GameObject backButton, backButtonPause, playButton, optionsMainMenuButton, quitGameButton, backToMainMenu, creditButton;
     public GameObject pauseMenuUI;
     public GameObject optionsPauseSoundSlider;
     private bool _pauseMenuActive = false;
@@ -85,7 +85,7 @@ public class Menu : MonoBehaviour
 
         if (SceneManager.GetSceneByBuildIndex(0).isLoaded)
         {
-            Debug.Log("current selected: " + EventSystem.current.currentSelectedGameObject);
+            EvaluateActiveMainMenuButton();
 
             if (optionsMenu.activeInHierarchy)
             {
@@ -104,6 +104,7 @@ public class Menu : MonoBehaviour
                 }
                 else if (EventSystem.current.currentSelectedGameObject == optionsMainMenuButton)
                 {
+                    Debug.Log("open options");
                     OpenOptions();
                 }
                 else if (EventSystem.current.currentSelectedGameObject == creditButton)
@@ -112,10 +113,6 @@ public class Menu : MonoBehaviour
                     OpenCredits();
                 }
                 else if (EventSystem.current.currentSelectedGameObject == quitGameButton)
-                {
-                    ExitGame();
-                }
-                else if (EventSystem.current.currentSelectedGameObject == continueButton)
                 {
                     ExitGame();
                 }
@@ -129,6 +126,33 @@ public class Menu : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void EvaluateActiveMainMenuButton()
+    {
+        Debug.Log("Current selected: " + EventSystem.current.currentSelectedGameObject);
+        if (playButton != EventSystem.current.currentSelectedGameObject)
+        {
+            playButton.GetComponent<Animator>().Play("Normal");
+        }
+        if (optionsMainMenuButton != EventSystem.current.currentSelectedGameObject)
+        {
+            optionsMainMenuButton.GetComponent<Animator>().Play("Normal");
+        }
+        if (creditButton != EventSystem.current.currentSelectedGameObject)
+        {
+            creditButton.GetComponent<Animator>().Play("Normal");
+            Debug.Log("HEJ");
+        }
+        if (quitGameButton != EventSystem.current.currentSelectedGameObject)
+        {
+            quitGameButton.GetComponent<Animator>().Play("Normal");
+        }
+        //else
+        //{
+        //    EventSystem.current.currentSelectedGameObject.GetComponent<Animator>().Play("Selected");
+        //}
+
     }
 
     private void CloseCredits()
@@ -202,7 +226,7 @@ public class Menu : MonoBehaviour
         optionsMenu.SetActive(false);
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(playButton);
-        EventSystem.current.currentSelectedGameObject.GetComponent<Animator>().SetTrigger("Highlighted");
+        //EventSystem.current.currentSelectedGameObject.GetComponent<Animator>().SetTrigger("Highlighted");
     }
 
     public void BackButton()
@@ -226,7 +250,7 @@ public class Menu : MonoBehaviour
         creditsMenu.SetActive(false);
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(playButton);
-        EventSystem.current.currentSelectedGameObject.GetComponent<Animator>().SetTrigger("Highlighted");
+        //EventSystem.current.currentSelectedGameObject.GetComponent<Animator>().SetTrigger("Highlighted");
     }
 
     public void OpenCredits()
