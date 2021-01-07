@@ -17,6 +17,7 @@ public class StoneOpening : MonoBehaviour
     public GameObject stoneOpening_shattered;
     private GameObject clone_shattered;
 
+
     private float waitToDestroy = 2f;
     #endregion
 
