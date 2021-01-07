@@ -14,13 +14,10 @@ public class Menu : MonoBehaviour
     #region Variables
     public GameObject pauseMenu, optionsMenu, mainMenu, pauseOptionMenu, creditsMenu;
     public GameObject pauseResumeButton, optionButton, mainMenuButton, quitToDesktopButton;
-    public GameObject backButton, backButtonPause, playButton, optionsMainMenuButton, quitGameButton, backToMainMenu, creditButton;
-    public GameObject pauseMenuUI;
+    public GameObject backButtonPause, playButton, optionsMainMenuButton, quitGameButton, backToMainMenu, creditButton;
     public GameObject optionsPauseSoundSlider;
-    private bool _pauseMenuActive = false;
     public GameObject levelLoader;
     public GameObject videoPlayer;
-    private GameObject _lastSelectedGameObject, _currentSelectedGameObject;
     #endregion
 
     #region Methods
@@ -30,55 +27,44 @@ public class Menu : MonoBehaviour
         Instance = this;
     }
 
-    private GameObject GetTheLastSelectedGameobject()
-    {
-        if (EventSystem.current.currentSelectedGameObject != _currentSelectedGameObject)
-        {
-            _lastSelectedGameObject = _currentSelectedGameObject;
-            _currentSelectedGameObject = EventSystem.current.currentSelectedGameObject;
-            return _lastSelectedGameObject;
-        }
-        return null;
-    }
-
     private void Update()
     {
-        if (pauseMenu.activeInHierarchy)
+        if (pauseOptionMenu.activeInHierarchy)
         {
             GameObject.Find("Player").GetComponent<Move>().enabled = false;
             Time.timeScale = 0f;
-            if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Joystick1Button1)
-                || Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Mouse1))
+            if (Input.GetKeyDown(KeyCode.Joystick1Button1))
             {
-
-                GameObject.Find("Player").GetComponent<Move>().enabled = false;
-                Time.timeScale = 0f;
-                //if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Joystick1Button1)
-                //    || Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Mouse1))
-                //{
-                //    if (EventSystem.current.currentSelectedGameObject == pauseResumeButton)
-                //    {
-                //        ResumeGame();
-                //    }
-                //    else if (EventSystem.current.currentSelectedGameObject == optionButton)
-                //    {
-                //        OpenOptionFromPause();
-                //    }
-                //    else if (EventSystem.current.currentSelectedGameObject == mainMenuButton)
-                //    {
-                //        OpenMainMenu();
-                //    }
-                //}
+                BackToPause();
             }
         }
-        if (pauseOptionMenu.activeInHierarchy)
+        if (pauseMenu.activeInHierarchy)
         {
-            if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Joystick1Button1)
-                || Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Mouse1))
+            EvaluateActivePauseMenuButton();
+
+            GameObject.Find("Player").GetComponent<Move>().enabled = false;
+            Time.timeScale = 0f;
+
+            if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Mouse0))
             {
-                if (EventSystem.current.currentSelectedGameObject == backButton)
+                GameObject.Find("Player").GetComponent<Move>().enabled = false;
+                Time.timeScale = 0f;
+
+                if (EventSystem.current.currentSelectedGameObject == pauseResumeButton)
                 {
-                    BackToPause();
+                    ResumeGame();
+                }
+                else if (EventSystem.current.currentSelectedGameObject == optionButton)
+                {
+                    OpenOptionFromPause();
+                }
+                else if (EventSystem.current.currentSelectedGameObject == mainMenuButton)
+                {
+                    OpenMainMenu();
+                }
+                else if (EventSystem.current.currentSelectedGameObject == quitToDesktopButton)
+                {
+                    ExitGame();
                 }
             }
         }
@@ -89,9 +75,9 @@ public class Menu : MonoBehaviour
 
             if (optionsMenu.activeInHierarchy)
             {
-                if (Input.GetKeyDown(KeyCode.Joystick1Button1) || Input.GetKeyDown(KeyCode.Joystick1Button1))
+                if (Input.GetKeyDown(KeyCode.Joystick1Button1) || Input.GetKeyDown(KeyCode.Mouse0))
                 {
-                    OpenMainMenu();
+                    BackToMainMenu();
                 }
             }
             if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Mouse0))
@@ -128,6 +114,84 @@ public class Menu : MonoBehaviour
         }
     }
 
+    #region Mainmenu
+
+    public void PlayGame()
+    {
+        levelLoader.GetComponent<LoadLevel>().LoadNextLevel();
+        Time.timeScale = 1f;
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(pauseResumeButton);
+    }
+
+    public void OpenOptions()
+    {
+        optionsMenu.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(optionsPauseSoundSlider);
+    }
+
+    public void OpenCredits()
+    {
+        creditsMenu.SetActive(true);
+        videoPlayer.GetComponent<VideoPlayer>().Play();
+    }
+
+    private void CloseCredits()
+    {
+        Debug.Log("back to main");
+        BackToMainMenu();
+    }
+
+    public void BackToMainMenu()
+    {
+        creditsMenu.SetActive(false);
+        optionsMenu.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(playButton);
+    }
+
+    #endregion
+
+    #region Pausemenu
+
+    public void ResumeGame()
+    {
+        pauseMenu.SetActive(false);
+        GameObject.Find("Player").GetComponent<Move>().enabled = true;
+        Time.timeScale = 1f;
+    }
+
+    public void OpenOptionFromPause()
+    {
+        pauseMenu.SetActive(false);
+        pauseOptionMenu.SetActive(true);
+        optionsPauseSoundSlider.GetComponent<Slider>().value = SoundEngine.Instance.SetMasterVolume;
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(backButtonPause);
+    }
+
+    public void OpenMainMenu()
+    {
+        pauseOptionMenu.SetActive(false);
+        optionsMenu.SetActive(false);
+        levelLoader.GetComponent<LoadLevel>().LoadMainMenu();
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(playButton);
+    }
+
+    public void BackToPause()
+    {
+        pauseOptionMenu.SetActive(false);
+        pauseMenu.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(pauseResumeButton);
+    }
+
+    #endregion
+
+    #region EvaluateButtons
+
     private void EvaluateActiveMainMenuButton()
     {
         Debug.Log("Current selected: " + EventSystem.current.currentSelectedGameObject);
@@ -142,42 +206,44 @@ public class Menu : MonoBehaviour
         if (creditButton != EventSystem.current.currentSelectedGameObject)
         {
             creditButton.GetComponent<Animator>().Play("Normal");
-            Debug.Log("HEJ");
         }
         if (quitGameButton != EventSystem.current.currentSelectedGameObject)
         {
             quitGameButton.GetComponent<Animator>().Play("Normal");
         }
-        //else
-        //{
-        //    EventSystem.current.currentSelectedGameObject.GetComponent<Animator>().Play("Selected");
-        //}
-
     }
 
-    private void CloseCredits()
+    private void EvaluateActivePauseMenuButton()
     {
-        Debug.Log("back to main");
-        BackToMainMenu();
+        Debug.Log("Current selected: " + EventSystem.current.currentSelectedGameObject);
+        if (pauseResumeButton != EventSystem.current.currentSelectedGameObject)
+        {
+            pauseResumeButton.GetComponent<Animator>().Play("Normal");
+        }
+        if (optionButton != EventSystem.current.currentSelectedGameObject)
+        {
+            optionButton.GetComponent<Animator>().Play("Normal");
+        }
+        if (mainMenuButton != EventSystem.current.currentSelectedGameObject)
+        {
+            mainMenuButton.GetComponent<Animator>().Play("Normal");
+        }
+        if (quitToDesktopButton != EventSystem.current.currentSelectedGameObject)
+        {
+            quitToDesktopButton.GetComponent<Animator>().Play("Normal");
+        }
     }
+
+    #endregion
 
     public void PauseGame()
     {
         pauseMenu.SetActive(true);
         mainMenu.SetActive(false);
         pauseOptionMenu.SetActive(false);
-        _pauseMenuActive = true;
     }
 
-    public void PlayGame()
-    {
-        levelLoader.GetComponent<LoadLevel>().LoadNextLevel();
-        Time.timeScale = 1f;
-        _pauseMenuActive = false;
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(pauseResumeButton);
-
-    }
+    #region ExitGame
 
     public void ExitGame()
     {
@@ -187,17 +253,9 @@ public class Menu : MonoBehaviour
             mainMenu.SetActive(false);
             pauseMenu.SetActive(false);
             optionsMenu.SetActive(false);
+            creditsMenu.SetActive(false);
             Application.wantsToQuit += WantsToQuit;
         }
-    }
-    public void ResumeGame()
-    {
-        pauseMenu.SetActive(false);
-        GameObject.Find("Player").GetComponent<Move>().enabled = true;
-        Time.timeScale = 1f;
-        _pauseMenuActive = false;
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(pauseResumeButton);
     }
 
     private static bool WantsToQuit()
@@ -205,64 +263,7 @@ public class Menu : MonoBehaviour
         return InputSave.Instance.WantToQuit();
     }
 
-    public void OpenOptions()
-    {
-        optionsMenu.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(optionsPauseSoundSlider);
-    }
+    #endregion
 
-    public void OpenOptionFromPause()
-    {
-        pauseMenu.SetActive(false);
-        pauseOptionMenu.SetActive(true);
-        optionsPauseSoundSlider.GetComponent<Slider>().value = SoundEngine.Instance.SetMasterVolume;
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(backButtonPause);
-    }
-
-    public void OpenMainMenu()
-    {
-        optionsMenu.SetActive(false);
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(playButton);
-        //EventSystem.current.currentSelectedGameObject.GetComponent<Animator>().SetTrigger("Highlighted");
-    }
-
-    public void BackButton()
-    {
-        optionsMenu.SetActive(false);
-        //mainMenu.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(pauseResumeButton);
-    }
-
-    public void BackToPause()
-    {
-        pauseOptionMenu.SetActive(false);
-        pauseMenu.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(pauseResumeButton);
-    }
-
-    public void BackToMainMenu()
-    {
-        creditsMenu.SetActive(false);
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(playButton);
-        //EventSystem.current.currentSelectedGameObject.GetComponent<Animator>().SetTrigger("Highlighted");
-    }
-
-    public void OpenCredits()
-    {
-        creditsMenu.SetActive(true);
-        videoPlayer.GetComponent<VideoPlayer>().Play();
-    }
-
-    private IEnumerator WaitToSelectBack()
-    {
-        Debug.Log("waiting");
-        yield return new WaitForSeconds(2);
-    }
     #endregion
 }

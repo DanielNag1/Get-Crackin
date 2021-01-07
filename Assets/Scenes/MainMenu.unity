@@ -826,14 +826,12 @@ MonoBehaviour:
   optionButton: {fileID: 1489596848}
   mainMenuButton: {fileID: 1963576696}
   quitToDesktopButton: {fileID: 0}
-  backButton: {fileID: 1963576696}
   backButtonPause: {fileID: 0}
   playButton: {fileID: 2061414098}
   optionsMainMenuButton: {fileID: 1489596848}
   quitGameButton: {fileID: 1753181488}
   backToMainMenu: {fileID: 1460017213}
   creditButton: {fileID: 2027799120}
-  pauseMenuUI: {fileID: 0}
   optionsPauseSoundSlider: {fileID: 318371326}
   levelLoader: {fileID: 1562262312811361600}
   videoPlayer: {fileID: 1675735843}
@@ -1931,7 +1929,7 @@ GameObject:
   - component: {fileID: 1460017216}
   - component: {fileID: 1460017215}
   m_Layer: 5
-  m_Name: Button
+  m_Name: BackButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
