@@ -16,7 +16,7 @@ public class Menu : MonoBehaviour
     public GameObject pauseResumeButton, optionButton, mainMenuButton, quitToDesktopButton;
     public GameObject backButton, backButtonPause, playButton, optionsMainMenuButton, quitGameButton, continueButton, backToMainMenu, creditButton;
     public GameObject pauseMenuUI;
-    public Slider optionsPauseSoundSlider;
+    public GameObject optionsPauseSoundSlider;
     private bool _pauseMenuActive = false;
     public GameObject levelLoader;
     public GameObject videoPlayer;
@@ -89,13 +89,9 @@ public class Menu : MonoBehaviour
 
             if (optionsMenu.activeInHierarchy)
             {
-                if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Joystick1Button1)
-                    || Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Mouse1))
+                if (Input.GetKeyDown(KeyCode.Joystick1Button1) || Input.GetKeyDown(KeyCode.Joystick1Button1))
                 {
-                    if (EventSystem.current.currentSelectedGameObject == backButton)
-                    {
-                        OpenMainMenu();
-                    }
+                    OpenMainMenu();
                 }
             }
             if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Mouse0))
@@ -187,34 +183,32 @@ public class Menu : MonoBehaviour
 
     public void OpenOptions()
     {
-        mainMenu.SetActive(false);
         optionsMenu.SetActive(true);
         EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(backButton);
+        EventSystem.current.SetSelectedGameObject(optionsPauseSoundSlider);
     }
 
     public void OpenOptionFromPause()
     {
         pauseMenu.SetActive(false);
         pauseOptionMenu.SetActive(true);
-        optionsPauseSoundSlider.value = SoundEngine.Instance.SetMasterVolume;
+        optionsPauseSoundSlider.GetComponent<Slider>().value = SoundEngine.Instance.SetMasterVolume;
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(backButtonPause);
     }
 
     public void OpenMainMenu()
     {
-        _pauseMenuActive = false;
-        pauseOptionMenu.SetActive(false);
-        SceneManager.LoadSceneAsync("MainMenu");
+        optionsMenu.SetActive(false);
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(playButton);
+        EventSystem.current.currentSelectedGameObject.GetComponent<Animator>().SetTrigger("Highlighted");
     }
 
     public void BackButton()
     {
         optionsMenu.SetActive(false);
-        mainMenu.SetActive(true);
+        //mainMenu.SetActive(true);
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(pauseResumeButton);
     }
