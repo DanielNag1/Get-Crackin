@@ -33,6 +33,12 @@ public class LoadLevel : MonoBehaviour
         StartCoroutine(LoadNewLevel(SceneManager.GetActiveScene().buildIndex - 2));
     }
 
+    public void Restart()
+    {
+        animator.SetTrigger("Start");
+        StartCoroutine(LoadNewLevel(SceneManager.GetActiveScene().buildIndex - 1));
+    }
+
     IEnumerator LoadNewLevel(int levelIndex)
     {
         yield return new WaitForSeconds(transitionTime);

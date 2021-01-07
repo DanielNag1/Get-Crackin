@@ -57,6 +57,7 @@ public class Menu : MonoBehaviour
                 else if (EventSystem.current.currentSelectedGameObject == optionButton)
                 {
                     OpenOptionFromPause();
+                    Debug.Log("Option open");
                 }
                 else if (EventSystem.current.currentSelectedGameObject == mainMenuButton)
                 {
@@ -82,20 +83,16 @@ public class Menu : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Mouse0))
             {
-                Debug.Log("Key pressed");
                 if (EventSystem.current.currentSelectedGameObject == playButton)
                 {
-                    Debug.Log("play game");
                     PlayGame();
                 }
                 else if (EventSystem.current.currentSelectedGameObject == optionsMainMenuButton)
                 {
-                    Debug.Log("open options");
                     OpenOptions();
                 }
                 else if (EventSystem.current.currentSelectedGameObject == creditButton)
                 {
-                    Debug.Log("Credits open");
                     OpenCredits();
                 }
                 else if (EventSystem.current.currentSelectedGameObject == quitGameButton)
@@ -127,6 +124,7 @@ public class Menu : MonoBehaviour
     public void OpenOptions()
     {
         optionsMenu.SetActive(true);
+        optionsPauseSoundSlider.GetComponent<Slider>().value = SoundEngine.Instance.SetMasterVolume;
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(optionsPauseSoundSlider);
     }
@@ -139,7 +137,6 @@ public class Menu : MonoBehaviour
 
     private void CloseCredits()
     {
-        Debug.Log("back to main");
         BackToMainMenu();
     }
 
@@ -157,6 +154,8 @@ public class Menu : MonoBehaviour
 
     public void ResumeGame()
     {
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(pauseResumeButton);
         pauseMenu.SetActive(false);
         GameObject.Find("Player").GetComponent<Move>().enabled = true;
         Time.timeScale = 1f;
@@ -194,7 +193,6 @@ public class Menu : MonoBehaviour
 
     private void EvaluateActiveMainMenuButton()
     {
-        Debug.Log("Current selected: " + EventSystem.current.currentSelectedGameObject);
         if (playButton != EventSystem.current.currentSelectedGameObject)
         {
             playButton.GetComponent<Animator>().Play("Normal");
@@ -218,19 +216,36 @@ public class Menu : MonoBehaviour
         Debug.Log("Current selected: " + EventSystem.current.currentSelectedGameObject);
         if (pauseResumeButton != EventSystem.current.currentSelectedGameObject)
         {
-            pauseResumeButton.GetComponent<Animator>().Play("Normal");
+            pauseResumeButton.GetComponent<Animator>().Play("Selected");
+            Debug.Log("HEJ");
+        }
+        else
+        {
+            pauseResumeButton.GetComponent<Animator>().Play("Highlighted");
         }
         if (optionButton != EventSystem.current.currentSelectedGameObject)
         {
-            optionButton.GetComponent<Animator>().Play("Normal");
+            optionButton.GetComponent<Animator>().Play("Selected");
+        }
+        else
+        {
+            optionButton.GetComponent<Animator>().Play("Highlighted");
         }
         if (mainMenuButton != EventSystem.current.currentSelectedGameObject)
         {
-            mainMenuButton.GetComponent<Animator>().Play("Normal");
+            mainMenuButton.GetComponent<Animator>().Play("Selected");
+        }
+        else
+        {
+            mainMenuButton.GetComponent<Animator>().Play("Highlighted");
         }
         if (quitToDesktopButton != EventSystem.current.currentSelectedGameObject)
         {
-            quitToDesktopButton.GetComponent<Animator>().Play("Normal");
+            quitToDesktopButton.GetComponent<Animator>().Play("Selected");
+        }
+        else
+        {
+            quitToDesktopButton.GetComponent<Animator>().Play("Highlighted");
         }
     }
 
