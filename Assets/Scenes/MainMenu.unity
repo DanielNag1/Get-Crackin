@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1574,7 +1574,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: da05f0d7103a2d942995998eb2ce5ca5, type: 3}
+    m_Font: {fileID: 12800000, guid: b6a44144fa945a54bb280da7ca488282, type: 3}
     m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
@@ -2177,7 +2177,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f38dd499886b16f45995790322816292, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ee9cc0fcc0d074c4793cf3e1547e616d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2394,8 +2394,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -249.1, y: -249}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -247.74, y: -238}
+  m_SizeDelta: {x: 263.9393, y: 35.545197}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1753181490
 Animator:
@@ -2478,7 +2478,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a53f52465bd751e40880aeca5a8f87bf, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3b024261056c4b84aa6f376299f6d3fd, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2702,7 +2702,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: Volume
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 9c140d7be3b0d394fa0b888b2f5e0097, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ee510a775b1962345b68d16eb05908f6, type: 2}
   m_sharedMaterial: {fileID: -5458571217168190875, guid: 9c140d7be3b0d394fa0b888b2f5e0097,
     type: 2}
   m_fontSharedMaterials: []
@@ -2767,7 +2767,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1804788318
@@ -3054,7 +3054,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: da05f0d7103a2d942995998eb2ce5ca5, type: 3}
+    m_Font: {fileID: 12800000, guid: b6a44144fa945a54bb280da7ca488282, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 1
@@ -3517,7 +3517,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6e7ec758ea38f0c4f894a8a232f03006, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f92fddc6cae67c346bf4aa778370308c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3647,7 +3647,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 1240a77388a3c444b84bc329c42974df, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ba372be0b054b384eb3de2ac0db2c5d3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4042,6 +4042,11 @@ PrefabInstance:
     - target: {fileID: 1581728943527523215, guid: ac60d4a10e364374bb71dbb662a1ea00,
         type: 3}
       propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1581728943832683014, guid: ac60d4a10e364374bb71dbb662a1ea00,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
