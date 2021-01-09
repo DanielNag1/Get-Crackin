@@ -571,6 +571,36 @@ Transform:
   m_Father: {fileID: 6056737006234448690}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3217601002263978143
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5629425130853395976}
+  m_Layer: 0
+  m_Name: WeaponPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5629425130853395976
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3217601002263978143}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1287352259244707305}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3639912660495348342
 GameObject:
   m_ObjectHideFlags: 0
@@ -1278,7 +1308,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1451,7 +1481,7 @@ MonoBehaviour:
   _hurtSoundPaths:
   - SFX/HurtSounds/goblin_fairy_hurt_pain_14
   _deathSoundPaths:
-  - SFX/DeathSounds/DeadTest_William
+  - SFX/DeathSounds/Fox_mating_call_01
   _volumeScales:
   - 1
   - 1
@@ -1741,6 +1771,7 @@ Transform:
   - {fileID: 178112528604165330}
   - {fileID: 7709574156099141529}
   - {fileID: 3419648034102036555}
+  - {fileID: 1287352259244707305}
   m_Father: {fileID: 6042249910431648676}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1961,6 +1992,134 @@ Transform:
   m_Father: {fileID: 7679058370021631180}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7601071456845369633
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1287352259244707305}
+  - component: {fileID: 3104126018570757744}
+  - component: {fileID: 2275944818990787935}
+  - component: {fileID: 3123508291113950080}
+  - component: {fileID: 5859151866115526711}
+  m_Layer: 0
+  m_Name: Stone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1287352259244707305
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7601071456845369633}
+  m_LocalRotation: {x: 0.28021225, y: 0.22211961, z: -0.21580832, w: 0.9086093}
+  m_LocalPosition: {x: 0.000089, y: 0.000233, z: 0.001375}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_Children:
+  - {fileID: 5629425130853395976}
+  m_Father: {fileID: 6133963879790608353}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 37.234, y: 20.798, z: -19.647001}
+--- !u!33 &3104126018570757744
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7601071456845369633}
+  m_Mesh: {fileID: -915661510970944972, guid: 687009aa99841094b9c125b943a03622, type: 3}
+--- !u!23 &2275944818990787935
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7601071456845369633}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: -3624093571002777824, guid: 687009aa99841094b9c125b943a03622, type: 3}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!114 &3123508291113950080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7601071456845369633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69d5659865216724dbb79c86dc3afbd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundPaths:
+  - SFX/ImpactSounds/Body_Slashed1
+  _volumeScales:
+  - 1
+  weaponDamage: 1
+  destroyOnImpact: 0
+  targetTag: Player
+  layerMaskValue: 9
+  weaponPoints:
+  - {fileID: 5629425130853395976}
+  invulnerabilityTime: 0.3
+  collisionActive: 0
+  _rageAdjustmentValue: 10
+  _shakeIntensity: 4
+  _shakeTime: 0.1
+--- !u!114 &5859151866115526711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7601071456845369633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbc4b049cb6105b4b860dd0a49b00c69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectileIsAlive: 0
+  velocity: {x: 0, y: 0, z: 0}
+  projectilePrefab: {fileID: 2082017252510119770, guid: e92f9f9dab9fa8748ad1e1715895d3d7,
+    type: 3}
+  objTransform: {fileID: 1287352259244707305}
+  initialSpeed: 0
+  elevationAngle: 0
 --- !u!1 &7857326039305188690
 GameObject:
   m_ObjectHideFlags: 0
@@ -2437,6 +2596,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91fb81c759cfd9a4db59fce4a64f30bd, type: 3}
+--- !u!4 &4547946576026589931 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4411788734209170572, guid: 91fb81c759cfd9a4db59fce4a64f30bd,
+    type: 3}
+  m_PrefabInstance: {fileID: 154352922289718887}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8514588476512455996 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8362544804058860379, guid: 91fb81c759cfd9a4db59fce4a64f30bd,
@@ -2449,9 +2614,9 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 154352922289718887}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &3860310194033329653 stripped
+--- !u!4 &4722642880197973983 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 4014620972558730130, guid: 91fb81c759cfd9a4db59fce4a64f30bd,
+  m_CorrespondingSourceObject: {fileID: 4876955876099166648, guid: 91fb81c759cfd9a4db59fce4a64f30bd,
     type: 3}
   m_PrefabInstance: {fileID: 154352922289718887}
   m_PrefabAsset: {fileID: 0}
@@ -2461,15 +2626,9 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 154352922289718887}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &4722642880197973983 stripped
+--- !u!4 &3860310194033329653 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 4876955876099166648, guid: 91fb81c759cfd9a4db59fce4a64f30bd,
-    type: 3}
-  m_PrefabInstance: {fileID: 154352922289718887}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &4547946576026589931 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4411788734209170572, guid: 91fb81c759cfd9a4db59fce4a64f30bd,
+  m_CorrespondingSourceObject: {fileID: 4014620972558730130, guid: 91fb81c759cfd9a4db59fce4a64f30bd,
     type: 3}
   m_PrefabInstance: {fileID: 154352922289718887}
   m_PrefabAsset: {fileID: 0}
