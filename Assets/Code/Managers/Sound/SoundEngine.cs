@@ -147,18 +147,6 @@ public class SoundEngine : ScriptableObject
             }
         }
     }
-
-
-    public void StartArenaMusic(AudioSource source, string trackPath, float volumeScale)
-    {
-        source.clip = Resources.Load<AudioClip>(trackPath);
-        source.volume = volumeScale * masterVolume;
-        source.Play();
-    }
-    public void StopArenaMusic(AudioSource source)
-    {
-        source.Stop();
-    }
 }
 
 
