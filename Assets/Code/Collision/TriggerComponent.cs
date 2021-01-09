@@ -16,6 +16,9 @@ public class TriggerComponent : MonoBehaviour
     [SerializeField] private List<string> _arenaFinishedClassesAndMethodsToBeCalled; //Can add a specific break character to know when one arena phase is done, so as to allow more then two waves of enemies in one arena.
     [SerializeField] private List<GameObject> _objectToMove;
     [SerializeField] private LoadLevel LoadLevel;
+    [SerializeField] private string _arenaMusicPath;
+    [SerializeField] private float _arenaMusicVolumeScale = 0;
+    [SerializeField] private AudioSource _arenaMusicAudioSource;
     private TextManager _textManager;
     #endregion
 
@@ -90,7 +93,14 @@ public class TriggerComponent : MonoBehaviour
                 _enemyManager.KillCurrentEnemies();
                 continue;
             }
-            
+            if (_classesAndMethodsToBeCalled[i] == "Music.Start")
+            {
+                SoundEngine.Instance.StartArenaMusic(_arenaMusicAudioSource, _arenaMusicPath, _arenaMusicVolumeScale);
+            }
+            if (_classesAndMethodsToBeCalled[i] == "Music.Stop")
+            {
+                SoundEngine.Instance.StopArenaMusic(_arenaMusicAudioSource);
+            }
             if (_classesAndMethodsToBeCalled[i] == "Break") //can be done in EnemyManager.StartArenaFight, IF we make sure to place everything in the correct order with EnemyManager.StartArenaFight beeing last!
             {
                 break;
