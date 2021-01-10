@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SoundEngine : ScriptableObject
 {
-
     #region Singleton
     /// <summary>
     /// Handles audio clips in audio sources.
@@ -154,13 +154,63 @@ public class SoundEngine : ScriptableObject
         source.clip = Resources.Load<AudioClip>(trackPath);
         source.volume = volumeScale * masterVolume;
         source.Play();
+        // LerpSound.Instance.BeginLerp(source, masterVolume, volumeScale);
     }
-    public void StopArenaMusic(AudioSource source)
+
+
+    public void StopArenaMusic(AudioSource source, float volumeScale)
     {
         source.Stop();
+        // LerpSound.Instance.EndLerp(source, masterVolume, volumeScale);
     }
-}
 
+
+
+}
+//public class LerpSound : MonoBehaviour
+//{
+//    #region Singleton
+//    public static LerpSound Instance;
+//    private void Awake()
+//    {
+//        Instance = this;
+//    }
+//    #endregion
+
+//    float timePassed;
+
+//    public void BeginLerp(AudioSource source, float masterVolume, float volumeScale)
+//    {
+//        timePassed = 0;
+//        StartCoroutine(LerpIncrease(source, masterVolume, volumeScale));
+//    }
+
+//    public void EndLerp(AudioSource source, float masterVolume, float volumeScale)
+//    {
+//        timePassed = 1;
+//        StartCoroutine(LerpDecrease(source, masterVolume, volumeScale));
+//    }
+
+//    IEnumerator LerpIncrease(AudioSource source, float masterVolume, float volumeScale)
+//    {
+//        while (timePassed < 1)
+//        {
+//            source.volume = volumeScale * masterVolume * timePassed;
+//            timePassed = Math.Min(1, Time.deltaTime + timePassed);
+//            yield return new WaitForSeconds(Time.deltaTime);
+//        }
+//    }
+
+//    IEnumerator LerpDecrease(AudioSource source, float masterVolume, float volumeScale)
+//    {
+//        while (timePassed > 0)
+//        {
+//            source.volume = volumeScale * masterVolume * timePassed;
+//            timePassed = Math.Max(0, timePassed - Time.deltaTime);
+//            yield return new WaitForSeconds(Time.deltaTime);
+//        }
+//    }
+//}
 
 /*
  ------------------------------------

@@ -99,7 +99,7 @@ public class TriggerComponent : MonoBehaviour
             }
             if (_classesAndMethodsToBeCalled[i] == "Music.Stop")
             {
-                SoundEngine.Instance.StopArenaMusic(_arenaMusicAudioSource);
+                SoundEngine.Instance.StopArenaMusic(_arenaMusicAudioSource, _arenaMusicVolumeScale);
             }
             if (_classesAndMethodsToBeCalled[i] == "Break") //can be done in EnemyManager.StartArenaFight, IF we make sure to place everything in the correct order with EnemyManager.StartArenaFight beeing last!
             {
