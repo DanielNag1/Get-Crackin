@@ -35,6 +35,7 @@ public class SoundEngine : ScriptableObject
         new List<Tuple<AudioSource, string, int, double>>(); //requests sent from audioHandlers get placed here
     public List<float> volumeScales = new List<float>();
     public float masterVolume = 1; //volume scale
+    SoundComponent soundComponent;
 
     public float SetMasterVolume
     {
@@ -117,7 +118,6 @@ public class SoundEngine : ScriptableObject
         request.Item1.PlayOneShot(request.Item1.clip, volumeScale * masterVolume);
     }
 
-
     /// <summary>
     /// Plays the audio clip on the selected audio source.
     /// </summary>
@@ -148,7 +148,6 @@ public class SoundEngine : ScriptableObject
         }
     }
 
-
     public void StartArenaMusic(AudioSource source, string trackPath, float volumeScale)
     {
         source.clip = Resources.Load<AudioClip>(trackPath);
@@ -157,60 +156,71 @@ public class SoundEngine : ScriptableObject
         // LerpSound.Instance.BeginLerp(source, masterVolume, volumeScale);
     }
 
-
     public void StopArenaMusic(AudioSource source, float volumeScale)
     {
         source.Stop();
         // LerpSound.Instance.EndLerp(source, masterVolume, volumeScale);
+        
     }
-
-
-
 }
-//public class LerpSound : MonoBehaviour
-//{
-//    #region Singleton
-//    public static LerpSound Instance;
-//    private void Awake()
-//    {
-//        Instance = this;
-//    }
-//    #endregion
+public static class LerpSound
+{
+    //#region Singleton
+    //public static LerpSound Instance;
+    //private void Awake()
+    //{
+    //    Instance = this;
+    //}
+    //#endregion
 
-//    float timePassed;
+    public static IEnumerator Fading(AudioSource source, float fadeDuration, float endVolume)
+    {
+        float currentTime = 0;
+        float initialVolume = source.volume;
 
-//    public void BeginLerp(AudioSource source, float masterVolume, float volumeScale)
-//    {
-//        timePassed = 0;
-//        StartCoroutine(LerpIncrease(source, masterVolume, volumeScale));
-//    }
+        while (currentTime < fadeDuration)
+        {
+            currentTime += Time.deltaTime;
+            source.volume = Mathf.Lerp(initialVolume, endVolume, 3);  //start volume, end volume and currentTime / fadeDurtion
+            yield return null;
+        }
+        source.Stop();
+        yield break;
+    }
+    //float timePassed;
 
-//    public void EndLerp(AudioSource source, float masterVolume, float volumeScale)
-//    {
-//        timePassed = 1;
-//        StartCoroutine(LerpDecrease(source, masterVolume, volumeScale));
-//    }
+    //public void BeginLerp(AudioSource source, float masterVolume, float volumeScale)
+    //{
+    //    timePassed = 0;
+    //    StartCoroutine(LerpIncrease(source, masterVolume, volumeScale));
+    //}
 
-//    IEnumerator LerpIncrease(AudioSource source, float masterVolume, float volumeScale)
-//    {
-//        while (timePassed < 1)
-//        {
-//            source.volume = volumeScale * masterVolume * timePassed;
-//            timePassed = Math.Min(1, Time.deltaTime + timePassed);
-//            yield return new WaitForSeconds(Time.deltaTime);
-//        }
-//    }
+    //public void EndLerp(AudioSource source, float masterVolume, float volumeScale)
+    //{
+    //    timePassed = 1;
+    //    StartCoroutine(LerpDecrease(source, masterVolume, volumeScale));
+    //}
 
-//    IEnumerator LerpDecrease(AudioSource source, float masterVolume, float volumeScale)
-//    {
-//        while (timePassed > 0)
-//        {
-//            source.volume = volumeScale * masterVolume * timePassed;
-//            timePassed = Math.Max(0, timePassed - Time.deltaTime);
-//            yield return new WaitForSeconds(Time.deltaTime);
-//        }
-//    }
-//}
+    //IEnumerator LerpIncrease(AudioSource source, float masterVolume, float volumeScale)
+    //{
+    //    while (timePassed < 1)
+    //    {
+    //        source.volume = volumeScale * masterVolume * timePassed;
+    //        timePassed = Math.Min(1, Time.deltaTime + timePassed);
+    //        yield return new WaitForSeconds(Time.deltaTime);
+    //    }
+    //}
+
+    //IEnumerator LerpDecrease(AudioSource source, float masterVolume, float volumeScale)
+    //{
+    //    while (timePassed > 0)
+    //    {
+    //        source.volume = volumeScale * masterVolume * timePassed;
+    //        timePassed = Math.Max(0, timePassed - Time.deltaTime);
+    //        yield return new WaitForSeconds(Time.deltaTime);
+    //    }
+    //}
+}
 
 /*
  ------------------------------------

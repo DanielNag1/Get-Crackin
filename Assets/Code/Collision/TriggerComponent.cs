@@ -19,6 +19,7 @@ public class TriggerComponent : MonoBehaviour
     [SerializeField] private string _arenaMusicPath;
     [SerializeField] private float _arenaMusicVolumeScale = 0;
     [SerializeField] private AudioSource _arenaMusicAudioSource;
+    private float _fadeDuration = 3;
     private TextManager _textManager;
     #endregion
 
@@ -57,7 +58,7 @@ public class TriggerComponent : MonoBehaviour
     {
         for (int i = 0; _classesAndMethodsToBeCalled.Count > i; ++i)
         {
-            if(_classesAndMethodsToBeCalled[i] == "TextManager")
+            if (_classesAndMethodsToBeCalled[i] == "TextManager")
             {
                 _textManager.tutorialWindow.SetActive(true);
                 _textManager.TriggerTutorial();
@@ -78,8 +79,8 @@ public class TriggerComponent : MonoBehaviour
             if (_classesAndMethodsToBeCalled[i] == "MoveGameObject")
             {
                 //Uncomment this if you want the stone opening to fly away! 
-             //  StoneOpening.Instance.DestroyStone();
-              _objectToMove[0].GetComponent<Animator>().SetBool("Move", true/*!_objectToMove[0].GetComponent<Animator>().GetBool("Move")*/);
+                //  StoneOpening.Instance.DestroyStone();
+                _objectToMove[0].GetComponent<Animator>().SetBool("Move", true/*!_objectToMove[0].GetComponent<Animator>().GetBool("Move")*/);
                 _objectToMove.RemoveAt(0);
                 continue;
             }
@@ -99,7 +100,8 @@ public class TriggerComponent : MonoBehaviour
             }
             if (_classesAndMethodsToBeCalled[i] == "Music.Stop")
             {
-                SoundEngine.Instance.StopArenaMusic(_arenaMusicAudioSource, _arenaMusicVolumeScale);
+                //SoundEngine.Instance.StopArenaMusic(_arenaMusicAudioSource, _arenaMusicVolumeScale);
+                StartCoroutine(LerpSound.Fading(_arenaMusicAudioSource, _fadeDuration, 0));
             }
             if (_classesAndMethodsToBeCalled[i] == "Break") //can be done in EnemyManager.StartArenaFight, IF we make sure to place everything in the correct order with EnemyManager.StartArenaFight beeing last!
             {

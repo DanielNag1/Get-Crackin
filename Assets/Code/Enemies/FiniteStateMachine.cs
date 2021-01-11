@@ -22,7 +22,7 @@ public class FiniteStateMachine
         }
         //If we dont find any transition, we have returned a null and then we just let it Tick. We only want to set a state which is not a null state.
         _currentState?.TimeTick(); //THIS IS WHERE THE MAGIC HAPPENS! Tell the current state to Tick.
-        Debug.Log(id + " has state: " + _currentState);
+        //Debug.Log(id + " has state: " + _currentState);
     }
 
     public void SetState(IState state)
