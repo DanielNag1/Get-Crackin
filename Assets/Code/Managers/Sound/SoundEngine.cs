@@ -36,6 +36,7 @@ public class SoundEngine : ScriptableObject
     public List<float> volumeScales = new List<float>();
     public float masterVolume = 1; //volume scale
     SoundComponent soundComponent;
+    public bool FadeCanStart = false;
 
     public float SetMasterVolume
     {
@@ -180,13 +181,16 @@ public static class LerpSound
 
         while (currentTime < fadeDuration)
         {
+            //SoundEngine.Instance.FadeCanStart = true;
             currentTime += Time.deltaTime;
-            source.volume = Mathf.Lerp(initialVolume, endVolume, 3);  //start volume, end volume and currentTime / fadeDurtion
+            source.volume = Mathf.Lerp(initialVolume, endVolume, currentTime/fadeDuration);  //start volume, end volume and currentTime / fadeDurtion
             yield return null;
         }
+        SoundEngine.Instance.FadeCanStart = false;
         source.Stop();
         yield break;
     }
+
     //float timePassed;
 
     //public void BeginLerp(AudioSource source, float masterVolume, float volumeScale)

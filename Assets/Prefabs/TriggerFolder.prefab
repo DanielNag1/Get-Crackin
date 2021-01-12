@@ -1,5 +1,200 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &153572196
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 153572197}
+  - component: {fileID: 153572202}
+  - component: {fileID: 153572201}
+  - component: {fileID: 153572200}
+  - component: {fileID: 153572199}
+  - component: {fileID: 153572198}
+  m_Layer: 11
+  m_Name: ArenaMusic (6)
+  m_TagString: Trigger
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &153572197
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153572196}
+  m_LocalRotation: {x: -0, y: 0.93803155, z: -0, w: 0.34654987}
+  m_LocalPosition: {x: 66.24, y: 1.1827, z: 420.2}
+  m_LocalScale: {x: 14.689012, y: 6, z: 0.77488}
+  m_Children: []
+  m_Father: {fileID: 7783500969872200597}
+  m_RootOrder: 21
+  m_LocalEulerAnglesHint: {x: 0, y: 139.447, z: 0}
+--- !u!33 &153572202
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153572196}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &153572201
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153572196}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &153572200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153572196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab22b273deb30e48bdcff20ad1270a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _destroyOnTriggerActive: 1
+  _soundPath: SFX/InputFeedbackSounds/Trigger
+  _volumeScale: 0
+  _looper: 0
+  _soundObjectPrefab: {fileID: 6447233000424186925, guid: a214008ad84fe8d4fb1ad97d04c3ed40,
+    type: 3}
+  _classesAndMethodsToBeCalled:
+  - Music.Start
+  _setToUse: 00000000
+  _arenaFinishedClassesAndMethodsToBeCalled: []
+  _objectToMove: []
+  LoadLevel: {fileID: 0}
+  _arenaMusicPath: BackgroundMusicFolder/modern_war
+  _arenaMusicVolumeScale: 0.4
+  _arenaMusicAudioSource: {fileID: 0}
+--- !u!54 &153572199
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153572196}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!82 &153572198
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153572196}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &291783625
 GameObject:
   m_ObjectHideFlags: 0
@@ -29,7 +224,7 @@ Transform:
   m_GameObject: {fileID: 291783625}
   m_LocalRotation: {x: -0, y: 0.7628178, z: -0, w: 0.64661354}
   m_LocalPosition: {x: 81.7, y: 11, z: 76.7}
-  m_LocalScale: {x: 17.676577, y: 0.34236676, z: -1.0741011}
+  m_LocalScale: {x: 17.676577, y: 0.34236676, z: 1}
   m_Children: []
   m_Father: {fileID: 7783500969872200597}
   m_RootOrder: 10
@@ -113,12 +308,15 @@ MonoBehaviour:
   _soundObjectPrefab: {fileID: 6447233000424186925, guid: a214008ad84fe8d4fb1ad97d04c3ed40,
     type: 3}
   _classesAndMethodsToBeCalled:
-  - TextManager
   - EnemyManager.SpawnEnemyFromTrigger
+  - TextManager
   _setToUse: 07000000
   _arenaFinishedClassesAndMethodsToBeCalled: []
   _objectToMove: []
   LoadLevel: {fileID: 0}
+  _arenaMusicPath: 
+  _arenaMusicVolumeScale: 0
+  _arenaMusicAudioSource: {fileID: 0}
 --- !u!1 &367792013
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,6 +436,9 @@ MonoBehaviour:
   _arenaFinishedClassesAndMethodsToBeCalled: []
   _objectToMove: []
   LoadLevel: {fileID: 0}
+  _arenaMusicPath: 
+  _arenaMusicVolumeScale: 0
+  _arenaMusicAudioSource: {fileID: 0}
 --- !u!54 &367792019
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -254,6 +455,201 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!1 &483319880
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 483319881}
+  - component: {fileID: 483319886}
+  - component: {fileID: 483319885}
+  - component: {fileID: 483319884}
+  - component: {fileID: 483319883}
+  - component: {fileID: 483319882}
+  m_Layer: 11
+  m_Name: ArenaMusic (4)
+  m_TagString: Trigger
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &483319881
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483319880}
+  m_LocalRotation: {x: -0, y: 0.7657521, z: -0, w: 0.64313596}
+  m_LocalPosition: {x: 170, y: 1.1827, z: 297}
+  m_LocalScale: {x: 14.689012, y: 6, z: 0.77488}
+  m_Children: []
+  m_Father: {fileID: 7783500969872200597}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 99.948006, z: 0}
+--- !u!33 &483319886
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483319880}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &483319885
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483319880}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &483319884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483319880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab22b273deb30e48bdcff20ad1270a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _destroyOnTriggerActive: 1
+  _soundPath: SFX/InputFeedbackSounds/Trigger
+  _volumeScale: 0
+  _looper: 0
+  _soundObjectPrefab: {fileID: 6447233000424186925, guid: a214008ad84fe8d4fb1ad97d04c3ed40,
+    type: 3}
+  _classesAndMethodsToBeCalled:
+  - Music.Stop
+  _setToUse: 00000000
+  _arenaFinishedClassesAndMethodsToBeCalled: []
+  _objectToMove: []
+  LoadLevel: {fileID: 0}
+  _arenaMusicPath: BackgroundMusicFolder/modern_war
+  _arenaMusicVolumeScale: 0.4
+  _arenaMusicAudioSource: {fileID: 0}
+--- !u!54 &483319883
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483319880}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!82 &483319882
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483319880}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &524271315
 GameObject:
   m_ObjectHideFlags: 0
@@ -372,6 +768,9 @@ MonoBehaviour:
   _arenaFinishedClassesAndMethodsToBeCalled: []
   _objectToMove: []
   LoadLevel: {fileID: 0}
+  _arenaMusicPath: 
+  _arenaMusicVolumeScale: 0
+  _arenaMusicAudioSource: {fileID: 0}
 --- !u!1 &660411600
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,7 +800,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 660411600}
   m_LocalRotation: {x: -0, y: -0.22358803, z: -0, w: 0.97468376}
-  m_LocalPosition: {x: 80.5, y: 1, z: 349.3}
+  m_LocalPosition: {x: 79.56, y: 1, z: 351.24}
   m_LocalScale: {x: 15.390958, y: 6, z: 0.77488}
   m_Children: []
   m_Father: {fileID: 7783500969872200597}
@@ -448,10 +847,14 @@ MonoBehaviour:
     type: 3}
   _classesAndMethodsToBeCalled:
   - EnemyManager.SpawnEnemyFromTrigger
+  - Music.Stop
   _setToUse: 04000000
   _arenaFinishedClassesAndMethodsToBeCalled: []
   _objectToMove: []
   LoadLevel: {fileID: 0}
+  _arenaMusicPath: BackgroundMusicFolder
+  _arenaMusicVolumeScale: 0.4
+  _arenaMusicAudioSource: {fileID: 0}
 --- !u!54 &660411603
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -682,6 +1085,9 @@ MonoBehaviour:
   _arenaFinishedClassesAndMethodsToBeCalled: []
   _objectToMove: []
   LoadLevel: {fileID: 0}
+  _arenaMusicPath: 
+  _arenaMusicVolumeScale: 0
+  _arenaMusicAudioSource: {fileID: 0}
 --- !u!1 &742727557
 GameObject:
   m_ObjectHideFlags: 0
@@ -800,6 +1206,399 @@ MonoBehaviour:
   _arenaFinishedClassesAndMethodsToBeCalled: []
   _objectToMove: []
   LoadLevel: {fileID: 0}
+  _arenaMusicPath: 
+  _arenaMusicVolumeScale: 0
+  _arenaMusicAudioSource: {fileID: 0}
+--- !u!1 &854683190
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 854683191}
+  - component: {fileID: 854683196}
+  - component: {fileID: 854683195}
+  - component: {fileID: 854683194}
+  - component: {fileID: 854683193}
+  - component: {fileID: 854683192}
+  m_Layer: 11
+  m_Name: ArenaMusic (2)
+  m_TagString: Trigger
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &854683191
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 854683190}
+  m_LocalRotation: {x: -0, y: 0.69204956, z: -0, w: 0.7218501}
+  m_LocalPosition: {x: 117, y: 1.1827, z: 197}
+  m_LocalScale: {x: 14.689012, y: 6, z: 0.77488}
+  m_Children: []
+  m_Father: {fileID: 7783500969872200597}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 87.58501, z: 0}
+--- !u!33 &854683196
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 854683190}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &854683195
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 854683190}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &854683194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 854683190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab22b273deb30e48bdcff20ad1270a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _destroyOnTriggerActive: 1
+  _soundPath: SFX/InputFeedbackSounds/Trigger
+  _volumeScale: 0
+  _looper: 0
+  _soundObjectPrefab: {fileID: 6447233000424186925, guid: a214008ad84fe8d4fb1ad97d04c3ed40,
+    type: 3}
+  _classesAndMethodsToBeCalled:
+  - Music.Stop
+  _setToUse: 00000000
+  _arenaFinishedClassesAndMethodsToBeCalled: []
+  _objectToMove: []
+  LoadLevel: {fileID: 0}
+  _arenaMusicPath: BackgroundMusicFolder/modern_war
+  _arenaMusicVolumeScale: 0.4
+  _arenaMusicAudioSource: {fileID: 0}
+--- !u!54 &854683193
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 854683190}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!82 &854683192
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 854683190}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!1 &913833885
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 913833886}
+  - component: {fileID: 913833891}
+  - component: {fileID: 913833890}
+  - component: {fileID: 913833889}
+  - component: {fileID: 913833888}
+  - component: {fileID: 913833887}
+  m_Layer: 11
+  m_Name: ArenaMusic (3)
+  m_TagString: Trigger
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &913833886
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 913833885}
+  m_LocalRotation: {x: -0, y: 0.9995447, z: -0, w: -0.030173913}
+  m_LocalPosition: {x: 184, y: 1.1827, z: 259}
+  m_LocalScale: {x: 14.689012, y: 6, z: 0.77488}
+  m_Children: []
+  m_Father: {fileID: 7783500969872200597}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 183.458, z: 0}
+--- !u!33 &913833891
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 913833885}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &913833890
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 913833885}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &913833889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 913833885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab22b273deb30e48bdcff20ad1270a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _destroyOnTriggerActive: 1
+  _soundPath: SFX/InputFeedbackSounds/Trigger
+  _volumeScale: 0
+  _looper: 0
+  _soundObjectPrefab: {fileID: 6447233000424186925, guid: a214008ad84fe8d4fb1ad97d04c3ed40,
+    type: 3}
+  _classesAndMethodsToBeCalled:
+  - Music.Start
+  _setToUse: 00000000
+  _arenaFinishedClassesAndMethodsToBeCalled: []
+  _objectToMove: []
+  LoadLevel: {fileID: 0}
+  _arenaMusicPath: BackgroundMusicFolder/modern_war
+  _arenaMusicVolumeScale: 0.4
+  _arenaMusicAudioSource: {fileID: 0}
+--- !u!54 &913833888
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 913833885}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!82 &913833887
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 913833885}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &948427561
 GameObject:
   m_ObjectHideFlags: 0
@@ -876,10 +1675,14 @@ MonoBehaviour:
     type: 3}
   _classesAndMethodsToBeCalled:
   - EnemyManager.SpawnEnemyFromTrigger
+  - Music.Stop
   _setToUse: 02000000
   _arenaFinishedClassesAndMethodsToBeCalled: []
   _objectToMove: []
   LoadLevel: {fileID: 0}
+  _arenaMusicPath: BackgroundMusicFolder
+  _arenaMusicVolumeScale: 0.4
+  _arenaMusicAudioSource: {fileID: 0}
 --- !u!54 &948427564
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1068,10 +1871,14 @@ MonoBehaviour:
     type: 3}
   _classesAndMethodsToBeCalled:
   - EnemyManager.SpawnEnemyFromTrigger
+  - Music.Start
   _setToUse: 00000000
   _arenaFinishedClassesAndMethodsToBeCalled: []
   _objectToMove: []
   LoadLevel: {fileID: 0}
+  _arenaMusicPath: BackgroundMusicFolder/modern_war
+  _arenaMusicVolumeScale: 0.4
+  _arenaMusicAudioSource: {fileID: 0}
 --- !u!54 &1132273757
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1095,6 +1902,201 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1132273754}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!1 &1227586311
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1227586312}
+  - component: {fileID: 1227586317}
+  - component: {fileID: 1227586316}
+  - component: {fileID: 1227586315}
+  - component: {fileID: 1227586314}
+  - component: {fileID: 1227586313}
+  m_Layer: 11
+  m_Name: ArenaMusic
+  m_TagString: Trigger
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &1227586312
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227586311}
+  m_LocalRotation: {x: -0, y: 0.80324465, z: -0, w: 0.59564936}
+  m_LocalPosition: {x: 73, y: 1.1827, z: 112}
+  m_LocalScale: {x: 14.689012, y: 6, z: 0.77488}
+  m_Children: []
+  m_Father: {fileID: 7783500969872200597}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 106.882, z: 0}
+--- !u!33 &1227586317
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227586311}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &1227586316
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227586311}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1227586315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227586311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab22b273deb30e48bdcff20ad1270a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _destroyOnTriggerActive: 1
+  _soundPath: SFX/InputFeedbackSounds/Trigger
+  _volumeScale: 0
+  _looper: 0
+  _soundObjectPrefab: {fileID: 6447233000424186925, guid: a214008ad84fe8d4fb1ad97d04c3ed40,
+    type: 3}
+  _classesAndMethodsToBeCalled:
+  - Music.Start
+  _setToUse: 00000000
+  _arenaFinishedClassesAndMethodsToBeCalled: []
+  _objectToMove: []
+  LoadLevel: {fileID: 0}
+  _arenaMusicPath: BackgroundMusicFolder/modern_war
+  _arenaMusicVolumeScale: 0.4
+  _arenaMusicAudioSource: {fileID: 0}
+--- !u!54 &1227586314
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227586311}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!82 &1227586313
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227586311}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
@@ -1302,6 +2304,9 @@ MonoBehaviour:
   _arenaFinishedClassesAndMethodsToBeCalled: []
   _objectToMove: []
   LoadLevel: {fileID: 0}
+  _arenaMusicPath: 
+  _arenaMusicVolumeScale: 0
+  _arenaMusicAudioSource: {fileID: 0}
 --- !u!1 &1406723261
 GameObject:
   m_ObjectHideFlags: 0
@@ -1331,7 +2336,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1406723261}
   m_LocalRotation: {x: -0, y: -0.8092992, z: -0, w: 0.58739674}
-  m_LocalPosition: {x: 158.13, y: 0.55, z: 433.76}
+  m_LocalPosition: {x: 162, y: 0.55, z: 433.76}
   m_LocalScale: {x: 14.29035, y: 1.34742, z: 0.77488}
   m_Children: []
   m_Father: {fileID: 7783500969872200597}
@@ -1372,7 +2377,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _destroyOnTriggerActive: 1
   _soundPath: BackgroundMusicFolder/CHICKEN_BOSS
-  _volumeScale: 0
+  _volumeScale: 1
   _looper: 1
   _soundObjectPrefab: {fileID: 6447233000424186925, guid: a214008ad84fe8d4fb1ad97d04c3ed40,
     type: 3}
@@ -1387,6 +2392,9 @@ MonoBehaviour:
   - LoadLevel.LoadNextLevel
   _objectToMove: []
   LoadLevel: {fileID: 0}
+  _arenaMusicPath: 
+  _arenaMusicVolumeScale: 0
+  _arenaMusicAudioSource: {fileID: 0}
 --- !u!54 &1406723264
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1410,6 +2418,396 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1406723261}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!1 &1474001002
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1474001003}
+  - component: {fileID: 1474001008}
+  - component: {fileID: 1474001007}
+  - component: {fileID: 1474001006}
+  - component: {fileID: 1474001005}
+  - component: {fileID: 1474001004}
+  m_Layer: 11
+  m_Name: ArenaMusic (5)
+  m_TagString: Trigger
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &1474001003
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1474001002}
+  m_LocalRotation: {x: -0, y: 0.9698847, z: -0, w: 0.2435644}
+  m_LocalPosition: {x: 105, y: 1.1827, z: 305}
+  m_LocalScale: {x: 14.689012, y: 6, z: 0.77488}
+  m_Children: []
+  m_Father: {fileID: 7783500969872200597}
+  m_RootOrder: 20
+  m_LocalEulerAnglesHint: {x: 0, y: 151.806, z: 0}
+--- !u!33 &1474001008
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1474001002}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &1474001007
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1474001002}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1474001006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1474001002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab22b273deb30e48bdcff20ad1270a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _destroyOnTriggerActive: 1
+  _soundPath: SFX/InputFeedbackSounds/Trigger
+  _volumeScale: 0
+  _looper: 0
+  _soundObjectPrefab: {fileID: 6447233000424186925, guid: a214008ad84fe8d4fb1ad97d04c3ed40,
+    type: 3}
+  _classesAndMethodsToBeCalled:
+  - Music.Start
+  _setToUse: 00000000
+  _arenaFinishedClassesAndMethodsToBeCalled: []
+  _objectToMove: []
+  LoadLevel: {fileID: 0}
+  _arenaMusicPath: BackgroundMusicFolder/modern_war
+  _arenaMusicVolumeScale: 0.4
+  _arenaMusicAudioSource: {fileID: 0}
+--- !u!54 &1474001005
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1474001002}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!82 &1474001004
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1474001002}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!1 &1517114909
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1517114910}
+  - component: {fileID: 1517114915}
+  - component: {fileID: 1517114914}
+  - component: {fileID: 1517114913}
+  - component: {fileID: 1517114912}
+  - component: {fileID: 1517114911}
+  m_Layer: 11
+  m_Name: ArenaMusic (7)
+  m_TagString: Trigger
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &1517114910
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517114909}
+  m_LocalRotation: {x: -0, y: 0.75254774, z: -0, w: 0.6585378}
+  m_LocalPosition: {x: 99.69, y: 1.1827, z: 456.21}
+  m_LocalScale: {x: 14.689012, y: 6, z: 0.77488}
+  m_Children: []
+  m_Father: {fileID: 7783500969872200597}
+  m_RootOrder: 22
+  m_LocalEulerAnglesHint: {x: 0, y: 97.623, z: 0}
+--- !u!33 &1517114915
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517114909}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &1517114914
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517114909}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1517114913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517114909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab22b273deb30e48bdcff20ad1270a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _destroyOnTriggerActive: 1
+  _soundPath: SFX/InputFeedbackSounds/Trigger
+  _volumeScale: 0
+  _looper: 0
+  _soundObjectPrefab: {fileID: 6447233000424186925, guid: a214008ad84fe8d4fb1ad97d04c3ed40,
+    type: 3}
+  _classesAndMethodsToBeCalled:
+  - Music.Stop
+  _setToUse: 00000000
+  _arenaFinishedClassesAndMethodsToBeCalled: []
+  _objectToMove: []
+  LoadLevel: {fileID: 0}
+  _arenaMusicPath: BackgroundMusicFolder/modern_war
+  _arenaMusicVolumeScale: 0.4
+  _arenaMusicAudioSource: {fileID: 0}
+--- !u!54 &1517114912
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517114909}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!82 &1517114911
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1517114909}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
@@ -1579,6 +2977,9 @@ MonoBehaviour:
   _arenaFinishedClassesAndMethodsToBeCalled: []
   _objectToMove: []
   LoadLevel: {fileID: 0}
+  _arenaMusicPath: 
+  _arenaMusicVolumeScale: 0
+  _arenaMusicAudioSource: {fileID: 0}
 --- !u!54 &1553136868
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1767,10 +3168,14 @@ MonoBehaviour:
     type: 3}
   _classesAndMethodsToBeCalled:
   - EnemyManager.SpawnEnemyFromTrigger
+  - Music.Stop
   _setToUse: 01000000
   _arenaFinishedClassesAndMethodsToBeCalled: []
   _objectToMove: []
   LoadLevel: {fileID: 0}
+  _arenaMusicPath: 
+  _arenaMusicVolumeScale: 1
+  _arenaMusicAudioSource: {fileID: 0}
 --- !u!54 &1760299149
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1794,6 +3199,201 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1760299146}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!1 &1801902428
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1801902429}
+  - component: {fileID: 1801902434}
+  - component: {fileID: 1801902433}
+  - component: {fileID: 1801902432}
+  - component: {fileID: 1801902431}
+  - component: {fileID: 1801902430}
+  m_Layer: 11
+  m_Name: ArenaMusic (1)
+  m_TagString: Trigger
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &1801902429
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1801902428}
+  m_LocalRotation: {x: -0, y: 0.50543064, z: -0, w: 0.86286724}
+  m_LocalPosition: {x: 76, y: 1.1827, z: 157}
+  m_LocalScale: {x: 14.689012, y: 6, z: 0.77488}
+  m_Children: []
+  m_Father: {fileID: 7783500969872200597}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 60.72, z: 0}
+--- !u!33 &1801902434
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1801902428}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &1801902433
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1801902428}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1801902432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1801902428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab22b273deb30e48bdcff20ad1270a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _destroyOnTriggerActive: 1
+  _soundPath: SFX/InputFeedbackSounds/Trigger
+  _volumeScale: 0
+  _looper: 0
+  _soundObjectPrefab: {fileID: 6447233000424186925, guid: a214008ad84fe8d4fb1ad97d04c3ed40,
+    type: 3}
+  _classesAndMethodsToBeCalled:
+  - Music.Start
+  _setToUse: 00000000
+  _arenaFinishedClassesAndMethodsToBeCalled: []
+  _objectToMove: []
+  LoadLevel: {fileID: 0}
+  _arenaMusicPath: BackgroundMusicFolder/modern_war
+  _arenaMusicVolumeScale: 0.4
+  _arenaMusicAudioSource: {fileID: 0}
+--- !u!54 &1801902431
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1801902428}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!82 &1801902430
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1801902428}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
@@ -1912,7 +3512,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1925340504}
   m_LocalRotation: {x: -0, y: -0.52746874, z: -0, w: 0.84957445}
-  m_LocalPosition: {x: 146.45, y: 1.8, z: 429.08}
+  m_LocalPosition: {x: 146, y: 1.8, z: 431}
   m_LocalScale: {x: 24.445072, y: 1.37538, z: 0.77488}
   m_Children: []
   m_Father: {fileID: 7783500969872200597}
@@ -1952,8 +3552,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _destroyOnTriggerActive: 1
-  _soundPath: SFX/InputFeedbackSounds/Trigger
-  _volumeScale: 0
+  _soundPath: SFX/EnviromentSounds/tree_falling_Down
+  _volumeScale: 0.03
   _looper: 0
   _soundObjectPrefab: {fileID: 6447233000424186925, guid: a214008ad84fe8d4fb1ad97d04c3ed40,
     type: 3}
@@ -1965,6 +3565,9 @@ MonoBehaviour:
   _objectToMove:
   - {fileID: 0}
   LoadLevel: {fileID: 0}
+  _arenaMusicPath: 
+  _arenaMusicVolumeScale: 0
+  _arenaMusicAudioSource: {fileID: 0}
 --- !u!54 &1925340507
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2195,6 +3798,9 @@ MonoBehaviour:
   _arenaFinishedClassesAndMethodsToBeCalled: []
   _objectToMove: []
   LoadLevel: {fileID: 0}
+  _arenaMusicPath: 
+  _arenaMusicVolumeScale: 0
+  _arenaMusicAudioSource: {fileID: 0}
 --- !u!1 &4538135624787089383
 GameObject:
   m_ObjectHideFlags: 0
@@ -2237,6 +3843,14 @@ Transform:
   - {fileID: 715427614}
   - {fileID: 1269735193}
   - {fileID: 524271316}
+  - {fileID: 1227586312}
+  - {fileID: 1801902429}
+  - {fileID: 854683191}
+  - {fileID: 913833886}
+  - {fileID: 483319881}
+  - {fileID: 1474001003}
+  - {fileID: 153572197}
+  - {fileID: 1517114910}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2319,6 +3933,9 @@ MonoBehaviour:
   _arenaFinishedClassesAndMethodsToBeCalled: []
   _objectToMove: []
   LoadLevel: {fileID: 0}
+  _arenaMusicPath: 
+  _arenaMusicVolumeScale: 0
+  _arenaMusicAudioSource: {fileID: 0}
 --- !u!54 &187784166605109599
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -19,7 +19,7 @@ public class TriggerComponent : MonoBehaviour
     [SerializeField] private string _arenaMusicPath;
     [SerializeField] private float _arenaMusicVolumeScale = 0;
     [SerializeField] private AudioSource _arenaMusicAudioSource;
-    private float _fadeDuration = 3;
+    private float _fadeDuration = 2f;
     private TextManager _textManager;
     #endregion
 
@@ -52,6 +52,14 @@ public class TriggerComponent : MonoBehaviour
         set { _setToUse = value; }
     }
     #endregion
+
+    private void FixedUpdate()
+    {
+        if(SoundEngine.Instance.FadeCanStart == true)
+        {
+            StartCoroutine(LerpSound.Fading(_arenaMusicAudioSource, _fadeDuration, 0));
+        }
+    }
 
     //Use the unity list to specify when something happens, We assume that you want spawns and objects to be done in the order of input.
     public void ActivateTrigger() //Activates the trigger when CharacterController collides with trigger hitbox.
@@ -100,8 +108,7 @@ public class TriggerComponent : MonoBehaviour
             }
             if (_classesAndMethodsToBeCalled[i] == "Music.Stop")
             {
-                //SoundEngine.Instance.StopArenaMusic(_arenaMusicAudioSource, _arenaMusicVolumeScale);
-                StartCoroutine(LerpSound.Fading(_arenaMusicAudioSource, _fadeDuration, 0));
+                SoundEngine.Instance.FadeCanStart = true;
             }
             if (_classesAndMethodsToBeCalled[i] == "Break") //can be done in EnemyManager.StartArenaFight, IF we make sure to place everything in the correct order with EnemyManager.StartArenaFight beeing last!
             {
