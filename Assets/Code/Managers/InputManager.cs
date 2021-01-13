@@ -101,8 +101,6 @@ public class InputManager : ScriptableObject
         }
         InputBuffer.Instance.pressedButtons = _pressedButtons;
         InputBuffer.Instance.StartBuffer();
-        InputSave.Instance.pressedButtons = _pressedButtons;
-        InputSave.Instance.SaveBuffer();
     }
 
     /// <summary>
