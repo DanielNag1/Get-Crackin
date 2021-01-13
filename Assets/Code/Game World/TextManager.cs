@@ -60,9 +60,9 @@ public class TextManager : MonoBehaviour
 
     private string StartCutscene()
     {
-        _textToShow = "The rage inside of me.. it's unbearable. One year ago today, a peasant killed my family. I managed to escape but at what cost? .... " +
-          "Im all alone, surrounded by the same trees day after day. " +
-          "The foxes here are vicious .... I must escape this forest!";
+        _textToShow = "The rage inside of me.. it's unbearable. One year ago, a peasant killed my family. I escaped, but at what cost? ... " +
+          "I'm all alone, surrounded by the same trees day after day. " +
+          "The foxes here are vicious .... I must escape this forest, find the peasant and get a nasty revenge!";
         return _textToShow;
     }
 
