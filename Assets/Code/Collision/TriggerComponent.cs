@@ -6,7 +6,6 @@ public class TriggerComponent : MonoBehaviour
     #region Variables
     private EnemyManager _enemyManager;
     [SerializeField] private bool _destroyOnTriggerActive;
-    [SerializeField] private string _soundPath; //The sound to be played when the trigger is activated
     [SerializeField] private float _volumeScale = 1; //volume scale
     [SerializeField] private bool _looper = false; //volume scale
     [SerializeField] private GameObject _soundObjectPrefab; //Creates a temporary SoundObject on the location of the trigger that destroys itself when done.
@@ -115,14 +114,7 @@ public class TriggerComponent : MonoBehaviour
                 break;
             }
         }
-        if (_soundPath != null || _soundPath != "")
-        {
-            GameObject temp = Instantiate(_soundObjectPrefab, this.transform.position, Quaternion.identity); //Creates the temporary SoundObject
-            SoundComponent tempComponent = temp.GetComponent<SoundComponent>(); //Gets the temporary SoundObjects SoundComponent.
-            tempComponent.soundPath = _soundPath; //Assignes the correct sound to the SoundComponent.
-            tempComponent.looper = _looper;
-            tempComponent.volumeScale = _volumeScale;//Assignes the correct soundVolume to the SoundComponent.        
-        }
+        
         if (_destroyOnTriggerActive)
         {
             Destroy(this.gameObject); //Destroyes the trigger object, freeing up resources and avoiding the trigger beeing activated twice.
