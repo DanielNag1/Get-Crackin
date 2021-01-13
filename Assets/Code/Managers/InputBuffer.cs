@@ -134,6 +134,10 @@ public class InputBuffer : ScriptableObject
                 }
                 break;
             case KeyCode.Joystick1Button7: //Start Button
+                if (Menu.Instance.isMenuActive)
+                {
+                    return;
+                }
                 Menu.Instance.PauseGame();
                 break;
             #region Unused Buttons

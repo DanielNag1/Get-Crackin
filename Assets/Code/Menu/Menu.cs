@@ -19,6 +19,8 @@ public class Menu : MonoBehaviour
     public GameObject optionsPauseSoundSlider;
     public GameObject levelLoader;
     public GameObject videoPlayer;
+    public GameObject lastSelected;
+    public bool isMenuActive = false;
     #endregion
 
     #region Methods
@@ -30,6 +32,16 @@ public class Menu : MonoBehaviour
 
     private void Update()
     {
+        if (EventSystem.current.currentSelectedGameObject == null)
+        {
+            EventSystem.current.SetSelectedGameObject(lastSelected);
+
+        }
+        else
+        {
+            lastSelected = EventSystem.current.currentSelectedGameObject;
+        }
+
         if (gameOverScreen.activeInHierarchy)
         {
             if (Input.GetKeyDown(KeyCode.Joystick1Button0))
@@ -44,9 +56,10 @@ public class Menu : MonoBehaviour
 
         if (pauseOptionMenu.activeInHierarchy)
         {
+            isMenuActive = true;
             GameObject.Find("Player").GetComponent<Move>().enabled = false;
             Time.timeScale = 0f;
-            if (Input.GetKeyDown(KeyCode.Joystick1Button1))
+            if (Input.GetKeyDown(KeyCode.Joystick1Button1) || Input.GetKeyDown(KeyCode.B)) 
             {
                 BackToPause();
             }
@@ -65,6 +78,7 @@ public class Menu : MonoBehaviour
 
                 if (EventSystem.current.currentSelectedGameObject == pauseResumeButton)
                 {
+                    
                     ResumeGame();
                 }
                 else if (EventSystem.current.currentSelectedGameObject == optionButton)
@@ -90,7 +104,7 @@ public class Menu : MonoBehaviour
 
             if (optionsMenu.activeInHierarchy)
             {
-                if (Input.GetKeyDown(KeyCode.Joystick1Button1) || Input.GetKeyDown(KeyCode.Mouse0))
+                if (Input.GetKeyDown(KeyCode.Joystick1Button1) || Input.GetKeyDown(KeyCode.B))
                 {
                     BackToMainMenu();
                 }
@@ -178,6 +192,7 @@ public class Menu : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(pauseResumeButton);
         pauseMenu.SetActive(false);
+        isMenuActive = false;
         GameObject.Find("Player").GetComponent<Move>().enabled = true;
         Time.timeScale = 1f;
     }
