@@ -337,7 +337,7 @@ public class EnemyManager : MonoBehaviour
                     }
                 }
                 AssignMeleeCombatRole(item);
-                Debug.Log(item.agentGameObject.GetComponentInChildren<FoxAgentFSM>().GetInstanceID() + " Assigned Melee:" + _meleeCombatants);
+                //Debug.Log(item.agentGameObject.GetComponentInChildren<FoxAgentFSM>().GetInstanceID() + " Assigned Melee:" + _meleeCombatants);
             }
         }
     }
@@ -403,7 +403,7 @@ public class EnemyManager : MonoBehaviour
         }
         if (SquareID != -1)
         {
-            Debug.Log(agent.GetComponent<FoxAgentFSM>().GetInstanceID() + " Assigned Square:" + SquareID);
+            //Debug.Log(agent.GetComponent<FoxAgentFSM>().GetInstanceID() + " Assigned Square:" + SquareID);
             positionSquaresUsed[SquareID].isAvailable = false;
             agent.GetComponent<FoxAgentFSM>().squareID = positionSquaresUsed[SquareID].id;
             agent.GetComponent<FoxAgentFSM>().squareNormalisedPosition = positionSquaresUsed[SquareID].squareTransform.localPosition;
@@ -429,7 +429,7 @@ public class EnemyManager : MonoBehaviour
         }
         if (SquareID != -1)
         {
-            Debug.Log(agent.GetComponent<FoxAgentFSM>().GetInstanceID() + " Assigned Square:" + SquareID + ", Previous square:" + agent.GetComponent<FoxAgentFSM>().squareID);
+            //Debug.Log(agent.GetComponent<FoxAgentFSM>().GetInstanceID() + " Assigned Square:" + SquareID + ", Previous square:" + agent.GetComponent<FoxAgentFSM>().squareID);
             positionSquaresUsed[SquareID].isAvailable = false;
             agent.GetComponent<FoxAgentFSM>().squareID = positionSquaresUsed[SquareID].id;
             agent.GetComponent<FoxAgentFSM>().squareNormalisedPosition = positionSquaresUsed[SquareID].squareTransform.localPosition;

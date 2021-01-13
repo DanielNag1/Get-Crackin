@@ -64,7 +64,41 @@ public class EnemyHealth : MonoBehaviour
             }
         }
     }
+    public void TakeDamageNoSound(int amount, Transform damageDealer)
+    {
+        if (_rb != null)
+        {
+            currentHealth -= amount;
+            if (currentHealth > 0)
+            {
+                Vector3 knockbackDirection = (rootGameObject.transform.position - damageDealer.position).normalized;
+                float knockbackDistance = 50;
 
+                if (_characterController.gameObject.GetComponent<Animator>().GetBool("Rage Mode"))
+                {
+                    _knockbackAmount = knockbackAmountResetVal * 1.5f;
+                }
+                else
+                {
+                    _knockbackAmount = knockbackAmountResetVal / 2;
+                }
+                //Direction * 6.000.000 gave nice result(Save this)
+                _rb.AddForce(knockbackDirection * _knockbackAmount, ForceMode.Impulse);
+                _rb.GetComponent<FoxAgentFSM>().knockback.destination = (knockbackDirection * knockbackDistance) +
+                    _rb.GetComponent<FoxAgentFSM>().transform.position;//experimental new knockback
+                _rb.GetComponent<FoxAgentFSM>().SetFSMState("knockback");
+                
+            }
+            else
+            {
+                EnemyManager.Instance.AgentLeftCombat(gameObject);
+                VFXEvents.Instance.VFX6Play(transform);
+                EnemyManager.Instance.enemyPool.Find(x => x.enemy.transform.root.GetInstanceID() ==
+                rootGameObject.transform.root.GetInstanceID()).elementAvailable = true;//If this crashes someone else fucked up! All enemies should exist in the EnemyManagers enemyPool!
+                StartCoroutine(DeathCoroutineNoSound());
+            }
+        }
+    }
     public void Reset()
     {
         currentHealth = startHealth;
@@ -86,10 +120,19 @@ public class EnemyHealth : MonoBehaviour
         //yield on a new YieldInstruction that waits the duration of the AudioClip.
         yield return new WaitForSeconds(Resources.Load<AudioClip>(_deathSoundPaths[_deathSound]).length);
     }
+    private IEnumerator DeathCoroutineNoSound()
+    {
+        Debug.Log(this.name + "Dead");
+        Reset();
+        rootGameObject.SetActive(false);
+
+        //yield on a new YieldInstruction that waits the duration of the AudioClip.
+        yield return new WaitForSeconds(Resources.Load<AudioClip>(_deathSoundPaths[_deathSound]).length);
+    }
 
     public void KillCurrentEnemy()
     {
-        TakeDamage(100, transform);
+        TakeDamageNoSound(100, transform);
     }
     #endregion
 }

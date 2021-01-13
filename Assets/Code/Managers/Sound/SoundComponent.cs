@@ -7,6 +7,14 @@ public class SoundComponent : MonoBehaviour
     public float volumeScale = 1; //volume scale
     public bool looper = false;
 
+    #region singleton
+    public static SoundComponent Instance { get; private set; }
+    #endregion
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -28,6 +36,10 @@ public class SoundComponent : MonoBehaviour
 
     }
 
+    
+
+  
+
     private IEnumerator LooperSoundCoroutine()
     {
         while (true)
@@ -39,6 +51,8 @@ public class SoundComponent : MonoBehaviour
             yield return new WaitForSeconds(Resources.Load<AudioClip>(soundPath).length);
         }
     }
+
+   
 
     private IEnumerator SoundCoroutine()
     {
