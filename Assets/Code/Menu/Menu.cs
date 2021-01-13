@@ -15,6 +15,7 @@ public class Menu : MonoBehaviour
     public GameObject pauseMenu, optionsMenu, mainMenu, pauseOptionMenu, creditsMenu;
     public GameObject pauseResumeButton, optionButton, mainMenuButton, quitToDesktopButton;
     public GameObject backButtonPause, playButton, optionsMainMenuButton, quitGameButton, backToMainMenu, creditButton;
+    public GameObject gameOverScreen;
     public GameObject optionsPauseSoundSlider;
     public GameObject levelLoader;
     public GameObject videoPlayer;
@@ -29,6 +30,18 @@ public class Menu : MonoBehaviour
 
     private void Update()
     {
+        if (gameOverScreen.activeInHierarchy)
+        {
+            if (Input.GetKeyDown(KeyCode.Joystick1Button0))
+            {
+                levelLoader.GetComponent<LoadLevel>().Restart();
+            }
+            else if (Input.GetKeyDown(KeyCode.Joystick1Button1))
+            {
+                levelLoader.GetComponent<LoadLevel>().LoadMainMenu();
+            }
+        }
+
         if (pauseOptionMenu.activeInHierarchy)
         {
             GameObject.Find("Player").GetComponent<Move>().enabled = false;
@@ -72,6 +85,7 @@ public class Menu : MonoBehaviour
 
         if (SceneManager.GetSceneByBuildIndex(0).isLoaded)
         {
+            Time.timeScale = 1f;
             EvaluateActiveMainMenuButton();
 
             if (optionsMenu.activeInHierarchy)
@@ -109,6 +123,13 @@ public class Menu : MonoBehaviour
                 }
             }
         }
+    }
+
+    public IEnumerator GameOver()
+    {
+        yield return new WaitForSeconds(3);
+        Time.timeScale = 0f;
+        gameOverScreen.SetActive(true);
     }
 
     #region Mainmenu
@@ -262,20 +283,9 @@ public class Menu : MonoBehaviour
 
     public void ExitGame()
     {
-        if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            Debug.Log("Quit");
-            mainMenu.SetActive(false);
-            pauseMenu.SetActive(false);
-            optionsMenu.SetActive(false);
-            creditsMenu.SetActive(false);
-            Application.wantsToQuit += WantsToQuit;
-        }
-    }
-
-    private static bool WantsToQuit()
-    {
-        return InputSave.Instance.WantToQuit();
+        mainMenu.SetActive(false);
+        pauseMenu.SetActive(false);
+        Application.Quit();
     }
 
     #endregion

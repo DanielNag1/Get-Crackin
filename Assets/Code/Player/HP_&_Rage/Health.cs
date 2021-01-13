@@ -58,12 +58,10 @@ public class Health : MonoBehaviour
             if (animator.GetBool("isDead") == false)
             {
                 animator.SetBool("isDead", true);
+                StartCoroutine(Menu.Instance.GameOver());
             }
         }
-
     }
-
-
 
     void OnControllerColliderHit(ControllerColliderHit hit)
     {

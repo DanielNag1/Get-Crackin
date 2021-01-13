@@ -9,10 +9,12 @@ public class LoadLevel : MonoBehaviour
     public Animator animator;
     public float transitionTime = 1f;
 
+    //public static LoadLevel Instance { get; private set; }
+
 
     void Awake()
     {
-
+        //Instance = this;
     }
 
 
@@ -36,7 +38,7 @@ public class LoadLevel : MonoBehaviour
     public void Restart()
     {
         animator.SetTrigger("Start");
-        StartCoroutine(LoadNewLevel(SceneManager.GetActiveScene().buildIndex - 1));
+        StartCoroutine(LoadNewLevel(SceneManager.GetActiveScene().buildIndex));
     }
 
     IEnumerator LoadNewLevel(int levelIndex)
