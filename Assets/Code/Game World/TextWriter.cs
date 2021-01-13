@@ -40,7 +40,7 @@ public class TextWriter : MonoBehaviour
                 i--;
             }
         }
-        if (Input.GetKeyDown(KeyCode.Joystick1Button0))
+        if (Input.GetKeyDown(KeyCode.Joystick1Button0) || Input.GetKeyDown(KeyCode.A))
         {
             load.LoadNextLevel();
         }
@@ -78,7 +78,7 @@ public class TextWriter : MonoBehaviour
                 }
                 text.text = shownText;
 
-                if (index > theText.Length)
+                if (index > theText.Length -1)
                 {
                     text = null;
                     return true;
