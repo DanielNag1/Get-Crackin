@@ -1,4 +1,5 @@
 ﻿using Cinemachine;
+using System;
 using UnityEngine;
 
 public class TPPCameraRotation : MonoBehaviour
@@ -6,40 +7,55 @@ public class TPPCameraRotation : MonoBehaviour
     #region Variables
     private CinemachineFreeLook _freeLookCamera;
     private float _movementDirectionX;
-    private bool _mouseActive;
+
 
     #endregion
     #region Methods
     private void Start()
     {
-        Cursor.visible = true;
         _freeLookCamera = GetComponent<CinemachineFreeLook>();
+
     }
-    //private bool IsMouseActive()
-    //{
-    //    return (Input.GetAxis("Mouse X") != 0) || (Input.GetAxis("Mouse Y") != 0);
-    //}
+
+
+
+    private bool IsMouseActive()
+    {
+        return (Input.GetAxis("Mouse X") != 0) || (Input.GetAxis("Mouse Y") != 0);
+    }
 
     private void Update()
     {
-        _movementDirectionX = Input.GetAxis("Horizontal");
-        if (_movementDirectionX != 0)
+
+        if (IsMouseActive())
         {
-            _freeLookCamera.m_XAxis.m_MaxSpeed = 1800;
-            //_mouseActive = true;
+            _freeLookCamera.m_XAxis.m_InputAxisName = "Mouse X";
+            _freeLookCamera.m_YAxis.m_InputAxisName = "Mouse Y";
+            _freeLookCamera.m_XAxis.m_MaxSpeed = 300;
+            _freeLookCamera.m_YAxis.m_MaxSpeed = 10;
         }
-       else
+        else
         {
-            _freeLookCamera.m_XAxis.m_MaxSpeed = 1500;
-            //if (_movementDirectionX != 0)
-            //{
-            //    _freeLookCamera.m_XAxis.m_MaxSpeed = 1800;
-            //}
-            //else
-            //{
-            //    _freeLookCamera.m_XAxis.m_MaxSpeed = 1500;
-            //}
+            _freeLookCamera.m_XAxis.m_InputAxisName = "Joystick X";
+            _freeLookCamera.m_YAxis.m_InputAxisName = "Joystick Y"; 
+            if (_movementDirectionX != 0)
+            {
+                _freeLookCamera.m_XAxis.m_MaxSpeed = 1800;
+            }
+            else
+            {
+                _freeLookCamera.m_XAxis.m_MaxSpeed = 1500;
+            }
         }
+
+        
+
+
+
+
+
+
+
     }
     #endregion
 }
