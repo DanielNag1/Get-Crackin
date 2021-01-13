@@ -186,9 +186,9 @@ public class Menu : MonoBehaviour
     {
         pauseMenu.SetActive(false);
         pauseOptionMenu.SetActive(true);
-        optionsPauseSoundSlider.GetComponent<Slider>().value = SoundEngine.Instance.SetMasterVolume;
         EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(backButtonPause);
+        EventSystem.current.SetSelectedGameObject(optionsPauseSoundSlider);
+        optionsPauseSoundSlider.GetComponent<Slider>().value = SoundEngine.Instance.SetMasterVolume;
     }
 
     public void OpenMainMenu()
