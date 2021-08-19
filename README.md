@@ -25,3 +25,11 @@ To get the player to understand the game logics and mechanics, a small-scaled tu
 consist of interactable objects and facing enemies in combat. The tutorial is placed in the down right corner so it is not in the way or distracting
 the player and can be ignored if the player chooses to.   
 
+![getcracking](https://user-images.githubusercontent.com/48715807/130103807-86e87cdf-3652-4efb-83c2-ca3999c51584.PNG)
+
+
+![getcracking1](https://user-images.githubusercontent.com/48715807/130103932-da4339f9-d68e-4a60-aa8e-6428e89555bf.PNG)
+
+
+
+
